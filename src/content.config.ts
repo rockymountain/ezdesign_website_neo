@@ -111,7 +111,29 @@ const caseStudies = defineCollection({
   }),
 });
 
+const insights = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    slug: z.string(),
+    excerpt: z.string(),
+
+    seoTitle: z.string(),
+    seoDescription: z.string(),
+    ogImage: z.string().optional(),
+
+    publishedAt: z.coerce.date(),
+    updatedAt: z.coerce.date().optional(),
+
+    category: z.string(),
+    tags: z.array(z.string()).default([]),
+
+    isDraft: z.boolean().default(false),
+  }),
+});
+
 export const collections = {
   services,
   'case-studies': caseStudies,
+  insights,
 };
