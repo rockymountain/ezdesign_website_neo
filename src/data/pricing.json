@@ -1,0 +1,41 @@
+{
+  "ezdAiChatPricing": [
+    {
+      "name": "Starter",
+      "priceLabel": "Từ 299k/tháng",
+      "description": "Phù hợp với website nhỏ cần FAQ, tư vấn cơ bản và handoff sang người thật.",
+      "features": [
+        "1 website",
+        "1 AI character template",
+        "FAQ/knowledge cơ bản",
+        "Zalo/Messenger handoff",
+        "Basic analytics"
+      ]
+    },
+    {
+      "name": "Growth",
+      "priceLabel": "Từ 799k/tháng",
+      "description": "Phù hợp với SME cần custom tone, lead flow và tối ưu định kỳ.",
+      "features": [
+        "Custom tone of voice",
+        "Lead capture flow",
+        "No EZD branding",
+        "Monthly analytics review",
+        "Tối ưu FAQ định kỳ"
+      ]
+    },
+    {
+      "name": "Pro",
+      "priceLabel": "Tư vấn theo nhu cầu",
+      "description": "Phù hợp với mô hình multi-branch, tích hợp CRM/Google Sheets hoặc nhu cầu nâng cao.",
+      "features": [
+        "Multi-page hoặc multi-branch",
+        "Advanced analytics",
+        "Google Sheets/CRM integration",
+        "Priority setup/support",
+        "Custom workflow"
+      ]
+    }
+  ],
+  "pricingNote": "Chi phí setup, custom character, outfit hoặc integration sẽ được báo riêng theo nhu cầu."
+}

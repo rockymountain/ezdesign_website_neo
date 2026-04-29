@@ -1,0 +1,50 @@
+{
+  "mainNavigation": [
+    {
+      "label": "EZD AI Chat",
+      "href": "/ezd-ai-chat/"
+    },
+    {
+      "label": "Dịch vụ",
+      "href": "/services/ai-brand-character/"
+    },
+    {
+      "label": "Case Study",
+      "href": "/case-studies/yen-ai-chat/"
+    },
+    {
+      "label": "Về EZDesign",
+      "href": "/about/"
+    },
+    {
+      "label": "Liên hệ",
+      "href": "/contact/"
+    }
+  ],
+  "footerNavigation": [
+    {
+      "label": "EZD AI Chat",
+      "href": "/ezd-ai-chat/"
+    },
+    {
+      "label": "AI Brand Character",
+      "href": "/services/ai-brand-character/"
+    },
+    {
+      "label": "AR/VR/MR",
+      "href": "/services/ar-vr-mr/"
+    },
+    {
+      "label": "Digital Twin",
+      "href": "/services/digital-twin/"
+    },
+    {
+      "label": "Game Activation",
+      "href": "/services/game-activation/"
+    },
+    {
+      "label": "Interactive Website",
+      "href": "/services/interactive-website/"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "targetIndustries": [
+    {
+      "name": "Homestay / Retreat",
+      "description": "Tư vấn phòng, tiện ích, lịch trống, chính sách và dẫn khách sang đặt lịch."
+    },
+    {
+      "name": "Cafe / Nhà hàng",
+      "description": "Trả lời menu, giờ mở cửa, đặt bàn, chỉ đường và chương trình ưu đãi."
+    },
+    {
+      "name": "Spa / Salon",
+      "description": "Tư vấn dịch vụ, gói chăm sóc, giá tham khảo và đặt lịch hẹn."
+    },
+    {
+      "name": "Studio / Wedding / Event",
+      "description": "Giới thiệu gói dịch vụ, lịch chụp, quy trình làm việc và thu lead tư vấn."
+    },
+    {
+      "name": "Giáo dục / Workshop",
+      "description": "Tư vấn khóa học, lịch khai giảng, học phí và đăng ký nhận tư vấn."
+    },
+    {
+      "name": "Local brand / Shop",
+      "description": "Tư vấn sản phẩm, size, chính sách đổi trả và chuyển khách sang kênh bán hàng."
+    }
+  ]
+}
