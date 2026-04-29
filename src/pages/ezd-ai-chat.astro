@@ -1,0 +1,406 @@
+---
+import '../styles/global.css';
+import pricingData from '../data/pricing.json';
+import industriesData from '../data/industries.json';
+
+const { ezdAiChatPricing, pricingNote } = pricingData;
+const { targetIndustries } = industriesData;
+
+const painPoints = [
+  'Khách hỏi nhiều câu giống nhau nhưng nhân sự phản hồi không kịp.',
+  'Website có traffic nhưng chưa chuyển đổi tốt thành lead.',
+  'Chatbot truyền thống quá máy móc và không phản ánh cá tính thương hiệu.',
+  'Khách cần được tư vấn trước khi mua, đặt lịch hoặc để lại thông tin.',
+  'SME không có đội kỹ thuật để tự xây hệ thống AI riêng.',
+];
+
+const differences = [
+  {
+    title: 'Có nhân vật AI đại diện thương hiệu',
+    description:
+      'EZD AI Chat không chỉ là khung chat. Mỗi doanh nghiệp có thể có một AI Brand Character với tên, vai trò, giọng nói và cách xưng hô riêng.',
+  },
+  {
+    title: 'Biết tư vấn và dẫn khách tới hành động',
+    description:
+      'AI có thể gợi ý thông tin phù hợp, dẫn khách qua quick replies, form lead hoặc chuyển sang kênh người thật khi cần.',
+  },
+  {
+    title: 'Dễ triển khai theo mô hình managed SaaS',
+    description:
+      'Team EZDesign setup, tinh chỉnh và tối ưu định kỳ, phù hợp với SME không có đội kỹ thuật nội bộ.',
+  },
+];
+
+const coreFeatures = [
+  {
+    title: 'AI Brand Character',
+    description: 'Tùy chỉnh tên, vai trò, giọng nói, cách xưng hô và tính cách của nhân vật AI.',
+  },
+  {
+    title: 'FAQ Guardrail',
+    description: 'Ưu tiên trả lời chính xác các thông tin quan trọng như địa chỉ, giờ mở cửa, giá cơ bản và chính sách.',
+  },
+  {
+    title: 'Quick Replies',
+    description: 'Gợi ý lựa chọn nhanh để khách dễ bắt đầu hội thoại và đi đúng luồng chuyển đổi.',
+  },
+  {
+    title: 'Lead Flow',
+    description: 'Thu thông tin khách hàng theo ngữ cảnh như nhu cầu, thời gian, kênh liên hệ hoặc website hiện tại.',
+  },
+  {
+    title: 'Human Handoff',
+    description: 'Chuyển khách sang Zalo, Messenger, WhatsApp hoặc hotline khi cần người thật hỗ trợ.',
+  },
+  {
+    title: 'Basic Analytics',
+    description: 'Theo dõi lượt mở chat, quick reply clicks, lead flow starts/completions và handoff clicks.',
+  },
+];
+
+const faqs = [
+  {
+    question: 'EZD AI Chat có phải chatbot thông thường không?',
+    answer:
+      'Không. EZD AI Chat được thiết kế như một AI brand assistant có nhân vật, giọng thương hiệu, FAQ guardrail, lead flow và handoff sang người thật.',
+  },
+  {
+    question: 'EZDesign có setup giúp không?',
+    answer:
+      'Có. Giai đoạn đầu EZD AI Chat vận hành theo mô hình managed SaaS: team EZDesign setup và tối ưu định kỳ cho từng khách hàng.',
+  },
+  {
+    question: 'Có lưu nội dung chat không?',
+    answer:
+      'Không. Theo định hướng hiện tại, EZDesign không lưu nội dung hội thoại cá nhân trong demo AI Chat.',
+  },
+  {
+    question: 'Setup fee tính như thế nào?',
+    answer:
+      'Setup fee sẽ được báo theo nhu cầu, tùy mức độ custom nhân vật, knowledge base, lead flow, handoff và integration.',
+  },
+];
+---
+
+<main class="min-h-screen bg-[var(--ezd-bg)] text-[var(--ezd-text)]">
+  <!-- Hero -->
+  <section class="border-b border-[var(--ezd-border)] bg-[var(--ezd-bg-soft)] py-20">
+    <div class="ezd-container">
+      <div class="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-[0.3em] text-[var(--ezd-brand)]">
+            EZD AI Chat
+          </p>
+
+          <h1 class="mt-5 max-w-4xl text-4xl font-bold tracking-tight md:text-6xl">
+            AI brand assistant giúp SME B2C tư vấn khách và thu lead trên website.
+          </h1>
+
+          <p class="mt-6 max-w-2xl text-lg leading-8 text-[var(--ezd-text-muted)]">
+            EZD AI Chat giúp website của bạn có một nhân vật AI mang giọng thương hiệu,
+            biết trả lời FAQ, tư vấn khách, dẫn dắt lead flow và chuyển khách sang người thật khi cần.
+          </p>
+
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a
+              href="/contact/"
+              class="ezd-focus-ring rounded-full bg-[var(--ezd-brand)] px-5 py-3 text-sm font-semibold text-white shadow-[var(--ezd-shadow-sm)] hover:bg-[var(--ezd-brand-dark)]"
+            >
+              Đặt lịch demo
+            </a>
+
+            <a
+              href="#live-demo"
+              class="ezd-focus-ring rounded-full border border-[var(--ezd-border-strong)] bg-white px-5 py-3 text-sm font-semibold text-[var(--ezd-text)] hover:bg-[var(--ezd-surface-muted)]"
+            >
+              Xem AI demo
+            </a>
+          </div>
+        </div>
+
+        <div class="rounded-[var(--ezd-radius-2xl)] border border-[var(--ezd-border)] bg-[var(--ezd-surface)] p-6 shadow-[var(--ezd-shadow-md)]">
+          <div class="rounded-[var(--ezd-radius-xl)] bg-[var(--ezd-bg-soft)] p-6">
+            <p class="text-sm font-semibold text-[var(--ezd-brand)]">Motion mockup render</p>
+
+            <div class="mt-6 space-y-3">
+              <div class="max-w-[85%] rounded-2xl bg-white p-4 shadow-[var(--ezd-shadow-sm)]">
+                <p class="text-sm text-[var(--ezd-text-muted)]">
+                  Xin chào, mình là EZD Assistant. Bạn muốn tư vấn AI Chat cho ngành nào?
+                </p>
+              </div>
+
+              <div class="ml-auto max-w-[75%] rounded-2xl bg-[var(--ezd-brand)] p-4 text-white">
+                <p class="text-sm">Tôi muốn tư vấn cho spa/salon.</p>
+              </div>
+
+              <div class="max-w-[90%] rounded-2xl bg-white p-4 shadow-[var(--ezd-shadow-sm)]">
+                <p class="text-sm text-[var(--ezd-text-muted)]">
+                  Tuyệt vời. Mình có thể giúp bạn thiết kế nhân vật AI để tư vấn dịch vụ,
+                  đặt lịch và chuyển khách sang Zalo khi cần.
+                </p>
+              </div>
+            </div>
+
+            <p class="mt-6 text-xs leading-5 text-[var(--ezd-text-soft)]">
+              Placeholder cho motion mockup render hoặc live widget embed trong sprint sau.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pain Points -->
+  <section class="py-20">
+    <div class="ezd-container">
+      <div class="max-w-2xl">
+        <p class="text-sm font-semibold uppercase tracking-[0.25em] text-[var(--ezd-brand)]">
+          Vấn đề
+        </p>
+
+        <h2 class="mt-4 text-3xl font-bold tracking-tight md:text-5xl">
+          Website có khách ghé thăm, nhưng chưa đủ khả năng trò chuyện và chuyển đổi.
+        </h2>
+
+        <p class="mt-5 text-lg leading-8 text-[var(--ezd-text-muted)]">
+          Nhiều SME B2C có traffic, có sản phẩm tốt, nhưng thiếu một điểm chạm đủ nhanh,
+          đủ thân thiện và đủ đúng ngữ cảnh để dẫn khách tới hành động.
+        </p>
+      </div>
+
+      <div class="mt-10 grid gap-5 md:grid-cols-2">
+        {
+          painPoints.map((item) => (
+            <div class="rounded-[var(--ezd-radius-xl)] border border-[var(--ezd-border)] bg-white p-6 shadow-[var(--ezd-shadow-sm)]">
+              <p class="text-base leading-7 text-[var(--ezd-text-muted)]">{item}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Difference -->
+  <section class="bg-[var(--ezd-bg-soft)] py-20">
+    <div class="ezd-container">
+      <div class="max-w-2xl">
+        <p class="text-sm font-semibold uppercase tracking-[0.25em] text-[var(--ezd-brand)]">
+          Khác biệt
+        </p>
+
+        <h2 class="mt-4 text-3xl font-bold tracking-tight md:text-5xl">
+          Không chỉ là chatbot. Đây là một AI brand assistant.
+        </h2>
+      </div>
+
+      <div class="mt-10 grid gap-5 md:grid-cols-3">
+        {
+          differences.map((item) => (
+            <div class="rounded-[var(--ezd-radius-xl)] border border-[var(--ezd-border)] bg-white p-6 shadow-[var(--ezd-shadow-sm)]">
+              <h3 class="text-xl font-semibold">{item.title}</h3>
+              <p class="mt-3 text-sm leading-6 text-[var(--ezd-text-muted)]">
+                {item.description}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Demo -->
+  <section id="live-demo" class="py-20">
+    <div class="ezd-container">
+      <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-[0.25em] text-[var(--ezd-brand)]">
+            Live Demo
+          </p>
+
+          <h2 class="mt-4 text-3xl font-bold tracking-tight md:text-5xl">
+            Trải nghiệm EZD Assistant ngay trên website.
+          </h2>
+
+          <p class="mt-5 text-lg leading-8 text-[var(--ezd-text-muted)]">
+            Vùng này sẽ embed AI thật của EZD Assistant. Nội dung chat không được lưu
+            và AI chỉ hỗ trợ tư vấn ban đầu.
+          </p>
+
+          <p class="mt-5 rounded-[var(--ezd-radius-lg)] border border-[var(--ezd-border)] bg-[var(--ezd-bg-soft)] p-4 text-sm leading-6 text-[var(--ezd-text-muted)]">
+            AI có thể hỗ trợ tư vấn ban đầu và có thể chưa chính xác trong mọi trường hợp.
+            EZDesign không lưu nội dung hội thoại cá nhân và không dùng chat để thu thập thông tin nhạy cảm.
+          </p>
+        </div>
+
+        <div class="rounded-[var(--ezd-radius-2xl)] border border-dashed border-[var(--ezd-border-strong)] bg-[var(--ezd-bg-soft)] p-6">
+          <div id="ezd-ai-chat-demo" class="min-h-[420px] rounded-[var(--ezd-radius-xl)] bg-white p-6 shadow-[var(--ezd-shadow-sm)]">
+            <p class="text-sm font-semibold text-[var(--ezd-brand)]">EZD Assistant widget embed placeholder</p>
+            <p class="mt-3 text-sm leading-6 text-[var(--ezd-text-muted)]">
+              Sprint sau sẽ gắn script/widget thật tại đây.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Use Cases -->
+  <section class="bg-[var(--ezd-bg-soft)] py-20">
+    <div class="ezd-container">
+      <div class="max-w-2xl">
+        <p class="text-sm font-semibold uppercase tracking-[0.25em] text-[var(--ezd-brand)]">
+          Use Cases
+        </p>
+
+        <h2 class="mt-4 text-3xl font-bold tracking-tight md:text-5xl">
+          Phù hợp với các ngành cần tư vấn trước khi chuyển đổi.
+        </h2>
+      </div>
+
+      <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {
+          targetIndustries.map((industry) => (
+            <div class="rounded-[var(--ezd-radius-xl)] border border-[var(--ezd-border)] bg-white p-6 shadow-[var(--ezd-shadow-sm)]">
+              <h3 class="text-xl font-semibold">{industry.name}</h3>
+              <p class="mt-3 text-sm leading-6 text-[var(--ezd-text-muted)]">
+                {industry.description}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Features -->
+  <section class="py-20">
+    <div class="ezd-container">
+      <div class="max-w-2xl">
+        <p class="text-sm font-semibold uppercase tracking-[0.25em] text-[var(--ezd-brand)]">
+          Features
+        </p>
+
+        <h2 class="mt-4 text-3xl font-bold tracking-tight md:text-5xl">
+          Một lớp AI nhẹ, dễ triển khai và có khả năng dẫn dắt chuyển đổi.
+        </h2>
+      </div>
+
+      <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {
+          coreFeatures.map((feature) => (
+            <div class="rounded-[var(--ezd-radius-xl)] border border-[var(--ezd-border)] bg-white p-6 shadow-[var(--ezd-shadow-sm)]">
+              <h3 class="text-xl font-semibold">{feature.title}</h3>
+              <p class="mt-3 text-sm leading-6 text-[var(--ezd-text-muted)]">
+                {feature.description}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="bg-[var(--ezd-bg-soft)] py-20">
+    <div class="ezd-container">
+      <div class="max-w-2xl">
+        <p class="text-sm font-semibold uppercase tracking-[0.25em] text-[var(--ezd-brand)]">
+          Pricing
+        </p>
+
+        <h2 class="mt-4 text-3xl font-bold tracking-tight md:text-5xl">
+          Gói triển khai linh hoạt cho SME.
+        </h2>
+
+        <p class="mt-5 text-lg leading-8 text-[var(--ezd-text-muted)]">
+          EZD AI Chat vận hành theo mô hình managed SaaS, phù hợp với doanh nghiệp nhỏ
+          muốn có AI tư vấn mà không cần tự xây hệ thống.
+        </p>
+      </div>
+
+      <div class="mt-10 grid gap-5 lg:grid-cols-3">
+        {
+          ezdAiChatPricing.map((plan) => (
+            <div class="rounded-[var(--ezd-radius-2xl)] border border-[var(--ezd-border)] bg-white p-6 shadow-[var(--ezd-shadow-sm)]">
+              <h3 class="text-2xl font-bold">{plan.name}</h3>
+              <p class="mt-3 text-3xl font-bold text-[var(--ezd-brand)]">{plan.priceLabel}</p>
+              <p class="mt-4 text-sm leading-6 text-[var(--ezd-text-muted)]">
+                {plan.description}
+              </p>
+
+              <ul class="mt-6 space-y-3">
+                {
+                  plan.features.map((feature) => (
+                    <li class="text-sm leading-6 text-[var(--ezd-text-muted)]">
+                      <span class="font-semibold text-[var(--ezd-brand)]">✓</span> {feature}
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+
+      <p class="mt-6 text-sm leading-6 text-[var(--ezd-text-muted)]">{pricingNote}</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-20">
+    <div class="ezd-container">
+      <div class="max-w-2xl">
+        <p class="text-sm font-semibold uppercase tracking-[0.25em] text-[var(--ezd-brand)]">
+          FAQ
+        </p>
+
+        <h2 class="mt-4 text-3xl font-bold tracking-tight md:text-5xl">
+          Những câu hỏi thường gặp.
+        </h2>
+      </div>
+
+      <div class="mt-10 space-y-4">
+        {
+          faqs.map((faq) => (
+            <div class="rounded-[var(--ezd-radius-xl)] border border-[var(--ezd-border)] bg-white p-6 shadow-[var(--ezd-shadow-sm)]">
+              <h3 class="text-lg font-semibold">{faq.question}</h3>
+              <p class="mt-3 text-sm leading-6 text-[var(--ezd-text-muted)]">{faq.answer}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="pb-20">
+    <div class="ezd-container">
+      <div class="rounded-[var(--ezd-radius-2xl)] bg-[var(--ezd-text)] p-8 text-white md:p-12">
+        <h2 class="max-w-3xl text-3xl font-bold tracking-tight md:text-5xl">
+          Muốn có một nhân vật AI tư vấn cho website của bạn?
+        </h2>
+
+        <p class="mt-5 max-w-2xl text-lg leading-8 text-white/75">
+          Đặt lịch demo để xem EZD AI Chat có thể phù hợp với ngành, website và hành trình khách hàng của bạn như thế nào.
+        </p>
+
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a
+            href="/contact/"
+            class="ezd-focus-ring inline-flex rounded-full bg-white px-5 py-3 text-sm font-semibold text-[var(--ezd-text)] hover:bg-white/90"
+          >
+            Đặt lịch demo
+          </a>
+
+          <a
+            href="/case-studies/yen-ai-chat/"
+            class="ezd-focus-ring inline-flex rounded-full border border-white/20 px-5 py-3 text-sm font-semibold text-white hover:bg-white/10"
+          >
+            Xem case Yên AI Chat
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
