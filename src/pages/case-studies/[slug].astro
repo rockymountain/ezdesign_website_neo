@@ -1,0 +1,378 @@
+---
+import '../../styles/global.css';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+
+type CaseStudyEntry = CollectionEntry<'case-studies'>;
+type CaseStudyData = CaseStudyEntry['data'];
+
+type CaseChallenge = string;
+type CaseSolution = CaseStudyData['solution'][number];
+type CaseHighlight = string;
+type RelatedService = CaseStudyData['relatedServices'][number];
+
+export async function getStaticPaths() {
+  const caseStudies: CaseStudyEntry[] = await getCollection('case-studies');
+
+  return caseStudies.map((caseStudy: CaseStudyEntry) => ({
+    params: {
+      slug: caseStudy.data.slug,
+    },
+    props: {
+      caseStudy,
+    },
+  }));
+}
+
+type Props = {
+  caseStudy: CaseStudyEntry;
+};
+
+const { caseStudy } = Astro.props as Props;
+const { Content } = await render(caseStudy);
+
+const {
+  title,
+  client,
+  industry,
+  product,
+  summary,
+  heroTitle,
+  heroDescription,
+  canPublicName,
+  canPublicImages,
+  canPublicMetrics,
+  canPublicFlow,
+  canPublicCharacter,
+  hasTestimonial,
+  testimonial,
+} = caseStudy.data;
+
+const challenge: CaseChallenge[] = caseStudy.data.challenge ?? [];
+const solution: CaseSolution[] = caseStudy.data.solution ?? [];
+const highlights: CaseHighlight[] = caseStudy.data.highlights ?? [];
+const relatedServices: RelatedService[] = caseStudy.data.relatedServices ?? [];
+
+const permissionItems = [
+  {
+    label: 'Tên client',
+    value: canPublicName ? 'Có thể public' : 'Không public',
+  },
+  {
+    label: 'Hình ảnh thật',
+    value: canPublicImages ? 'Có thể public' : 'Không public',
+  },
+  {
+    label: 'Số liệu',
+    value: canPublicMetrics ? 'Có thể public' : 'Không public',
+  },
+  {
+    label: 'Flow chat',
+    value: canPublicFlow ? 'Có thể public' : 'Không public',
+  },
+  {
+    label: 'Character visual',
+    value: canPublicCharacter ? 'Có thể public' : 'Không public',
+  },
+];
+---
+
+<main class="min-h-screen bg-[var(--ezd-bg)] text-[var(--ezd-text)]">
+  <!-- Hero -->
+  <section class="border-b border-[var(--ezd-border)] bg-[var(--ezd-bg-soft)] py-20">
+    <div class="ezd-container">
+      <p class="text-sm font-semibold uppercase tracking-[0.3em] text-[var(--ezd-brand)]">
+        Case Study
+      </p>
+
+      <h1 class="mt-5 max-w-4xl text-4xl font-bold tracking-tight md:text-6xl">
+        {heroTitle}
+      </h1>
+
+      <p class="mt-6 max-w-2xl text-lg leading-8 text-[var(--ezd-text-muted)]">
+        {heroDescription}
+      </p>
+
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a
+          href="/ezd-ai-chat/"
+          class="ezd-focus-ring rounded-full bg-[var(--ezd-brand)] px-5 py-3 text-sm font-semibold text-white shadow-[var(--ezd-shadow-sm)] hover:bg-[var(--ezd-brand-dark)]"
+        >
+          Xem EZD AI Chat
+        </a>
+
+        <a
+          href="/contact/"
+          class="ezd-focus-ring rounded-full border border-[var(--ezd-border-strong)] bg-white px-5 py-3 text-sm font-semibold text-[var(--ezd-text)] hover:bg-[var(--ezd-surface-muted)]"
+        >
+          Làm giải pháp tương tự
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Case Meta -->
+  <section class="py-12">
+    <div class="ezd-container">
+      <div class="grid gap-5 md:grid-cols-4">
+        <div class="rounded-[var(--ezd-radius-xl)] border border-[var(--ezd-border)] bg-white p-5 shadow-[var(--ezd-shadow-sm)]">
+          <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--ezd-text-soft)]">
+            Client
+          </p>
+          <p class="mt-3 font-semibold">{client}</p>
+        </div>
+
+        <div class="rounded-[var(--ezd-radius-xl)] border border-[var(--ezd-border)] bg-white p-5 shadow-[var(--ezd-shadow-sm)]">
+          <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--ezd-text-soft)]">
+            Industry
+          </p>
+          <p class="mt-3 font-semibold">{industry}</p>
+        </div>
+
+        <div class="rounded-[var(--ezd-radius-xl)] border border-[var(--ezd-border)] bg-white p-5 shadow-[var(--ezd-shadow-sm)]">
+          <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--ezd-text-soft)]">
+            Product
+          </p>
+          <p class="mt-3 font-semibold">{product}</p>
+        </div>
+
+        <div class="rounded-[var(--ezd-radius-xl)] border border-[var(--ezd-border)] bg-white p-5 shadow-[var(--ezd-shadow-sm)]">
+          <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--ezd-text-soft)]">
+            Public Scope
+          </p>
+          <p class="mt-3 font-semibold">Selected details</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Summary -->
+  <section class="py-12">
+    <div class="ezd-container">
+      <div class="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-[0.25em] text-[var(--ezd-brand)]">
+            Summary
+          </p>
+
+          <h2 class="mt-4 text-3xl font-bold tracking-tight md:text-5xl">
+            {title}
+          </h2>
+
+          <p class="mt-5 text-lg leading-8 text-[var(--ezd-text-muted)]">
+            {summary}
+          </p>
+        </div>
+
+        <article
+          class="rounded-[var(--ezd-radius-2xl)] border border-[var(--ezd-border)] bg-white p-6 leading-8 text-[var(--ezd-text-muted)] shadow-[var(--ezd-shadow-sm)]"
+        >
+          <Content />
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Challenge -->
+  {
+    challenge.length > 0 && (
+      <section class="bg-[var(--ezd-bg-soft)] py-20">
+        <div class="ezd-container">
+          <div class="max-w-2xl">
+            <p class="text-sm font-semibold uppercase tracking-[0.25em] text-[var(--ezd-brand)]">
+              Challenge
+            </p>
+
+            <h2 class="mt-4 text-3xl font-bold tracking-tight md:text-5xl">
+              Bài toán cần giải quyết.
+            </h2>
+          </div>
+
+          <div class="mt-10 grid gap-5 md:grid-cols-3">
+            {challenge.map((item: CaseChallenge) => (
+              <div class="rounded-[var(--ezd-radius-xl)] border border-[var(--ezd-border)] bg-white p-6 shadow-[var(--ezd-shadow-sm)]">
+                <p class="text-base leading-7 text-[var(--ezd-text-muted)]">{item}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <!-- Solution -->
+  {
+    solution.length > 0 && (
+      <section class="py-20">
+        <div class="ezd-container">
+          <div class="max-w-2xl">
+            <p class="text-sm font-semibold uppercase tracking-[0.25em] text-[var(--ezd-brand)]">
+              Solution
+            </p>
+
+            <h2 class="mt-4 text-3xl font-bold tracking-tight md:text-5xl">
+              Cách EZDesign triển khai.
+            </h2>
+          </div>
+
+          <div class="mt-10 grid gap-5 md:grid-cols-2">
+            {solution.map((item: CaseSolution) => (
+              <div class="rounded-[var(--ezd-radius-xl)] border border-[var(--ezd-border)] bg-white p-6 shadow-[var(--ezd-shadow-sm)]">
+                <h3 class="text-xl font-semibold">{item.title}</h3>
+                <p class="mt-3 text-sm leading-6 text-[var(--ezd-text-muted)]">
+                  {item.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <!-- Highlights -->
+  {
+    highlights.length > 0 && (
+      <section class="bg-[var(--ezd-bg-soft)] py-20">
+        <div class="ezd-container">
+          <div class="max-w-2xl">
+            <p class="text-sm font-semibold uppercase tracking-[0.25em] text-[var(--ezd-brand)]">
+              Highlights
+            </p>
+
+            <h2 class="mt-4 text-3xl font-bold tracking-tight md:text-5xl">
+              Những điểm có thể chia sẻ.
+            </h2>
+          </div>
+
+          <div class="mt-10 grid gap-5 md:grid-cols-2">
+            {highlights.map((item: CaseHighlight) => (
+              <div class="rounded-[var(--ezd-radius-xl)] border border-[var(--ezd-border)] bg-white p-6 shadow-[var(--ezd-shadow-sm)]">
+                <p class="text-base leading-7 text-[var(--ezd-text-muted)]">{item}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <!-- Public Scope -->
+  <section class="py-20">
+    <div class="ezd-container">
+      <div class="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-[0.25em] text-[var(--ezd-brand)]">
+            Public Scope
+          </p>
+
+          <h2 class="mt-4 text-3xl font-bold tracking-tight md:text-5xl">
+            Phạm vi thông tin được public.
+          </h2>
+
+          <p class="mt-5 text-lg leading-8 text-[var(--ezd-text-muted)]">
+            Case study này chỉ chia sẻ các phần đã được thống nhất, không public số liệu nhạy cảm
+            hoặc flow chat chi tiết.
+          </p>
+        </div>
+
+        <div class="grid gap-4">
+          {permissionItems.map((item: { label: string; value: string }) => (
+            <div class="flex items-center justify-between gap-4 rounded-[var(--ezd-radius-xl)] border border-[var(--ezd-border)] bg-white p-5 shadow-[var(--ezd-shadow-sm)]">
+              <p class="font-semibold">{item.label}</p>
+              <p class="text-sm text-[var(--ezd-text-muted)]">{item.value}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonial -->
+  {
+    hasTestimonial && testimonial && (
+      <section class="bg-[var(--ezd-bg-soft)] py-20">
+        <div class="ezd-container">
+          <div class="rounded-[var(--ezd-radius-2xl)] border border-[var(--ezd-border)] bg-white p-8 shadow-[var(--ezd-shadow-md)] md:p-10">
+            <p class="text-sm font-semibold uppercase tracking-[0.25em] text-[var(--ezd-brand)]">
+              Testimonial
+            </p>
+
+            <blockquote class="mt-5 max-w-3xl text-2xl font-semibold leading-10">
+              “{testimonial.quote}”
+            </blockquote>
+
+            <p class="mt-6 text-sm text-[var(--ezd-text-muted)]">
+              {testimonial.name}
+              {testimonial.role && ` — ${testimonial.role}`}
+            </p>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <!-- Related Services -->
+  {
+    relatedServices.length > 0 && (
+      <section class="py-20">
+        <div class="ezd-container">
+          <div class="max-w-2xl">
+            <p class="text-sm font-semibold uppercase tracking-[0.25em] text-[var(--ezd-brand)]">
+              Related Services
+            </p>
+
+            <h2 class="mt-4 text-3xl font-bold tracking-tight md:text-5xl">
+              Các dịch vụ liên quan.
+            </h2>
+          </div>
+
+          <div class="mt-10 grid gap-5 md:grid-cols-3">
+            {relatedServices.map((service: RelatedService) => (
+              <a
+                href={service.href}
+                class="rounded-[var(--ezd-radius-xl)] border border-[var(--ezd-border)] bg-white p-6 shadow-[var(--ezd-shadow-sm)] transition hover:-translate-y-1 hover:shadow-[var(--ezd-shadow-md)]"
+              >
+                <h3 class="text-xl font-semibold">{service.title}</h3>
+                <p class="mt-3 text-sm leading-6 text-[var(--ezd-text-muted)]">
+                  Xem thêm về giải pháp này.
+                </p>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <!-- Final CTA -->
+  <section class="pb-20">
+    <div class="ezd-container">
+      <div class="rounded-[var(--ezd-radius-2xl)] bg-[var(--ezd-text)] p-8 text-white md:p-12">
+        <h2 class="max-w-3xl text-3xl font-bold tracking-tight md:text-5xl">
+          Muốn xây một AI brand assistant tương tự cho thương hiệu của bạn?
+        </h2>
+
+        <p class="mt-5 max-w-2xl text-lg leading-8 text-white/75">
+          Đặt lịch demo để EZDesign tư vấn cách biến website của bạn thành một điểm chạm biết trò chuyện,
+          biết tư vấn và biết chuyển đổi.
+        </p>
+
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a
+            href="/contact/"
+            class="ezd-focus-ring inline-flex rounded-full bg-white px-5 py-3 text-sm font-semibold text-[var(--ezd-text)] hover:bg-white/90"
+          >
+            Đặt lịch demo
+          </a>
+
+          <a
+            href="/ezd-ai-chat/"
+            class="ezd-focus-ring inline-flex rounded-full border border-white/20 px-5 py-3 text-sm font-semibold text-white hover:bg-white/10"
+          >
+            Xem EZD AI Chat
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
