@@ -65,3 +65,47 @@ const headerTextClass = background === 'dark' ? 'text-white' : '';
     </div>
   </div>
 </section>
+
+  <script>
+    const roots = document.querySelectorAll('[data-feature-spotlight]');
+
+    roots.forEach((root) => {
+      const tabs = root.querySelectorAll('[data-feature-tab]');
+      const indexEl = root.querySelector('[data-active-feature-index]');
+      const titleEl = root.querySelector('[data-active-feature-title]');
+      const descriptionEl = root.querySelector('[data-active-feature-description]');
+
+      tabs.forEach((tab) => {
+        tab.addEventListener('click', () => {
+          const index = tab.getAttribute('data-index') ?? '1';
+          const title = tab.getAttribute('data-title') ?? '';
+          const description = tab.getAttribute('data-description') ?? '';
+
+          if (indexEl) indexEl.textContent = index.padStart(2, '0');
+          if (titleEl) titleEl.textContent = title;
+          if (descriptionEl) descriptionEl.textContent = description;
+
+          tabs.forEach((item) => {
+            item.setAttribute('aria-selected', 'false');
+            item.classList.remove('border-[var(--ezd-brand)]', 'bg-[var(--ezd-brand)]', 'text-white');
+            item.classList.add(
+              'border-white/70',
+              'bg-white/70',
+              'text-[var(--ezd-text-muted)]',
+              'shadow-[var(--ezd-shadow-sm)]',
+            );
+          });
+
+          tab.setAttribute('aria-selected', 'true');
+          tab.classList.remove(
+            'border-white/70',
+            'bg-white/70',
+            'text-[var(--ezd-text-muted)]',
+            'shadow-[var(--ezd-shadow-sm)]',
+          );
+          tab.classList.add('border-[var(--ezd-brand)]', 'bg-[var(--ezd-brand)]', 'text-white');
+        });
+      });
+    });
+  </script>
+</section>

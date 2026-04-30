@@ -6,6 +6,7 @@ import ProductHero from '../components/sections/ProductHero.astro';
 import PainPointGrid from '../components/sections/PainPointGrid.astro';
 import FeatureGrid from '../components/sections/FeatureGrid.astro';
 import UseCaseGrid from '../components/sections/UseCaseGrid.astro';
+import FeatureSpotlight from '../components/sections/FeatureSpotlight.astro';
 
 const title = 'EZD AI Chat — AI Brand Assistant cho SME B2C | EZDesign';
 const description =
@@ -104,6 +105,39 @@ const faqs = [
       'Setup fee sẽ được báo theo nhu cầu, tùy mức độ custom nhân vật, knowledge base, lead flow, handoff và integration.',
   },
 ];
+
+const spotlightFeatures = [
+  {
+    title: 'AI Brand Character',
+    description:
+      'Thiết kế nhân vật AI có tên, vai trò, cách xưng hô, tính cách và giọng nói phù hợp với thương hiệu.',
+  },
+  {
+    title: 'FAQ Guardrail',
+    description:
+      'Các thông tin quan trọng như địa chỉ, giờ mở cửa, chính sách và giá cơ bản được kiểm soát bằng lớp FAQ guardrail.',
+  },
+  {
+    title: 'Quick Replies',
+    description:
+      'Gợi ý các lựa chọn nhanh để khách dễ bắt đầu hội thoại và đi thẳng vào nhu cầu phổ biến.',
+  },
+  {
+    title: 'Lead Flow',
+    description:
+      'Dẫn khách qua luồng để lại nhu cầu, thông tin liên hệ hoặc yêu cầu tư vấn theo từng ngành.',
+  },
+  {
+    title: 'Human Handoff',
+    description:
+      'Chuyển tiếp khách sang Zalo, Messenger, WhatsApp hoặc hotline khi cần người thật hỗ trợ.',
+  },
+  {
+    title: 'Basic Analytics',
+    description:
+      'Theo dõi các tín hiệu cơ bản như lượt mở chat, quick reply clicks, lead flow starts và handoff clicks.',
+  },
+];
 ---
 <BaseLayout title={title} description={description}>
   <main class="min-h-screen bg-[var(--ezd-bg)] text-[var(--ezd-text)]">
@@ -182,6 +216,14 @@ const faqs = [
       title="Phù hợp với các ngành cần tư vấn trước khi chuyển đổi."
       description="EZD AI Chat phù hợp với các SME B2C có khách hàng cần hỏi, so sánh, đặt lịch hoặc để lại thông tin trước khi mua."
       items={targetIndustries}
+    />
+
+    <!-- Feature Spotlight -->
+    <FeatureSpotlight
+      eyebrow="AI Features"
+      title="Một lớp AI nhẹ, dễ triển khai và có khả năng dẫn dắt chuyển đổi."
+      description="EZD AI Chat kết hợp nhân vật thương hiệu, FAQ guardrail, quick replies, lead flow, handoff và analytics cơ bản để website không chỉ trả lời mà còn biết tư vấn."
+      features={spotlightFeatures}
     />
 
     <!-- Core Features -->

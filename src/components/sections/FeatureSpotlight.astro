@@ -1,0 +1,303 @@
+---
+import SectionHeader from '../common/SectionHeader.astro';
+import Card from '../common/Card.astro';
+
+type SpotlightFeature = {
+  title: string;
+  description: string;
+};
+
+type Props = {
+  eyebrow?: string;
+  title: string;
+  description?: string;
+  features: SpotlightFeature[];
+};
+
+const {
+  eyebrow = 'AI Features',
+  title,
+  description,
+  features,
+} = Astro.props as Props;
+
+const spotlightId = `feature-spotlight-${Math.random().toString(36).slice(2)}`;
+
+const getWrappedFeature = (index: number) => {
+  const safeIndex = ((index % features.length) + features.length) % features.length;
+  return features[safeIndex];
+};
+
+const initialActiveIndex = 0;
+const initialLeft = getWrappedFeature(initialActiveIndex - 1);
+const initialCenter = getWrappedFeature(initialActiveIndex);
+const initialRight = getWrappedFeature(initialActiveIndex + 1);
+---
+
+<section
+  id={spotlightId}
+  class="relative overflow-hidden bg-[var(--ezd-accent-soft)] py-20"
+  data-feature-spotlight
+>
+  <div
+    class="pointer-events-none absolute inset-0 opacity-80"
+    aria-hidden="true"
+    style="background:
+      radial-gradient(circle at 18% 18%, rgb(35 199 201 / 0.55), transparent 28rem),
+      radial-gradient(circle at 80% 28%, rgb(0 87 255 / 0.18), transparent 30rem),
+      linear-gradient(180deg, #e7ffff 0%, #f5f7ff 100%);"
+  >
+  </div>
+
+  <div class="ezd-container relative">
+    <SectionHeader
+      eyebrow={eyebrow}
+      title={title}
+      description={description}
+      align="center"
+      maxWidth="xl"
+    />
+
+    <div class="relative mt-12">
+      <div class="grid gap-5 lg:grid-cols-3 lg:items-stretch">
+        <!-- Left card -->
+        <Card
+          variant="glass"
+          padding="lg"
+          hover
+          class="relative min-h-[340px] overflow-hidden"
+        >
+          <p
+            class="text-xs font-black uppercase tracking-[0.24em] text-[var(--ezd-brand)]"
+            data-left-feature-index
+          >
+            {String(features.length).padStart(2, '0')}
+          </p>
+
+          <h3 class="ezd-heading-card mt-4 text-2xl" data-left-feature-title>
+            {initialLeft.title}
+          </h3>
+
+          <p class="ezd-body-small mt-4 text-[var(--ezd-text-muted)]" data-left-feature-description>
+            {initialLeft.description}
+          </p>
+        </Card>
+
+        <!-- Center card -->
+        <Card
+          variant="default"
+          padding="lg"
+          hover
+          class="relative min-h-[420px] overflow-hidden lg:-mt-6"
+        >
+          <div class="absolute inset-x-8 top-8 h-44 rounded-[var(--ezd-radius-2xl)] bg-[var(--ezd-brand-soft)]">
+            <div class="flex h-full items-center justify-center rounded-[var(--ezd-radius-2xl)] border border-[var(--ezd-border)] bg-white/70">
+              <div class="text-center">
+                <div class="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-[var(--ezd-brand)] text-2xl font-black text-white shadow-[var(--ezd-shadow-md)]">
+                  AI
+                </div>
+                <p class="mt-4 text-xs font-black uppercase tracking-[0.22em] text-[var(--ezd-brand)]">
+                  Character Placeholder
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-56">
+            <p
+              class="text-xs font-black uppercase tracking-[0.24em] text-[var(--ezd-brand)]"
+              data-center-feature-index
+            >
+              01
+            </p>
+
+            <h3 class="ezd-heading-card mt-4 text-2xl" data-center-feature-title>
+              {initialCenter.title}
+            </h3>
+
+            <p class="ezd-body-small mt-4 text-[var(--ezd-text-muted)]" data-center-feature-description>
+              {initialCenter.description}
+            </p>
+          </div>
+        </Card>
+
+        <!-- Right card -->
+        <Card
+          variant="glass"
+          padding="lg"
+          hover
+          class="relative min-h-[340px] overflow-hidden"
+        >
+          <p
+            class="text-xs font-black uppercase tracking-[0.24em] text-[var(--ezd-brand)]"
+            data-right-feature-index
+          >
+            02
+          </p>
+
+          <h3 class="ezd-heading-card mt-4 text-2xl" data-right-feature-title>
+            {initialRight.title}
+          </h3>
+
+          <p class="ezd-body-small mt-4 text-[var(--ezd-text-muted)]" data-right-feature-description>
+            {initialRight.description}
+          </p>
+        </Card>
+      </div>
+
+      <!-- Tabs row -->
+      <div class="mt-8">
+        <div
+          class="spotlight-tab-row flex flex-nowrap items-center gap-2 overflow-x-auto whitespace-nowrap pb-2"
+          role="tablist"
+          aria-label="EZD AI Chat features"
+          data-feature-tab-row
+        >
+          {
+            features.map((feature: SpotlightFeature, index: number) => (
+              <button
+                type="button"
+                class="spotlight-tab shrink-0 rounded-full px-5 py-2.5 text-xs font-black uppercase tracking-[0.16em]"
+                role="tab"
+                aria-selected={index === 0 ? 'true' : 'false'}
+                data-feature-tab
+                data-index={index}
+              >
+                {feature.title}
+              </button>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script define:vars={{ spotlightId, features }} is:inline>
+    const root = document.getElementById(spotlightId);
+
+    if (root) {
+      const items = features;
+      const tabs = Array.from(root.querySelectorAll('[data-feature-tab]'));
+      const tabRow = root.querySelector('[data-feature-tab-row]');
+
+      const refs = {
+        leftIndex: root.querySelector('[data-left-feature-index]'),
+        leftTitle: root.querySelector('[data-left-feature-title]'),
+        leftDescription: root.querySelector('[data-left-feature-description]'),
+
+        centerIndex: root.querySelector('[data-center-feature-index]'),
+        centerTitle: root.querySelector('[data-center-feature-title]'),
+        centerDescription: root.querySelector('[data-center-feature-description]'),
+
+        rightIndex: root.querySelector('[data-right-feature-index]'),
+        rightTitle: root.querySelector('[data-right-feature-title]'),
+        rightDescription: root.querySelector('[data-right-feature-description]'),
+      };
+
+      const wrap = (value) => ((value % items.length) + items.length) % items.length;
+      const pad = (value) => String(value + 1).padStart(2, '0');
+
+      const updateContent = (activeIndex) => {
+        const leftIndex = wrap(activeIndex - 1);
+        const centerIndex = wrap(activeIndex);
+        const rightIndex = wrap(activeIndex + 1);
+
+        const left = items[leftIndex];
+        const center = items[centerIndex];
+        const right = items[rightIndex];
+
+        if (refs.leftIndex) refs.leftIndex.textContent = pad(leftIndex);
+        if (refs.leftTitle) refs.leftTitle.textContent = left.title;
+        if (refs.leftDescription) refs.leftDescription.textContent = left.description;
+
+        if (refs.centerIndex) refs.centerIndex.textContent = pad(centerIndex);
+        if (refs.centerTitle) refs.centerTitle.textContent = center.title;
+        if (refs.centerDescription) refs.centerDescription.textContent = center.description;
+
+        if (refs.rightIndex) refs.rightIndex.textContent = pad(rightIndex);
+        if (refs.rightTitle) refs.rightTitle.textContent = right.title;
+        if (refs.rightDescription) refs.rightDescription.textContent = right.description;
+
+        tabs.forEach((tab, index) => {
+          tab.setAttribute('aria-selected', index === activeIndex ? 'true' : 'false');
+        });
+
+        const activeTab = tabs[activeIndex];
+        if (activeTab) {
+          activeTab.scrollIntoView({
+            inline: 'center',
+            block: 'nearest',
+            behavior: 'smooth',
+          });
+        }
+      };
+
+      tabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => {
+          updateContent(index);
+        });
+      });
+
+      if (tabRow) {
+        tabRow.addEventListener(
+          'wheel',
+          (event) => {
+            if (Math.abs(event.deltaY) > Math.abs(event.deltaX)) {
+              event.preventDefault();
+              tabRow.scrollLeft += event.deltaY;
+            }
+          },
+          { passive: false }
+        );
+      }
+
+      updateContent(0);
+    }
+  </script>
+
+  <style>
+    .spotlight-tab-row {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    .spotlight-tab-row::-webkit-scrollbar {
+      display: none;
+    }
+
+    .spotlight-tab {
+      border: 1px solid var(--ezd-border);
+      background: rgb(255 255 255 / 0.78);
+      color: var(--ezd-text-muted);
+      box-shadow: var(--ezd-shadow-sm);
+      transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+    }
+
+    .spotlight-tab:hover {
+      border-color: var(--ezd-brand);
+      background: rgb(255 255 255 / 0.96);
+      color: var(--ezd-brand);
+      box-shadow: 0 8px 24px rgb(32 38 127 / 0.12);
+      transform: none;
+    }
+
+    .spotlight-tab[aria-selected='true'] {
+      border-color: var(--ezd-brand);
+      background: var(--ezd-brand);
+      color: #ffffff;
+      box-shadow: var(--ezd-shadow-md);
+    }
+
+    .spotlight-tab[aria-selected='true']:hover {
+      border-color: var(--ezd-brand);
+      background: var(--ezd-brand);
+      color: #ffffff;
+      transform: none;
+    }
+  </style>
+</section>
