@@ -1,0 +1,120 @@
+---
+import navigationData from '../../data/navigation.json';
+
+type NavItem = {
+  label: string;
+  href: string;
+};
+
+const mainNavigation = navigationData.mainNavigation as NavItem[];
+
+const currentPath = Astro.url.pathname;
+
+function isActivePath(href: string) {
+  if (href === '/') return currentPath === '/';
+  return currentPath === href || currentPath.startsWith(href);
+}
+---
+
+<header class="sticky top-0 z-50 border-b border-[var(--ezd-border)] bg-white/85 backdrop-blur-xl">
+  <div class="ezd-container">
+    <div class="flex min-h-16 items-center justify-between gap-6">
+      <!-- Brand -->
+      <a href="/" class="ezd-focus-ring flex items-center gap-3 rounded-full">
+        <span
+          class="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--ezd-text)] text-sm font-bold text-white"
+          aria-hidden="true"
+        >
+          EZ
+        </span>
+
+        <span class="flex flex-col leading-none">
+          <span class="text-sm font-bold tracking-tight text-[var(--ezd-text)]">
+            EZDesign
+          </span>
+          <span class="mt-1 hidden text-xs text-[var(--ezd-text-soft)] sm:inline">
+            Digital touchpoints
+          </span>
+        </span>
+      </a>
+
+      <!-- Desktop nav -->
+      <nav class="hidden items-center gap-1 lg:flex" aria-label="Main navigation">
+        {
+          mainNavigation.map((item: NavItem) => {
+            const active = isActivePath(item.href);
+
+            return (
+              <a
+                href={item.href}
+                class:list={[
+                  'ezd-focus-ring rounded-full px-4 py-2 text-sm font-semibold transition',
+                  active
+                    ? 'bg-[var(--ezd-brand-soft)] text-[var(--ezd-brand-dark)]'
+                    : 'text-[var(--ezd-text-muted)] hover:bg-[var(--ezd-bg-soft)] hover:text-[var(--ezd-text)]',
+                ]}
+                aria-current={active ? 'page' : undefined}
+              >
+                {item.label}
+              </a>
+            );
+          })
+        }
+      </nav>
+
+      <!-- Desktop CTA -->
+      <div class="hidden items-center gap-3 lg:flex">
+        <a
+          href="/contact/"
+          class="ezd-focus-ring rounded-full bg-[var(--ezd-brand)] px-5 py-2.5 text-sm font-semibold text-white shadow-[var(--ezd-shadow-sm)] transition hover:bg-[var(--ezd-brand-dark)]"
+        >
+          Đặt lịch demo
+        </a>
+      </div>
+
+      <!-- Mobile menu -->
+      <details class="relative lg:hidden">
+        <summary
+          class="ezd-focus-ring flex cursor-pointer list-none items-center gap-2 rounded-full border border-[var(--ezd-border)] bg-white px-4 py-2 text-sm font-semibold text-[var(--ezd-text)] shadow-[var(--ezd-shadow-sm)] marker:hidden"
+        >
+          Menu
+          <span aria-hidden="true">☰</span>
+        </summary>
+
+        <div
+          class="absolute right-0 mt-3 w-[min(18rem,calc(100vw-2rem))] rounded-[var(--ezd-radius-xl)] border border-[var(--ezd-border)] bg-white p-3 shadow-[var(--ezd-shadow-lg)]"
+        >
+          <nav class="grid gap-1" aria-label="Mobile navigation">
+            {
+              mainNavigation.map((item: NavItem) => {
+                const active = isActivePath(item.href);
+
+                return (
+                  <a
+                    href={item.href}
+                    class:list={[
+                      'rounded-[var(--ezd-radius-md)] px-4 py-3 text-sm font-semibold transition',
+                      active
+                        ? 'bg-[var(--ezd-brand-soft)] text-[var(--ezd-brand-dark)]'
+                        : 'text-[var(--ezd-text-muted)] hover:bg-[var(--ezd-bg-soft)] hover:text-[var(--ezd-text)]',
+                    ]}
+                    aria-current={active ? 'page' : undefined}
+                  >
+                    {item.label}
+                  </a>
+                );
+              })
+            }
+
+            <a
+              href="/contact/"
+              class="mt-2 rounded-[var(--ezd-radius-md)] bg-[var(--ezd-brand)] px-4 py-3 text-center text-sm font-semibold text-white hover:bg-[var(--ezd-brand-dark)]"
+            >
+              Đặt lịch demo
+            </a>
+          </nav>
+        </div>
+      </details>
+    </div>
+  </div>
+</header>
