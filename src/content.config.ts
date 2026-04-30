@@ -1,7 +1,11 @@
 import { defineCollection, z } from 'astro:content';
+import { glob } from 'astro/loaders';
 
 const services = defineCollection({
-  type: 'content',
+  loader: glob({
+    pattern: '**/*.{md,mdx}',
+    base: './src/content/services',
+  }),
   schema: z.object({
     title: z.string(),
     slug: z.string(),
@@ -55,7 +59,10 @@ const services = defineCollection({
 });
 
 const caseStudies = defineCollection({
-  type: 'content',
+  loader: glob({
+    pattern: '**/*.{md,mdx}',
+    base: './src/content/case-studies',
+  }),
   schema: z.object({
     title: z.string(),
     slug: z.string(),
@@ -112,7 +119,10 @@ const caseStudies = defineCollection({
 });
 
 const insights = defineCollection({
-  type: 'content',
+  loader: glob({
+    pattern: '**/*.{md,mdx}',
+    base: './src/content/insights',
+  }),
   schema: z.object({
     title: z.string(),
     slug: z.string(),
