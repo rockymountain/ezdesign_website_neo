@@ -1,4 +1,6 @@
 ---
+import ButtonLink from './ButtonLink.astro';
+
 type CTA = {
   label: string;
   href: string;
@@ -10,89 +12,129 @@ type Props = {
   description?: string;
   primaryCTA: CTA;
   secondaryCTA?: CTA;
-  variant?: 'dark' | 'light';
+  variant?: 'dark' | 'light' | 'brand';
 };
 
 const {
-  eyebrow,
+  eyebrow = 'Start',
   title,
   description,
   primaryCTA,
   secondaryCTA,
-  variant = 'dark',
+  variant = 'brand',
 } = Astro.props as Props;
 
-const isDark = variant === 'dark';
+const isLight = variant === 'light';
+
+const sectionClass = isLight
+  ? 'py-20'
+  : 'py-20 bg-[var(--ezd-bg)]';
+
+const panelClass = isLight
+  ? 'border border-[var(--ezd-border)] bg-[var(--ezd-bg-soft)] text-[var(--ezd-text)]'
+  : 'ezd-brand-gradient text-white';
+
+const eyebrowClass = isLight ? 'ezd-eyebrow' : 'ezd-eyebrow-inverse';
+
+const descriptionClass = isLight
+  ? 'text-[var(--ezd-text-muted)]'
+  : 'text-white/78';
 ---
 
-<section class="py-20">
+<section class={sectionClass}>
   <div class="ezd-container">
     <div
       class:list={[
-        'rounded-[var(--ezd-radius-2xl)] p-8 md:p-12',
-        isDark
-          ? 'bg-[var(--ezd-text)] text-white'
-          : 'border border-[var(--ezd-border)] bg-white text-[var(--ezd-text)] shadow-[var(--ezd-shadow-md)]',
+        'relative overflow-hidden rounded-[var(--ezd-radius-2xl)] px-6 py-12 shadow-[var(--ezd-shadow-lg)] md:px-12 md:py-16',
+        panelClass,
       ]}
     >
       {
-        eyebrow && (
-          <p
-            class:list={[
-              'text-sm font-semibold uppercase tracking-[0.25em]',
-              isDark ? 'text-white/60' : 'text-[var(--ezd-brand)]',
-            ]}
-          >
-            {eyebrow}
-          </p>
-        )
-      }
-
-      <h2 class="max-w-3xl text-3xl font-bold tracking-tight md:text-5xl">
-        {title}
-      </h2>
-
-      {
-        description && (
-          <p
-            class:list={[
-              'mt-5 max-w-2xl text-lg leading-8',
-              isDark ? 'text-white/75' : 'text-[var(--ezd-text-muted)]',
-            ]}
-          >
-            {description}
-          </p>
-        )
-      }
-
-      <div class="mt-8 flex flex-wrap gap-3">
-        <a
-          href={primaryCTA.href}
-          class:list={[
-            'ezd-focus-ring inline-flex rounded-full px-5 py-3 text-sm font-semibold transition',
-            isDark
-              ? 'bg-white text-[var(--ezd-text)] hover:bg-white/90'
-              : 'bg-[var(--ezd-brand)] text-white hover:bg-[var(--ezd-brand-dark)]',
-          ]}
-        >
-          {primaryCTA.label}
-        </a>
-
-        {
-          secondaryCTA && (
-            <a
-              href={secondaryCTA.href}
-              class:list={[
-                'ezd-focus-ring inline-flex rounded-full border px-5 py-3 text-sm font-semibold transition',
-                isDark
-                  ? 'border-white/20 text-white hover:bg-white/10'
-                  : 'border-[var(--ezd-border-strong)] text-[var(--ezd-text)] hover:bg-[var(--ezd-surface-muted)]',
-              ]}
+        !isLight && (
+          <>
+            <div
+              class="pointer-events-none absolute inset-0 opacity-25"
+              aria-hidden="true"
+              style="background-image: linear-gradient(rgba(255,255,255,.10) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.10) 1px, transparent 1px); background-size: 56px 56px;"
             >
-              {secondaryCTA.label}
-            </a>
+            </div>
+
+            <div
+              class="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[var(--ezd-accent)] opacity-30 blur-3xl"
+              aria-hidden="true"
+            >
+            </div>
+
+            <div
+              class="pointer-events-none absolute -bottom-28 left-10 h-80 w-80 rounded-full bg-white opacity-10 blur-3xl"
+              aria-hidden="true"
+            >
+            </div>
+          </>
+        )
+      }
+
+      <div class="relative max-w-4xl">
+        {
+          eyebrow && (
+            <p class={eyebrowClass}>
+              {eyebrow}
+            </p>
           )
         }
+
+        <h2 class="ezd-heading-section mt-4 text-4xl md:text-6xl">
+          {title}
+        </h2>
+
+        {
+          description && (
+            <p class:list={['ezd-body-large mt-6 max-w-2xl', descriptionClass]}>
+              {description}
+            </p>
+          )
+        }
+
+        <div class="mt-8 flex flex-wrap gap-3">
+          {
+            isLight ? (
+              <ButtonLink
+                href={primaryCTA.href}
+                label={primaryCTA.label}
+                variant="primary"
+                size="lg"
+              />
+            ) : (
+              <ButtonLink
+                href={primaryCTA.href}
+                label={primaryCTA.label}
+                variant="light"
+                size="lg"
+              />
+            )
+          }
+
+          {
+            secondaryCTA && (
+              isLight ? (
+                <ButtonLink
+                  href={secondaryCTA.href}
+                  label={secondaryCTA.label}
+                  variant="secondary"
+                  size="lg"
+                />
+              ) : (
+                <ButtonLink
+                  href={secondaryCTA.href}
+                  label={secondaryCTA.label}
+                  variant="secondary"
+                  size="lg"
+                  class="border-white/30 bg-white/10 text-white hover:bg-white/20"
+                />
+              )
+            )
+          }
+        </div>
       </div>
     </div>
   </div>
