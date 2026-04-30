@@ -1,0 +1,112 @@
+---
+import ButtonLink from '../common/ButtonLink.astro';
+import AIChatPreview from './AIChatPreview.astro';
+
+type CTA = {
+  label: string;
+  href: string;
+};
+
+type Message = {
+  role: 'assistant' | 'user';
+  text: string;
+};
+
+type Props = {
+  eyebrow: string;
+  title: string;
+  description: string;
+  primaryCTA: CTA;
+  secondaryCTA?: CTA;
+  previewMessages?: Message[];
+  previewNote?: string;
+};
+
+const {
+  eyebrow,
+  title,
+  description,
+  primaryCTA,
+  secondaryCTA,
+  previewMessages = [
+    {
+      role: 'assistant',
+      text: 'Xin chào, mình là EZD Assistant. Bạn muốn tư vấn AI Chat cho ngành nào?',
+    },
+    {
+      role: 'user',
+      text: 'Tôi muốn tư vấn cho spa/salon.',
+    },
+    {
+      role: 'assistant',
+      text: 'Tuyệt vời. Mình có thể giúp bạn thiết kế nhân vật AI để tư vấn dịch vụ, đặt lịch và chuyển khách sang Zalo khi cần.',
+    },
+  ],
+  previewNote,
+} = Astro.props as Props;
+---
+
+<section class="ezd-brand-gradient relative overflow-hidden py-20 text-white md:py-24">
+  <div
+    class="pointer-events-none absolute inset-0 opacity-30"
+    aria-hidden="true"
+    style="background-image: linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px); background-size: 56px 56px;"
+  >
+  </div>
+
+  <div class="pointer-events-none absolute -right-24 top-20 h-72 w-72 rounded-full bg-[var(--ezd-turquoise)] opacity-20 blur-3xl" aria-hidden="true"></div>
+  <div class="pointer-events-none absolute -bottom-28 left-10 h-80 w-80 rounded-full bg-white opacity-10 blur-3xl" aria-hidden="true"></div>
+
+  <div class="ezd-container relative">
+    <div class="grid gap-12 lg:grid-cols-[1.02fr_0.98fr] lg:items-center">
+      <div>
+        <p class="ezd-eyebrow-inverse">
+          {eyebrow}
+        </p>
+
+        <h1 class="ezd-heading-display mt-5 max-w-4xl text-4xl md:text-6xl">
+          {title}
+        </h1>
+
+        <p class="ezd-body-large mt-6 max-w-2xl text-white/78">
+          {description}
+        </p>
+
+        <div class="mt-8 flex flex-wrap gap-3">
+          <ButtonLink href={primaryCTA.href} label={primaryCTA.label} variant="light" size="lg" />
+
+          {
+            secondaryCTA && (
+              <ButtonLink
+                href={secondaryCTA.href}
+                label={secondaryCTA.label}
+                variant="secondary"
+                size="lg"
+                class="border-white/30 bg-white/10 text-white hover:bg-white/20"
+              />
+            )
+          }
+        </div>
+
+        <div class="mt-8 grid max-w-2xl gap-3 text-sm text-white/75 sm:grid-cols-3">
+          <div class="rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur-xl">
+            <p class="font-black text-white">FAQ Guardrail</p>
+            <p class="mt-1 text-xs leading-5">Thông tin quan trọng trả lời nhất quán.</p>
+          </div>
+
+          <div class="rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur-xl">
+            <p class="font-black text-white">Lead Flow</p>
+            <p class="mt-1 text-xs leading-5">Dẫn khách để lại nhu cầu đúng ngữ cảnh.</p>
+          </div>
+
+          <div class="rounded-2xl border border-white/15 bg-white/10 p-4 backdrop-blur-xl">
+            <p class="font-black text-white">Handoff</p>
+            <p class="mt-1 text-xs leading-5">Chuyển sang Zalo/Messenger khi cần.</p>
+          </div>
+        </div>
+      </div>
+
+      <AIChatPreview messages={previewMessages} note={previewNote} />
+    </div>
+  </div>
+</section>

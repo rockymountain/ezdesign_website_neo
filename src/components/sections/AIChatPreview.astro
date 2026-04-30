@@ -1,0 +1,89 @@
+---
+type Message = {
+  role: 'assistant' | 'user';
+  text: string;
+};
+
+type Props = {
+  eyebrow?: string;
+  title?: string;
+  messages: Message[];
+  note?: string;
+  widgetTargetId?: string;
+};
+
+const {
+  eyebrow = 'AI Chat Preview',
+  title = 'EZD Assistant',
+  messages,
+  note = 'Production widget sẽ được tích hợp tại đây sau khi hoàn tất UI website.',
+  widgetTargetId = 'ezd-ai-chat-preview',
+} = Astro.props as Props;
+---
+
+<div
+  class="relative overflow-hidden rounded-[var(--ezd-radius-2xl)] border border-white/20 bg-white/10 p-3 shadow-[var(--ezd-shadow-lg)] backdrop-blur-xl"
+>
+  <div class="rounded-[calc(var(--ezd-radius-2xl)-0.5rem)] bg-white p-4 text-[var(--ezd-text)] md:p-5">
+    <div class="flex items-center justify-between gap-4 border-b border-[var(--ezd-border)] pb-4">
+      <div>
+        <p class="text-xs font-bold uppercase tracking-[0.24em] text-[var(--ezd-brand)]">
+          {eyebrow}
+        </p>
+        <h3 class="mt-1 text-lg font-black tracking-tight">
+          {title}
+        </h3>
+      </div>
+
+      <div class="flex items-center gap-2" aria-hidden="true">
+        <span class="h-2.5 w-2.5 rounded-full bg-[var(--ezd-turquoise)]"></span>
+        <span class="text-xs font-bold text-[var(--ezd-text-soft)]">Online</span>
+      </div>
+    </div>
+
+    <div id={widgetTargetId} class="mt-5 min-h-[360px] rounded-[var(--ezd-radius-xl)] bg-[var(--ezd-bg-soft)] p-4">
+      <div class="space-y-4">
+        {
+          messages.map((message: Message) => {
+            const isUser = message.role === 'user';
+
+            return (
+              <div class:list={['flex', isUser ? 'justify-end' : 'justify-start']}>
+                <div
+                  class:list={[
+                    'max-w-[86%] rounded-2xl px-4 py-3 text-sm leading-6 shadow-[var(--ezd-shadow-sm)]',
+                    isUser
+                      ? 'bg-[var(--ezd-brand)] text-white'
+                      : 'bg-white text-[var(--ezd-text-muted)]',
+                  ]}
+                >
+                  {message.text}
+                </div>
+              </div>
+            );
+          })
+        }
+      </div>
+
+      <div class="mt-5 flex flex-wrap gap-2">
+        <span class="rounded-full border border-[var(--ezd-border)] bg-white px-3 py-1.5 text-xs font-bold text-[var(--ezd-text-muted)]">
+          Tư vấn dịch vụ
+        </span>
+        <span class="rounded-full border border-[var(--ezd-border)] bg-white px-3 py-1.5 text-xs font-bold text-[var(--ezd-text-muted)]">
+          Xem pricing
+        </span>
+        <span class="rounded-full border border-[var(--ezd-border)] bg-white px-3 py-1.5 text-xs font-bold text-[var(--ezd-text-muted)]">
+          Chuyển sang Zalo
+        </span>
+      </div>
+    </div>
+
+    {
+      note && (
+        <p class="mt-4 text-xs leading-5 text-[var(--ezd-text-soft)]">
+          {note}
+        </p>
+      )
+    }
+  </div>
+</div>
