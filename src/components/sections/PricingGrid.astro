@@ -1,0 +1,116 @@
+---
+import SectionHeader from '../common/SectionHeader.astro';
+import Card from '../common/Card.astro';
+import ButtonLink from '../common/ButtonLink.astro';
+
+type PricingPlan = {
+  name: string;
+  priceLabel: string;
+  description: string;
+  features: string[];
+  isRecommended?: boolean;
+};
+
+type Props = {
+  eyebrow?: string;
+  title: string;
+  description?: string;
+  plans: PricingPlan[];
+  note?: string;
+};
+
+const {
+  eyebrow = 'Pricing',
+  title,
+  description,
+  plans,
+  note,
+} = Astro.props as Props;
+---
+
+<section class="bg-[var(--ezd-bg-soft)] py-20">
+  <div class="ezd-container">
+    <SectionHeader
+      eyebrow={eyebrow}
+      title={title}
+      description={description}
+      align="center"
+      maxWidth="lg"
+    />
+
+    <div class="mt-12 grid gap-5 lg:grid-cols-3">
+      {
+        plans.map((plan: PricingPlan) => {
+          const isRecommended = Boolean(plan.isRecommended);
+
+          return (
+            <Card
+              padding="lg"
+              hover
+              class={`relative overflow-hidden ${
+                isRecommended
+                  ? 'border-[var(--ezd-brand)] bg-white shadow-[var(--ezd-shadow-lg)] lg:-mt-4'
+                  : 'bg-white'
+              }`}
+            >
+              {
+                isRecommended && (
+                  <div class="absolute right-5 top-5 rounded-full bg-[var(--ezd-brand)] px-3 py-1 text-xs font-black uppercase tracking-[0.16em] text-white">
+                    Recommended
+                  </div>
+                )
+              }
+
+              <div class={isRecommended ? 'pr-28' : ''}>
+                <p class="text-sm font-black uppercase tracking-[0.22em] text-[var(--ezd-brand)]">
+                  {plan.name}
+                </p>
+
+                <h3 class="ezd-heading-card mt-4 text-3xl">
+                  {plan.priceLabel}
+                </h3>
+
+                <p class="ezd-body-small mt-4 text-[var(--ezd-text-muted)]">
+                  {plan.description}
+                </p>
+              </div>
+
+              <div class="mt-7 h-px bg-[var(--ezd-border)]"></div>
+
+              <ul class="mt-7 space-y-3">
+                {
+                  plan.features.map((feature: string) => (
+                    <li class="flex gap-3 text-sm leading-6 text-[var(--ezd-text-muted)]">
+                      <span class="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--ezd-brand-soft)] text-xs font-black text-[var(--ezd-brand)]">
+                        ✓
+                      </span>
+                      <span>{feature}</span>
+                    </li>
+                  ))
+                }
+              </ul>
+
+              <div class="mt-8">
+                <ButtonLink
+                  href="/contact/"
+                  label={isRecommended ? 'Tư vấn gói Growth' : 'Đặt lịch demo'}
+                  variant={isRecommended ? 'primary' : 'secondary'}
+                  size="md"
+                  class="w-full"
+                />
+              </div>
+            </Card>
+          );
+        })
+      }
+    </div>
+
+    {
+      note && (
+        <p class="ezd-body-small mx-auto mt-8 max-w-2xl text-center text-[var(--ezd-text-soft)]">
+          {note}
+        </p>
+      )
+    }
+  </div>
+</section>

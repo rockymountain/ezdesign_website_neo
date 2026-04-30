@@ -7,6 +7,8 @@ import PainPointGrid from '../components/sections/PainPointGrid.astro';
 import FeatureGrid from '../components/sections/FeatureGrid.astro';
 import UseCaseGrid from '../components/sections/UseCaseGrid.astro';
 import FeatureSpotlight from '../components/sections/FeatureSpotlight.astro';
+import PricingGrid from '../components/sections/PricingGrid.astro';
+import FAQGrid from '../components/sections/FAQGrid.astro';
 
 const title = 'EZD AI Chat — AI Brand Assistant cho SME B2C | EZDesign';
 const description =
@@ -255,76 +257,21 @@ const spotlightFeatures = [
     </section>
 
     <!-- Pricing -->
-    <section class="bg-[var(--ezd-bg-soft)] py-20">
-      <div class="ezd-container">
-        <div class="max-w-2xl">
-          <p class="text-sm font-semibold uppercase tracking-[0.25em] text-[var(--ezd-brand)]">
-            Pricing
-          </p>
-
-          <h2 class="mt-4 text-3xl font-bold tracking-tight md:text-5xl">
-            Gói triển khai linh hoạt cho SME.
-          </h2>
-
-          <p class="mt-5 text-lg leading-8 text-[var(--ezd-text-muted)]">
-            EZD AI Chat vận hành theo mô hình managed SaaS, phù hợp với doanh nghiệp nhỏ
-            muốn có AI tư vấn mà không cần tự xây hệ thống.
-          </p>
-        </div>
-
-        <div class="mt-10 grid gap-5 lg:grid-cols-3">
-          {
-            ezdAiChatPricing.map((plan) => (
-              <div class="rounded-[var(--ezd-radius-2xl)] border border-[var(--ezd-border)] bg-white p-6 shadow-[var(--ezd-shadow-sm)]">
-                <h3 class="text-2xl font-bold">{plan.name}</h3>
-                <p class="mt-3 text-3xl font-bold text-[var(--ezd-brand)]">{plan.priceLabel}</p>
-                <p class="mt-4 text-sm leading-6 text-[var(--ezd-text-muted)]">
-                  {plan.description}
-                </p>
-
-                <ul class="mt-6 space-y-3">
-                  {
-                    plan.features.map((feature) => (
-                      <li class="text-sm leading-6 text-[var(--ezd-text-muted)]">
-                        <span class="font-semibold text-[var(--ezd-brand)]">✓</span> {feature}
-                      </li>
-                    ))
-                  }
-                </ul>
-              </div>
-            ))
-          }
-        </div>
-
-        <p class="mt-6 text-sm leading-6 text-[var(--ezd-text-muted)]">{pricingNote}</p>
-      </div>
-    </section>
+    <PricingGrid
+      eyebrow="Pricing"
+      title="Gói triển khai linh hoạt cho SME."
+      description="EZD AI Chat vận hành theo hướng managed SaaS trong giai đoạn đầu, giúp bạn có thể bắt đầu nhanh mà không cần đội ngũ kỹ thuật nội bộ."
+      plans={ezdAiChatPricing}
+      note={pricingNote}
+    />
 
     <!-- FAQ -->
-    <section class="py-20">
-      <div class="ezd-container">
-        <div class="max-w-2xl">
-          <p class="text-sm font-semibold uppercase tracking-[0.25em] text-[var(--ezd-brand)]">
-            FAQ
-          </p>
-
-          <h2 class="mt-4 text-3xl font-bold tracking-tight md:text-5xl">
-            Những câu hỏi thường gặp.
-          </h2>
-        </div>
-
-        <div class="mt-10 space-y-4">
-          {
-            faqs.map((faq) => (
-              <div class="rounded-[var(--ezd-radius-xl)] border border-[var(--ezd-border)] bg-white p-6 shadow-[var(--ezd-shadow-sm)]">
-                <h3 class="text-lg font-semibold">{faq.question}</h3>
-                <p class="mt-3 text-sm leading-6 text-[var(--ezd-text-muted)]">{faq.answer}</p>
-              </div>
-            ))
-          }
-        </div>
-      </div>
-    </section>
+    <FAQGrid
+      eyebrow="FAQ"
+      title="Những câu hỏi thường gặp."
+      description="Một số thông tin nền trước khi bạn đặt lịch demo hoặc bắt đầu triển khai EZD AI Chat."
+      faqs={faqs}
+    />
 
     <!-- Final CTA -->
     <section class="pb-20">

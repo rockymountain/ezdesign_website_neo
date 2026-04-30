@@ -1,0 +1,51 @@
+---
+import SectionHeader from '../common/SectionHeader.astro';
+import Card from '../common/Card.astro';
+
+type FAQ = {
+  question: string;
+  answer: string;
+};
+
+type Props = {
+  eyebrow?: string;
+  title: string;
+  description?: string;
+  faqs: FAQ[];
+};
+
+const {
+  eyebrow = 'FAQ',
+  title,
+  description,
+  faqs,
+} = Astro.props as Props;
+---
+
+<section class="py-20">
+  <div class="ezd-container">
+    <SectionHeader
+      eyebrow={eyebrow}
+      title={title}
+      description={description}
+      align="center"
+      maxWidth="lg"
+    />
+
+    <div class="mt-10 grid gap-4 md:grid-cols-2">
+      {
+        faqs.map((faq: FAQ) => (
+          <Card hover>
+            <h3 class="text-base font-black tracking-tight">
+              {faq.question}
+            </h3>
+
+            <p class="ezd-body-small mt-3 text-[var(--ezd-text-muted)]">
+              {faq.answer}
+            </p>
+          </Card>
+        ))
+      }
+    </div>
+  </div>
+</section>
