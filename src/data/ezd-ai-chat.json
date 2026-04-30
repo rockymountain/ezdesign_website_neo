@@ -1,0 +1,164 @@
+{
+  "seo": {
+    "title": "EZD AI Chat — AI Brand Assistant cho SME B2C | EZDesign",
+    "description": "EZD AI Chat giúp SME B2C có một nhân vật AI mang giọng thương hiệu, biết tư vấn khách, trả lời FAQ, thu lead và chuyển khách sang người thật khi cần."
+  },
+  "hero": {
+    "eyebrow": "EZD AI Chat",
+    "title": "Biến website thành nhân viên tư vấn 24/7 với AI Brand Assistant.",
+    "description": "EZD AI Chat giúp website của bạn có một nhân vật AI mang giọng thương hiệu, biết trả lời FAQ, tư vấn khách, dẫn dắt lead flow và chuyển khách sang người thật khi cần.",
+    "primaryCTA": {
+      "label": "Đặt lịch demo",
+      "href": "/contact/"
+    },
+    "secondaryCTA": {
+      "label": "Xem AI demo",
+      "href": "#live-demo"
+    },
+    "previewNote": "Production widget sẽ được tích hợp tại vùng preview này sau khi hoàn tất UI website.",
+    "previewMessages": [
+      {
+        "role": "assistant",
+        "text": "Xin chào, mình là EZD Assistant. Bạn muốn tư vấn AI Chat cho ngành nào?"
+      },
+      {
+        "role": "user",
+        "text": "Tôi muốn tư vấn cho spa/salon."
+      },
+      {
+        "role": "assistant",
+        "text": "Tuyệt vời. Mình có thể giúp bạn thiết kế nhân vật AI để tư vấn dịch vụ, đặt lịch và chuyển khách sang Zalo khi cần."
+      }
+    ]
+  },
+  "painPoints": {
+    "eyebrow": "Vấn đề",
+    "title": "Website có traffic, nhưng bạn đang đánh rơi khách hàng mỗi ngày?",
+    "description": "Một điểm chạm biết trò chuyện giúp bạn phản hồi nhanh hơn, tư vấn đúng ngữ cảnh hơn và dẫn khách tới hành động rõ ràng hơn.",
+    "items": [
+      {
+        "title": "Khách hỏi lặp lại",
+        "description": "Khách hỏi nhiều câu giống nhau nhưng nhân sự không phải lúc nào cũng phản hồi kịp."
+      },
+      {
+        "title": "Traffic chưa thành lead",
+        "description": "Website có lượt truy cập nhưng thiếu một điểm chạm đủ nhanh để dẫn khách tới hành động."
+      },
+      {
+        "title": "Chatbot quá máy móc",
+        "description": "Các chatbot truyền thống thường khô cứng, không phản ánh được cá tính thương hiệu."
+      },
+      {
+        "title": "Khách cần tư vấn trước khi mua",
+        "description": "Nhiều ngành B2C cần giải thích, tư vấn, gợi ý hoặc đặt lịch trước khi chuyển đổi."
+      },
+      {
+        "title": "Đội ngũ nhỏ thiếu người trực",
+        "description": "SME khó duy trì phản hồi nhanh trên mọi khung giờ nếu chỉ dựa vào nhân sự thật."
+      }
+    ]
+  },
+  "difference": {
+    "eyebrow": "Khác biệt",
+    "title": "Không chỉ là chatbot. Đây là một AI brand assistant.",
+    "description": "EZD AI Chat được thiết kế như một nhân vật đại diện thương hiệu, có vai trò, giọng nói và hành trình hội thoại riêng.",
+    "features": [
+      {
+        "title": "Nhân vật AI đại diện thương hiệu",
+        "description": "AI không chỉ trả lời câu hỏi, mà xuất hiện như một nhân vật có tính cách, giọng nói và cách xưng hô phù hợp với thương hiệu."
+      },
+      {
+        "title": "Biết tư vấn và dẫn khách tới hành động",
+        "description": "AI có thể gợi ý dịch vụ, trả lời FAQ, dẫn khách qua lead flow và chuyển tiếp sang người thật khi cần."
+      },
+      {
+        "title": "Dễ triển khai theo mô hình managed SaaS",
+        "description": "EZDesign hỗ trợ setup ban đầu, cấu hình nhân vật, FAQ, quick replies, handoff và analytics để SME bắt đầu nhanh hơn."
+      }
+    ]
+  },
+  "liveDemo": {
+    "eyebrow": "Live Demo",
+    "title": "Trải nghiệm EZD Assistant ngay trên website.",
+    "description": "Vùng này sẽ embed AI thật của EZD Assistant. Khi đi vào production, khách có thể thử hội thoại trực tiếp ngay tại đây.",
+    "placeholderTitle": "EZD Assistant widget embed placeholder",
+    "placeholderDescription": "Production widget sẽ được tích hợp ở section này sau khi hoàn tất UI website."
+  },
+  "useCases": {
+    "eyebrow": "Use Cases",
+    "title": "Phù hợp với các ngành cần tư vấn trước khi chuyển đổi.",
+    "description": "EZD AI Chat phù hợp với các SME B2C có khách hàng cần hỏi, so sánh, đặt lịch hoặc để lại thông tin trước khi mua."
+  },
+  "spotlight": {
+    "eyebrow": "AI Features",
+    "title": "Một lớp AI nhẹ, dễ triển khai và có khả năng dẫn dắt chuyển đổi.",
+    "description": "EZD AI Chat kết hợp nhân vật thương hiệu, FAQ guardrail, quick replies, lead flow, handoff và analytics cơ bản để website không chỉ trả lời mà còn biết tư vấn.",
+    "features": [
+      {
+        "title": "AI Brand Character",
+        "description": "Thiết kế nhân vật AI có tên, vai trò, cách xưng hô, tính cách và giọng nói phù hợp với thương hiệu."
+      },
+      {
+        "title": "FAQ Guardrail",
+        "description": "Các thông tin quan trọng như địa chỉ, giờ mở cửa, chính sách và giá cơ bản được kiểm soát bằng lớp FAQ guardrail."
+      },
+      {
+        "title": "Quick Replies",
+        "description": "Gợi ý các lựa chọn nhanh để khách dễ bắt đầu hội thoại và đi thẳng vào nhu cầu phổ biến."
+      },
+      {
+        "title": "Lead Flow",
+        "description": "Dẫn khách qua luồng để lại nhu cầu, thông tin liên hệ hoặc yêu cầu tư vấn theo từng ngành."
+      },
+      {
+        "title": "Human Handoff",
+        "description": "Chuyển tiếp khách sang Zalo, Messenger, WhatsApp hoặc hotline khi cần người thật hỗ trợ."
+      },
+      {
+        "title": "Basic Analytics",
+        "description": "Theo dõi các tín hiệu cơ bản như lượt mở chat, quick reply clicks, lead flow starts và handoff clicks."
+      }
+    ]
+  },
+  "pricing": {
+    "eyebrow": "Pricing",
+    "title": "Gói triển khai linh hoạt cho SME.",
+    "description": "EZD AI Chat vận hành theo hướng managed SaaS trong giai đoạn đầu, giúp bạn có thể bắt đầu nhanh mà không cần đội ngũ kỹ thuật nội bộ."
+  },
+  "faq": {
+    "eyebrow": "FAQ",
+    "title": "Những câu hỏi thường gặp.",
+    "description": "Một số thông tin nền trước khi bạn đặt lịch demo hoặc bắt đầu triển khai EZD AI Chat.",
+    "items": [
+      {
+        "question": "EZD AI Chat có phải chatbot thông thường không?",
+        "answer": "Không. EZD AI Chat được thiết kế như một AI brand assistant có nhân vật, giọng nói thương hiệu, FAQ guardrail, lead flow và handoff sang người thật."
+      },
+      {
+        "question": "EZDesign có setup giúp không?",
+        "answer": "Có. Giai đoạn đầu EZD AI Chat vận hành theo mô hình managed SaaS, team EZDesign hỗ trợ setup cấu hình, FAQ, knowledge, quick replies và handoff."
+      },
+      {
+        "question": "Có cần đội ngũ kỹ thuật không?",
+        "answer": "Không bắt buộc. EZDesign có thể hỗ trợ triển khai widget vào website và cấu hình dữ liệu ban đầu theo nhu cầu."
+      },
+      {
+        "question": "Setup fee tính như thế nào?",
+        "answer": "Setup fee được báo theo nhu cầu thực tế, tùy mức độ custom nhân vật AI, knowledge setup, lead flow, tích hợp Google Sheets/CRM hoặc yêu cầu visual riêng."
+      }
+    ]
+  },
+  "finalCTA": {
+    "eyebrow": "Start",
+    "title": "Muốn có một nhân vật AI tư vấn cho website của bạn?",
+    "description": "Bắt đầu demo cùng EZDesign để xác định ngành, use case, dữ liệu cần chuẩn bị và hướng triển khai phù hợp cho SME của bạn.",
+    "primaryCTA": {
+      "label": "Đặt lịch demo",
+      "href": "/contact/"
+    },
+    "secondaryCTA": {
+      "label": "Xem case Yên AI Chat",
+      "href": "/case-studies/yen-ai-chat/"
+    }
+  }
+}

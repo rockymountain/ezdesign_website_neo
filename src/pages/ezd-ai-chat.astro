@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import pricingData from '../data/pricing.json';
-import industriesData from '../data/industries.json';
+
 import ProductHero from '../components/sections/ProductHero.astro';
 import PainPointGrid from '../components/sections/PainPointGrid.astro';
 import FeatureGrid from '../components/sections/FeatureGrid.astro';
@@ -9,299 +8,145 @@ import UseCaseGrid from '../components/sections/UseCaseGrid.astro';
 import FeatureSpotlight from '../components/sections/FeatureSpotlight.astro';
 import PricingGrid from '../components/sections/PricingGrid.astro';
 import FAQGrid from '../components/sections/FAQGrid.astro';
+import CTASection from '../components/common/CTASection.astro';
+import Card from '../components/common/Card.astro';
 
-const title = 'EZD AI Chat — AI Brand Assistant cho SME B2C | EZDesign';
-const description =
-  'EZD AI Chat giúp SME B2C có một nhân vật AI mang giọng thương hiệu, biết tư vấn khách, trả lời FAQ, thu lead và chuyển khách sang người thật khi cần.';
+import pageContent from '../data/ezd-ai-chat.json';
+import pricingData from '../data/pricing.json';
+import industriesData from '../data/industries.json';
 
-const { ezdAiChatPricing, pricingNote } = pricingData;
-const { targetIndustries } = industriesData;
+type ChatMessage = {
+  role: 'assistant' | 'user';
+  text: string;
+};
 
-const painPoints = [
-  {
-    title: 'Khách hỏi lặp lại',
-    description: 'Khách hỏi nhiều câu giống nhau nhưng nhân sự không phải lúc nào cũng phản hồi kịp.',
-  },
-  {
-    title: 'Traffic chưa thành lead',
-    description: 'Website có lượt truy cập nhưng thiếu một điểm chạm đủ nhanh để dẫn khách tới hành động.',
-  },
-  {
-    title: 'Chatbot quá máy móc',
-    description: 'Các chatbot truyền thống thường khô cứng, không phản ánh được cá tính thương hiệu.',
-  },
-  {
-    title: 'Khách cần tư vấn trước khi mua',
-    description: 'Nhiều ngành B2C cần giải thích, tư vấn, gợi ý hoặc đặt lịch trước khi chuyển đổi.',
-  },
-  {
-    title: 'Đội ngũ nhỏ thiếu người trực',
-    description: 'SME khó duy trì phản hồi nhanh trên mọi khung giờ nếu chỉ dựa vào nhân sự thật.',
-  },
-];
+type PricingPlan = {
+  name: string;
+  priceLabel: string;
+  description: string;
+  features: string[];
+  isRecommended?: boolean;
+};
 
-const differences = [
-  {
-    title: 'Có nhân vật AI đại diện thương hiệu',
-    description:
-      'EZD AI Chat không chỉ là khung chat. Mỗi doanh nghiệp có thể có một AI Brand Character với tên, vai trò, giọng nói và cách xưng hô riêng.',
-  },
-  {
-    title: 'Biết tư vấn và dẫn khách tới hành động',
-    description:
-      'AI có thể gợi ý thông tin phù hợp, dẫn khách qua quick replies, form lead hoặc chuyển sang kênh người thật khi cần.',
-  },
-  {
-    title: 'Dễ triển khai theo mô hình managed SaaS',
-    description:
-      'Team EZDesign setup, tinh chỉnh và tối ưu định kỳ, phù hợp với SME không có đội kỹ thuật nội bộ.',
-  },
-];
+type Industry = {
+  name?: string;
+  title?: string;
+  description: string;
+};
 
-const coreFeatures = [
-  {
-    title: 'AI Brand Character',
-    description: 'Tùy chỉnh tên, vai trò, giọng nói, cách xưng hô và tính cách của nhân vật AI.',
-  },
-  {
-    title: 'FAQ Guardrail',
-    description: 'Ưu tiên trả lời chính xác các thông tin quan trọng như địa chỉ, giờ mở cửa, giá cơ bản và chính sách.',
-  },
-  {
-    title: 'Quick Replies',
-    description: 'Gợi ý lựa chọn nhanh để khách dễ bắt đầu hội thoại và đi đúng luồng chuyển đổi.',
-  },
-  {
-    title: 'Lead Flow',
-    description: 'Thu thông tin khách hàng theo ngữ cảnh như nhu cầu, thời gian, kênh liên hệ hoặc website hiện tại.',
-  },
-  {
-    title: 'Human Handoff',
-    description: 'Chuyển khách sang Zalo, Messenger, WhatsApp hoặc hotline khi cần người thật hỗ trợ.',
-  },
-  {
-    title: 'Basic Analytics',
-    description: 'Theo dõi lượt mở chat, quick reply clicks, lead flow starts/completions và handoff clicks.',
-  },
-];
+const title = pageContent.seo.title;
+const description = pageContent.seo.description;
 
-const faqs = [
-  {
-    question: 'EZD AI Chat có phải chatbot thông thường không?',
-    answer:
-      'Không. EZD AI Chat được thiết kế như một AI brand assistant có nhân vật, giọng thương hiệu, FAQ guardrail, lead flow và handoff sang người thật.',
-  },
-  {
-    question: 'EZDesign có setup giúp không?',
-    answer:
-      'Có. Giai đoạn đầu EZD AI Chat vận hành theo mô hình managed SaaS: team EZDesign setup và tối ưu định kỳ cho từng khách hàng.',
-  },
-  {
-    question: 'Có lưu nội dung chat không?',
-    answer:
-      'Không. Theo định hướng hiện tại, EZDesign không lưu nội dung hội thoại cá nhân trong demo AI Chat.',
-  },
-  {
-    question: 'Setup fee tính như thế nào?',
-    answer:
-      'Setup fee sẽ được báo theo nhu cầu, tùy mức độ custom nhân vật, knowledge base, lead flow, handoff và integration.',
-  },
-];
+const heroPreviewMessages = pageContent.hero.previewMessages as ChatMessage[];
 
-const spotlightFeatures = [
-  {
-    title: 'AI Brand Character',
-    description:
-      'Thiết kế nhân vật AI có tên, vai trò, cách xưng hô, tính cách và giọng nói phù hợp với thương hiệu.',
-  },
-  {
-    title: 'FAQ Guardrail',
-    description:
-      'Các thông tin quan trọng như địa chỉ, giờ mở cửa, chính sách và giá cơ bản được kiểm soát bằng lớp FAQ guardrail.',
-  },
-  {
-    title: 'Quick Replies',
-    description:
-      'Gợi ý các lựa chọn nhanh để khách dễ bắt đầu hội thoại và đi thẳng vào nhu cầu phổ biến.',
-  },
-  {
-    title: 'Lead Flow',
-    description:
-      'Dẫn khách qua luồng để lại nhu cầu, thông tin liên hệ hoặc yêu cầu tư vấn theo từng ngành.',
-  },
-  {
-    title: 'Human Handoff',
-    description:
-      'Chuyển tiếp khách sang Zalo, Messenger, WhatsApp hoặc hotline khi cần người thật hỗ trợ.',
-  },
-  {
-    title: 'Basic Analytics',
-    description:
-      'Theo dõi các tín hiệu cơ bản như lượt mở chat, quick reply clicks, lead flow starts và handoff clicks.',
-  },
-];
+const ezdAiChatPlans = pricingData.ezdAiChatPricing as PricingPlan[];
+const pricingNote = pricingData.pricingNote;
+
+const targetIndustries = industriesData.targetIndustries as Industry[];
 ---
+
 <BaseLayout title={title} description={description}>
   <main class="min-h-screen bg-[var(--ezd-bg)] text-[var(--ezd-text)]">
-    <!-- Hero -->
     <ProductHero
-      eyebrow="EZD AI Chat"
-      title="Biến website thành nhân viên tư vấn 24/7 với AI Brand Assistant."
-      description="EZD AI Chat giúp website của bạn có một nhân vật AI mang giọng thương hiệu, biết trả lời FAQ, tư vấn khách, dẫn dắt lead flow và chuyển khách sang người thật khi cần."
-      primaryCTA={{
-        label: 'Đặt lịch demo',
-        href: '/contact/',
-      }}
-      secondaryCTA={{
-        label: 'Xem AI demo',
-        href: '#live-demo',
-      }}
-      previewNote="Production widget sẽ được tích hợp tại vùng preview này sau khi hoàn tất UI website."
+      eyebrow={pageContent.hero.eyebrow}
+      title={pageContent.hero.title}
+      description={pageContent.hero.description}
+      primaryCTA={pageContent.hero.primaryCTA}
+      secondaryCTA={pageContent.hero.secondaryCTA}
+      previewMessages={heroPreviewMessages}
+      previewNote={pageContent.hero.previewNote}
     />
 
-    <!-- Pain Points -->
     <PainPointGrid
-      eyebrow="Vấn đề"
-      title="Website có traffic, nhưng bạn đang đánh rơi khách hàng mỗi ngày?"
-      description="Một điểm chạm biết trò chuyện giúp bạn phản hồi nhanh hơn, tư vấn đúng ngữ cảnh hơn và dẫn khách tới hành động rõ ràng hơn."
-      items={painPoints}
+      eyebrow={pageContent.painPoints.eyebrow}
+      title={pageContent.painPoints.title}
+      description={pageContent.painPoints.description}
+      items={pageContent.painPoints.items}
     />
 
-    <!-- Difference -->
     <FeatureGrid
-      eyebrow="Khác biệt"
-      title="Không chỉ là chatbot. Đây là một AI brand assistant."
-      description="EZD AI Chat được thiết kế như một nhân vật đại diện thương hiệu, có vai trò, giọng nói và hành trình hội thoại riêng."
-      features={differences}
+      eyebrow={pageContent.difference.eyebrow}
+      title={pageContent.difference.title}
+      description={pageContent.difference.description}
+      features={pageContent.difference.features}
       background="soft"
     />
 
-    <!-- Live Demo -->
     <section id="live-demo" class="py-20">
       <div class="ezd-container">
         <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
           <div>
-            <p class="text-sm font-semibold uppercase tracking-[0.25em] text-[var(--ezd-brand)]">
-              Live Demo
+            <p class="ezd-eyebrow">
+              {pageContent.liveDemo.eyebrow}
             </p>
 
-            <h2 class="mt-4 text-3xl font-bold tracking-tight md:text-5xl">
-              Trải nghiệm EZD Assistant ngay trên website.
+            <h2 class="ezd-heading-section mt-4 text-3xl md:text-5xl">
+              {pageContent.liveDemo.title}
             </h2>
 
-            <p class="mt-5 text-lg leading-8 text-[var(--ezd-text-muted)]">
-              Vùng này sẽ embed AI thật của EZD Assistant. Nội dung chat không được lưu
-              và AI chỉ hỗ trợ tư vấn ban đầu.
+            <p class="ezd-body-large mt-5 text-[var(--ezd-text-muted)]">
+              {pageContent.liveDemo.description}
             </p>
 
-            <p class="mt-5 rounded-[var(--ezd-radius-lg)] border border-[var(--ezd-border)] bg-[var(--ezd-bg-soft)] p-4 text-sm leading-6 text-[var(--ezd-text-muted)]">
+            <p class="ezd-body-small mt-5 rounded-[var(--ezd-radius-lg)] border border-[var(--ezd-border)] bg-[var(--ezd-bg-soft)] p-4 text-[var(--ezd-text-muted)]">
               AI có thể hỗ trợ tư vấn ban đầu và có thể chưa chính xác trong mọi trường hợp.
               EZDesign không lưu nội dung hội thoại cá nhân và không dùng chat để thu thập thông tin nhạy cảm.
             </p>
           </div>
 
-          <div class="rounded-[var(--ezd-radius-2xl)] border border-dashed border-[var(--ezd-border-strong)] bg-[var(--ezd-bg-soft)] p-6">
-            <div id="ezd-ai-chat-demo" class="min-h-[420px] rounded-[var(--ezd-radius-xl)] bg-white p-6 shadow-[var(--ezd-shadow-sm)]">
-              <p class="text-sm font-semibold text-[var(--ezd-brand)]">EZD Assistant widget embed placeholder</p>
-              <p class="mt-3 text-sm leading-6 text-[var(--ezd-text-muted)]">
-                Sprint sau sẽ gắn script/widget thật tại đây.
+          <Card padding="lg" class="min-h-[420px] border-dashed">
+            <div
+              id="ezd-ai-chat-demo"
+              class="min-h-[360px] rounded-[var(--ezd-radius-xl)] bg-[var(--ezd-bg-soft)] p-6"
+            >
+              <p class="text-sm font-black uppercase tracking-[0.22em] text-[var(--ezd-brand)]">
+                {pageContent.liveDemo.placeholderTitle}
+              </p>
+
+              <p class="ezd-body-small mt-4 text-[var(--ezd-text-muted)]">
+                {pageContent.liveDemo.placeholderDescription}
               </p>
             </div>
-          </div>
+          </Card>
         </div>
       </div>
     </section>
 
-    <!-- Use Cases -->
     <UseCaseGrid
-      eyebrow="Use Cases"
-      title="Phù hợp với các ngành cần tư vấn trước khi chuyển đổi."
-      description="EZD AI Chat phù hợp với các SME B2C có khách hàng cần hỏi, so sánh, đặt lịch hoặc để lại thông tin trước khi mua."
+      eyebrow={pageContent.useCases.eyebrow}
+      title={pageContent.useCases.title}
+      description={pageContent.useCases.description}
       items={targetIndustries}
     />
 
-    <!-- Feature Spotlight -->
     <FeatureSpotlight
-      eyebrow="AI Features"
-      title="Một lớp AI nhẹ, dễ triển khai và có khả năng dẫn dắt chuyển đổi."
-      description="EZD AI Chat kết hợp nhân vật thương hiệu, FAQ guardrail, quick replies, lead flow, handoff và analytics cơ bản để website không chỉ trả lời mà còn biết tư vấn."
-      features={spotlightFeatures}
+      eyebrow={pageContent.spotlight.eyebrow}
+      title={pageContent.spotlight.title}
+      description={pageContent.spotlight.description}
+      features={pageContent.spotlight.features}
     />
 
-    <!-- Core Features -->
-    <section class="py-20">
-      <div class="ezd-container">
-        <div class="max-w-2xl">
-          <p class="text-sm font-semibold uppercase tracking-[0.25em] text-[var(--ezd-brand)]">
-            Features
-          </p>
-
-          <h2 class="mt-4 text-3xl font-bold tracking-tight md:text-5xl">
-            Một lớp AI nhẹ, dễ triển khai và có khả năng dẫn dắt chuyển đổi.
-          </h2>
-        </div>
-
-        <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {
-            coreFeatures.map((feature) => (
-              <div class="rounded-[var(--ezd-radius-xl)] border border-[var(--ezd-border)] bg-white p-6 shadow-[var(--ezd-shadow-sm)]">
-                <h3 class="text-xl font-semibold">{feature.title}</h3>
-                <p class="mt-3 text-sm leading-6 text-[var(--ezd-text-muted)]">
-                  {feature.description}
-                </p>
-              </div>
-            ))
-          }
-        </div>
-      </div>
-    </section>
-
-    <!-- Pricing -->
     <PricingGrid
-      eyebrow="Pricing"
-      title="Gói triển khai linh hoạt cho SME."
-      description="EZD AI Chat vận hành theo hướng managed SaaS trong giai đoạn đầu, giúp bạn có thể bắt đầu nhanh mà không cần đội ngũ kỹ thuật nội bộ."
-      plans={ezdAiChatPricing}
+      eyebrow={pageContent.pricing.eyebrow}
+      title={pageContent.pricing.title}
+      description={pageContent.pricing.description}
+      plans={ezdAiChatPlans}
       note={pricingNote}
     />
 
-    <!-- FAQ -->
     <FAQGrid
-      eyebrow="FAQ"
-      title="Những câu hỏi thường gặp."
-      description="Một số thông tin nền trước khi bạn đặt lịch demo hoặc bắt đầu triển khai EZD AI Chat."
-      faqs={faqs}
+      eyebrow={pageContent.faq.eyebrow}
+      title={pageContent.faq.title}
+      description={pageContent.faq.description}
+      faqs={pageContent.faq.items}
     />
 
-    <!-- Final CTA -->
-    <section class="pb-20">
-      <div class="ezd-container">
-        <div class="rounded-[var(--ezd-radius-2xl)] bg-[var(--ezd-text)] p-8 text-white md:p-12">
-          <h2 class="max-w-3xl text-3xl font-bold tracking-tight md:text-5xl">
-            Muốn có một nhân vật AI tư vấn cho website của bạn?
-          </h2>
-
-          <p class="mt-5 max-w-2xl text-lg leading-8 text-white/75">
-            Đặt lịch demo để xem EZD AI Chat có thể phù hợp với ngành, website và hành trình khách hàng của bạn như thế nào.
-          </p>
-
-          <div class="mt-8 flex flex-wrap gap-3">
-            <a
-              href="/contact/"
-              class="ezd-focus-ring inline-flex rounded-full bg-white px-5 py-3 text-sm font-semibold text-[var(--ezd-text)] hover:bg-white/90"
-            >
-              Đặt lịch demo
-            </a>
-
-            <a
-              href="/case-studies/yen-ai-chat/"
-              class="ezd-focus-ring inline-flex rounded-full border border-white/20 px-5 py-3 text-sm font-semibold text-white hover:bg-white/10"
-            >
-              Xem case Yên AI Chat
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
+    <CTASection
+      eyebrow={pageContent.finalCTA.eyebrow}
+      title={pageContent.finalCTA.title}
+      description={pageContent.finalCTA.description}
+      primaryCTA={pageContent.finalCTA.primaryCTA}
+      secondaryCTA={pageContent.finalCTA.secondaryCTA}
+    />
   </main>
 </BaseLayout>
