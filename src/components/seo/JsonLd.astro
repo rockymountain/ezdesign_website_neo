@@ -1,0 +1,16 @@
+---
+import { stringifyJsonLd } from '../../utils/schema';
+
+type Props = {
+  schema: unknown | unknown[];
+};
+
+const { schema } = Astro.props as Props;
+const schemas = Array.isArray(schema) ? schema : [schema];
+---
+
+{
+  schemas.map((item) => (
+    <script type="application/ld+json" set:html={stringifyJsonLd(item)}></script>
+  ))
+}

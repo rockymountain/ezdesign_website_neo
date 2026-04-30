@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection, render, type CollectionEntry } from 'astro:content';
+import { buildArticleSchema, buildBreadcrumbSchema } from '../../utils/schema';
 
 type CaseStudyEntry = CollectionEntry<'case-studies'>;
 type CaseStudyData = CaseStudyEntry['data'];
@@ -51,6 +52,31 @@ const pageTitle = caseStudy.data.seoTitle;
 const pageDescription = caseStudy.data.seoDescription;
 const pageOgImage = caseStudy.data.ogImage;
 
+const pageUrl = `/case-studies/${caseStudy.data.slug}/`;
+
+const jsonLd = [
+  buildArticleSchema({
+    headline: title,
+    description: summary,
+    url: pageUrl,
+    image: pageOgImage,
+  }),
+  buildBreadcrumbSchema([
+    {
+      name: 'Home',
+      url: '/',
+    },
+    {
+      name: 'Case Studies',
+      url: '/case-studies/yen-ai-chat/',
+    },
+    {
+      name: title,
+      url: pageUrl,
+    },
+  ]),
+];
+
 const challenge: CaseChallenge[] = caseStudy.data.challenge ?? [];
 const solution: CaseSolution[] = caseStudy.data.solution ?? [];
 const highlights: CaseHighlight[] = caseStudy.data.highlights ?? [];
@@ -84,6 +110,7 @@ const permissionItems = [
   description={pageDescription}
   ogImage={pageOgImage}
   ogType="article"
+  jsonLd={jsonLd}
 >
   <main class="min-h-screen bg-[var(--ezd-bg)] text-[var(--ezd-text)]">
     <!-- Hero -->

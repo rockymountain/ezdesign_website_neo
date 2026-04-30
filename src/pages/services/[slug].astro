@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection, render, type CollectionEntry } from 'astro:content';
+import { buildBreadcrumbSchema, buildServiceSchema } from '../../utils/schema';
 
 type ServiceEntry = CollectionEntry<'services'>;
 type ServiceData = ServiceEntry['data'];
@@ -42,13 +43,43 @@ const pageTitle = service.data.seoTitle;
 const pageDescription = service.data.seoDescription;
 const pageOgImage = service.data.ogImage;
 
+const pageUrl = `/services/${service.data.slug}/`;
+
+const jsonLd = [
+  buildServiceSchema({
+    name: title,
+    description: excerpt,
+    url: pageUrl,
+    image: pageOgImage,
+  }),
+  buildBreadcrumbSchema([
+    {
+      name: 'Home',
+      url: '/',
+    },
+    {
+      name: 'Services',
+      url: '/services/ai-brand-character/',
+    },
+    {
+      name: title,
+      url: pageUrl,
+    },
+  ]),
+];
+
 const problems: string[] = service.data.problems ?? [];
 const features: ServiceFeature[] = service.data.features ?? [];
 const useCases: ServiceUseCase[] = service.data.useCases ?? [];
 const faqs: ServiceFaq[] = service.data.faqs ?? [];
 ---
 
-<BaseLayout title={pageTitle} description={pageDescription} ogImage={pageOgImage}></BaseLayout>
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  ogImage={pageOgImage}
+  jsonLd={jsonLd}
+>
   <main class="min-h-screen bg-[var(--ezd-bg)] text-[var(--ezd-text)]">
     <!-- Hero -->
     <section class="border-b border-[var(--ezd-border)] bg-[var(--ezd-bg-soft)] py-20">
