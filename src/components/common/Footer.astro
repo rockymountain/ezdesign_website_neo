@@ -1,0 +1,140 @@
+---
+import navigationData from '../../data/navigation.json';
+import siteConfig from '../../data/site.json';
+
+type NavItem = {
+  label: string;
+  href: string;
+};
+
+const footerNavigation = navigationData.footerNavigation as NavItem[];
+
+const currentYear = new Date().getFullYear();
+
+const contactLinks = [
+  {
+    label: 'Email',
+    value: 'info@ezdesign.vn',
+    href: 'mailto:info@ezdesign.vn',
+  },
+  {
+    label: 'Hotline',
+    value: '(+84) 983 77 40 65',
+    href: '/contact/',
+  },
+  {
+    label: 'Zalo',
+    value: '(+84) 983 77 40 65',
+    href: '/contact/',
+  },
+];
+---
+
+<footer class="border-t border-[var(--ezd-border)] bg-[var(--ezd-bg-soft)]">
+  <div class="ezd-container py-14">
+    <div class="grid gap-10 lg:grid-cols-[1.1fr_0.9fr_0.8fr]">
+      <!-- Brand -->
+      <div>
+        <a href="/" class="ezd-focus-ring inline-flex items-center gap-3 rounded-full">
+          <span
+            class="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--ezd-text)] text-sm font-bold text-white"
+            aria-hidden="true"
+          >
+            EZ
+          </span>
+
+          <span class="flex flex-col leading-none">
+            <span class="text-base font-bold tracking-tight text-[var(--ezd-text)]">
+              {siteConfig.name}
+            </span>
+            <span class="mt-1 text-xs text-[var(--ezd-text-soft)]">
+              Digital touchpoints
+            </span>
+          </span>
+        </a>
+
+        <p class="mt-5 max-w-md text-sm leading-6 text-[var(--ezd-text-muted)]">
+          EZDesign thiết kế các điểm chạm số biết trò chuyện, tương tác và chuyển đổi —
+          từ AI brand assistant đến AR/VR, Digital Twin, Game Activation và website tương tác.
+        </p>
+
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a
+            href="/ezd-ai-chat/"
+            class="ezd-focus-ring rounded-full bg-[var(--ezd-brand)] px-4 py-2 text-sm font-semibold text-white hover:bg-[var(--ezd-brand-dark)]"
+          >
+            Xem EZD AI Chat
+          </a>
+
+          <a
+            href="/contact/"
+            class="ezd-focus-ring rounded-full border border-[var(--ezd-border-strong)] bg-white px-4 py-2 text-sm font-semibold text-[var(--ezd-text)] hover:bg-[var(--ezd-surface-muted)]"
+          >
+            Đặt lịch demo
+          </a>
+        </div>
+      </div>
+
+      <!-- Footer navigation -->
+      <div>
+        <p class="text-sm font-semibold uppercase tracking-[0.25em] text-[var(--ezd-brand)]">
+          Services
+        </p>
+
+        <nav class="mt-5 grid gap-3" aria-label="Footer navigation">
+          {
+            footerNavigation.map((item: NavItem) => (
+              <a
+                href={item.href}
+                class="ezd-focus-ring w-fit rounded-full text-sm font-semibold text-[var(--ezd-text-muted)] transition hover:text-[var(--ezd-text)]"
+              >
+                {item.label}
+              </a>
+            ))
+          }
+        </nav>
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <p class="text-sm font-semibold uppercase tracking-[0.25em] text-[var(--ezd-brand)]">
+          Contact
+        </p>
+
+        <div class="mt-5 grid gap-4">
+          {
+            contactLinks.map(
+              (item: { label: string; value: string; href: string }) => (
+                <a
+                  href={item.href}
+                  class="rounded-[var(--ezd-radius-lg)] border border-[var(--ezd-border)] bg-white p-4 shadow-[var(--ezd-shadow-sm)] transition hover:-translate-y-0.5 hover:shadow-[var(--ezd-shadow-md)]"
+                >
+                  <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--ezd-text-soft)]">
+                    {item.label}
+                  </p>
+                  <p class="mt-2 text-sm font-semibold text-[var(--ezd-text)]">
+                    {item.value}
+                  </p>
+                </a>
+              ),
+            )
+          }
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="mt-12 flex flex-col gap-4 border-t border-[var(--ezd-border)] pt-6 text-sm text-[var(--ezd-text-soft)] md:flex-row md:items-center md:justify-between"
+    >
+      <p>© {currentYear} {siteConfig.name}. All rights reserved.</p>
+
+      <div class="flex flex-wrap gap-4">
+        <a href="/about/" class="hover:text-[var(--ezd-text)]">Về EZDesign</a>
+        <a href="/case-studies/yen-ai-chat/" class="hover:text-[var(--ezd-text)]">
+          Yên AI Chat
+        </a>
+        <a href="/contact/" class="hover:text-[var(--ezd-text)]">Liên hệ</a>
+      </div>
+    </div>
+  </div>
+</footer>
