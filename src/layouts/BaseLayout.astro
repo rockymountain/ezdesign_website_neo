@@ -1,0 +1,66 @@
+---
+import '../styles/global.css';
+import siteConfig from '../data/site.json';
+
+type Props = {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article';
+  noindex?: boolean;
+};
+
+const {
+  title = siteConfig.defaultTitle,
+  description = siteConfig.defaultDescription,
+  canonical,
+  ogImage = siteConfig.defaultOgImage,
+  ogType = 'website',
+  noindex = false,
+} = Astro.props as Props;
+
+const siteUrl = siteConfig.url.replace(/\/$/, '');
+
+const currentPath = Astro.url.pathname;
+const canonicalUrl = canonical ?? `${siteUrl}${currentPath}`;
+
+const absoluteOgImage = ogImage.startsWith('http')
+  ? ogImage
+  : `${siteUrl}${ogImage.startsWith('/') ? ogImage : `/${ogImage}`}`;
+---
+
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    {
+      noindex && <meta name="robots" content="noindex, nofollow" />
+    }
+
+    <meta property="og:site_name" content={siteConfig.name} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={absoluteOgImage} />
+    <meta property="og:locale" content={siteConfig.locale} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={absoluteOgImage} />
+
+    <meta name="theme-color" content="#0f766e" />
+  </head>
+
+  <body class="bg-[var(--ezd-bg)] text-[var(--ezd-text)] antialiased">
+    <slot />
+  </body>
+</html>
