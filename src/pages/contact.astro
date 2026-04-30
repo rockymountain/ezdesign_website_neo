@@ -1,5 +1,9 @@
 ---
-import '../styles/global.css';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = 'Liên hệ EZDesign — Đặt lịch demo hoặc tư vấn giải pháp';
+const description =
+  'Liên hệ EZDesign để đặt lịch demo EZD AI Chat hoặc tư vấn các giải pháp AI brand assistant, website tương tác, AR/VR, Digital Twin và Game Activation.';
 
 const interestOptions = [
   'EZD AI Chat',
@@ -60,324 +64,325 @@ const nextSteps = [
   },
 ];
 ---
-
-<main class="min-h-screen bg-[var(--ezd-bg)] text-[var(--ezd-text)]">
-  <!-- Hero -->
-  <section class="border-b border-[var(--ezd-border)] bg-[var(--ezd-bg-soft)] py-20">
-    <div class="ezd-container">
-      <p class="text-sm font-semibold uppercase tracking-[0.3em] text-[var(--ezd-brand)]">
-        Contact
-      </p>
-
-      <h1 class="mt-5 max-w-4xl text-4xl font-bold tracking-tight md:text-6xl">
-        Đặt lịch demo hoặc trao đổi về điểm chạm số cho thương hiệu của bạn.
-      </h1>
-
-      <p class="mt-6 max-w-2xl text-lg leading-8 text-[var(--ezd-text-muted)]">
-        Chia sẻ nhu cầu hiện tại của bạn. EZDesign sẽ phản hồi để tư vấn hướng triển khai phù hợp,
-        từ EZD AI Chat đến website tương tác, AR/VR, Digital Twin hoặc Game Activation.
-      </p>
-    </div>
-  </section>
-
-  <!-- Contact Form + Channels -->
-  <section class="py-20">
-    <div class="ezd-container">
-      <div class="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-start">
-        <!-- Lead Form -->
-        <form
-          class="rounded-[var(--ezd-radius-2xl)] border border-[var(--ezd-border)] bg-white p-6 shadow-[var(--ezd-shadow-md)] md:p-8"
-          method="post"
-          action="#"
-        >
-          <div>
-            <p class="text-sm font-semibold uppercase tracking-[0.25em] text-[var(--ezd-brand)]">
-              Lead Form
-            </p>
-
-            <h2 class="mt-4 text-3xl font-bold tracking-tight">
-              Cho EZDesign biết bạn đang cần gì.
-            </h2>
-
-            <p class="mt-3 text-sm leading-6 text-[var(--ezd-text-muted)]">
-              Đây là form UI skeleton. Sprint sau sẽ kết nối với Cloudflare Worker,
-              Google Sheets và email notification.
-            </p>
-          </div>
-
-          <!-- Honeypot placeholder -->
-          <div class="hidden" aria-hidden="true">
-            <label for="company_website">Company website</label>
-            <input id="company_website" name="company_website" type="text" tabindex="-1" autocomplete="off" />
-          </div>
-
-          <div class="mt-8 grid gap-5 md:grid-cols-2">
-            <div>
-              <label for="name" class="text-sm font-semibold">Họ tên</label>
-              <input
-                id="name"
-                name="name"
-                type="text"
-                placeholder="Tên của bạn"
-                class="mt-2 w-full rounded-[var(--ezd-radius-md)] border border-[var(--ezd-border)] bg-white px-4 py-3 text-sm outline-none transition focus:border-[var(--ezd-brand)]"
-              />
-            </div>
-
-            <div>
-              <label for="businessName" class="text-sm font-semibold">Tên doanh nghiệp</label>
-              <input
-                id="businessName"
-                name="businessName"
-                type="text"
-                placeholder="Tên thương hiệu / công ty"
-                class="mt-2 w-full rounded-[var(--ezd-radius-md)] border border-[var(--ezd-border)] bg-white px-4 py-3 text-sm outline-none transition focus:border-[var(--ezd-brand)]"
-              />
-            </div>
-
-            <div>
-              <label for="email" class="text-sm font-semibold">Email</label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                placeholder="you@example.com"
-                class="mt-2 w-full rounded-[var(--ezd-radius-md)] border border-[var(--ezd-border)] bg-white px-4 py-3 text-sm outline-none transition focus:border-[var(--ezd-brand)]"
-              />
-            </div>
-
-            <div>
-              <label for="phoneOrZalo" class="text-sm font-semibold">Số điện thoại / Zalo</label>
-              <input
-                id="phoneOrZalo"
-                name="phoneOrZalo"
-                type="text"
-                placeholder="Số điện thoại hoặc Zalo"
-                class="mt-2 w-full rounded-[var(--ezd-radius-md)] border border-[var(--ezd-border)] bg-white px-4 py-3 text-sm outline-none transition focus:border-[var(--ezd-brand)]"
-              />
-            </div>
-
-            <div>
-              <label for="website" class="text-sm font-semibold">Website hiện tại</label>
-              <input
-                id="website"
-                name="website"
-                type="url"
-                placeholder="https://..."
-                class="mt-2 w-full rounded-[var(--ezd-radius-md)] border border-[var(--ezd-border)] bg-white px-4 py-3 text-sm outline-none transition focus:border-[var(--ezd-brand)]"
-              />
-            </div>
-
-            <div>
-              <label for="industry" class="text-sm font-semibold">Ngành kinh doanh</label>
-              <select
-                id="industry"
-                name="industry"
-                class="mt-2 w-full rounded-[var(--ezd-radius-md)] border border-[var(--ezd-border)] bg-white px-4 py-3 text-sm outline-none transition focus:border-[var(--ezd-brand)]"
-              >
-                <option value="">Chọn ngành phù hợp</option>
-                {
-                  industries.map((industry: string) => (
-                    <option value={industry}>{industry}</option>
-                  ))
-                }
-              </select>
-            </div>
-
-            <div class="md:col-span-2">
-              <label for="interest" class="text-sm font-semibold">Bạn quan tâm giải pháp nào?</label>
-              <select
-                id="interest"
-                name="interest"
-                class="mt-2 w-full rounded-[var(--ezd-radius-md)] border border-[var(--ezd-border)] bg-white px-4 py-3 text-sm outline-none transition focus:border-[var(--ezd-brand)]"
-              >
-                <option value="">Chọn giải pháp</option>
-                {
-                  interestOptions.map((option: string) => (
-                    <option value={option}>{option}</option>
-                  ))
-                }
-              </select>
-            </div>
-
-            <div class="md:col-span-2">
-              <label for="message" class="text-sm font-semibold">Mô tả nhu cầu ngắn</label>
-              <textarea
-                id="message"
-                name="message"
-                rows="6"
-                placeholder="Ví dụ: Tôi muốn gắn AI Chat vào website spa để tư vấn dịch vụ và chuyển khách sang Zalo..."
-                class="mt-2 w-full resize-y rounded-[var(--ezd-radius-md)] border border-[var(--ezd-border)] bg-white px-4 py-3 text-sm leading-6 outline-none transition focus:border-[var(--ezd-brand)]"
-              ></textarea>
-            </div>
-          </div>
-
-          <div class="mt-6 rounded-[var(--ezd-radius-lg)] border border-[var(--ezd-border)] bg-[var(--ezd-bg-soft)] p-4 text-sm leading-6 text-[var(--ezd-text-muted)]">
-            Form này sẽ gửi thông tin đến Google Sheets và email notification qua Cloudflare Worker.
-            EZDesign không dùng form để thu thập thông tin nhạy cảm không cần thiết.
-          </div>
-
-          <div class="mt-8 flex flex-wrap items-center gap-4">
-            <button
-              type="submit"
-              class="ezd-focus-ring rounded-full bg-[var(--ezd-brand)] px-6 py-3 text-sm font-semibold text-white shadow-[var(--ezd-shadow-sm)] hover:bg-[var(--ezd-brand-dark)]"
-            >
-              Gửi yêu cầu tư vấn
-            </button>
-
-            <p class="text-sm text-[var(--ezd-text-muted)]">
-              Chức năng submit thật sẽ được kết nối ở sprint sau.
-            </p>
-          </div>
-        </form>
-
-        <!-- Contact Channels -->
-        <aside class="space-y-5">
-          <div class="rounded-[var(--ezd-radius-2xl)] border border-[var(--ezd-border)] bg-white p-6 shadow-[var(--ezd-shadow-sm)]">
-            <p class="text-sm font-semibold uppercase tracking-[0.25em] text-[var(--ezd-brand)]">
-              Channels
-            </p>
-
-            <h2 class="mt-4 text-2xl font-bold tracking-tight">
-              Kênh liên hệ trực tiếp.
-            </h2>
-
-            <p class="mt-3 text-sm leading-6 text-[var(--ezd-text-muted)]">
-              Các thông tin hotline/Zalo có thể được cập nhật khi có link chính thức.
-            </p>
-          </div>
-
-          {
-            contactChannels.map(
-              (channel: {
-                label: string;
-                value: string;
-                href: string;
-                description: string;
-              }) => (
-                <a
-                  href={channel.href}
-                  class="block rounded-[var(--ezd-radius-xl)] border border-[var(--ezd-border)] bg-white p-6 shadow-[var(--ezd-shadow-sm)] transition hover:-translate-y-1 hover:shadow-[var(--ezd-shadow-md)]"
-                >
-                  <p class="text-sm font-semibold text-[var(--ezd-brand)]">{channel.label}</p>
-                  <p class="mt-2 text-lg font-semibold">{channel.value}</p>
-                  <p class="mt-3 text-sm leading-6 text-[var(--ezd-text-muted)]">
-                    {channel.description}
-                  </p>
-                </a>
-              ),
-            )
-          }
-
-          <div class="rounded-[var(--ezd-radius-2xl)] border border-dashed border-[var(--ezd-border-strong)] bg-[var(--ezd-bg-soft)] p-6">
-            <p class="text-sm font-semibold text-[var(--ezd-brand)]">EZD Assistant placeholder</p>
-            <p class="mt-3 text-sm leading-6 text-[var(--ezd-text-muted)]">
-              Vùng này có thể embed EZD Assistant để khách hỏi nhanh trước khi gửi form.
-            </p>
-          </div>
-        </aside>
-      </div>
-    </div>
-  </section>
-
-  <!-- Next Steps -->
-  <section class="bg-[var(--ezd-bg-soft)] py-20">
-    <div class="ezd-container">
-      <div class="max-w-2xl">
-        <p class="text-sm font-semibold uppercase tracking-[0.25em] text-[var(--ezd-brand)]">
-          Next Steps
+<BaseLayout title={title} description={description}>
+  <main class="min-h-screen bg-[var(--ezd-bg)] text-[var(--ezd-text)]">
+    <!-- Hero -->
+    <section class="border-b border-[var(--ezd-border)] bg-[var(--ezd-bg-soft)] py-20">
+      <div class="ezd-container">
+        <p class="text-sm font-semibold uppercase tracking-[0.3em] text-[var(--ezd-brand)]">
+          Contact
         </p>
 
-        <h2 class="mt-4 text-3xl font-bold tracking-tight md:text-5xl">
-          Sau khi bạn gửi yêu cầu, điều gì sẽ xảy ra?
-        </h2>
-      </div>
+        <h1 class="mt-5 max-w-4xl text-4xl font-bold tracking-tight md:text-6xl">
+          Đặt lịch demo hoặc trao đổi về điểm chạm số cho thương hiệu của bạn.
+        </h1>
 
-      <div class="mt-10 grid gap-5 md:grid-cols-3">
-        {
-          nextSteps.map(
-            (item: { step: string; title: string; description: string }) => (
-              <div class="rounded-[var(--ezd-radius-xl)] border border-[var(--ezd-border)] bg-white p-6 shadow-[var(--ezd-shadow-sm)]">
-                <p class="text-sm font-semibold text-[var(--ezd-brand)]">{item.step}</p>
-                <h3 class="mt-4 text-xl font-semibold">{item.title}</h3>
-                <p class="mt-3 text-sm leading-6 text-[var(--ezd-text-muted)]">
-                  {item.description}
-                </p>
+        <p class="mt-6 max-w-2xl text-lg leading-8 text-[var(--ezd-text-muted)]">
+          Chia sẻ nhu cầu hiện tại của bạn. EZDesign sẽ phản hồi để tư vấn hướng triển khai phù hợp,
+          từ EZD AI Chat đến website tương tác, AR/VR, Digital Twin hoặc Game Activation.
+        </p>
+      </div>
+    </section>
+
+    <!-- Contact Form + Channels -->
+    <section class="py-20">
+      <div class="ezd-container">
+        <div class="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-start">
+          <!-- Lead Form -->
+          <form
+            class="rounded-[var(--ezd-radius-2xl)] border border-[var(--ezd-border)] bg-white p-6 shadow-[var(--ezd-shadow-md)] md:p-8"
+            method="post"
+            action="#"
+          >
+            <div>
+              <p class="text-sm font-semibold uppercase tracking-[0.25em] text-[var(--ezd-brand)]">
+                Lead Form
+              </p>
+
+              <h2 class="mt-4 text-3xl font-bold tracking-tight">
+                Cho EZDesign biết bạn đang cần gì.
+              </h2>
+
+              <p class="mt-3 text-sm leading-6 text-[var(--ezd-text-muted)]">
+                Đây là form UI skeleton. Sprint sau sẽ kết nối với Cloudflare Worker,
+                Google Sheets và email notification.
+              </p>
+            </div>
+
+            <!-- Honeypot placeholder -->
+            <div class="hidden" aria-hidden="true">
+              <label for="company_website">Company website</label>
+              <input id="company_website" name="company_website" type="text" tabindex="-1" autocomplete="off" />
+            </div>
+
+            <div class="mt-8 grid gap-5 md:grid-cols-2">
+              <div>
+                <label for="name" class="text-sm font-semibold">Họ tên</label>
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  placeholder="Tên của bạn"
+                  class="mt-2 w-full rounded-[var(--ezd-radius-md)] border border-[var(--ezd-border)] bg-white px-4 py-3 text-sm outline-none transition focus:border-[var(--ezd-brand)]"
+                />
               </div>
-            ),
-          )
-        }
-      </div>
-    </div>
-  </section>
 
-  <!-- Demo Expectations -->
-  <section class="py-20">
-    <div class="ezd-container">
-      <div class="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
-        <div>
+              <div>
+                <label for="businessName" class="text-sm font-semibold">Tên doanh nghiệp</label>
+                <input
+                  id="businessName"
+                  name="businessName"
+                  type="text"
+                  placeholder="Tên thương hiệu / công ty"
+                  class="mt-2 w-full rounded-[var(--ezd-radius-md)] border border-[var(--ezd-border)] bg-white px-4 py-3 text-sm outline-none transition focus:border-[var(--ezd-brand)]"
+                />
+              </div>
+
+              <div>
+                <label for="email" class="text-sm font-semibold">Email</label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  placeholder="you@example.com"
+                  class="mt-2 w-full rounded-[var(--ezd-radius-md)] border border-[var(--ezd-border)] bg-white px-4 py-3 text-sm outline-none transition focus:border-[var(--ezd-brand)]"
+                />
+              </div>
+
+              <div>
+                <label for="phoneOrZalo" class="text-sm font-semibold">Số điện thoại / Zalo</label>
+                <input
+                  id="phoneOrZalo"
+                  name="phoneOrZalo"
+                  type="text"
+                  placeholder="Số điện thoại hoặc Zalo"
+                  class="mt-2 w-full rounded-[var(--ezd-radius-md)] border border-[var(--ezd-border)] bg-white px-4 py-3 text-sm outline-none transition focus:border-[var(--ezd-brand)]"
+                />
+              </div>
+
+              <div>
+                <label for="website" class="text-sm font-semibold">Website hiện tại</label>
+                <input
+                  id="website"
+                  name="website"
+                  type="url"
+                  placeholder="https://..."
+                  class="mt-2 w-full rounded-[var(--ezd-radius-md)] border border-[var(--ezd-border)] bg-white px-4 py-3 text-sm outline-none transition focus:border-[var(--ezd-brand)]"
+                />
+              </div>
+
+              <div>
+                <label for="industry" class="text-sm font-semibold">Ngành kinh doanh</label>
+                <select
+                  id="industry"
+                  name="industry"
+                  class="mt-2 w-full rounded-[var(--ezd-radius-md)] border border-[var(--ezd-border)] bg-white px-4 py-3 text-sm outline-none transition focus:border-[var(--ezd-brand)]"
+                >
+                  <option value="">Chọn ngành phù hợp</option>
+                  {
+                    industries.map((industry: string) => (
+                      <option value={industry}>{industry}</option>
+                    ))
+                  }
+                </select>
+              </div>
+
+              <div class="md:col-span-2">
+                <label for="interest" class="text-sm font-semibold">Bạn quan tâm giải pháp nào?</label>
+                <select
+                  id="interest"
+                  name="interest"
+                  class="mt-2 w-full rounded-[var(--ezd-radius-md)] border border-[var(--ezd-border)] bg-white px-4 py-3 text-sm outline-none transition focus:border-[var(--ezd-brand)]"
+                >
+                  <option value="">Chọn giải pháp</option>
+                  {
+                    interestOptions.map((option: string) => (
+                      <option value={option}>{option}</option>
+                    ))
+                  }
+                </select>
+              </div>
+
+              <div class="md:col-span-2">
+                <label for="message" class="text-sm font-semibold">Mô tả nhu cầu ngắn</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="6"
+                  placeholder="Ví dụ: Tôi muốn gắn AI Chat vào website spa để tư vấn dịch vụ và chuyển khách sang Zalo..."
+                  class="mt-2 w-full resize-y rounded-[var(--ezd-radius-md)] border border-[var(--ezd-border)] bg-white px-4 py-3 text-sm leading-6 outline-none transition focus:border-[var(--ezd-brand)]"
+                ></textarea>
+              </div>
+            </div>
+
+            <div class="mt-6 rounded-[var(--ezd-radius-lg)] border border-[var(--ezd-border)] bg-[var(--ezd-bg-soft)] p-4 text-sm leading-6 text-[var(--ezd-text-muted)]">
+              Form này sẽ gửi thông tin đến Google Sheets và email notification qua Cloudflare Worker.
+              EZDesign không dùng form để thu thập thông tin nhạy cảm không cần thiết.
+            </div>
+
+            <div class="mt-8 flex flex-wrap items-center gap-4">
+              <button
+                type="submit"
+                class="ezd-focus-ring rounded-full bg-[var(--ezd-brand)] px-6 py-3 text-sm font-semibold text-white shadow-[var(--ezd-shadow-sm)] hover:bg-[var(--ezd-brand-dark)]"
+              >
+                Gửi yêu cầu tư vấn
+              </button>
+
+              <p class="text-sm text-[var(--ezd-text-muted)]">
+                Chức năng submit thật sẽ được kết nối ở sprint sau.
+              </p>
+            </div>
+          </form>
+
+          <!-- Contact Channels -->
+          <aside class="space-y-5">
+            <div class="rounded-[var(--ezd-radius-2xl)] border border-[var(--ezd-border)] bg-white p-6 shadow-[var(--ezd-shadow-sm)]">
+              <p class="text-sm font-semibold uppercase tracking-[0.25em] text-[var(--ezd-brand)]">
+                Channels
+              </p>
+
+              <h2 class="mt-4 text-2xl font-bold tracking-tight">
+                Kênh liên hệ trực tiếp.
+              </h2>
+
+              <p class="mt-3 text-sm leading-6 text-[var(--ezd-text-muted)]">
+                Các thông tin hotline/Zalo có thể được cập nhật khi có link chính thức.
+              </p>
+            </div>
+
+            {
+              contactChannels.map(
+                (channel: {
+                  label: string;
+                  value: string;
+                  href: string;
+                  description: string;
+                }) => (
+                  <a
+                    href={channel.href}
+                    class="block rounded-[var(--ezd-radius-xl)] border border-[var(--ezd-border)] bg-white p-6 shadow-[var(--ezd-shadow-sm)] transition hover:-translate-y-1 hover:shadow-[var(--ezd-shadow-md)]"
+                  >
+                    <p class="text-sm font-semibold text-[var(--ezd-brand)]">{channel.label}</p>
+                    <p class="mt-2 text-lg font-semibold">{channel.value}</p>
+                    <p class="mt-3 text-sm leading-6 text-[var(--ezd-text-muted)]">
+                      {channel.description}
+                    </p>
+                  </a>
+                ),
+              )
+            }
+
+            <div class="rounded-[var(--ezd-radius-2xl)] border border-dashed border-[var(--ezd-border-strong)] bg-[var(--ezd-bg-soft)] p-6">
+              <p class="text-sm font-semibold text-[var(--ezd-brand)]">EZD Assistant placeholder</p>
+              <p class="mt-3 text-sm leading-6 text-[var(--ezd-text-muted)]">
+                Vùng này có thể embed EZD Assistant để khách hỏi nhanh trước khi gửi form.
+              </p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- Next Steps -->
+    <section class="bg-[var(--ezd-bg-soft)] py-20">
+      <div class="ezd-container">
+        <div class="max-w-2xl">
           <p class="text-sm font-semibold uppercase tracking-[0.25em] text-[var(--ezd-brand)]">
-            Demo
+            Next Steps
           </p>
 
           <h2 class="mt-4 text-3xl font-bold tracking-tight md:text-5xl">
-            Buổi demo nên giúp bạn trả lời điều gì?
+            Sau khi bạn gửi yêu cầu, điều gì sẽ xảy ra?
           </h2>
         </div>
 
-        <div class="grid gap-4">
-          <div class="rounded-[var(--ezd-radius-xl)] border border-[var(--ezd-border)] bg-white p-6 shadow-[var(--ezd-shadow-sm)]">
-            <h3 class="text-xl font-semibold">EZD AI Chat có phù hợp với ngành của bạn không?</h3>
-            <p class="mt-3 text-sm leading-6 text-[var(--ezd-text-muted)]">
-              Demo sẽ tập trung vào use case thật của doanh nghiệp: khách hỏi gì, cần tư vấn gì và nên chuyển đổi ở đâu.
+        <div class="mt-10 grid gap-5 md:grid-cols-3">
+          {
+            nextSteps.map(
+              (item: { step: string; title: string; description: string }) => (
+                <div class="rounded-[var(--ezd-radius-xl)] border border-[var(--ezd-border)] bg-white p-6 shadow-[var(--ezd-shadow-sm)]">
+                  <p class="text-sm font-semibold text-[var(--ezd-brand)]">{item.step}</p>
+                  <h3 class="mt-4 text-xl font-semibold">{item.title}</h3>
+                  <p class="mt-3 text-sm leading-6 text-[var(--ezd-text-muted)]">
+                    {item.description}
+                  </p>
+                </div>
+              ),
+            )
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- Demo Expectations -->
+    <section class="py-20">
+      <div class="ezd-container">
+        <div class="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+          <div>
+            <p class="text-sm font-semibold uppercase tracking-[0.25em] text-[var(--ezd-brand)]">
+              Demo
             </p>
+
+            <h2 class="mt-4 text-3xl font-bold tracking-tight md:text-5xl">
+              Buổi demo nên giúp bạn trả lời điều gì?
+            </h2>
           </div>
 
-          <div class="rounded-[var(--ezd-radius-xl)] border border-[var(--ezd-border)] bg-white p-6 shadow-[var(--ezd-shadow-sm)]">
-            <h3 class="text-xl font-semibold">Cần chuẩn bị dữ liệu gì để triển khai?</h3>
-            <p class="mt-3 text-sm leading-6 text-[var(--ezd-text-muted)]">
-              EZDesign sẽ tư vấn các nhóm thông tin cần có như FAQ, chính sách, sản phẩm/dịch vụ, tone of voice và kênh handoff.
-            </p>
-          </div>
+          <div class="grid gap-4">
+            <div class="rounded-[var(--ezd-radius-xl)] border border-[var(--ezd-border)] bg-white p-6 shadow-[var(--ezd-shadow-sm)]">
+              <h3 class="text-xl font-semibold">EZD AI Chat có phù hợp với ngành của bạn không?</h3>
+              <p class="mt-3 text-sm leading-6 text-[var(--ezd-text-muted)]">
+                Demo sẽ tập trung vào use case thật của doanh nghiệp: khách hỏi gì, cần tư vấn gì và nên chuyển đổi ở đâu.
+              </p>
+            </div>
 
-          <div class="rounded-[var(--ezd-radius-xl)] border border-[var(--ezd-border)] bg-white p-6 shadow-[var(--ezd-shadow-sm)]">
-            <h3 class="text-xl font-semibold">Chi phí và setup fee dự kiến như thế nào?</h3>
-            <p class="mt-3 text-sm leading-6 text-[var(--ezd-text-muted)]">
-              Subscription có thể tham khảo từ các gói public, còn setup fee sẽ được báo theo nhu cầu thực tế.
-            </p>
+            <div class="rounded-[var(--ezd-radius-xl)] border border-[var(--ezd-border)] bg-white p-6 shadow-[var(--ezd-shadow-sm)]">
+              <h3 class="text-xl font-semibold">Cần chuẩn bị dữ liệu gì để triển khai?</h3>
+              <p class="mt-3 text-sm leading-6 text-[var(--ezd-text-muted)]">
+                EZDesign sẽ tư vấn các nhóm thông tin cần có như FAQ, chính sách, sản phẩm/dịch vụ, tone of voice và kênh handoff.
+              </p>
+            </div>
+
+            <div class="rounded-[var(--ezd-radius-xl)] border border-[var(--ezd-border)] bg-white p-6 shadow-[var(--ezd-shadow-sm)]">
+              <h3 class="text-xl font-semibold">Chi phí và setup fee dự kiến như thế nào?</h3>
+              <p class="mt-3 text-sm leading-6 text-[var(--ezd-text-muted)]">
+                Subscription có thể tham khảo từ các gói public, còn setup fee sẽ được báo theo nhu cầu thực tế.
+              </p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Final CTA -->
-  <section class="pb-20">
-    <div class="ezd-container">
-      <div class="rounded-[var(--ezd-radius-2xl)] bg-[var(--ezd-text)] p-8 text-white md:p-12">
-        <h2 class="max-w-3xl text-3xl font-bold tracking-tight md:text-5xl">
-          Chưa chắc nên bắt đầu từ đâu?
-        </h2>
+    <!-- Final CTA -->
+    <section class="pb-20">
+      <div class="ezd-container">
+        <div class="rounded-[var(--ezd-radius-2xl)] bg-[var(--ezd-text)] p-8 text-white md:p-12">
+          <h2 class="max-w-3xl text-3xl font-bold tracking-tight md:text-5xl">
+            Chưa chắc nên bắt đầu từ đâu?
+          </h2>
 
-        <p class="mt-5 max-w-2xl text-lg leading-8 text-white/75">
-          Chỉ cần gửi tình trạng website hiện tại và mục tiêu bạn muốn đạt được. EZDesign sẽ gợi ý hướng đi phù hợp.
-        </p>
+          <p class="mt-5 max-w-2xl text-lg leading-8 text-white/75">
+            Chỉ cần gửi tình trạng website hiện tại và mục tiêu bạn muốn đạt được. EZDesign sẽ gợi ý hướng đi phù hợp.
+          </p>
 
-        <div class="mt-8 flex flex-wrap gap-3">
-          <a
-            href="/ezd-ai-chat/"
-            class="ezd-focus-ring inline-flex rounded-full bg-white px-5 py-3 text-sm font-semibold text-[var(--ezd-text)] hover:bg-white/90"
-          >
-            Xem EZD AI Chat
-          </a>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a
+              href="/ezd-ai-chat/"
+              class="ezd-focus-ring inline-flex rounded-full bg-white px-5 py-3 text-sm font-semibold text-[var(--ezd-text)] hover:bg-white/90"
+            >
+              Xem EZD AI Chat
+            </a>
 
-          <a
-            href="/case-studies/yen-ai-chat/"
-            class="ezd-focus-ring inline-flex rounded-full border border-white/20 px-5 py-3 text-sm font-semibold text-white hover:bg-white/10"
-          >
-            Xem case Yên AI Chat
-          </a>
+            <a
+              href="/case-studies/yen-ai-chat/"
+              class="ezd-focus-ring inline-flex rounded-full border border-white/20 px-5 py-3 text-sm font-semibold text-white hover:bg-white/10"
+            >
+              Xem case Yên AI Chat
+            </a>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
-</main>
+    </section>
+  </main>
+</BaseLayout>
