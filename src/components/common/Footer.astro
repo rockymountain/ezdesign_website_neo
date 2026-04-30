@@ -1,6 +1,8 @@
 ---
 import navigationData from '../../data/navigation.json';
 import siteConfig from '../../data/site.json';
+import BrandMark from './BrandMark.astro';
+import ButtonLink from './ButtonLink.astro';
 
 type NavItem = {
   label: string;
@@ -35,40 +37,13 @@ const contactLinks = [
     <div class="grid gap-10 lg:grid-cols-[1.1fr_0.9fr_0.8fr]">
       <!-- Brand -->
       <div>
-        <a href="/" class="ezd-focus-ring inline-flex items-center gap-3 rounded-full">
-          <span
-            class="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--ezd-text)] text-sm font-bold text-white"
-            aria-hidden="true"
-          >
-            EZ
-          </span>
-
-          <span class="flex flex-col leading-none">
-            <span class="text-base font-bold tracking-tight text-[var(--ezd-text)]">
-              {siteConfig.name}
-            </span>
-            <span class="mt-1 text-xs text-[var(--ezd-text-soft)]">
-              Digital touchpoints
-            </span>
-          </span>
-        </a>
+        <BrandMark />
 
         <p class="mt-5 max-w-md text-sm leading-6 text-[var(--ezd-text-muted)]"> {siteConfig.description} </p>
 
         <div class="mt-6 flex flex-wrap gap-3">
-          <a
-            href="/ezd-ai-chat/"
-            class="ezd-focus-ring rounded-full bg-[var(--ezd-brand)] px-4 py-2 text-sm font-semibold text-white hover:bg-[var(--ezd-brand-dark)]"
-          >
-            Xem EZD AI Chat
-          </a>
-
-          <a
-            href="/contact/"
-            class="ezd-focus-ring rounded-full border border-[var(--ezd-border-strong)] bg-white px-4 py-2 text-sm font-semibold text-[var(--ezd-text)] hover:bg-[var(--ezd-surface-muted)]"
-          >
-            Đặt lịch demo
-          </a>
+          <ButtonLink href="/ezd-ai-chat/" label="Xem EZD AI Chat" variant="primary" size="sm" />
+          <ButtonLink href="/contact/" label="Đặt lịch demo" variant="secondary" size="sm" />
         </div>
       </div>
 

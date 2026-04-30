@@ -1,6 +1,8 @@
 ---
 import navigationData from '../../data/navigation.json';
 import siteConfig from '../../data/site.json';
+import BrandMark from './BrandMark.astro';
+import ButtonLink from './ButtonLink.astro';
 
 type NavItem = {
   label: string;
@@ -21,23 +23,7 @@ function isActivePath(href: string) {
   <div class="ezd-container">
     <div class="flex min-h-16 items-center justify-between gap-6">
       <!-- Brand -->
-      <a href="/" class="ezd-focus-ring flex items-center gap-3 rounded-full">
-        <span
-          class="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--ezd-text)] text-sm font-bold text-white"
-          aria-hidden="true"
-        >
-          {siteConfig.brand.shortName}
-        </span>
-
-        <span class="flex flex-col leading-none">
-          <span class="text-sm font-extrabold tracking-tight text-[var(--ezd-text)]">
-            {siteConfig.name}
-          </span>
-          <span class="mt-1 hidden text-xs text-[var(--ezd-text-soft)] sm:inline">
-            Digital touchpoints
-          </span>
-        </span>
-      </a>
+      <BrandMark />
 
       <!-- Desktop nav -->
       <nav class="hidden items-center gap-1 lg:flex" aria-label="Main navigation">
@@ -65,12 +51,7 @@ function isActivePath(href: string) {
 
       <!-- Desktop CTA -->
       <div class="hidden items-center gap-3 lg:flex">
-        <a
-          href="/contact/"
-          class="ezd-focus-ring rounded-full bg-[var(--ezd-brand)] px-5 py-2.5 text-sm font-semibold text-white shadow-[var(--ezd-shadow-sm)] transition hover:bg-[var(--ezd-brand-dark)]"
-        >
-          Đặt lịch demo
-        </a>
+        <ButtonLink href="/contact/" label="Đặt lịch demo" variant="primary" size="md" />
       </div>
 
       <!-- Mobile menu -->
@@ -107,12 +88,13 @@ function isActivePath(href: string) {
               })
             }
 
-            <a
+            <ButtonLink
               href="/contact/"
-              class="ezd-focus-ring rounded-full bg-[var(--ezd-brand)] px-5 py-2.5 text-sm font-semibold text-white shadow-[var(--ezd-shadow-sm)] transition hover:bg-[var(--ezd-brand-dark)]"
-            >
-              Đặt lịch demo
-            </a>
+              label="Đặt lịch demo"
+              variant="primary"
+              size="md"
+              class="mt-2 w-full rounded-[var(--ezd-radius-md)]"
+            />
           </nav>
         </div>
       </details>

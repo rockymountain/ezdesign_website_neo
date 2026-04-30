@@ -1,0 +1,47 @@
+---
+type Props = {
+  variant?: 'default' | 'soft' | 'glass' | 'outline' | 'dark';
+  padding?: 'sm' | 'md' | 'lg';
+  hover?: boolean;
+  class?: string;
+};
+
+const {
+  variant = 'default',
+  padding = 'md',
+  hover = false,
+  class: className = '',
+} = Astro.props as Props;
+
+const variantClassMap = {
+  default: 'border border-[var(--ezd-border)] bg-white shadow-[var(--ezd-shadow-sm)]',
+  soft: 'border border-[var(--ezd-border)] bg-[var(--ezd-bg-soft)] shadow-[var(--ezd-shadow-sm)]',
+  glass:
+    'border border-white/40 bg-white/80 shadow-[var(--ezd-shadow-md)] backdrop-blur-xl',
+  outline: 'border border-[var(--ezd-border)] bg-transparent',
+  dark: 'border border-white/10 bg-[var(--ezd-black)] text-white shadow-[var(--ezd-shadow-md)]',
+};
+
+const paddingClassMap = {
+  sm: 'p-4',
+  md: 'p-6',
+  lg: 'p-8',
+};
+
+const hoverClass = hover ? 'transition hover:-translate-y-1 hover:shadow-[var(--ezd-shadow-md)]' : '';
+
+const variantClass = variantClassMap[variant];
+const paddingClass = paddingClassMap[padding];
+---
+
+<div
+  class:list={[
+    'rounded-[var(--ezd-radius-2xl)]',
+    variantClass,
+    paddingClass,
+    hoverClass,
+    className,
+  ]}
+>
+  <slot />
+</div>

@@ -1,0 +1,56 @@
+---
+import siteConfig from '../../data/site.json';
+
+type Props = {
+  variant?: 'full' | 'mark';
+  tone?: 'dark' | 'light';
+  showTagline?: boolean;
+  href?: string;
+};
+
+const {
+  variant = 'full',
+  tone = 'dark',
+  showTagline = true,
+  href = '/',
+} = Astro.props as Props;
+
+const isLight = tone === 'light';
+
+const markClass = isLight
+  ? 'bg-white text-[var(--ezd-black)]'
+  : 'bg-[var(--ezd-black)] text-white';
+
+const textClass = isLight ? 'text-white' : 'text-[var(--ezd-text)]';
+const taglineClass = isLight ? 'text-white/70' : 'text-[var(--ezd-text-soft)]';
+---
+
+<a href={href} class="ezd-focus-ring inline-flex items-center gap-3 rounded-full">
+  <span
+    class:list={[
+      'flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-black tracking-tight',
+      markClass,
+    ]}
+    aria-hidden="true"
+  >
+    {siteConfig.brand.shortName}
+  </span>
+
+  {
+    variant === 'full' && (
+      <span class="flex flex-col leading-none">
+        <span class:list={['text-base font-black tracking-tight', textClass]}>
+          {siteConfig.name}
+        </span>
+
+        {
+          showTagline && (
+            <span class:list={['mt-1 text-xs font-medium', taglineClass]}>
+              Digital touchpoints
+            </span>
+          )
+        }
+      </span>
+    )
+  }
+</a>
