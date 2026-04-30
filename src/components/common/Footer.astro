@@ -14,17 +14,17 @@ const currentYear = new Date().getFullYear();
 const contactLinks = [
   {
     label: 'Email',
-    value: 'info@ezdesign.vn',
-    href: 'mailto:info@ezdesign.vn',
+    value: siteConfig.contact.email,
+    href: `mailto:${siteConfig.contact.email}`,
   },
   {
     label: 'Hotline',
-    value: '(+84) 983 77 40 65',
+    value: siteConfig.contact.hotline,
     href: '/contact/',
   },
   {
     label: 'Zalo',
-    value: '(+84) 983 77 40 65',
+    value: siteConfig.contact.zalo,
     href: '/contact/',
   },
 ];
@@ -53,10 +53,7 @@ const contactLinks = [
           </span>
         </a>
 
-        <p class="mt-5 max-w-md text-sm leading-6 text-[var(--ezd-text-muted)]">
-          EZDesign thiết kế các điểm chạm số biết trò chuyện, tương tác và chuyển đổi —
-          từ AI brand assistant đến AR/VR, Digital Twin, Game Activation và website tương tác.
-        </p>
+        <p class="mt-5 max-w-md text-sm leading-6 text-[var(--ezd-text-muted)]"> {siteConfig.description} </p>
 
         <div class="mt-6 flex flex-wrap gap-3">
           <a

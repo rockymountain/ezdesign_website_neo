@@ -1,5 +1,6 @@
 ---
 import navigationData from '../../data/navigation.json';
+import siteConfig from '../../data/site.json';
 
 type NavItem = {
   label: string;
@@ -25,12 +26,12 @@ function isActivePath(href: string) {
           class="flex h-9 w-9 items-center justify-center rounded-full bg-[var(--ezd-text)] text-sm font-bold text-white"
           aria-hidden="true"
         >
-          EZ
+          {siteConfig.brand.shortName}
         </span>
 
         <span class="flex flex-col leading-none">
           <span class="text-sm font-bold tracking-tight text-[var(--ezd-text)]">
-            EZDesign
+            {siteConfig.name}
           </span>
           <span class="mt-1 hidden text-xs text-[var(--ezd-text-soft)] sm:inline">
             Digital touchpoints

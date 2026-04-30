@@ -1,8 +1,47 @@
 {
   "name": "EZDesign",
   "url": "https://ezdesign.vn",
+  "locale": "vi_VN",
+  "language": "vi",
+  "tagline": "Digital touchpoints that talk, interact and convert.",
+  "description": "EZDesign thiết kế các điểm chạm số biết trò chuyện, tương tác và chuyển đổi — từ AI brand assistant đến AR/VR, Digital Twin, Game Activation và website tương tác.",
   "defaultTitle": "EZDesign — Điểm chạm số biết trò chuyện, tương tác và chuyển đổi",
   "defaultDescription": "EZDesign thiết kế AI brand assistant, AR/VR, Digital Twin, Game Activation và website tương tác cho thương hiệu.",
   "defaultOgImage": "/og/default.jpg",
-  "locale": "vi_VN"
+  "themeColor": "#0f766e",
+  "brand": {
+    "shortName": "EZ",
+    "fullName": "EZDesign",
+    "positioning": "Điểm chạm số biết trò chuyện, tương tác và chuyển đổi",
+    "heroProduct": "EZD AI Chat"
+  },
+  "contact": {
+    "email": "hello@ezdesign.vn",
+    "hotline": "Cập nhật sau",
+    "zalo": "Cập nhật sau",
+    "messenger": "Cập nhật sau",
+    "whatsapp": "Cập nhật sau"
+  },
+  "links": {
+    "home": "/",
+    "ezdAiChat": "/ezd-ai-chat/",
+    "contact": "/contact/",
+    "caseStudy": "/case-studies/yen-ai-chat/"
+  },
+  "defaultCta": {
+    "primary": {
+      "label": "Đặt lịch demo",
+      "href": "/contact/"
+    },
+    "secondary": {
+      "label": "Xem EZD AI Chat",
+      "href": "/ezd-ai-chat/"
+    }
+  },
+  "social": {
+    "facebook": "",
+    "linkedin": "",
+    "youtube": "",
+    "github": ""
+  }
 }
