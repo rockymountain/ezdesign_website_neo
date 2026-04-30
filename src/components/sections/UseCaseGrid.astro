@@ -1,0 +1,59 @@
+---
+import SectionHeader from '../common/SectionHeader.astro';
+import Card from '../common/Card.astro';
+
+type UseCase = {
+  name?: string;
+  title?: string;
+  description: string;
+};
+
+type Props = {
+  eyebrow?: string;
+  title: string;
+  description?: string;
+  items: UseCase[];
+};
+
+const {
+  eyebrow = 'Use Cases',
+  title,
+  description,
+  items,
+} = Astro.props as Props;
+---
+
+<section class="bg-[var(--ezd-bg-soft)] py-20">
+  <div class="ezd-container">
+    <SectionHeader
+      eyebrow={eyebrow}
+      title={title}
+      description={description}
+      maxWidth="lg"
+    />
+
+    <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+      {
+        items.map((item: UseCase) => {
+          const label = item.name ?? item.title ?? 'Use case';
+
+          return (
+            <Card hover>
+              <p class="text-xs font-black uppercase tracking-[0.24em] text-[var(--ezd-brand)]">
+                SME B2C
+              </p>
+
+              <h3 class="ezd-heading-card mt-4 text-xl">
+                {label}
+              </h3>
+
+              <p class="ezd-body-small mt-3 text-[var(--ezd-text-muted)]">
+                {item.description}
+              </p>
+            </Card>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>

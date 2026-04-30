@@ -1,0 +1,67 @@
+---
+import SectionHeader from '../common/SectionHeader.astro';
+import Card from '../common/Card.astro';
+
+type Feature = {
+  title: string;
+  description: string;
+};
+
+type Props = {
+  eyebrow?: string;
+  title: string;
+  description?: string;
+  features: Feature[];
+  background?: 'white' | 'soft' | 'dark';
+};
+
+const {
+  eyebrow = 'Khác biệt',
+  title,
+  description,
+  features,
+  background = 'soft',
+} = Astro.props as Props;
+
+const sectionClass =
+  background === 'dark'
+    ? 'ezd-blue-panel py-20'
+    : background === 'soft'
+      ? 'bg-[var(--ezd-bg-soft)] py-20'
+      : 'py-20';
+
+const headerTextClass = background === 'dark' ? 'text-white' : '';
+---
+
+<section class={sectionClass}>
+  <div class="ezd-container">
+    <div class={headerTextClass}>
+      <SectionHeader
+        eyebrow={eyebrow}
+        title={title}
+        description={description}
+        maxWidth="lg"
+      />
+    </div>
+
+    <div class="mt-10 grid gap-5 md:grid-cols-3">
+      {
+        features.map((feature: Feature) => (
+          <Card
+            variant={background === 'dark' ? 'glass' : 'default'}
+            hover
+            class={background === 'dark' ? 'text-[var(--ezd-text)]' : ''}
+          >
+            <h3 class="ezd-heading-card text-xl">
+              {feature.title}
+            </h3>
+
+            <p class="ezd-body-small mt-3 text-[var(--ezd-text-muted)]">
+              {feature.description}
+            </p>
+          </Card>
+        ))
+      }
+    </div>
+  </div>
+</section>

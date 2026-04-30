@@ -1,0 +1,63 @@
+---
+import SectionHeader from '../common/SectionHeader.astro';
+import Card from '../common/Card.astro';
+
+type PainPoint = {
+  title?: string;
+  description: string;
+};
+
+type Props = {
+  eyebrow?: string;
+  title: string;
+  description?: string;
+  items: PainPoint[];
+};
+
+const {
+  eyebrow = 'Vấn đề',
+  title,
+  description,
+  items,
+} = Astro.props as Props;
+---
+
+<section class="py-20">
+  <div class="ezd-container">
+    <SectionHeader
+      eyebrow={eyebrow}
+      title={title}
+      description={description}
+      maxWidth="lg"
+    />
+
+    <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+      {
+        items.map((item: PainPoint, index: number) => (
+          <Card hover class={index === 0 ? 'lg:col-span-2' : ''}>
+            <div class="flex h-full flex-col">
+              <div class="mb-5 flex h-10 w-10 items-center justify-center rounded-full bg-[var(--ezd-brand-soft)] text-sm font-black text-[var(--ezd-brand)]">
+                {String(index + 1).padStart(2, '0')}
+              </div>
+
+              {
+                item.title && (
+                  <h3 class="ezd-heading-card text-xl">
+                    {item.title}
+                  </h3>
+                )
+              }
+
+              <p class:list={[
+                'ezd-body-small text-[var(--ezd-text-muted)]',
+                item.title ? 'mt-3' : '',
+              ]}>
+                {item.description}
+              </p>
+            </div>
+          </Card>
+        ))
+      }
+    </div>
+  </div>
+</section>

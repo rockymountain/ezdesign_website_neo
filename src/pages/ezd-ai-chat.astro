@@ -3,6 +3,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import pricingData from '../data/pricing.json';
 import industriesData from '../data/industries.json';
 import ProductHero from '../components/sections/ProductHero.astro';
+import PainPointGrid from '../components/sections/PainPointGrid.astro';
+import FeatureGrid from '../components/sections/FeatureGrid.astro';
+import UseCaseGrid from '../components/sections/UseCaseGrid.astro';
 
 const title = 'EZD AI Chat — AI Brand Assistant cho SME B2C | EZDesign';
 const description =
@@ -12,11 +15,26 @@ const { ezdAiChatPricing, pricingNote } = pricingData;
 const { targetIndustries } = industriesData;
 
 const painPoints = [
-  'Khách hỏi nhiều câu giống nhau nhưng nhân sự phản hồi không kịp.',
-  'Website có traffic nhưng chưa chuyển đổi tốt thành lead.',
-  'Chatbot truyền thống quá máy móc và không phản ánh cá tính thương hiệu.',
-  'Khách cần được tư vấn trước khi mua, đặt lịch hoặc để lại thông tin.',
-  'SME không có đội kỹ thuật để tự xây hệ thống AI riêng.',
+  {
+    title: 'Khách hỏi lặp lại',
+    description: 'Khách hỏi nhiều câu giống nhau nhưng nhân sự không phải lúc nào cũng phản hồi kịp.',
+  },
+  {
+    title: 'Traffic chưa thành lead',
+    description: 'Website có lượt truy cập nhưng thiếu một điểm chạm đủ nhanh để dẫn khách tới hành động.',
+  },
+  {
+    title: 'Chatbot quá máy móc',
+    description: 'Các chatbot truyền thống thường khô cứng, không phản ánh được cá tính thương hiệu.',
+  },
+  {
+    title: 'Khách cần tư vấn trước khi mua',
+    description: 'Nhiều ngành B2C cần giải thích, tư vấn, gợi ý hoặc đặt lịch trước khi chuyển đổi.',
+  },
+  {
+    title: 'Đội ngũ nhỏ thiếu người trực',
+    description: 'SME khó duy trì phản hồi nhanh trên mọi khung giờ nếu chỉ dựa vào nhân sự thật.',
+  },
 ];
 
 const differences = [
@@ -106,62 +124,21 @@ const faqs = [
     />
 
     <!-- Pain Points -->
-    <section class="py-20">
-      <div class="ezd-container">
-        <div class="max-w-2xl">
-          <p class="text-sm font-semibold uppercase tracking-[0.25em] text-[var(--ezd-brand)]">
-            Vấn đề
-          </p>
-
-          <h2 class="mt-4 text-3xl font-bold tracking-tight md:text-5xl">
-            Website có khách ghé thăm, nhưng chưa đủ khả năng trò chuyện và chuyển đổi.
-          </h2>
-
-          <p class="mt-5 text-lg leading-8 text-[var(--ezd-text-muted)]">
-            Nhiều SME B2C có traffic, có sản phẩm tốt, nhưng thiếu một điểm chạm đủ nhanh,
-            đủ thân thiện và đủ đúng ngữ cảnh để dẫn khách tới hành động.
-          </p>
-        </div>
-
-        <div class="mt-10 grid gap-5 md:grid-cols-2">
-          {
-            painPoints.map((item) => (
-              <div class="rounded-[var(--ezd-radius-xl)] border border-[var(--ezd-border)] bg-white p-6 shadow-[var(--ezd-shadow-sm)]">
-                <p class="text-base leading-7 text-[var(--ezd-text-muted)]">{item}</p>
-              </div>
-            ))
-          }
-        </div>
-      </div>
-    </section>
+    <PainPointGrid
+      eyebrow="Vấn đề"
+      title="Website có traffic, nhưng bạn đang đánh rơi khách hàng mỗi ngày?"
+      description="Một điểm chạm biết trò chuyện giúp bạn phản hồi nhanh hơn, tư vấn đúng ngữ cảnh hơn và dẫn khách tới hành động rõ ràng hơn."
+      items={painPoints}
+    />
 
     <!-- Difference -->
-    <section class="bg-[var(--ezd-bg-soft)] py-20">
-      <div class="ezd-container">
-        <div class="max-w-2xl">
-          <p class="text-sm font-semibold uppercase tracking-[0.25em] text-[var(--ezd-brand)]">
-            Khác biệt
-          </p>
-
-          <h2 class="mt-4 text-3xl font-bold tracking-tight md:text-5xl">
-            Không chỉ là chatbot. Đây là một AI brand assistant.
-          </h2>
-        </div>
-
-        <div class="mt-10 grid gap-5 md:grid-cols-3">
-          {
-            differences.map((item) => (
-              <div class="rounded-[var(--ezd-radius-xl)] border border-[var(--ezd-border)] bg-white p-6 shadow-[var(--ezd-shadow-sm)]">
-                <h3 class="text-xl font-semibold">{item.title}</h3>
-                <p class="mt-3 text-sm leading-6 text-[var(--ezd-text-muted)]">
-                  {item.description}
-                </p>
-              </div>
-            ))
-          }
-        </div>
-      </div>
-    </section>
+    <FeatureGrid
+      eyebrow="Khác biệt"
+      title="Không chỉ là chatbot. Đây là một AI brand assistant."
+      description="EZD AI Chat được thiết kế như một nhân vật đại diện thương hiệu, có vai trò, giọng nói và hành trình hội thoại riêng."
+      features={differences}
+      background="soft"
+    />
 
     <!-- Live Demo -->
     <section id="live-demo" class="py-20">
@@ -200,32 +177,12 @@ const faqs = [
     </section>
 
     <!-- Use Cases -->
-    <section class="bg-[var(--ezd-bg-soft)] py-20">
-      <div class="ezd-container">
-        <div class="max-w-2xl">
-          <p class="text-sm font-semibold uppercase tracking-[0.25em] text-[var(--ezd-brand)]">
-            Use Cases
-          </p>
-
-          <h2 class="mt-4 text-3xl font-bold tracking-tight md:text-5xl">
-            Phù hợp với các ngành cần tư vấn trước khi chuyển đổi.
-          </h2>
-        </div>
-
-        <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {
-            targetIndustries.map((industry) => (
-              <div class="rounded-[var(--ezd-radius-xl)] border border-[var(--ezd-border)] bg-white p-6 shadow-[var(--ezd-shadow-sm)]">
-                <h3 class="text-xl font-semibold">{industry.name}</h3>
-                <p class="mt-3 text-sm leading-6 text-[var(--ezd-text-muted)]">
-                  {industry.description}
-                </p>
-              </div>
-            ))
-          }
-        </div>
-      </div>
-    </section>
+    <UseCaseGrid
+      eyebrow="Use Cases"
+      title="Phù hợp với các ngành cần tư vấn trước khi chuyển đổi."
+      description="EZD AI Chat phù hợp với các SME B2C có khách hàng cần hỏi, so sánh, đặt lịch hoặc để lại thông tin trước khi mua."
+      items={targetIndustries}
+    />
 
     <!-- Core Features -->
     <section class="py-20">
