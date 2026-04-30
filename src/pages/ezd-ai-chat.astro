@@ -72,9 +72,15 @@ const targetIndustries = industriesData.targetIndustries as Industry[];
       background="soft"
     />
 
-    <section id="live-demo" class="py-20">
-      <div class="ezd-container">
-        <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
+    <section id="live-demo" class="relative overflow-hidden py-20">
+      <div
+        class="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,#ffffff_0%,var(--ezd-bg-soft)_100%)]"
+        aria-hidden="true"
+      >
+      </div>
+
+      <div class="ezd-container relative">
+        <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <div>
             <p class="ezd-eyebrow">
               {pageContent.liveDemo.eyebrow}
@@ -88,22 +94,113 @@ const targetIndustries = industriesData.targetIndustries as Industry[];
               {pageContent.liveDemo.description}
             </p>
 
-            <p class="ezd-body-small mt-5 rounded-[var(--ezd-radius-lg)] border border-[var(--ezd-border)] bg-[var(--ezd-bg-soft)] p-4 text-[var(--ezd-text-muted)]">
-              AI có thể hỗ trợ tư vấn ban đầu và có thể chưa chính xác trong mọi trường hợp.
+            <div class="mt-8 grid gap-3 sm:grid-cols-3">
+              <div
+                class="rounded-[var(--ezd-radius-xl)] border border-[var(--ezd-border)] bg-white p-4 shadow-[var(--ezd-shadow-sm)]"
+              >
+                <p class="text-xs font-black uppercase tracking-[0.18em] text-[var(--ezd-brand)]">
+                  01
+                </p>
+                <p class="mt-2 text-sm font-black">Hỏi tự nhiên</p>
+              </div>
+
+              <div
+                class="rounded-[var(--ezd-radius-xl)] border border-[var(--ezd-border)] bg-white p-4 shadow-[var(--ezd-shadow-sm)]"
+              >
+                <p class="text-xs font-black uppercase tracking-[0.18em] text-[var(--ezd-brand)]">
+                  02
+                </p>
+                <p class="mt-2 text-sm font-black">Tư vấn theo ngành</p>
+              </div>
+
+              <div
+                class="rounded-[var(--ezd-radius-xl)] border border-[var(--ezd-border)] bg-white p-4 shadow-[var(--ezd-shadow-sm)]"
+              >
+                <p class="text-xs font-black uppercase tracking-[0.18em] text-[var(--ezd-brand)]">
+                  03
+                </p>
+                <p class="mt-2 text-sm font-black">Chuyển sang người thật</p>
+              </div>
+            </div>
+
+            <p
+              class="ezd-body-small mt-5 rounded-[var(--ezd-radius-lg)] border border-[var(--ezd-border)] bg-white p-4 text-[var(--ezd-text-muted)] shadow-[var(--ezd-shadow-sm)]"
+            >
+              AI hỗ trợ tư vấn ban đầu và có thể chưa chính xác trong mọi trường hợp.
               EZDesign không lưu nội dung hội thoại cá nhân và không dùng chat để thu thập thông tin nhạy cảm.
             </p>
           </div>
 
-          <Card padding="lg" class="min-h-[420px] border-dashed">
+          <Card padding="lg" class="relative min-h-[460px] overflow-hidden border-dashed bg-white">
+            <div
+              class="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-[var(--ezd-accent)] opacity-20 blur-3xl"
+              aria-hidden="true"
+            >
+            </div>
+
             <div
               id="ezd-ai-chat-demo"
-              class="min-h-[360px] rounded-[var(--ezd-radius-xl)] bg-[var(--ezd-bg-soft)] p-6"
+              class="relative min-h-[390px] rounded-[var(--ezd-radius-2xl)] border border-[var(--ezd-border)] bg-[var(--ezd-bg-soft)] p-5"
             >
-              <p class="text-sm font-black uppercase tracking-[0.22em] text-[var(--ezd-brand)]">
-                {pageContent.liveDemo.placeholderTitle}
-              </p>
+              <div class="flex items-center justify-between gap-4 border-b border-[var(--ezd-border)] pb-4">
+                <div>
+                  <p class="text-xs font-black uppercase tracking-[0.22em] text-[var(--ezd-brand)]">
+                    Live Widget Area
+                  </p>
 
-              <p class="ezd-body-small mt-4 text-[var(--ezd-text-muted)]">
+                  <h3 class="mt-1 text-xl font-black tracking-tight">
+                    {pageContent.liveDemo.placeholderTitle}
+                  </h3>
+                </div>
+
+                <span
+                  class="shrink-0 rounded-full bg-[var(--ezd-brand-soft)] px-3 py-1 text-xs font-black text-[var(--ezd-brand)]"
+                >
+                  Soon
+                </span>
+              </div>
+
+              <div class="mt-5 space-y-4">
+                <div
+                  class="max-w-[82%] rounded-2xl bg-white px-4 py-3 text-sm leading-6 text-[var(--ezd-text-muted)] shadow-[var(--ezd-shadow-sm)]"
+                >
+                  Xin chào, mình là EZD Assistant. Bạn muốn xem demo theo ngành nào?
+                </div>
+
+                <div
+                  class="ml-auto max-w-[82%] rounded-2xl bg-[var(--ezd-brand)] px-4 py-3 text-sm leading-6 text-white shadow-[var(--ezd-shadow-sm)]"
+                >
+                  Tôi muốn xem demo cho spa/salon.
+                </div>
+
+                <div
+                  class="max-w-[82%] rounded-2xl bg-white px-4 py-3 text-sm leading-6 text-[var(--ezd-text-muted)] shadow-[var(--ezd-shadow-sm)]"
+                >
+                  Mình có thể mô phỏng flow tư vấn dịch vụ, đặt lịch và chuyển sang Zalo khi khách cần nhân viên hỗ trợ.
+                </div>
+              </div>
+
+              <div class="mt-6 flex flex-wrap gap-2">
+                <span
+                  class="rounded-full border border-[var(--ezd-border)] bg-white px-3 py-1.5 text-xs font-black text-[var(--ezd-text-muted)]"
+                >
+                  Tư vấn dịch vụ
+                </span>
+
+                <span
+                  class="rounded-full border border-[var(--ezd-border)] bg-white px-3 py-1.5 text-xs font-black text-[var(--ezd-text-muted)]"
+                >
+                  Đặt lịch demo
+                </span>
+
+                <span
+                  class="rounded-full border border-[var(--ezd-border)] bg-white px-3 py-1.5 text-xs font-black text-[var(--ezd-text-muted)]"
+                >
+                  Chuyển sang Zalo
+                </span>
+              </div>
+
+              <p class="ezd-body-small mt-6 text-[var(--ezd-text-soft)]">
                 {pageContent.liveDemo.placeholderDescription}
               </p>
             </div>
