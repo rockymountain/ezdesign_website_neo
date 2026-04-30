@@ -30,8 +30,20 @@ const finalSecondaryCTA = pageContent.finalCTA.secondaryCTA as CTA;
 <BaseLayout title={title} description={description}>
   <main class="min-h-screen bg-[var(--ezd-bg)] text-[var(--ezd-text)]">
     <!-- Hero -->
-    <section class="border-b border-[var(--ezd-border)] bg-[var(--ezd-bg-soft)] py-20">
-      <div class="ezd-container">
+    <section class="relative overflow-hidden border-b border-[var(--ezd-border)] bg-[var(--ezd-bg-soft)] py-20">
+      <div
+        class="pointer-events-none absolute -right-24 top-10 h-72 w-72 rounded-full bg-[var(--ezd-accent)] opacity-20 blur-3xl"
+        aria-hidden="true"
+      >
+      </div>
+
+      <div
+        class="pointer-events-none absolute -left-24 bottom-0 h-72 w-72 rounded-full bg-[var(--ezd-brand)] opacity-10 blur-3xl"
+        aria-hidden="true"
+      >
+      </div>
+
+      <div class="ezd-container relative">
         <SectionHeader
           eyebrow={pageContent.hero.eyebrow}
           title={pageContent.hero.title}
@@ -150,6 +162,12 @@ const finalSecondaryCTA = pageContent.finalCTA.secondaryCTA as CTA;
         <Card padding="lg" class="relative overflow-hidden">
           <div
             class="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[var(--ezd-accent)] opacity-20 blur-3xl"
+            aria-hidden="true"
+          >
+          </div>
+
+          <div
+            class="pointer-events-none absolute -left-20 bottom-0 h-64 w-64 rounded-full bg-[var(--ezd-brand)] opacity-10 blur-3xl"
             aria-hidden="true"
           >
           </div>

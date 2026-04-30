@@ -45,8 +45,20 @@ const finalSecondaryCTA = pageContent.finalCTA.secondaryCTA as CTA;
 <BaseLayout title={title} description={description}>
   <main class="min-h-screen bg-[var(--ezd-bg)] text-[var(--ezd-text)]">
     <!-- Hero -->
-    <section class="border-b border-[var(--ezd-border)] bg-[var(--ezd-bg-soft)] py-20">
-      <div class="ezd-container">
+    <section class="relative overflow-hidden border-b border-[var(--ezd-border)] bg-[var(--ezd-bg-soft)] py-20">
+      <div
+        class="pointer-events-none absolute -right-24 top-10 h-72 w-72 rounded-full bg-[var(--ezd-accent)] opacity-20 blur-3xl"
+        aria-hidden="true"
+      >
+      </div>
+
+      <div
+        class="pointer-events-none absolute -left-24 bottom-0 h-72 w-72 rounded-full bg-[var(--ezd-brand)] opacity-10 blur-3xl"
+        aria-hidden="true"
+      >
+      </div>
+
+      <div class="ezd-container relative">
         <SectionHeader
           eyebrow={pageContent.hero.eyebrow}
           title={pageContent.hero.title}
@@ -82,9 +94,11 @@ const finalSecondaryCTA = pageContent.finalCTA.secondaryCTA as CTA;
                   <span class="text-sm font-black text-[var(--ezd-text)]">
                     Tên của bạn
                   </span>
+
                   <input
                     type="text"
                     name="name"
+                    required
                     placeholder="Ví dụ: Nguyễn An"
                     class="ezd-focus-ring rounded-[var(--ezd-radius-lg)] border border-[var(--ezd-border)] bg-white px-4 py-3 text-sm outline-none transition focus:border-[var(--ezd-brand)]"
                   />
@@ -94,9 +108,11 @@ const finalSecondaryCTA = pageContent.finalCTA.secondaryCTA as CTA;
                   <span class="text-sm font-black text-[var(--ezd-text)]">
                     Email / Số điện thoại
                   </span>
+
                   <input
                     type="text"
                     name="contact"
+                    required
                     placeholder="email@domain.com hoặc số điện thoại"
                     class="ezd-focus-ring rounded-[var(--ezd-radius-lg)] border border-[var(--ezd-border)] bg-white px-4 py-3 text-sm outline-none transition focus:border-[var(--ezd-brand)]"
                   />
@@ -108,8 +124,10 @@ const finalSecondaryCTA = pageContent.finalCTA.secondaryCTA as CTA;
                   <span class="text-sm font-black text-[var(--ezd-text)]">
                     Bạn quan tâm giải pháp nào?
                   </span>
+
                   <select
                     name="interest"
+                    required
                     class="ezd-focus-ring rounded-[var(--ezd-radius-lg)] border border-[var(--ezd-border)] bg-white px-4 py-3 text-sm outline-none transition focus:border-[var(--ezd-brand)]"
                   >
                     <option value="">Chọn giải pháp</option>
@@ -125,6 +143,7 @@ const finalSecondaryCTA = pageContent.finalCTA.secondaryCTA as CTA;
                   <span class="text-sm font-black text-[var(--ezd-text)]">
                     Ngành / mô hình kinh doanh
                   </span>
+
                   <select
                     name="industry"
                     class="ezd-focus-ring rounded-[var(--ezd-radius-lg)] border border-[var(--ezd-border)] bg-white px-4 py-3 text-sm outline-none transition focus:border-[var(--ezd-brand)]"
@@ -143,6 +162,7 @@ const finalSecondaryCTA = pageContent.finalCTA.secondaryCTA as CTA;
                 <span class="text-sm font-black text-[var(--ezd-text)]">
                   Website hiện tại
                 </span>
+
                 <input
                   type="url"
                   name="website"
@@ -155,9 +175,11 @@ const finalSecondaryCTA = pageContent.finalCTA.secondaryCTA as CTA;
                 <span class="text-sm font-black text-[var(--ezd-text)]">
                   Nhu cầu / ghi chú
                 </span>
+
                 <textarea
                   name="message"
                   rows="6"
+                  required
                   placeholder="Bạn muốn tư vấn EZD AI Chat, nâng cấp website, tạo trải nghiệm tương tác hay cần demo theo ngành?"
                   class="ezd-focus-ring resize-y rounded-[var(--ezd-radius-lg)] border border-[var(--ezd-border)] bg-white px-4 py-3 text-sm outline-none transition focus:border-[var(--ezd-brand)]"
                 ></textarea>
@@ -193,6 +215,10 @@ const finalSecondaryCTA = pageContent.finalCTA.secondaryCTA as CTA;
 
                     <p class="ezd-body-small mt-3 text-[var(--ezd-text-muted)]">
                       {channel.description}
+                    </p>
+
+                    <p class="mt-5 text-sm font-black text-[var(--ezd-brand)]">
+                      Liên hệ qua kênh này →
                     </p>
                   </Card>
                 </a>

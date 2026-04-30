@@ -1,5 +1,10 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionHeader from '../../components/common/SectionHeader.astro';
+import CTASection from '../../components/common/CTASection.astro';
+import Card from '../../components/common/Card.astro';
+import ButtonLink from '../../components/common/ButtonLink.astro';
+
 import { getCollection, render, type CollectionEntry } from 'astro:content';
 import { buildArticleSchema, buildBreadcrumbSchema } from '../../utils/schema';
 
@@ -66,7 +71,13 @@ const jsonLd = [
   ]),
 ];
 
+const formattedPublishedAt = publishedAt.toLocaleDateString('vi-VN');
+
+const formattedUpdatedAt = updatedAt
+  ? updatedAt.toLocaleDateString('vi-VN')
+  : null;
 ---
+
 <BaseLayout
   title={pageTitle}
   description={pageDescription}
@@ -79,95 +90,296 @@ const jsonLd = [
 >
   <main class="min-h-screen bg-[var(--ezd-bg)] text-[var(--ezd-text)]">
     <!-- Hero -->
-    <section class="border-b border-[var(--ezd-border)] bg-[var(--ezd-bg-soft)] py-20">
-      <div class="ezd-container">
-        <div class="max-w-4xl">
-          <p class="text-sm font-semibold uppercase tracking-[0.3em] text-[var(--ezd-brand)]">
-            {isDraft ? 'Draft Insight' : 'Insight'} · {category}
-          </p>
+    <section class="relative overflow-hidden border-b border-[var(--ezd-border)] bg-[var(--ezd-bg-soft)] py-20">
+      <div
+        class="pointer-events-none absolute -right-24 top-10 h-72 w-72 rounded-full bg-[var(--ezd-accent)] opacity-20 blur-3xl"
+        aria-hidden="true"
+      >
+      </div>
 
-          <h1 class="mt-5 text-4xl font-bold tracking-tight md:text-6xl">
-            {title}
-          </h1>
+      <div
+        class="pointer-events-none absolute -left-24 bottom-0 h-72 w-72 rounded-full bg-[var(--ezd-brand)] opacity-10 blur-3xl"
+        aria-hidden="true"
+      >
+      </div>
 
-          <p class="mt-6 max-w-2xl text-lg leading-8 text-[var(--ezd-text-muted)]">
-            {excerpt}
-          </p>
+      <div class="ezd-container relative">
+        <div class="grid gap-10 lg:grid-cols-[1fr_0.82fr] lg:items-center">
+          <div>
+            <p class="ezd-eyebrow">
+              {isDraft ? 'Draft Insight' : 'Insight'} · {category}
+            </p>
 
-          <div class="mt-6 flex flex-wrap gap-3 text-sm text-[var(--ezd-text-muted)]">
-            <span>
-              Published: {publishedAt.toLocaleDateString('vi-VN')}
-            </span>
+            <h1 class="ezd-heading-hero mt-5 max-w-4xl text-4xl md:text-6xl">
+              {title}
+            </h1>
+
+            <p class="ezd-body-large mt-6 max-w-2xl text-[var(--ezd-text-muted)]">
+              {excerpt}
+            </p>
+
+            <div class="mt-8 flex flex-wrap gap-3">
+              <span class="rounded-full bg-[var(--ezd-brand)] px-4 py-2 text-sm font-black text-white">
+                Published: {formattedPublishedAt}
+              </span>
+
+              {
+                formattedUpdatedAt && (
+                  <span class="rounded-full border border-[var(--ezd-border)] bg-white px-4 py-2 text-sm font-black text-[var(--ezd-text-muted)]">
+                    Updated: {formattedUpdatedAt}
+                  </span>
+                )
+              }
+
+              {
+                isDraft && (
+                  <span class="rounded-full border border-[var(--ezd-border)] bg-white px-4 py-2 text-sm font-black text-[var(--ezd-brand)]">
+                    Noindex
+                  </span>
+                )
+              }
+            </div>
 
             {
-              updatedAt && (
-                <span>
-                  Updated: {updatedAt.toLocaleDateString('vi-VN')}
-                </span>
+              tags.length > 0 && (
+                <div class="mt-6 flex flex-wrap gap-2">
+                  {tags.map((tag: string) => (
+                    <span class="rounded-full bg-white px-3 py-1.5 text-xs font-black text-[var(--ezd-text-muted)] shadow-[var(--ezd-shadow-sm)]">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
               )
             }
           </div>
 
-          {
-            tags.length > 0 && (
-              <div class="mt-6 flex flex-wrap gap-2">
-                {tags.map((tag: string) => (
-                  <span class="rounded-full border border-[var(--ezd-border)] bg-white px-3 py-1 text-xs font-semibold text-[var(--ezd-text-muted)]">
-                    {tag}
-                  </span>
-                ))}
+          <Card padding="lg" class="relative overflow-hidden">
+            <div
+              class="pointer-events-none absolute -right-16 -top-16 h-52 w-52 rounded-full bg-[var(--ezd-accent)] opacity-20 blur-3xl"
+              aria-hidden="true"
+            >
+            </div>
+
+            <div class="relative">
+              <p class="text-xs font-black uppercase tracking-[0.22em] text-[var(--ezd-brand)]">
+                Article Context
+              </p>
+
+              <h2 class="ezd-heading-card mt-4 text-3xl">
+                {category}
+              </h2>
+
+              <p class="ezd-body-small mt-4 text-[var(--ezd-text-muted)]">
+                Bài viết thuộc nhóm nội dung về AI Chat, AI Brand Character, lead generation
+                và các điểm chạm số dành cho SME B2C.
+              </p>
+
+              <div class="mt-6 grid gap-3">
+                <div class="rounded-[var(--ezd-radius-xl)] bg-[var(--ezd-bg-soft)] p-4">
+                  <p class="text-sm font-black text-[var(--ezd-text)]">
+                    Clear and practical
+                  </p>
+                  <p class="mt-1 text-xs leading-5 text-[var(--ezd-text-muted)]">
+                    Nội dung được viết theo hướng dễ hiểu, thực tế và có thể ứng dụng cho SME.
+                  </p>
+                </div>
+
+                <div class="rounded-[var(--ezd-radius-xl)] bg-[var(--ezd-bg-soft)] p-4">
+                  <p class="text-sm font-black text-[var(--ezd-text)]">
+                    SEO-ready
+                  </p>
+                  <p class="mt-1 text-xs leading-5 text-[var(--ezd-text-muted)]">
+                    Page đã có article metadata, JSON-LD và canonical URL.
+                  </p>
+                </div>
               </div>
-            )
-          }
+            </div>
+          </Card>
         </div>
       </div>
     </section>
 
-    <!-- Draft notice -->
+    <!-- Draft Notice -->
     {
       isDraft && (
         <section class="py-8">
           <div class="ezd-container">
-            <div class="rounded-[var(--ezd-radius-xl)] border border-dashed border-[var(--ezd-border-strong)] bg-[var(--ezd-bg-soft)] p-5 text-sm leading-6 text-[var(--ezd-text-muted)]">
-              Bài viết này đang ở trạng thái draft. Route được tạo để kiểm tra content collection và layout,
-              chưa nên đưa vào navigation chính hoặc internal link public.
-            </div>
+            <Card class="border-dashed bg-[var(--ezd-bg-soft)]">
+              <p class="text-sm font-black text-[var(--ezd-brand)]">
+                Bài viết này đang ở trạng thái draft.
+              </p>
+
+              <p class="ezd-body-small mt-3 text-[var(--ezd-text-muted)]">
+                Route được tạo để kiểm tra content collection, layout và SEO setup.
+                Page này đang truyền <code>noindex</code> vào BaseLayout, nên không nên được index khi deploy.
+              </p>
+            </Card>
           </div>
         </section>
       )
     }
 
-    <!-- Content -->
+    <!-- Article Body -->
     <section class="py-20">
       <div class="ezd-container">
-        <article class="mx-auto max-w-3xl rounded-[var(--ezd-radius-2xl)] border border-[var(--ezd-border)] bg-white p-6 leading-8 text-[var(--ezd-text-muted)] shadow-[var(--ezd-shadow-sm)] md:p-10">
-          <Content />
-        </article>
+        <div class="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:items-start">
+          <aside class="lg:sticky lg:top-24">
+            <Card padding="lg">
+              <p class="text-xs font-black uppercase tracking-[0.22em] text-[var(--ezd-brand)]">
+                Article Info
+              </p>
+
+              <div class="mt-6 grid gap-4">
+                <div>
+                  <p class="text-xs font-black uppercase tracking-[0.18em] text-[var(--ezd-text-soft)]">
+                    Category
+                  </p>
+                  <p class="mt-2 text-sm font-black text-[var(--ezd-text)]">
+                    {category}
+                  </p>
+                </div>
+
+                <div>
+                  <p class="text-xs font-black uppercase tracking-[0.18em] text-[var(--ezd-text-soft)]">
+                    Published
+                  </p>
+                  <p class="mt-2 text-sm font-black text-[var(--ezd-text)]">
+                    {formattedPublishedAt}
+                  </p>
+                </div>
+
+                {
+                  formattedUpdatedAt && (
+                    <div>
+                      <p class="text-xs font-black uppercase tracking-[0.18em] text-[var(--ezd-text-soft)]">
+                        Updated
+                      </p>
+                      <p class="mt-2 text-sm font-black text-[var(--ezd-text)]">
+                        {formattedUpdatedAt}
+                      </p>
+                    </div>
+                  )
+                }
+
+                {
+                  tags.length > 0 && (
+                    <div>
+                      <p class="text-xs font-black uppercase tracking-[0.18em] text-[var(--ezd-text-soft)]">
+                        Tags
+                      </p>
+
+                      <div class="mt-3 flex flex-wrap gap-2">
+                        {tags.map((tag: string) => (
+                          <span class="rounded-full bg-[var(--ezd-brand-soft)] px-3 py-1 text-xs font-black text-[var(--ezd-brand)]">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )
+                }
+              </div>
+
+              <div class="mt-8">
+                <ButtonLink
+                  href="/insights/"
+                  label="Quay lại Insights"
+                  variant="secondary"
+                  size="md"
+                  class="w-full"
+                />
+              </div>
+            </Card>
+          </aside>
+
+          <Card padding="lg">
+            <article class="ezd-article ezd-body text-[var(--ezd-text-muted)]">
+              <Content />
+            </article>
+          </Card>
+        </div>
+      </div>
+    </section>
+
+    <!-- Related CTA -->
+    <section class="bg-[var(--ezd-bg-soft)] py-20">
+      <div class="ezd-container">
+        <Card padding="lg" class="relative overflow-hidden">
+          <div
+            class="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[var(--ezd-accent)] opacity-20 blur-3xl"
+            aria-hidden="true"
+          >
+          </div>
+
+          <div class="relative grid gap-10 lg:grid-cols-[1fr_0.82fr] lg:items-center">
+            <div>
+              <p class="ezd-eyebrow">
+                Next Step
+              </p>
+
+              <h2 class="ezd-heading-section mt-4 text-3xl md:text-5xl">
+                Muốn áp dụng góc nhìn này vào website của bạn?
+              </h2>
+
+              <p class="ezd-body-large mt-5 max-w-2xl text-[var(--ezd-text-muted)]">
+                Đặt lịch demo để EZDesign tư vấn cách dùng AI Chat, AI Brand Character
+                và các điểm chạm số để tăng khả năng tư vấn và chuyển đổi trên website.
+              </p>
+
+              <div class="mt-8 flex flex-wrap gap-3">
+                <ButtonLink
+                  href="/contact/"
+                  label="Đặt lịch demo"
+                  variant="primary"
+                  size="lg"
+                />
+
+                <ButtonLink
+                  href="/ezd-ai-chat/"
+                  label="Xem EZD AI Chat"
+                  variant="secondary"
+                  size="lg"
+                />
+              </div>
+            </div>
+
+            <div class="rounded-[var(--ezd-radius-2xl)] bg-[var(--ezd-bg-soft)] p-6">
+              <p class="text-xs font-black uppercase tracking-[0.22em] text-[var(--ezd-brand)]">
+                EZD AI Chat
+              </p>
+
+              <div class="mt-5 space-y-4">
+                <div class="max-w-[86%] rounded-2xl bg-white px-4 py-3 text-sm leading-6 text-[var(--ezd-text-muted)] shadow-[var(--ezd-shadow-sm)]">
+                  Website đang có traffic nhưng chưa tạo đủ lead?
+                </div>
+
+                <div class="ml-auto max-w-[86%] rounded-2xl bg-[var(--ezd-brand)] px-4 py-3 text-sm leading-6 text-white shadow-[var(--ezd-shadow-sm)]">
+                  Tôi muốn thử AI tư vấn trên website.
+                </div>
+
+                <div class="max-w-[86%] rounded-2xl bg-white px-4 py-3 text-sm leading-6 text-[var(--ezd-text-muted)] shadow-[var(--ezd-shadow-sm)]">
+                  EZD AI Chat có thể giúp bạn tạo nhân vật AI biết tư vấn, thu lead và chuyển khách sang người thật khi cần.
+                </div>
+              </div>
+            </div>
+          </div>
+        </Card>
       </div>
     </section>
 
     <!-- Final CTA -->
-    <section class="pb-20">
-      <div class="ezd-container">
-        <div class="mx-auto max-w-3xl rounded-[var(--ezd-radius-2xl)] bg-[var(--ezd-text)] p-8 text-white md:p-10">
-          <h2 class="text-3xl font-bold tracking-tight">
-            Muốn áp dụng nội dung này cho website của bạn?
-          </h2>
-
-          <p class="mt-5 text-lg leading-8 text-white/75">
-            EZDesign có thể tư vấn cách triển khai AI Chat, AI Brand Character hoặc website tương tác phù hợp với ngành của bạn.
-          </p>
-
-          <div class="mt-8">
-            <a
-              href="/contact/"
-              class="ezd-focus-ring inline-flex rounded-full bg-white px-5 py-3 text-sm font-semibold text-[var(--ezd-text)] hover:bg-white/90"
-            >
-              Đặt lịch demo
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
+    <CTASection
+      eyebrow="Demo"
+      title="Muốn trao đổi trực tiếp với EZDesign?"
+      description="Chia sẻ website hiện tại và mục tiêu bạn muốn đạt được. EZDesign sẽ gợi ý hướng triển khai phù hợp."
+      primaryCTA={{
+        label: 'Đặt lịch demo',
+        href: '/contact/',
+      }}
+      secondaryCTA={{
+        label: 'Xem EZD AI Chat',
+        href: '/ezd-ai-chat/',
+      }}
+    />
   </main>
 </BaseLayout>
