@@ -1,42 +1,54 @@
 @import "tailwindcss";
 
 :root {
-  /* Brand */
-  --ezd-brand: #0f766e;
-  --ezd-brand-dark: #115e59;
-  --ezd-brand-soft: #ccfbf1;
+  /* Brand Core — EZDesign 2025 */
+  --ezd-blue-dark: #20267f;
+  --ezd-blue: #0047ff;
+  --ezd-blue-bright: #0057ff;
+  --ezd-turquoise: #23c7c9;
+  --ezd-black: #050505;
+  --ezd-white: #ffffff;
+
+  /* Brand aliases */
+  --ezd-brand: var(--ezd-blue-dark);
+  --ezd-brand-dark: #15195f;
+  --ezd-brand-bright: var(--ezd-blue);
+  --ezd-brand-soft: #eef2ff;
+  --ezd-brand-contrast: #ffffff;
+  --ezd-brand-bright-contrast: #ffffff;
 
   /* Accent */
-  --ezd-accent: #06b6d4;
-  --ezd-accent-soft: #cffafe;
+  --ezd-accent: var(--ezd-turquoise);
+  --ezd-accent-soft: #dffafa;
 
   /* Background */
   --ezd-bg: #ffffff;
-  --ezd-bg-soft: #f8fafc;
+  --ezd-bg-soft: #f5f7ff;
+  --ezd-bg-dark: var(--ezd-blue-dark);
   --ezd-surface: #ffffff;
-  --ezd-surface-muted: #f1f5f9;
+  --ezd-surface-muted: #f2f4fb;
 
   /* Text */
-  --ezd-text: #0f172a;
-  --ezd-text-muted: #475569;
-  --ezd-text-soft: #64748b;
+  --ezd-text: #050505;
+  --ezd-text-muted: #3f4454;
+  --ezd-text-soft: #6b7280;
   --ezd-text-inverse: #ffffff;
 
   /* Border */
-  --ezd-border: #e2e8f0;
-  --ezd-border-strong: #cbd5e1;
+  --ezd-border: #e4e7f2;
+  --ezd-border-strong: #c8cede;
 
   /* Radius */
-  --ezd-radius-sm: 0.5rem;
-  --ezd-radius-md: 0.875rem;
-  --ezd-radius-lg: 1.25rem;
-  --ezd-radius-xl: 1.5rem;
-  --ezd-radius-2xl: 2rem;
+  --ezd-radius-sm: 0.375rem;
+  --ezd-radius-md: 0.75rem;
+  --ezd-radius-lg: 1rem;
+  --ezd-radius-xl: 1.25rem;
+  --ezd-radius-2xl: 1.75rem;
 
   /* Shadow */
-  --ezd-shadow-sm: 0 1px 2px rgb(15 23 42 / 0.06);
-  --ezd-shadow-md: 0 12px 30px rgb(15 23 42 / 0.08);
-  --ezd-shadow-lg: 0 24px 80px rgb(15 23 42 / 0.12);
+  --ezd-shadow-sm: 0 1px 2px rgb(5 5 5 / 0.06);
+  --ezd-shadow-md: 0 14px 36px rgb(32 38 127 / 0.1);
+  --ezd-shadow-lg: 0 28px 90px rgb(32 38 127 / 0.16);
 
   /* Layout */
   --ezd-container: 72rem;
@@ -64,7 +76,6 @@ body {
 }
 
 a {
-  color: inherit;
   text-decoration: none;
 }
 
@@ -100,4 +111,20 @@ canvas {
 
 .ezd-focus-ring:focus-visible {
   outline-color: var(--ezd-accent);
+}
+
+.ezd-brand-gradient {
+  background:
+    radial-gradient(circle at 20% 20%, rgb(35 199 201 / 0.34), transparent 32rem),
+    radial-gradient(circle at 85% 35%, rgb(0 87 255 / 0.45), transparent 30rem),
+    linear-gradient(135deg, var(--ezd-blue) 0%, var(--ezd-blue-dark) 58%, #15195f 100%);
+}
+
+.ezd-blue-panel {
+  background: var(--ezd-blue-dark);
+  color: var(--ezd-white);
+}
+
+.ezd-mono-media {
+  filter: grayscale(1);
 }

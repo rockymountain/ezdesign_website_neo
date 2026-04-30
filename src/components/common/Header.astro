@@ -51,8 +51,8 @@ function isActivePath(href: string) {
                 class:list={[
                   'ezd-focus-ring rounded-full px-4 py-2 text-sm font-semibold transition',
                   active
-                    ? 'bg-[var(--ezd-brand-soft)] text-[var(--ezd-brand-dark)]'
-                    : 'text-[var(--ezd-text-muted)] hover:bg-[var(--ezd-bg-soft)] hover:text-[var(--ezd-text)]',
+                    ? 'bg-[var(--ezd-brand)] text-white'
+                    : 'text-[var(--ezd-text-muted)] hover:bg-[var(--ezd-brand-soft)] hover:text-[var(--ezd-brand-dark)]',
                 ]}
                 aria-current={active ? 'page' : undefined}
               >
@@ -96,8 +96,8 @@ function isActivePath(href: string) {
                     class:list={[
                       'rounded-[var(--ezd-radius-md)] px-4 py-3 text-sm font-semibold transition',
                       active
-                        ? 'bg-[var(--ezd-brand-soft)] text-[var(--ezd-brand-dark)]'
-                        : 'text-[var(--ezd-text-muted)] hover:bg-[var(--ezd-bg-soft)] hover:text-[var(--ezd-text)]',
+                        ? 'bg-[var(--ezd-brand)] text-white'
+                        : 'text-[var(--ezd-text-muted)] hover:bg-[var(--ezd-brand-soft)] hover:text-[var(--ezd-brand-dark)]',
                     ]}
                     aria-current={active ? 'page' : undefined}
                   >
@@ -109,7 +109,7 @@ function isActivePath(href: string) {
 
             <a
               href="/contact/"
-              class="mt-2 rounded-[var(--ezd-radius-md)] bg-[var(--ezd-brand)] px-4 py-3 text-center text-sm font-semibold text-white hover:bg-[var(--ezd-brand-dark)]"
+              class="ezd-focus-ring rounded-full bg-[var(--ezd-brand)] px-5 py-2.5 text-sm font-semibold text-white shadow-[var(--ezd-shadow-sm)] transition hover:bg-[var(--ezd-brand-dark)]"
             >
               Đặt lịch demo
             </a>
