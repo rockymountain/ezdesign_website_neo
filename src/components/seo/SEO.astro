@@ -1,0 +1,74 @@
+---
+import siteConfig from '../../data/site.json';
+
+type Props = {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article';
+  noindex?: boolean;
+  publishedTime?: string;
+  modifiedTime?: string;
+};
+
+const {
+  title = siteConfig.defaultTitle,
+  description = siteConfig.defaultDescription,
+  canonical,
+  ogImage = siteConfig.defaultOgImage,
+  ogType = 'website',
+  noindex = false,
+  publishedTime,
+  modifiedTime,
+} = Astro.props as Props;
+
+const siteUrl = siteConfig.url.replace(/\/$/, '');
+const currentPath = Astro.url.pathname;
+const canonicalUrl = canonical ?? `${siteUrl}${currentPath}`;
+
+const absoluteOgImage = ogImage.startsWith('http')
+  ? ogImage
+  : `${siteUrl}${ogImage.startsWith('/') ? ogImage : `/${ogImage}`}`;
+
+const shouldRenderArticleMeta = ogType === 'article';
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalUrl} />
+
+{
+  noindex ? (
+    <meta name="robots" content="noindex, nofollow" />
+  ) : (
+    <meta name="robots" content="index, follow" />
+  )
+}
+
+<meta property="og:site_name" content={siteConfig.name} />
+<meta property="og:type" content={ogType} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:image" content={absoluteOgImage} />
+<meta property="og:locale" content={siteConfig.locale} />
+
+{
+  shouldRenderArticleMeta && publishedTime && (
+    <meta property="article:published_time" content={publishedTime} />
+  )
+}
+
+{
+  shouldRenderArticleMeta && modifiedTime && (
+    <meta property="article:modified_time" content={modifiedTime} />
+  )
+}
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={absoluteOgImage} />
+
+<meta name="theme-color" content="#0f766e" />

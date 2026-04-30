@@ -1,8 +1,8 @@
 ---
 import '../styles/global.css';
-import siteConfig from '../data/site.json';
 import Header from '../components/common/Header.astro';
 import Footer from '../components/common/Footer.astro';
+import SEO from '../components/seo/SEO.astro';
 
 type Props = {
   title?: string;
@@ -11,25 +11,20 @@ type Props = {
   ogImage?: string;
   ogType?: 'website' | 'article';
   noindex?: boolean;
+  publishedTime?: string;
+  modifiedTime?: string;
 };
 
 const {
-  title = siteConfig.defaultTitle,
-  description = siteConfig.defaultDescription,
+  title,
+  description,
   canonical,
-  ogImage = siteConfig.defaultOgImage,
+  ogImage,
   ogType = 'website',
   noindex = false,
+  publishedTime,
+  modifiedTime,
 } = Astro.props as Props;
-
-const siteUrl = siteConfig.url.replace(/\/$/, '');
-
-const currentPath = Astro.url.pathname;
-const canonicalUrl = canonical ?? `${siteUrl}${currentPath}`;
-
-const absoluteOgImage = ogImage.startsWith('http')
-  ? ogImage
-  : `${siteUrl}${ogImage.startsWith('/') ? ogImage : `/${ogImage}`}`;
 ---
 
 <!doctype html>
@@ -38,28 +33,16 @@ const absoluteOgImage = ogImage.startsWith('http')
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>{title}</title>
-    <meta name="description" content={description} />
-    <link rel="canonical" href={canonicalUrl} />
-
-    {
-      noindex && <meta name="robots" content="noindex, nofollow" />
-    }
-
-    <meta property="og:site_name" content={siteConfig.name} />
-    <meta property="og:type" content={ogType} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonicalUrl} />
-    <meta property="og:image" content={absoluteOgImage} />
-    <meta property="og:locale" content={siteConfig.locale} />
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={absoluteOgImage} />
-
-    <meta name="theme-color" content="#0f766e" />
+    <SEO
+      title={title}
+      description={description}
+      canonical={canonical}
+      ogImage={ogImage}
+      ogType={ogType}
+      noindex={noindex}
+      publishedTime={publishedTime}
+      modifiedTime={modifiedTime}
+    />
   </head>
 
   <body class="bg-[var(--ezd-bg)] text-[var(--ezd-text)] antialiased">

@@ -45,7 +45,9 @@ const pageOgImage = insight.data.ogImage;
   ogImage={pageOgImage}
   ogType="article"
   noindex={isDraft}
->
+  publishedTime={publishedAt.toISOString()}
+  modifiedTime={updatedAt?.toISOString()}
+/>
   <main class="min-h-screen bg-[var(--ezd-bg)] text-[var(--ezd-text)]">
     <!-- Hero -->
     <section class="border-b border-[var(--ezd-border)] bg-[var(--ezd-bg-soft)] py-20">
