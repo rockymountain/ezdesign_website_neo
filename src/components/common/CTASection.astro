@@ -1,0 +1,99 @@
+---
+type CTA = {
+  label: string;
+  href: string;
+};
+
+type Props = {
+  eyebrow?: string;
+  title: string;
+  description?: string;
+  primaryCTA: CTA;
+  secondaryCTA?: CTA;
+  variant?: 'dark' | 'light';
+};
+
+const {
+  eyebrow,
+  title,
+  description,
+  primaryCTA,
+  secondaryCTA,
+  variant = 'dark',
+} = Astro.props as Props;
+
+const isDark = variant === 'dark';
+---
+
+<section class="py-20">
+  <div class="ezd-container">
+    <div
+      class:list={[
+        'rounded-[var(--ezd-radius-2xl)] p-8 md:p-12',
+        isDark
+          ? 'bg-[var(--ezd-text)] text-white'
+          : 'border border-[var(--ezd-border)] bg-white text-[var(--ezd-text)] shadow-[var(--ezd-shadow-md)]',
+      ]}
+    >
+      {
+        eyebrow && (
+          <p
+            class:list={[
+              'text-sm font-semibold uppercase tracking-[0.25em]',
+              isDark ? 'text-white/60' : 'text-[var(--ezd-brand)]',
+            ]}
+          >
+            {eyebrow}
+          </p>
+        )
+      }
+
+      <h2 class="max-w-3xl text-3xl font-bold tracking-tight md:text-5xl">
+        {title}
+      </h2>
+
+      {
+        description && (
+          <p
+            class:list={[
+              'mt-5 max-w-2xl text-lg leading-8',
+              isDark ? 'text-white/75' : 'text-[var(--ezd-text-muted)]',
+            ]}
+          >
+            {description}
+          </p>
+        )
+      }
+
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a
+          href={primaryCTA.href}
+          class:list={[
+            'ezd-focus-ring inline-flex rounded-full px-5 py-3 text-sm font-semibold transition',
+            isDark
+              ? 'bg-white text-[var(--ezd-text)] hover:bg-white/90'
+              : 'bg-[var(--ezd-brand)] text-white hover:bg-[var(--ezd-brand-dark)]',
+          ]}
+        >
+          {primaryCTA.label}
+        </a>
+
+        {
+          secondaryCTA && (
+            <a
+              href={secondaryCTA.href}
+              class:list={[
+                'ezd-focus-ring inline-flex rounded-full border px-5 py-3 text-sm font-semibold transition',
+                isDark
+                  ? 'border-white/20 text-white hover:bg-white/10'
+                  : 'border-[var(--ezd-border-strong)] text-[var(--ezd-text)] hover:bg-[var(--ezd-surface-muted)]',
+              ]}
+            >
+              {secondaryCTA.label}
+            </a>
+          )
+        }
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import CTASection from '../components/common/CTASection.astro';
 
 const title = 'EZDesign — Điểm chạm số biết trò chuyện, tương tác và chuyển đổi';
 const description =
@@ -187,28 +188,18 @@ const description =
     </section>
 
     <!-- Final CTA -->
-    <section class="py-20">
-      <div class="ezd-container">
-        <div class="rounded-[var(--ezd-radius-2xl)] bg-[var(--ezd-text)] p-8 text-white md:p-12">
-          <h2 class="max-w-3xl text-3xl font-bold tracking-tight md:text-5xl">
-            Sẵn sàng biến website của bạn thành điểm chạm biết trò chuyện?
-          </h2>
-
-          <p class="mt-5 max-w-2xl text-lg leading-8 text-white/75">
-            Bắt đầu với một buổi demo để xem EZD AI Chat và hệ sinh thái trải nghiệm số
-            có thể phù hợp với thương hiệu của bạn như thế nào.
-          </p>
-
-          <div class="mt-8">
-            <a
-              href="/contact/"
-              class="ezd-focus-ring inline-flex rounded-full bg-white px-5 py-3 text-sm font-semibold text-[var(--ezd-text)] hover:bg-white/90"
-            >
-              Đặt lịch demo
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
+    <CTASection
+      eyebrow="Start"
+      title="Sẵn sàng biến website của bạn thành điểm chạm biết trò chuyện?"
+      description="Bắt đầu với một buổi demo để xem EZD AI Chat và hệ sinh thái trải nghiệm số có thể phù hợp với thương hiệu của bạn như thế nào."
+      primaryCTA={{
+        label: 'Đặt lịch demo',
+        href: '/contact/',
+      }}
+      secondaryCTA={{
+        label: 'Xem EZD AI Chat',
+        href: '/ezd-ai-chat/',
+      }}
+    />
   </main>
 </BaseLayout>
