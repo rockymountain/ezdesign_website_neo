@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CTASection from '../components/common/CTASection.astro';
+import SectionHeader from '../components/common/SectionHeader.astro';
 
 const title = 'EZDesign — Điểm chạm số biết trò chuyện, tương tác và chuyển đổi';
 const description =
@@ -87,19 +88,11 @@ const description =
     <!-- Services Overview -->
     <section class="bg-[var(--ezd-bg-soft)] py-20">
       <div class="ezd-container">
-        <div class="max-w-2xl">
-          <p class="text-sm font-semibold uppercase tracking-[0.25em] text-[var(--ezd-brand)]">
-            Services
-          </p>
-
-          <h2 class="mt-4 text-3xl font-bold tracking-tight md:text-5xl">
-            Hệ sinh thái điểm chạm số của EZDesign.
-          </h2>
-
-          <p class="mt-5 text-lg leading-8 text-[var(--ezd-text-muted)]">
-            Từ nhân vật AI đến AR/VR, Digital Twin, Game Activation và microsite tương tác.
-          </p>
-        </div>
+        <SectionHeader
+          eyebrow="Services"
+          title="Hệ sinh thái điểm chạm số của EZDesign."
+          description="Từ nhân vật AI đến AR/VR, Digital Twin, Game Activation và microsite tương tác."
+        />
 
         <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {

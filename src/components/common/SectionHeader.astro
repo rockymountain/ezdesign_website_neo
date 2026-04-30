@@ -1,0 +1,59 @@
+---
+type Props = {
+  eyebrow?: string;
+  title: string;
+  description?: string;
+  align?: 'left' | 'center';
+  maxWidth?: 'sm' | 'md' | 'lg' | 'xl';
+  headingLevel?: 'h1' | 'h2' | 'h3';
+};
+
+const {
+  eyebrow,
+  title,
+  description,
+  align = 'left',
+  maxWidth = 'md',
+  headingLevel = 'h2',
+} = Astro.props as Props;
+
+const alignmentClass = align === 'center' ? 'mx-auto text-center' : '';
+
+const maxWidthClassMap = {
+  sm: 'max-w-xl',
+  md: 'max-w-2xl',
+  lg: 'max-w-3xl',
+  xl: 'max-w-4xl',
+};
+
+const maxWidthClass = maxWidthClassMap[maxWidth];
+
+const headingClass =
+  headingLevel === 'h1'
+    ? 'mt-5 text-4xl font-bold tracking-tight md:text-6xl'
+    : headingLevel === 'h2'
+      ? 'mt-4 text-3xl font-bold tracking-tight md:text-5xl'
+      : 'mt-3 text-2xl font-bold tracking-tight md:text-3xl';
+
+const HeadingTag = headingLevel;
+---
+
+<div class:list={[maxWidthClass, alignmentClass]}>
+  {
+    eyebrow && (
+      <p class="text-sm font-semibold uppercase tracking-[0.25em] text-[var(--ezd-brand)]">
+        {eyebrow}
+      </p>
+    )
+  }
+
+  <HeadingTag class={headingClass}>{title}</HeadingTag>
+
+  {
+    description && (
+      <p class="mt-5 text-lg leading-8 text-[var(--ezd-text-muted)]">
+        {description}
+      </p>
+    )
+  }
+</div>
