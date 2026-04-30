@@ -30,10 +30,10 @@ const maxWidthClass = maxWidthClassMap[maxWidth];
 
 const headingClass =
   headingLevel === 'h1'
-    ? 'mt-5 text-4xl font-bold tracking-tight md:text-6xl'
+    ? 'ezd-heading-hero mt-5 text-4xl md:text-6xl'
     : headingLevel === 'h2'
-      ? 'mt-4 text-3xl font-bold tracking-tight md:text-5xl'
-      : 'mt-3 text-2xl font-bold tracking-tight md:text-3xl';
+      ? 'ezd-heading-section mt-4 text-3xl md:text-5xl'
+      : 'ezd-heading-card mt-3 text-2xl md:text-3xl';
 
 const HeadingTag = headingLevel;
 ---
@@ -41,7 +41,7 @@ const HeadingTag = headingLevel;
 <div class:list={[maxWidthClass, alignmentClass]}>
   {
     eyebrow && (
-      <p class="text-sm font-semibold uppercase tracking-[0.25em] text-[var(--ezd-brand)]">
+      <p class="ezd-eyebrow">
         {eyebrow}
       </p>
     )
@@ -51,7 +51,7 @@ const HeadingTag = headingLevel;
 
   {
     description && (
-      <p class="mt-5 text-lg leading-8 text-[var(--ezd-text-muted)]">
+      <p class="ezd-body-large mt-5 text-[var(--ezd-text-muted)]">
         {description}
       </p>
     )
