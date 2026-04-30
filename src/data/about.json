@@ -1,0 +1,65 @@
+{
+  "seo": {
+    "title": "Về EZDesign — Studio thiết kế điểm chạm số tương tác",
+    "description": "EZDesign thiết kế các điểm chạm số biết trò chuyện, tương tác và chuyển đổi — từ AI brand assistant đến AR/VR, Digital Twin, Game Activation và website tương tác."
+  },
+  "hero": {
+    "eyebrow": "About EZDesign",
+    "title": "Thiết kế điểm chạm số dễ hiểu, nhanh triển khai và có khả năng chuyển đổi.",
+    "description": "EZDesign kết hợp tư duy thiết kế tối giản, công nghệ tương tác và AI để giúp SME tạo trải nghiệm số chuyên nghiệp mà không cần đội ngũ nội bộ phức tạp."
+  },
+  "intro": {
+    "eyebrow": "Who we are",
+    "title": "EZDesign bắt đầu từ tinh thần thiết kế đơn giản, rõ ràng và dễ ứng dụng.",
+    "description": "Từ nền tảng thiết kế 2D cho cá nhân tự do và doanh nghiệp nhỏ, EZDesign mở rộng sang các điểm chạm số mới như AI Chat, AR/VR, Digital Twin, Game Activation và website tương tác."
+  },
+  "values": {
+    "eyebrow": "Core Values",
+    "title": "Nhanh, rõ ràng và phù hợp với SME.",
+    "items": [
+      {
+        "title": "Chất lượng",
+        "description": "Thiết kế rõ ràng, có hệ thống và phù hợp với mục tiêu thương hiệu."
+      },
+      {
+        "title": "Tốc độ",
+        "description": "Ưu tiên quy trình gọn, triển khai nhanh và dễ kiểm tra."
+      },
+      {
+        "title": "Tiết kiệm",
+        "description": "Giúp SME có giải pháp vừa đủ mạnh mà không cần đội ngũ lớn."
+      }
+    ]
+  },
+  "principles": {
+    "eyebrow": "Communication",
+    "title": "Cách EZDesign giao tiếp và làm việc.",
+    "items": [
+      {
+        "title": "Warm and courteous",
+        "description": "Trao đổi thân thiện, tôn trọng và dễ hợp tác."
+      },
+      {
+        "title": "Thoughtful and truthful",
+        "description": "Tư vấn dựa trên nhu cầu thật, không hứa quá mức."
+      },
+      {
+        "title": "Clear and concise",
+        "description": "Trình bày ngắn gọn, rõ bước, dễ quyết định."
+      }
+    ]
+  },
+  "finalCTA": {
+    "eyebrow": "Work with us",
+    "title": "Bạn đang muốn nâng cấp trải nghiệm số cho thương hiệu?",
+    "description": "Chia sẻ tình trạng website hiện tại và mục tiêu bạn muốn đạt được. EZDesign sẽ đề xuất hướng triển khai phù hợp.",
+    "primaryCTA": {
+      "label": "Liên hệ EZDesign",
+      "href": "/contact/"
+    },
+    "secondaryCTA": {
+      "label": "Xem EZD AI Chat",
+      "href": "/ezd-ai-chat/"
+    }
+  }
+}

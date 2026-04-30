@@ -1,0 +1,31 @@
+{
+  "seo": {
+    "title": "Insights — AI Chat, AI Brand Character và trải nghiệm số | EZDesign",
+    "description": "Góc nhìn từ EZDesign về AI Chat, AI Brand Character, lead generation và các điểm chạm số cho SME B2C."
+  },
+  "hero": {
+    "eyebrow": "Insights",
+    "title": "Góc nhìn về AI Chat, AI Brand Character và trải nghiệm số cho SME.",
+    "description": "Khu vực này được chuẩn bị sẵn cho các bài viết SEO và nội dung chuyên sâu. Trong Sprint 1, Insights chưa được đưa vào navigation chính."
+  },
+  "published": {
+    "eyebrow": "Published",
+    "title": "Bài viết đã publish.",
+    "emptyTitle": "Chưa có bài viết public.",
+    "emptyDescription": "Insights route đã được chuẩn bị. Các bài viết sẽ được publish ở sprint content/SEO sau."
+  },
+  "drafts": {
+    "eyebrow": "Drafts",
+    "title": "Bài viết đang chuẩn bị.",
+    "description": "Section này chỉ để xác nhận content collection đã hoạt động trong Sprint hiện tại. Khi production launch, có thể ẩn draft nếu muốn."
+  },
+  "finalCTA": {
+    "eyebrow": "Demo",
+    "title": "Muốn trao đổi trực tiếp thay vì đọc thêm?",
+    "description": "Đặt lịch demo để EZDesign tư vấn cách dùng AI Chat và trải nghiệm số cho website của bạn.",
+    "primaryCTA": {
+      "label": "Đặt lịch demo",
+      "href": "/contact/"
+    }
+  }
+}

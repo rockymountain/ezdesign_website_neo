@@ -1,0 +1,93 @@
+{
+  "seo": {
+    "title": "EZDesign — Điểm chạm số biết trò chuyện, tương tác và chuyển đổi",
+    "description": "EZDesign thiết kế AI brand assistant, AR/VR, Digital Twin, Game Activation và website tương tác cho thương hiệu."
+  },
+  "hero": {
+    "eyebrow": "EZDesign",
+    "title": "Điểm chạm số biết trò chuyện, tương tác và chuyển đổi.",
+    "description": "EZDesign giúp thương hiệu xây dựng AI brand assistant, website tương tác, AR/VR, Digital Twin và game activation để biến mỗi lượt truy cập thành một trải nghiệm có khả năng dẫn dắt khách hàng.",
+    "primaryCTA": {
+      "label": "Khám phá EZD AI Chat",
+      "href": "/ezd-ai-chat/"
+    },
+    "secondaryCTA": {
+      "label": "Đặt lịch demo",
+      "href": "/contact/"
+    },
+    "highlight": {
+      "eyebrow": "Hero Product",
+      "title": "EZD AI Chat",
+      "description": "Nhân vật AI mang giọng thương hiệu, biết tư vấn khách, trả lời FAQ, thu lead và chuyển khách sang người thật khi cần.",
+      "items": [
+        {
+          "title": "AI Brand Character",
+          "description": "Nhân vật AI riêng cho từng thương hiệu."
+        },
+        {
+          "title": "Lead Flow",
+          "description": "Dẫn khách tới đặt lịch, để lại nhu cầu hoặc handoff."
+        }
+      ]
+    }
+  },
+  "services": {
+    "eyebrow": "Services",
+    "title": "Hệ sinh thái điểm chạm số của EZDesign.",
+    "description": "Từ AI brand assistant đến AR/VR, Digital Twin, Game Activation và website tương tác — mỗi giải pháp đều hướng tới trải nghiệm dễ hiểu, nhanh triển khai và có khả năng chuyển đổi.",
+    "items": [
+      {
+        "title": "EZD AI Chat",
+        "description": "AI brand assistant giúp website biết tư vấn, trả lời FAQ, thu lead và chuyển khách sang người thật khi cần.",
+        "href": "/ezd-ai-chat/"
+      },
+      {
+        "title": "AI Brand Character",
+        "description": "Thiết kế nhân vật AI đại diện thương hiệu với giọng nói, vai trò và tính cách riêng.",
+        "href": "/services/ai-brand-character/"
+      },
+      {
+        "title": "AR/VR/MR",
+        "description": "Trải nghiệm tương tác giúp khách hàng khám phá sản phẩm, không gian hoặc chiến dịch theo cách trực quan hơn.",
+        "href": "/services/ar-vr-mr/"
+      },
+      {
+        "title": "Digital Twin",
+        "description": "Mô phỏng không gian, sản phẩm hoặc quy trình để tạo trải nghiệm số dễ hiểu và có tính ứng dụng.",
+        "href": "/services/digital-twin/"
+      },
+      {
+        "title": "Game Activation",
+        "description": "Mini game và trải nghiệm tương tác giúp thương hiệu tăng engagement trong chiến dịch.",
+        "href": "/services/game-activation/"
+      },
+      {
+        "title": "Interactive Website",
+        "description": "Website có tương tác, storytelling và CTA rõ ràng để nâng cao trải nghiệm khách hàng.",
+        "href": "/services/interactive-website/"
+      }
+    ]
+  },
+  "caseStudy": {
+    "eyebrow": "Case Study",
+    "title": "Yên AI Chat — khi chatbot trở thành một người nhà của thương hiệu.",
+    "description": "Case Yên Retreat & Cafe là nền tảng đầu tiên giúp EZDesign định hình EZD AI Chat: AI có tính cách, giọng nói, quick replies, lead flow, Zalo handoff và guardrail rõ ràng.",
+    "primaryCTA": {
+      "label": "Xem case study",
+      "href": "/case-studies/yen-ai-chat/"
+    }
+  },
+  "finalCTA": {
+    "eyebrow": "Start",
+    "title": "Sẵn sàng biến website của bạn thành một điểm chạm biết trò chuyện?",
+    "description": "Bắt đầu với một buổi demo để xem EZD AI Chat và hệ sinh thái trải nghiệm số có thể phù hợp với thương hiệu của bạn như thế nào.",
+    "primaryCTA": {
+      "label": "Đặt lịch demo",
+      "href": "/contact/"
+    },
+    "secondaryCTA": {
+      "label": "Xem EZD AI Chat",
+      "href": "/ezd-ai-chat/"
+    }
+  }
+}

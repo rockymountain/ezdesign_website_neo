@@ -2,83 +2,124 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CTASection from '../components/common/CTASection.astro';
 import SectionHeader from '../components/common/SectionHeader.astro';
+import ButtonLink from '../components/common/ButtonLink.astro';
+import Card from '../components/common/Card.astro';
 
-const title = 'EZDesign — Điểm chạm số biết trò chuyện, tương tác và chuyển đổi';
-const description =
-  'EZDesign thiết kế AI brand assistant, AR/VR, Digital Twin, Game Activation và website tương tác cho thương hiệu.';
+import pageContent from '../data/home.json';
+
+type CTA = {
+  label: string;
+  href: string;
+};
+
+type HeroHighlightItem = {
+  title: string;
+  description: string;
+};
+
+type ServiceItem = {
+  title: string;
+  description: string;
+  href: string;
+};
+
+const title = pageContent.seo.title;
+const description = pageContent.seo.description;
+
+const heroPrimaryCTA = pageContent.hero.primaryCTA as CTA;
+const heroSecondaryCTA = pageContent.hero.secondaryCTA as CTA;
+const heroHighlightItems = pageContent.hero.highlight.items as HeroHighlightItem[];
+
+const services = pageContent.services.items as ServiceItem[];
+
+const caseStudyCTA = pageContent.caseStudy.primaryCTA as CTA;
+
+const finalPrimaryCTA = pageContent.finalCTA.primaryCTA as CTA;
+const finalSecondaryCTA = pageContent.finalCTA.secondaryCTA as CTA;
 ---
 
 <BaseLayout title={title} description={description}>
   <main class="min-h-screen bg-[var(--ezd-bg)] text-[var(--ezd-text)]">
     <!-- Hero -->
-    <section class="border-b border-[var(--ezd-border)] bg-[var(--ezd-bg-soft)] py-20">
-      <div class="ezd-container">
-        <p class="text-sm font-semibold uppercase tracking-[0.3em] text-[var(--ezd-brand)]">
-          EZDesign Website Neo
-        </p>
-
-        <h1 class="mt-5 max-w-4xl text-4xl font-bold tracking-tight md:text-6xl">
-          Điểm chạm số biết trò chuyện, tương tác và chuyển đổi.
-        </h1>
-
-        <p class="mt-6 max-w-2xl text-lg leading-8 text-[var(--ezd-text-muted)]">
-          EZDesign giúp thương hiệu tạo AI brand assistant, AR/VR, Digital Twin,
-          Game Activation và website tương tác để biến mỗi lượt truy cập thành một
-          trải nghiệm có khả năng dẫn dắt khách hàng.
-        </p>
-
-        <div class="mt-8 flex flex-wrap gap-3">
-          <a
-            href="/ezd-ai-chat/"
-            class="ezd-focus-ring rounded-full bg-[var(--ezd-brand)] px-5 py-3 text-sm font-semibold text-white shadow-[var(--ezd-shadow-sm)] hover:bg-[var(--ezd-brand-dark)]"
-          >
-            Xem EZD AI Chat
-          </a>
-
-          <a
-            href="/contact/"
-            class="ezd-focus-ring rounded-full border border-[var(--ezd-border-strong)] bg-white px-5 py-3 text-sm font-semibold text-[var(--ezd-text)] hover:bg-[var(--ezd-surface-muted)]"
-          >
-            Đặt lịch demo
-          </a>
-        </div>
+    <section class="ezd-brand-gradient relative overflow-hidden py-24 text-white md:py-28">
+      <div
+        class="pointer-events-none absolute inset-0 opacity-30"
+        aria-hidden="true"
+        style="background-image: linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px); background-size: 56px 56px;"
+      >
       </div>
-    </section>
 
-    <!-- EZD AI Chat Spotlight -->
-    <section class="py-20">
-      <div class="ezd-container">
-        <div class="grid gap-10 lg:grid-cols-[1fr_0.9fr] lg:items-center">
+      <div
+        class="pointer-events-none absolute -right-24 top-20 h-72 w-72 rounded-full bg-[var(--ezd-turquoise)] opacity-20 blur-3xl"
+        aria-hidden="true"
+      >
+      </div>
+
+      <div
+        class="pointer-events-none absolute -bottom-28 left-10 h-80 w-80 rounded-full bg-white opacity-10 blur-3xl"
+        aria-hidden="true"
+      >
+      </div>
+
+      <div class="ezd-container relative">
+        <div class="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
           <div>
-            <p class="text-sm font-semibold uppercase tracking-[0.25em] text-[var(--ezd-brand)]">
-              Hero Product
+            <p class="ezd-eyebrow-inverse">
+              {pageContent.hero.eyebrow}
             </p>
 
-            <h2 class="mt-4 text-3xl font-bold tracking-tight md:text-5xl">
-              EZD AI Chat — AI brand assistant cho SME B2C.
-            </h2>
+            <h1 class="ezd-heading-display mt-5 max-w-4xl text-5xl md:text-6xl">
+              {pageContent.hero.title}
+            </h1>
 
-            <p class="mt-5 text-lg leading-8 text-[var(--ezd-text-muted)]">
-              Một nhân vật AI mang giọng thương hiệu, biết tư vấn khách, trả lời FAQ,
-              thu lead và chuyển khách sang người thật khi cần.
+            <p class="ezd-body-large mt-6 max-w-2xl text-white/80">
+              {pageContent.hero.description}
             </p>
 
-            <div class="mt-8">
-              <a
-                href="/ezd-ai-chat/"
-                class="ezd-focus-ring inline-flex rounded-full bg-[var(--ezd-text)] px-5 py-3 text-sm font-semibold text-white hover:opacity-90"
-              >
-                Khám phá sản phẩm
-              </a>
+            <div class="mt-8 flex flex-wrap gap-3">
+              <ButtonLink
+                href={heroPrimaryCTA.href}
+                label={heroPrimaryCTA.label}
+                variant="light"
+                size="lg"
+              />
+
+              <ButtonLink
+                href={heroSecondaryCTA.href}
+                label={heroSecondaryCTA.label}
+                variant="secondary"
+                size="lg"
+                class="border-white/30 bg-white/10 text-white hover:bg-white/20"
+              />
             </div>
           </div>
 
-          <div class="rounded-[var(--ezd-radius-2xl)] border border-[var(--ezd-border)] bg-[var(--ezd-surface)] p-6 shadow-[var(--ezd-shadow-md)]">
-            <div class="rounded-[var(--ezd-radius-xl)] bg-[var(--ezd-bg-soft)] p-6">
-              <p class="text-sm font-semibold text-[var(--ezd-brand)]">Demo widget placeholder</p>
-              <p class="mt-3 text-sm leading-6 text-[var(--ezd-text-muted)]">
-                Vùng này sẽ dùng để đặt motion mockup render hoặc embed widget demo EZD AI Chat.
-              </p>
+          <div
+            class="rounded-[var(--ezd-radius-2xl)] border border-white/20 bg-white/10 p-6 shadow-[var(--ezd-shadow-lg)] backdrop-blur-xl"
+          >
+            <p class="text-xs font-black uppercase tracking-[0.24em] text-white/70">
+              {pageContent.hero.highlight.eyebrow}
+            </p>
+
+            <h2 class="ezd-heading-section mt-4 text-3xl text-white">
+              {pageContent.hero.highlight.title}
+            </h2>
+
+            <p class="ezd-body-small mt-4 text-white/75">
+              {pageContent.hero.highlight.description}
+            </p>
+
+            <div class="mt-6 grid gap-3">
+              {
+                heroHighlightItems.map((item: HeroHighlightItem) => (
+                  <div class="rounded-2xl bg-white/10 p-4">
+                    <p class="text-sm font-black text-white">{item.title}</p>
+                    <p class="mt-1 text-xs leading-5 text-white/65">
+                      {item.description}
+                    </p>
+                  </div>
+                ))
+              }
             </div>
           </div>
         </div>
@@ -89,30 +130,47 @@ const description =
     <section class="bg-[var(--ezd-bg-soft)] py-20">
       <div class="ezd-container">
         <SectionHeader
-          eyebrow="Services"
-          title="Hệ sinh thái điểm chạm số của EZDesign."
-          description="Từ nhân vật AI đến AR/VR, Digital Twin, Game Activation và microsite tương tác."
+          eyebrow={pageContent.services.eyebrow}
+          title={pageContent.services.title}
+          description={pageContent.services.description}
+          maxWidth="lg"
         />
 
         <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {
-            [
-              ['AI Brand Character', '/services/ai-brand-character/'],
-              ['AR/VR/MR', '/services/ar-vr-mr/'],
-              ['Digital Twin', '/services/digital-twin/'],
-              ['Game Activation', '/services/game-activation/'],
-              ['Interactive Website', '/services/interactive-website/'],
-            ].map(([title, href]) => (
-              <a
-                href={href}
-                class="rounded-[var(--ezd-radius-xl)] border border-[var(--ezd-border)] bg-white p-6 shadow-[var(--ezd-shadow-sm)] transition hover:-translate-y-1 hover:shadow-[var(--ezd-shadow-md)]"
-              >
-                <h3 class="text-xl font-semibold">{title}</h3>
-                <p class="mt-3 text-sm leading-6 text-[var(--ezd-text-muted)]">
-                  Placeholder mô tả ngắn cho dịch vụ. Nội dung chi tiết sẽ được bổ sung ở sprint sau.
-                </p>
-              </a>
-            ))
+            services.map((service: ServiceItem, index: number) => {
+              const isHeroProduct = index === 0;
+
+              return (
+                <a href={service.href} class="block">
+                  <Card
+                    hover
+                    padding="lg"
+                    class={
+                      isHeroProduct
+                        ? 'h-full border-[var(--ezd-brand)] bg-white shadow-[var(--ezd-shadow-md)]'
+                        : 'h-full'
+                    }
+                  >
+                    <p class="text-xs font-black uppercase tracking-[0.22em] text-[var(--ezd-brand)]">
+                      {isHeroProduct ? 'Hero Product' : 'Service'}
+                    </p>
+
+                    <h3 class="ezd-heading-card mt-4 text-2xl">
+                      {service.title}
+                    </h3>
+
+                    <p class="ezd-body-small mt-3 text-[var(--ezd-text-muted)]">
+                      {service.description}
+                    </p>
+
+                    <p class="mt-6 text-sm font-black text-[var(--ezd-brand)]">
+                      Xem chi tiết →
+                    </p>
+                  </Card>
+                </a>
+              );
+            })
           }
         </div>
       </div>
@@ -121,78 +179,68 @@ const description =
     <!-- Featured Case Study -->
     <section class="py-20">
       <div class="ezd-container">
-        <div class="rounded-[var(--ezd-radius-2xl)] border border-[var(--ezd-border)] bg-[var(--ezd-surface)] p-8 shadow-[var(--ezd-shadow-md)] md:p-10">
-          <p class="text-sm font-semibold uppercase tracking-[0.25em] text-[var(--ezd-brand)]">
-            Featured Case Study
-          </p>
-
-          <h2 class="mt-4 text-3xl font-bold tracking-tight md:text-5xl">
-            Yên AI Chat — từ website tĩnh thành điểm chạm biết trò chuyện.
-          </h2>
-
-          <p class="mt-5 max-w-2xl text-lg leading-8 text-[var(--ezd-text-muted)]">
-            Case flagship cho EZD AI Chat, nơi AI không chỉ trả lời câu hỏi mà còn đóng vai
-            một người đại diện thương hiệu có tính cách, giọng nói và flow chuyển đổi riêng.
-          </p>
-
-          <div class="mt-8">
-            <a
-              href="/case-studies/yen-ai-chat/"
-              class="ezd-focus-ring inline-flex rounded-full border border-[var(--ezd-border-strong)] px-5 py-3 text-sm font-semibold hover:bg-[var(--ezd-surface-muted)]"
-            >
-              Xem case study
-            </a>
+        <Card padding="lg" class="relative overflow-hidden">
+          <div
+            class="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[var(--ezd-accent)] opacity-20 blur-3xl"
+            aria-hidden="true"
+          >
           </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- Process Overview -->
-    <section class="bg-[var(--ezd-bg-soft)] py-20">
-      <div class="ezd-container">
-        <div class="max-w-2xl">
-          <p class="text-sm font-semibold uppercase tracking-[0.25em] text-[var(--ezd-brand)]">
-            Process
-          </p>
+          <div class="relative grid gap-10 lg:grid-cols-[1fr_0.8fr] lg:items-center">
+            <div>
+              <p class="ezd-eyebrow">
+                {pageContent.caseStudy.eyebrow}
+              </p>
 
-          <h2 class="mt-4 text-3xl font-bold tracking-tight md:text-5xl">
-            Quy trình làm việc tinh gọn.
-          </h2>
-        </div>
+              <h2 class="ezd-heading-section mt-4 text-3xl md:text-5xl">
+                {pageContent.caseStudy.title}
+              </h2>
 
-        <div class="mt-10 grid gap-5 md:grid-cols-3">
-          {
-            [
-              ['01', 'Khám phá nhu cầu'],
-              ['02', 'Thiết kế giải pháp'],
-              ['03', 'Triển khai và tối ưu'],
-            ].map(([step, title]) => (
-              <div class="rounded-[var(--ezd-radius-xl)] border border-[var(--ezd-border)] bg-white p-6">
-                <p class="text-sm font-semibold text-[var(--ezd-brand)]">{step}</p>
-                <h3 class="mt-4 text-xl font-semibold">{title}</h3>
-                <p class="mt-3 text-sm leading-6 text-[var(--ezd-text-muted)]">
-                  Placeholder mô tả quy trình. Nội dung sẽ được viết chi tiết ở sprint content.
-                </p>
+              <p class="ezd-body-large mt-5 max-w-2xl text-[var(--ezd-text-muted)]">
+                {pageContent.caseStudy.description}
+              </p>
+
+              <div class="mt-8">
+                <ButtonLink
+                  href={caseStudyCTA.href}
+                  label={caseStudyCTA.label}
+                  variant="secondary"
+                  size="lg"
+                />
               </div>
-            ))
-          }
-        </div>
+            </div>
+
+            <div class="rounded-[var(--ezd-radius-2xl)] bg-[var(--ezd-bg-soft)] p-6">
+              <p class="text-xs font-black uppercase tracking-[0.22em] text-[var(--ezd-brand)]">
+                Yên AI Chat
+              </p>
+
+              <div class="mt-5 space-y-4">
+                <div class="max-w-[86%] rounded-2xl bg-white px-4 py-3 text-sm leading-6 text-[var(--ezd-text-muted)] shadow-[var(--ezd-shadow-sm)]">
+                  Khách hỏi về phòng, giá, đường đi hoặc đặt lịch?
+                </div>
+
+                <div class="ml-auto max-w-[86%] rounded-2xl bg-[var(--ezd-brand)] px-4 py-3 text-sm leading-6 text-white shadow-[var(--ezd-shadow-sm)]">
+                  Mình muốn hỏi lịch còn phòng cuối tuần này.
+                </div>
+
+                <div class="max-w-[86%] rounded-2xl bg-white px-4 py-3 text-sm leading-6 text-[var(--ezd-text-muted)] shadow-[var(--ezd-shadow-sm)]">
+                  Yên có thể hỗ trợ kiểm tra nhu cầu và chuyển bạn sang Zalo để team xác nhận nhanh hơn.
+                </div>
+              </div>
+            </div>
+          </div>
+        </Card>
       </div>
     </section>
 
     <!-- Final CTA -->
     <CTASection
-      eyebrow="Start"
-      title="Sẵn sàng biến website của bạn thành điểm chạm biết trò chuyện?"
-      description="Bắt đầu với một buổi demo để xem EZD AI Chat và hệ sinh thái trải nghiệm số có thể phù hợp với thương hiệu của bạn như thế nào."
-      primaryCTA={{
-        label: 'Đặt lịch demo',
-        href: '/contact/',
-      }}
-      secondaryCTA={{
-        label: 'Xem EZD AI Chat',
-        href: '/ezd-ai-chat/',
-      }}
+      eyebrow={pageContent.finalCTA.eyebrow}
+      title={pageContent.finalCTA.title}
+      description={pageContent.finalCTA.description}
+      primaryCTA={finalPrimaryCTA}
+      secondaryCTA={finalSecondaryCTA}
     />
   </main>
 </BaseLayout>

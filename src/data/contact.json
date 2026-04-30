@@ -1,0 +1,104 @@
+{
+  "seo": {
+    "title": "Liên hệ EZDesign — Đặt lịch demo hoặc tư vấn giải pháp",
+    "description": "Liên hệ EZDesign để đặt lịch demo EZD AI Chat hoặc tư vấn các giải pháp AI brand assistant, website tương tác, AR/VR, Digital Twin và Game Activation."
+  },
+  "hero": {
+    "eyebrow": "Contact",
+    "title": "Đặt lịch demo hoặc trao đổi về điểm chạm số cho thương hiệu của bạn.",
+    "description": "Chia sẻ nhu cầu hiện tại của bạn. EZDesign sẽ phản hồi để tư vấn hướng triển khai phù hợp, từ EZD AI Chat đến website tương tác, AR/VR, Digital Twin hoặc Game Activation."
+  },
+  "form": {
+    "eyebrow": "Lead Form",
+    "title": "Cho EZDesign biết bạn đang cần gì.",
+    "description": "Form này sẽ được kết nối với Cloudflare Worker, Google Sheets và email notification ở sprint sau.",
+    "submitLabel": "Gửi yêu cầu tư vấn",
+    "privacyNote": "EZDesign không dùng form để thu thập thông tin nhạy cảm không cần thiết."
+  },
+  "interestOptions": [
+    "EZD AI Chat",
+    "AI Brand Character",
+    "AR/VR/MR",
+    "Digital Twin",
+    "Game Activation",
+    "Interactive Website",
+    "Tư vấn tổng thể"
+  ],
+  "industries": [
+    "Homestay / Retreat / Khách sạn nhỏ",
+    "Cafe / Nhà hàng / Bakery",
+    "Spa / Salon / Clinic làm đẹp",
+    "Studio / Wedding / Event",
+    "Giáo dục / Workshop / Lớp học",
+    "Local brand / Shop",
+    "Khác"
+  ],
+  "contactChannels": [
+    {
+      "label": "Email",
+      "value": "hello@ezdesign.vn",
+      "href": "mailto:hello@ezdesign.vn",
+      "description": "Gửi brief, câu hỏi hoặc yêu cầu tư vấn dự án."
+    },
+    {
+      "label": "Hotline",
+      "value": "Cập nhật sau",
+      "href": "/contact/",
+      "description": "Dành cho trao đổi nhanh khi cần hẹn demo hoặc tư vấn trực tiếp."
+    },
+    {
+      "label": "Zalo",
+      "value": "Cập nhật sau",
+      "href": "/contact/",
+      "description": "Kênh handoff phù hợp với SME tại Việt Nam."
+    }
+  ],
+  "nextSteps": [
+    {
+      "step": "01",
+      "title": "Gửi nhu cầu",
+      "description": "Bạn để lại thông tin cơ bản về thương hiệu, website hiện tại và giải pháp quan tâm."
+    },
+    {
+      "step": "02",
+      "title": "EZDesign phản hồi",
+      "description": "Team EZDesign xem nhanh nhu cầu và đề xuất hướng trao đổi hoặc demo phù hợp."
+    },
+    {
+      "step": "03",
+      "title": "Demo / tư vấn",
+      "description": "Hai bên trao đổi về mục tiêu, ngành, hành trình khách hàng và cách triển khai khả thi."
+    }
+  ],
+  "demoExpectations": {
+    "eyebrow": "Demo",
+    "title": "Buổi demo nên giúp bạn trả lời điều gì?",
+    "items": [
+      {
+        "title": "EZD AI Chat có phù hợp với ngành của bạn không?",
+        "description": "Demo sẽ tập trung vào use case thật của doanh nghiệp: khách hỏi gì, cần tư vấn gì và nên chuyển đổi ở đâu."
+      },
+      {
+        "title": "Cần chuẩn bị dữ liệu gì để triển khai?",
+        "description": "EZDesign sẽ tư vấn các nhóm thông tin cần có như FAQ, chính sách, sản phẩm/dịch vụ, tone of voice và kênh handoff."
+      },
+      {
+        "title": "Chi phí và setup fee dự kiến như thế nào?",
+        "description": "Subscription có thể tham khảo từ các gói public, còn setup fee sẽ được báo theo nhu cầu thực tế."
+      }
+    ]
+  },
+  "finalCTA": {
+    "eyebrow": "Start",
+    "title": "Chưa chắc nên bắt đầu từ đâu?",
+    "description": "Chỉ cần gửi tình trạng website hiện tại và mục tiêu bạn muốn đạt được. EZDesign sẽ gợi ý hướng đi phù hợp.",
+    "primaryCTA": {
+      "label": "Xem EZD AI Chat",
+      "href": "/ezd-ai-chat/"
+    },
+    "secondaryCTA": {
+      "label": "Xem case Yên AI Chat",
+      "href": "/case-studies/yen-ai-chat/"
+    }
+  }
+}
