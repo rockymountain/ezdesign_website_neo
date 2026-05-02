@@ -173,23 +173,26 @@ const finalSecondaryCTA = pageContent.finalCTA.secondaryCTA as CTA;
               </div>
             </Card>
 
-            <Card padding="lg" class="relative overflow-hidden bg-[var(--ezd-black)] text-white">
+            <Card
+              padding="lg"
+              class="relative overflow-hidden border border-[var(--ezd-border)] bg-[linear-gradient(135deg,rgba(204,251,241,0.38),rgba(239,246,255,0.9))]"
+            >
               <div
-                class="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[var(--ezd-accent)] opacity-20 blur-3xl"
+                class="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[var(--ezd-accent)] opacity-10 blur-3xl"
                 aria-hidden="true"
               >
               </div>
 
               <div class="relative">
-                <p class="text-xs font-black uppercase tracking-[0.22em] text-white/70">
+                <p class="text-xs font-black uppercase tracking-[0.22em] text-[var(--ezd-brand)]">
                   Testimonial placeholder
                 </p>
 
-                <blockquote class="ezd-heading-card mt-5 text-2xl text-white">
+                <blockquote class="ezd-heading-card mt-5 text-2xl text-[var(--ezd-text)] md:text-3xl">
                   “{proofTestimonial.quote}”
                 </blockquote>
 
-                <p class="mt-5 text-sm font-bold text-white/70">
+                <p class="mt-5 text-sm font-bold text-[var(--ezd-text-muted)]">
                   {proofTestimonial.author} — {proofTestimonial.role}
                 </p>
               </div>
