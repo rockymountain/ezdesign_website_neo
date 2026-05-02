@@ -1,0 +1,112 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+import SectionHeader from '../common/SectionHeader.astro';
+import CTASection from '../common/CTASection.astro';
+import Card from '../common/Card.astro';
+import FAQAccordion from '../common/FAQAccordion.astro';
+
+import ARVRHero from '../sections/ARVRHero.astro';
+import ARVRExperienceGrid from '../sections/ARVRExperienceGrid.astro';
+import ARVRUseCaseShowcase from '../sections/ARVRUseCaseShowcase.astro';
+
+import pageContent from '../../data/ar-vr-mr-page.json';
+
+type ServiceEntry = CollectionEntry<'services'>;
+type ServiceFaq = ServiceEntry['data']['faqs'][number];
+
+type Props = {
+  service: ServiceEntry;
+};
+
+const { service } = Astro.props as Props;
+const faqs = (service.data.faqs ?? []) as ServiceFaq[];
+---
+
+<main class="min-h-screen bg-[var(--ezd-bg)] text-[var(--ezd-text)]">
+  <!-- Hero -->
+  <ARVRHero
+    eyebrow={pageContent.hero.eyebrow}
+    title={pageContent.hero.title}
+    description={pageContent.hero.description}
+    primaryCTA={pageContent.hero.primaryCTA}
+    secondaryCTA={pageContent.hero.secondaryCTA}
+  />
+
+  <!-- Experience Types -->
+  <ARVRExperienceGrid
+    eyebrow={pageContent.experiences.eyebrow}
+    title={pageContent.experiences.title}
+    description={pageContent.experiences.description}
+    items={pageContent.experiences.items}
+  />
+
+  <!-- Use Cases -->
+  <ARVRUseCaseShowcase
+    eyebrow={pageContent.useCases.eyebrow}
+    title={pageContent.useCases.title}
+    description={pageContent.useCases.description}
+    items={pageContent.useCases.items}
+  />
+
+  <!-- Process -->
+  <section class="py-20">
+    <div class="ezd-container">
+      <SectionHeader
+        eyebrow={pageContent.process.eyebrow}
+        title={pageContent.process.title}
+        align="center"
+        maxWidth="xl"
+      />
+
+      <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+        {
+          pageContent.process.items.map((item) => (
+            <Card hover padding="lg">
+              <p class="text-xs font-black uppercase tracking-[0.22em] text-[var(--ezd-brand)]">
+                {item.step}
+              </p>
+
+              <h3 class="ezd-heading-card mt-4 text-2xl">
+                {item.title}
+              </h3>
+
+              <p class="ezd-body-small mt-4 text-[var(--ezd-text-muted)]">
+                {item.description}
+              </p>
+            </Card>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  {
+    faqs.length > 0 && (
+      <section class="bg-[var(--ezd-bg-soft)] py-20">
+        <div class="ezd-container">
+          <div class="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+            <SectionHeader
+              eyebrow="FAQ"
+              title="Những câu hỏi thường gặp về AR/VR/MR."
+              description="Một số thông tin nền trước khi bạn trao đổi với EZDesign về hướng trải nghiệm phù hợp."
+              maxWidth="lg"
+            />
+
+            <FAQAccordion items={faqs} />
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <!-- Final CTA -->
+  <CTASection
+    eyebrow={pageContent.finalCTA.eyebrow}
+    title={pageContent.finalCTA.title}
+    description={pageContent.finalCTA.description}
+    primaryCTA={pageContent.finalCTA.primaryCTA}
+    secondaryCTA={pageContent.finalCTA.secondaryCTA}
+  />
+</main>

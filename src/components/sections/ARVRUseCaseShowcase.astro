@@ -1,0 +1,65 @@
+---
+import SectionHeader from '../common/SectionHeader.astro';
+import Card from '../common/Card.astro';
+
+type UseCase = {
+  title: string;
+  description: string;
+};
+
+type Props = {
+  eyebrow: string;
+  title: string;
+  description: string;
+  items: UseCase[];
+};
+
+const { eyebrow, title, description, items } = Astro.props as Props;
+---
+
+<section class="bg-[var(--ezd-bg-soft)] py-20">
+  <div class="ezd-container">
+    <SectionHeader
+      eyebrow={eyebrow}
+      title={title}
+      description={description}
+      maxWidth="xl"
+    />
+
+    <div class="mt-10 grid gap-5 lg:grid-cols-3">
+      {
+        items.map((item: UseCase, index: number) => (
+          <Card hover padding="lg" class="h-full">
+            <div class="rounded-[var(--ezd-radius-2xl)] bg-[linear-gradient(135deg,var(--ezd-brand-soft),var(--ezd-accent-soft))] p-5">
+              <div class="rounded-[var(--ezd-radius-xl)] border border-white/70 bg-white/70 p-5 shadow-[var(--ezd-shadow-sm)]">
+                <div class="flex items-center justify-between gap-4">
+                  <p class="text-xs font-black uppercase tracking-[0.22em] text-[var(--ezd-brand)]">
+                    0{index + 1}
+                  </p>
+
+                  <span class="rounded-full bg-[var(--ezd-brand)] px-3 py-1 text-xs font-black text-white">
+                    Demo
+                  </span>
+                </div>
+
+                <div class="mt-8 flex min-h-32 items-center justify-center">
+                  <div class="flex h-24 w-24 items-center justify-center rounded-full bg-[var(--ezd-brand)] text-2xl font-black text-white shadow-[var(--ezd-shadow-md)]">
+                    XR
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <h3 class="ezd-heading-card mt-6 text-2xl">
+              {item.title}
+            </h3>
+
+            <p class="ezd-body-small mt-4 text-[var(--ezd-text-muted)]">
+              {item.description}
+            </p>
+          </Card>
+        ))
+      }
+    </div>
+  </div>
+</section>

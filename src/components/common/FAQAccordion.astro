@@ -1,0 +1,37 @@
+---
+type FAQItem = {
+  question: string;
+  answer: string;
+};
+
+type Props = {
+  items: FAQItem[];
+};
+
+const { items } = Astro.props as Props;
+---
+
+<div class="grid gap-3">
+  {
+    items.map((faq: FAQItem, index: number) => (
+      <details
+        class="group rounded-[var(--ezd-radius-xl)] border border-[var(--ezd-border)] bg-white p-5 shadow-[var(--ezd-shadow-sm)]"
+        open={index === 0}
+      >
+        <summary class="flex cursor-pointer list-none items-start justify-between gap-5 marker:hidden">
+          <span class="text-base font-black tracking-tight text-[var(--ezd-text)]">
+            {faq.question}
+          </span>
+
+          <span class="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[var(--ezd-brand-soft)] text-sm font-black text-[var(--ezd-brand)] transition group-open:rotate-45">
+            +
+          </span>
+        </summary>
+
+        <p class="ezd-body-small mt-4 text-[var(--ezd-text-muted)]">
+          {faq.answer}
+        </p>
+      </details>
+    ))
+  }
+</div>

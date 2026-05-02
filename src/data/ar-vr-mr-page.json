@@ -1,0 +1,98 @@
+{
+  "hero": {
+    "eyebrow": "Service",
+    "title": "AR/VR/MR giúp thương hiệu tạo trải nghiệm sản phẩm trực quan hơn.",
+    "description": "EZDesign thiết kế các trải nghiệm AR, VR và Mixed Reality giúp khách hàng khám phá sản phẩm, không gian hoặc chiến dịch theo cách dễ hiểu, sinh động và có khả năng tương tác.",
+    "primaryCTA": {
+      "label": "Tư vấn AR/VR demo",
+      "href": "/contact/"
+    },
+    "secondaryCTA": {
+      "label": "Xem ý tưởng WebAR",
+      "href": "/contact/"
+    }
+  },
+  "experiences": {
+    "eyebrow": "Experience Types",
+    "title": "Ba lớp trải nghiệm có thể triển khai theo mục tiêu thương hiệu.",
+    "description": "Tùy ngành, ngân sách và nội dung hiện có, EZDesign có thể chọn hướng AR nhẹ trên web, VR showcase hoặc concept Mixed Reality cho chiến dịch.",
+    "items": [
+      {
+        "label": "AR",
+        "title": "AR Activation",
+        "description": "Khách quét QR hoặc mở link để xem object, sản phẩm hoặc nhân vật 3D ngay trên camera điện thoại.",
+        "detail": "Phù hợp campaign, launch sản phẩm, booth activation và social sharing."
+      },
+      {
+        "label": "VR",
+        "title": "VR Showcase",
+        "description": "Mô phỏng không gian, trải nghiệm tham quan hoặc câu chuyện thương hiệu trong một môi trường immersive.",
+        "detail": "Phù hợp showroom, hospitality, education, exhibition và real estate."
+      },
+      {
+        "label": "MR",
+        "title": "Mixed Reality Concept",
+        "description": "Kết hợp lớp nội dung số với không gian thật để tạo trải nghiệm có chiều sâu hơn cho sản phẩm hoặc sự kiện.",
+        "detail": "Phù hợp những concept cần wow-factor, demo nội bộ hoặc pitch deck."
+      }
+    ]
+  },
+  "useCases": {
+    "eyebrow": "Use Cases",
+    "title": "Một số ứng dụng AR/VR/MR phù hợp với SME và chiến dịch thương hiệu.",
+    "description": "Không phải dự án nào cũng cần triển khai nặng. Nhiều trải nghiệm có thể bắt đầu từ một WebAR demo nhỏ, landing page tương tác hoặc concept showroom ảo.",
+    "items": [
+      {
+        "title": "Product Try-on / Preview",
+        "description": "Cho khách xem sản phẩm trong bối cảnh thật hoặc thử trước một phiên bản visual nhẹ trên mobile."
+      },
+      {
+        "title": "Campaign Activation",
+        "description": "Tạo trải nghiệm quét QR, mở camera, nhận quà hoặc tương tác với nhân vật/sản phẩm trong chiến dịch."
+      },
+      {
+        "title": "Virtual Showroom",
+        "description": "Mô phỏng không gian trưng bày, cửa hàng, homestay, showroom hoặc concept sản phẩm để khách khám phá online."
+      }
+    ]
+  },
+  "process": {
+    "eyebrow": "Process",
+    "title": "Cách EZDesign tiếp cận một dự án AR/VR/MR.",
+    "items": [
+      {
+        "step": "01",
+        "title": "Define the moment",
+        "description": "Xác định khách sẽ tương tác ở đâu: website, QR, booth, social campaign hay sales presentation."
+      },
+      {
+        "step": "02",
+        "title": "Choose the right layer",
+        "description": "Chọn AR nhẹ, VR showcase hoặc MR concept dựa trên mục tiêu, asset hiện có và mức độ phức tạp."
+      },
+      {
+        "step": "03",
+        "title": "Prototype first",
+        "description": "Dựng prototype nhanh để kiểm tra trải nghiệm trước khi đầu tư asset hoặc motion phức tạp."
+      },
+      {
+        "step": "04",
+        "title": "Launch and measure",
+        "description": "Triển khai landing/demo, đo tương tác cơ bản và tối ưu CTA hoặc flow chia sẻ."
+      }
+    ]
+  },
+  "finalCTA": {
+    "eyebrow": "AR/VR/MR Demo",
+    "title": "Bạn muốn biến sản phẩm hoặc không gian thành trải nghiệm có thể tương tác?",
+    "description": "Chia sẻ ý tưởng, ngành hàng và asset hiện có. EZDesign sẽ gợi ý hướng AR/VR/MR phù hợp để bắt đầu gọn, rõ và có khả năng mở rộng.",
+    "primaryCTA": {
+      "label": "Tư vấn AR/VR demo",
+      "href": "/contact/"
+    },
+    "secondaryCTA": {
+      "label": "Xem EZD AI Chat",
+      "href": "/ezd-ai-chat/"
+    }
+  }
+}

@@ -5,7 +5,9 @@ import CTASection from '../../components/common/CTASection.astro';
 import Card from '../../components/common/Card.astro';
 import ButtonLink from '../../components/common/ButtonLink.astro';
 import ServiceVisualPanel from '../../components/sections/ServiceVisualPanel.astro';
+
 import AIBrandCharacterPage from '../../components/pages/AIBrandCharacterPage.astro';
+import ARVRMRPage from '../../components/pages/ARVRMRPage.astro';
 
 import { getCollection, render, type CollectionEntry } from 'astro:content';
 import { buildBreadcrumbSchema, buildServiceSchema } from '../../utils/schema';
@@ -66,6 +68,7 @@ const faqs: ServiceFaq[] = service.data.faqs ?? [];
 const pageUrl = `/services/${service.data.slug}/`;
 
 const isAIBrandCharacter = service.data.slug === 'ai-brand-character';
+const isARVRMR = service.data.slug === 'ar-vr-mr';
 
 const serviceVisualType = (
   [
@@ -112,6 +115,8 @@ const jsonLd = [
   {
     isAIBrandCharacter ? (
       <AIBrandCharacterPage service={service} />
+    ) : isARVRMR ? (
+      <ARVRMRPage service={service} />
     ) : (
       <main class="min-h-screen bg-[var(--ezd-bg)] text-[var(--ezd-text)]">
         <!-- Hero -->

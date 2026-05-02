@@ -1,0 +1,62 @@
+---
+import SectionHeader from '../common/SectionHeader.astro';
+import Card from '../common/Card.astro';
+
+type ExperienceItem = {
+  label: string;
+  title: string;
+  description: string;
+  detail: string;
+};
+
+type Props = {
+  eyebrow: string;
+  title: string;
+  description: string;
+  items: ExperienceItem[];
+};
+
+const { eyebrow, title, description, items } = Astro.props as Props;
+---
+
+<section class="py-20">
+  <div class="ezd-container">
+    <SectionHeader
+      eyebrow={eyebrow}
+      title={title}
+      description={description}
+      align="center"
+      maxWidth="xl"
+    />
+
+    <div class="mt-10 grid gap-5 md:grid-cols-3">
+      {
+        items.map((item: ExperienceItem) => (
+          <Card hover padding="lg">
+            <div class="flex h-20 w-20 items-center justify-center rounded-full bg-[var(--ezd-brand)] text-2xl font-black text-white shadow-[var(--ezd-shadow-md)]">
+              {item.label}
+            </div>
+
+            <h3 class="ezd-heading-card mt-6 text-2xl">
+              {item.title}
+            </h3>
+
+            <p class="ezd-body-small mt-4 text-[var(--ezd-text-muted)]">
+              {item.description}
+            </p>
+
+            <div class="mt-6 rounded-[var(--ezd-radius-xl)] bg-[var(--ezd-bg-soft)] p-4">
+              <p class="text-xs font-black uppercase tracking-[0.18em] text-[var(--ezd-brand)]">
+                Best fit
+              </p>
+
+              <p class="mt-2 text-sm leading-6 text-[var(--ezd-text-muted)]">
+                {item.detail}
+              </p>
+            </div>
+          </Card>
+        ))
+      }
+    </div>
+  </div>
+</section>
