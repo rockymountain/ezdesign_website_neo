@@ -1,0 +1,65 @@
+---
+import SectionHeader from '../common/SectionHeader.astro';
+import Card from '../common/Card.astro';
+
+type UseCase = {
+  title: string;
+  description: string;
+  href: string;
+};
+
+type Props = {
+  eyebrow: string;
+  title: string;
+  description: string;
+  items: UseCase[];
+};
+
+const { eyebrow, title, description, items } = Astro.props as Props;
+---
+
+<section class="py-20">
+  <div class="ezd-container">
+    <SectionHeader
+      eyebrow={eyebrow}
+      title={title}
+      description={description}
+      align="center"
+      maxWidth="xl"
+    />
+
+    <div class="mt-10 grid gap-5 lg:grid-cols-3">
+      {
+        items.map((item: UseCase) => (
+          <a href={item.href} class="block">
+            <Card hover padding="lg" class="h-full">
+              <div class="grid gap-5 md:grid-cols-[0.85fr_1.15fr] md:items-center lg:grid-cols-1">
+                <div class="rounded-[var(--ezd-radius-xl)] bg-[linear-gradient(135deg,var(--ezd-brand-soft),var(--ezd-accent-soft))] p-5">
+                  <div class="mx-auto flex h-32 w-24 items-center justify-center rounded-full bg-white/70 shadow-[var(--ezd-shadow-sm)]">
+                    <div class="flex h-20 w-20 items-center justify-center rounded-full bg-[var(--ezd-brand)] text-2xl font-black text-white">
+                      AI
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <h3 class="ezd-heading-card text-2xl">
+                    {item.title}
+                  </h3>
+
+                  <p class="ezd-body-small mt-3 text-[var(--ezd-text-muted)]">
+                    {item.description}
+                  </p>
+
+                  <p class="mt-5 text-sm font-black text-[var(--ezd-brand)]">
+                    Xem ý tưởng demo →
+                  </p>
+                </div>
+              </div>
+            </Card>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</section>

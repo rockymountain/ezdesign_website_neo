@@ -1,0 +1,191 @@
+---
+import SectionHeader from '../common/SectionHeader.astro';
+import Card from '../common/Card.astro';
+
+type Capability = {
+  title: string;
+  description: string;
+  chatName: string;
+  chatText: string;
+};
+
+type Props = {
+  eyebrow: string;
+  title: string;
+  description: string;
+  items: Capability[];
+};
+
+const { eyebrow, title, description, items } = Astro.props as Props;
+
+const showcaseId = `ai-character-capability-${Math.random().toString(36).slice(2)}`;
+const initialItem = items[0];
+---
+
+<section class="bg-[var(--ezd-bg-soft)] py-20" id={showcaseId}>
+  <div class="ezd-container">
+    <div class="grid gap-10 lg:grid-cols-[0.7fr_1.3fr] lg:items-center">
+      <div>
+        <SectionHeader
+          eyebrow={eyebrow}
+          title={title}
+          description={description}
+          maxWidth="lg"
+        />
+
+        <div class="mt-8 grid gap-3" role="tablist" aria-label="AI Brand Character capabilities">
+          {
+            items.map((item: Capability, index: number) => (
+              <button
+                type="button"
+                class="ai-character-capability-tab ezd-focus-ring rounded-[var(--ezd-radius-xl)] border p-5 text-left transition"
+                data-capability-tab
+                data-index={index}
+                aria-selected={index === 0 ? 'true' : 'false'}
+              >
+                <h3 class="text-base font-black text-[var(--ezd-text)]">
+                  {item.title}
+                </h3>
+
+                <p class="ezd-body-small mt-2 text-[var(--ezd-text-muted)]">
+                  {item.description}
+                </p>
+              </button>
+            ))
+          }
+        </div>
+      </div>
+
+      <Card padding="lg" class="relative overflow-hidden">
+        <div
+          class="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[var(--ezd-accent)] opacity-20 blur-3xl"
+          aria-hidden="true"
+        >
+        </div>
+
+        <div class="relative rounded-[var(--ezd-radius-2xl)] bg-white p-5">
+          <div class="flex min-h-[320px] items-center justify-center rounded-[var(--ezd-radius-xl)] bg-[linear-gradient(135deg,var(--ezd-brand-soft),var(--ezd-accent-soft))] p-6">
+            <div class="text-center">
+              <div class="mx-auto flex h-48 w-32 items-center justify-center rounded-full bg-white/60 shadow-[var(--ezd-shadow-md)]">
+                <div class="flex h-28 w-28 items-center justify-center rounded-full bg-[var(--ezd-brand)] text-4xl font-black text-white">
+                  AI
+                </div>
+              </div>
+
+              <p class="mt-5 text-xs font-black uppercase tracking-[0.22em] text-[var(--ezd-brand)]">
+                Character visual placeholder
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="ai-character-capability-content relative z-10 mx-auto -mt-10 max-w-md rounded-[var(--ezd-radius-xl)] border border-[var(--ezd-border)] bg-white p-5 shadow-[var(--ezd-shadow-md)]"
+            data-capability-content
+          >
+            <div class="flex items-center gap-3">
+              <div class="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--ezd-brand-soft)] text-sm font-black text-[var(--ezd-brand)]">
+                AI
+              </div>
+
+              <div>
+                <p class="text-sm font-black text-[var(--ezd-text)]" data-capability-chat-name>
+                  {initialItem.chatName}
+                </p>
+                <p class="text-xs font-medium text-[var(--ezd-text-soft)]">
+                  Live assistant behavior
+                </p>
+              </div>
+            </div>
+
+            <p class="ezd-body-small mt-4 text-[var(--ezd-text-muted)]" data-capability-chat-text>
+              {initialItem.chatText}
+            </p>
+          </div>
+        </div>
+      </Card>
+    </div>
+  </div>
+
+  <script define:vars={{ showcaseId, items }} is:inline>
+    const root = document.getElementById(showcaseId);
+
+    if (root) {
+      const tabs = Array.from(root.querySelectorAll('[data-capability-tab]'));
+      const content = root.querySelector('[data-capability-content]');
+      const chatName = root.querySelector('[data-capability-chat-name]');
+      const chatText = root.querySelector('[data-capability-chat-text]');
+
+      const setActive = (index) => {
+        const item = items[index];
+
+        if (!item) return;
+
+        tabs.forEach((tab, tabIndex) => {
+          const isActive = tabIndex === index;
+          tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        });
+
+        if (content) {
+          content.classList.add('is-changing');
+
+          window.setTimeout(() => {
+            if (chatName) chatName.textContent = item.chatName;
+            if (chatText) chatText.textContent = item.chatText;
+            content.classList.remove('is-changing');
+          }, 120);
+        }
+      };
+
+      tabs.forEach((tab) => {
+        tab.addEventListener('click', () => {
+          const index = Number(tab.getAttribute('data-index') || '0');
+          setActive(index);
+        });
+      });
+    }
+  </script>
+
+  <style>
+    .ai-character-capability-tab {
+      border-color: var(--ezd-border);
+      background: rgb(255 255 255 / 0.78);
+      box-shadow: var(--ezd-shadow-sm);
+      transition:
+        background-color 0.18s ease,
+        border-color 0.18s ease,
+        box-shadow 0.18s ease,
+        transform 0.18s ease;
+    }
+
+    .ai-character-capability-tab:hover {
+      border-color: var(--ezd-brand);
+      background: #ffffff;
+      box-shadow: var(--ezd-shadow-md);
+      transform: translateY(-1px);
+    }
+
+    .ai-character-capability-tab[aria-selected='true'] {
+      border-color: var(--ezd-brand);
+      background: #ffffff;
+      box-shadow: var(--ezd-shadow-md);
+    }
+
+    .ai-character-capability-tab[aria-selected='true']:hover {
+      border-color: var(--ezd-brand);
+      background: #ffffff;
+      box-shadow: var(--ezd-shadow-md);
+      transform: none;
+    }
+
+    .ai-character-capability-content {
+      transition:
+        opacity 0.18s ease,
+        transform 0.18s ease;
+    }
+
+    .ai-character-capability-content.is-changing {
+      opacity: 0;
+      transform: translateY(0.35rem);
+    }
+  </style>
+</section>

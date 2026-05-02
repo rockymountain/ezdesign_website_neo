@@ -1,0 +1,137 @@
+---
+import ButtonLink from '../common/ButtonLink.astro';
+
+type CTA = {
+  label: string;
+  href: string;
+};
+
+type Props = {
+  eyebrow: string;
+  title: string;
+  description: string;
+  primaryCTA: CTA;
+  secondaryCTA: CTA;
+  characterName: string;
+  characterRole: string;
+  chatText: string;
+};
+
+const {
+  eyebrow,
+  title,
+  description,
+  primaryCTA,
+  secondaryCTA,
+  characterName,
+  characterRole,
+  chatText,
+} = Astro.props as Props;
+---
+
+<section class="ezd-brand-gradient relative overflow-hidden py-20 text-white md:py-24">
+  <div
+    class="pointer-events-none absolute inset-0 opacity-25"
+    aria-hidden="true"
+    style="background-image: linear-gradient(rgba(255,255,255,.10) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.10) 1px, transparent 1px); background-size: 56px 56px;"
+  >
+  </div>
+
+  <div
+    class="pointer-events-none absolute -bottom-24 left-12 h-80 w-80 rounded-full border border-white/20"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div class="ezd-container relative">
+    <div class="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+      <div>
+        <p class="ezd-eyebrow-inverse">
+          {eyebrow}
+        </p>
+
+        <h1 class="ezd-heading-hero mt-5 max-w-4xl text-4xl md:text-6xl">
+          {title}
+        </h1>
+
+        <p class="ezd-body-large mt-6 max-w-2xl text-white/80">
+          {description}
+        </p>
+
+        <div class="mt-8 flex flex-wrap gap-3">
+          <ButtonLink
+            href={primaryCTA.href}
+            label={primaryCTA.label}
+            variant="light"
+            size="lg"
+          />
+
+          <ButtonLink
+            href={secondaryCTA.href}
+            label={secondaryCTA.label}
+            variant="secondary"
+            size="lg"
+            class="border-white/30 bg-white/10 text-white hover:bg-white/20"
+          />
+        </div>
+      </div>
+
+      <div class="relative rounded-[var(--ezd-radius-2xl)] border border-white/20 bg-white p-5 text-[var(--ezd-text)] shadow-[var(--ezd-shadow-lg)]">
+        <div
+          class="pointer-events-none absolute -right-14 -top-14 h-48 w-48 rounded-full bg-[var(--ezd-accent)] opacity-25 blur-3xl"
+          aria-hidden="true"
+        >
+        </div>
+
+        <div class="relative rounded-[calc(var(--ezd-radius-2xl)-0.5rem)] bg-[var(--ezd-bg-soft)] p-5">
+          <p class="text-xs font-black uppercase tracking-[0.22em] text-[var(--ezd-brand)]">
+            Character Preview
+          </p>
+
+          <div class="mt-5 flex flex-col gap-5 md:flex-row md:items-center">
+            <div class="mx-auto flex h-36 w-36 shrink-0 items-center justify-center rounded-full bg-[var(--ezd-brand)] text-4xl font-black text-white shadow-[var(--ezd-shadow-md)]">
+              AI
+            </div>
+
+            <div class="flex-1">
+              <h2 class="ezd-heading-card text-2xl">
+                {characterName}
+              </h2>
+
+              <p class="mt-1 text-sm font-black text-[var(--ezd-brand)]">
+                {characterRole}
+              </p>
+
+              <div class="mt-4 rounded-2xl bg-white px-4 py-3 text-sm leading-6 text-[var(--ezd-text-muted)] shadow-[var(--ezd-shadow-sm)]">
+                {chatText}
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-5 grid gap-3 sm:grid-cols-3">
+            <div class="rounded-[var(--ezd-radius-lg)] bg-white p-3 shadow-[var(--ezd-shadow-sm)]">
+              <p class="text-xs font-black uppercase tracking-[0.18em] text-[var(--ezd-text-soft)]">
+                Voice
+              </p>
+              <p class="mt-1 text-sm font-bold">On-brand</p>
+            </div>
+
+            <div class="rounded-[var(--ezd-radius-lg)] bg-white p-3 shadow-[var(--ezd-shadow-sm)]">
+              <p class="text-xs font-black uppercase tracking-[0.18em] text-[var(--ezd-text-soft)]">
+                Role
+              </p>
+              <p class="mt-1 text-sm font-bold">Tư vấn</p>
+            </div>
+
+            <div class="rounded-[var(--ezd-radius-lg)] bg-white p-3 shadow-[var(--ezd-shadow-sm)]">
+              <p class="text-xs font-black uppercase tracking-[0.18em] text-[var(--ezd-text-soft)]">
+                Visual
+              </p>
+              <p class="mt-1 text-sm font-bold">Custom</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,66 @@
+---
+import SectionHeader from '../common/SectionHeader.astro';
+import Card from '../common/Card.astro';
+
+type RelatedService = {
+  title: string;
+  description: string;
+  href: string;
+  tag?: string;
+};
+
+type Props = {
+  eyebrow: string;
+  title: string;
+  items: RelatedService[];
+};
+
+const { eyebrow, title, items } = Astro.props as Props;
+---
+
+<section class="py-20">
+  <div class="ezd-container">
+    <SectionHeader
+      eyebrow={eyebrow}
+      title={title}
+      maxWidth="lg"
+    />
+
+    <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+      {
+        items.map((item: RelatedService) => {
+          const isCurrent = item.tag === 'Current';
+
+          return (
+            <a href={item.href} class="block">
+              <Card
+                hover={!isCurrent}
+                padding="lg"
+                class:list={[
+                  'h-full',
+                  isCurrent ? 'border-[var(--ezd-brand)] shadow-[var(--ezd-shadow-md)]' : '',
+                ]}
+              >
+                <p class="text-xs font-black uppercase tracking-[0.22em] text-[var(--ezd-brand)]">
+                  {item.tag || 'Service'}
+                </p>
+
+                <h3 class="ezd-heading-card mt-4 text-2xl">
+                  {item.title}
+                </h3>
+
+                <p class="ezd-body-small mt-4 text-[var(--ezd-text-muted)]">
+                  {item.description}
+                </p>
+
+                <p class="mt-6 text-sm font-black text-[var(--ezd-brand)]">
+                  {isCurrent ? 'Đang xem' : 'Xem chi tiết →'}
+                </p>
+              </Card>
+            </a>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>

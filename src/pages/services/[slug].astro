@@ -5,6 +5,7 @@ import CTASection from '../../components/common/CTASection.astro';
 import Card from '../../components/common/Card.astro';
 import ButtonLink from '../../components/common/ButtonLink.astro';
 import ServiceVisualPanel from '../../components/sections/ServiceVisualPanel.astro';
+import AIBrandCharacterPage from '../../components/pages/AIBrandCharacterPage.astro';
 
 import { getCollection, render, type CollectionEntry } from 'astro:content';
 import { buildBreadcrumbSchema, buildServiceSchema } from '../../utils/schema';
@@ -64,6 +65,8 @@ const faqs: ServiceFaq[] = service.data.faqs ?? [];
 
 const pageUrl = `/services/${service.data.slug}/`;
 
+const isAIBrandCharacter = service.data.slug === 'ai-brand-character';
+
 const serviceVisualType = (
   [
     'ai-brand-character',
@@ -106,282 +109,288 @@ const jsonLd = [
   ogImage={pageOgImage}
   jsonLd={jsonLd}
 >
-  <main class="min-h-screen bg-[var(--ezd-bg)] text-[var(--ezd-text)]">
-    <!-- Hero -->
-    <section class="relative overflow-hidden border-b border-[var(--ezd-border)] bg-[var(--ezd-bg-soft)] py-20">
-      <div
-        class="pointer-events-none absolute -right-24 top-10 h-72 w-72 rounded-full bg-[var(--ezd-accent)] opacity-20 blur-3xl"
-        aria-hidden="true"
-      >
-      </div>
-
-      <div
-        class="pointer-events-none absolute -left-24 bottom-0 h-72 w-72 rounded-full bg-[var(--ezd-brand)] opacity-10 blur-3xl"
-        aria-hidden="true"
-      >
-      </div>
-
-      <div class="ezd-container relative">
-        <div class="grid gap-10 lg:grid-cols-[1fr_0.92fr] lg:items-center">
-          <div>
-            <p class="ezd-eyebrow">
-              {eyebrow}
-            </p>
-
-            <h1 class="ezd-heading-hero mt-5 max-w-4xl text-4xl md:text-6xl">
-              {heroTitle}
-            </h1>
-
-            <p class="ezd-body-large mt-6 max-w-2xl text-[var(--ezd-text-muted)]">
-              {heroDescription}
-            </p>
-
-            <div class="mt-8 flex flex-wrap gap-3">
-              <ButtonLink
-                href="/contact/"
-                label="Đặt lịch demo"
-                variant="primary"
-                size="lg"
-              />
-
-              <ButtonLink
-                href="/ezd-ai-chat/"
-                label="Xem EZD AI Chat"
-                variant="secondary"
-                size="lg"
-              />
-            </div>
+  {
+    isAIBrandCharacter ? (
+      <AIBrandCharacterPage service={service} />
+    ) : (
+      <main class="min-h-screen bg-[var(--ezd-bg)] text-[var(--ezd-text)]">
+        <!-- Hero -->
+        <section class="relative overflow-hidden border-b border-[var(--ezd-border)] bg-[var(--ezd-bg-soft)] py-20">
+          <div
+            class="pointer-events-none absolute -right-24 top-10 h-72 w-72 rounded-full bg-[var(--ezd-accent)] opacity-20 blur-3xl"
+            aria-hidden="true"
+          >
           </div>
 
-          <ServiceVisualPanel
-            type={serviceVisualType}
-            title={title}
-            description={excerpt}
-          />
-        </div>
-      </div>
-    </section>
-
-    <!-- Overview / MDX Content -->
-    <section class="py-20">
-      <div class="ezd-container">
-        <div class="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
-          <SectionHeader
-            eyebrow="Overview"
-            title="Dịch vụ này giúp thương hiệu tạo một điểm chạm số rõ ràng hơn."
-            description="Mỗi giải pháp của EZDesign được thiết kế để vừa đẹp, vừa dễ hiểu, vừa hướng khách hàng tới hành động phù hợp."
-            maxWidth="lg"
-          />
-
-          <Card padding="lg">
-            <article class="ezd-body text-[var(--ezd-text-muted)]">
-              <Content />
-            </article>
-          </Card>
-        </div>
-      </div>
-    </section>
-
-    <!-- Problems -->
-    {
-      problems.length > 0 && (
-        <section class="bg-[var(--ezd-bg-soft)] py-20">
-          <div class="ezd-container">
-            <SectionHeader
-              eyebrow="Problems"
-              title="Những vấn đề dịch vụ này thường giải quyết."
-              description="Các vấn đề dưới đây là lý do nhiều thương hiệu cần một điểm chạm số được thiết kế có chủ đích hơn."
-              maxWidth="lg"
-            />
-
-            <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-              {problems.map((problem: string, index: number) => (
-                <Card hover padding="lg">
-                  <p class="text-xs font-black uppercase tracking-[0.22em] text-[var(--ezd-brand)]">
-                    0{index + 1}
-                  </p>
-
-                  <p class="ezd-body-small mt-4 text-[var(--ezd-text-muted)]">
-                    {problem}
-                  </p>
-                </Card>
-              ))}
-            </div>
+          <div
+            class="pointer-events-none absolute -left-24 bottom-0 h-72 w-72 rounded-full bg-[var(--ezd-brand)] opacity-10 blur-3xl"
+            aria-hidden="true"
+          >
           </div>
-        </section>
-      )
-    }
 
-    <!-- Features -->
-    {
-      features.length > 0 && (
-        <section class="py-20">
-          <div class="ezd-container">
-            <SectionHeader
-              eyebrow="Features"
-              title="Các thành phần chính trong giải pháp."
-              description="EZDesign tập trung vào các phần tạo ra trải nghiệm rõ ràng, dễ dùng và có khả năng hỗ trợ chuyển đổi."
-              maxWidth="lg"
-            />
+          <div class="ezd-container relative">
+            <div class="grid gap-10 lg:grid-cols-[1fr_0.92fr] lg:items-center">
+              <div>
+                <p class="ezd-eyebrow">
+                  {eyebrow}
+                </p>
 
-            <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-              {features.map((feature: ServiceFeature) => (
-                <Card hover padding="lg">
-                  <h3 class="ezd-heading-card text-2xl">
-                    {feature.title}
-                  </h3>
+                <h1 class="ezd-heading-hero mt-5 max-w-4xl text-4xl md:text-6xl">
+                  {heroTitle}
+                </h1>
 
-                  <p class="ezd-body-small mt-4 text-[var(--ezd-text-muted)]">
-                    {feature.description}
-                  </p>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-      )
-    }
+                <p class="ezd-body-large mt-6 max-w-2xl text-[var(--ezd-text-muted)]">
+                  {heroDescription}
+                </p>
 
-    <!-- Use Cases -->
-    {
-      useCases.length > 0 && (
-        <section class="bg-[var(--ezd-bg-soft)] py-20">
-          <div class="ezd-container">
-            <SectionHeader
-              eyebrow="Use Cases"
-              title="Một số trường hợp ứng dụng phù hợp."
-              description="Dịch vụ có thể được điều chỉnh theo từng ngành, từng chiến dịch hoặc từng mục tiêu trải nghiệm."
-              maxWidth="lg"
-            />
+                <div class="mt-8 flex flex-wrap gap-3">
+                  <ButtonLink
+                    href="/contact/"
+                    label="Đặt lịch demo"
+                    variant="primary"
+                    size="lg"
+                  />
 
-            <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-              {useCases.map((useCase: ServiceUseCase) => (
-                <Card hover padding="lg">
-                  <p class="text-xs font-black uppercase tracking-[0.22em] text-[var(--ezd-brand)]">
-                    Use Case
-                  </p>
-
-                  <h3 class="ezd-heading-card mt-4 text-2xl">
-                    {useCase.title}
-                  </h3>
-
-                  <p class="ezd-body-small mt-4 text-[var(--ezd-text-muted)]">
-                    {useCase.description}
-                  </p>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-      )
-    }
-
-    <!-- Related Case Study -->
-    {
-      relatedCaseStudy && (
-        <section class="py-20">
-          <div class="ezd-container">
-            <Card padding="lg" class="relative overflow-hidden">
-              <div
-                class="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[var(--ezd-accent)] opacity-20 blur-3xl"
-                aria-hidden="true"
-              >
-              </div>
-
-              <div class="relative grid gap-10 lg:grid-cols-[1fr_0.8fr] lg:items-center">
-                <div>
-                  <p class="ezd-eyebrow">
-                    Related Case Study
-                  </p>
-
-                  <h2 class="ezd-heading-section mt-4 text-3xl md:text-5xl">
-                    Xem cách giải pháp được áp dụng trong một case thực tế.
-                  </h2>
-
-                  <p class="ezd-body-large mt-5 max-w-2xl text-[var(--ezd-text-muted)]">
-                    Case study giúp bạn hình dung rõ hơn cách EZDesign biến ý tưởng thành một điểm chạm số có khả năng hỗ trợ khách hàng.
-                  </p>
-
-                  <div class="mt-8">
-                    <ButtonLink
-                      href={relatedCaseStudy.href}
-                      label={relatedCaseStudy.title}
-                      variant="secondary"
-                      size="lg"
-                    />
-                  </div>
-                </div>
-
-                <div class="rounded-[var(--ezd-radius-2xl)] bg-[var(--ezd-bg-soft)] p-6">
-                  <p class="text-xs font-black uppercase tracking-[0.22em] text-[var(--ezd-brand)]">
-                    Case Preview
-                  </p>
-
-                  <div class="mt-5 space-y-4">
-                    <div class="max-w-[86%] rounded-2xl bg-white px-4 py-3 text-sm leading-6 text-[var(--ezd-text-muted)] shadow-[var(--ezd-shadow-sm)]">
-                      Khách truy cập cần được tư vấn nhanh hơn?
-                    </div>
-
-                    <div class="ml-auto max-w-[86%] rounded-2xl bg-[var(--ezd-brand)] px-4 py-3 text-sm leading-6 text-white shadow-[var(--ezd-shadow-sm)]">
-                      Tôi muốn xem cách EZDesign triển khai thực tế.
-                    </div>
-
-                    <div class="max-w-[86%] rounded-2xl bg-white px-4 py-3 text-sm leading-6 text-[var(--ezd-text-muted)] shadow-[var(--ezd-shadow-sm)]">
-                      Case study sẽ cho bạn thấy flow, guardrail và điểm chuyển đổi được thiết kế như thế nào.
-                    </div>
-                  </div>
+                  <ButtonLink
+                    href="/ezd-ai-chat/"
+                    label="Xem EZD AI Chat"
+                    variant="secondary"
+                    size="lg"
+                  />
                 </div>
               </div>
-            </Card>
-          </div>
-        </section>
-      )
-    }
 
-    <!-- FAQ -->
-    {
-      faqs.length > 0 && (
-        <section class="bg-[var(--ezd-bg-soft)] py-20">
-          <div class="ezd-container">
-            <SectionHeader
-              eyebrow="FAQ"
-              title="Những câu hỏi thường gặp."
-              description="Một số thông tin nền trước khi bạn trao đổi với EZDesign về dịch vụ này."
-              align="center"
-              maxWidth="lg"
-            />
-
-            <div class="mt-10 grid gap-4 md:grid-cols-2">
-              {faqs.map((faq: ServiceFaq) => (
-                <Card hover>
-                  <h3 class="text-base font-black tracking-tight">
-                    {faq.question}
-                  </h3>
-
-                  <p class="ezd-body-small mt-3 text-[var(--ezd-text-muted)]">
-                    {faq.answer}
-                  </p>
-                </Card>
-              ))}
+              <ServiceVisualPanel
+                type={serviceVisualType}
+                title={title}
+                description={excerpt}
+              />
             </div>
           </div>
         </section>
-      )
-    }
 
-    <!-- Final CTA -->
-    <CTASection
-      eyebrow="Start"
-      title="Muốn triển khai một điểm chạm số phù hợp với thương hiệu của bạn?"
-      description="Đặt lịch demo để EZDesign tư vấn giải pháp, scope triển khai và hướng nội dung phù hợp với ngành của bạn."
-      primaryCTA={{
-        label: 'Đặt lịch demo',
-        href: '/contact/',
-      }}
-      secondaryCTA={{
-        label: 'Xem EZD AI Chat',
-        href: '/ezd-ai-chat/',
-      }}
-    />
-  </main>
+        <!-- Overview / MDX Content -->
+        <section class="py-20">
+          <div class="ezd-container">
+            <div class="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+              <SectionHeader
+                eyebrow="Overview"
+                title="Dịch vụ này giúp thương hiệu tạo một điểm chạm số rõ ràng hơn."
+                description="Mỗi giải pháp của EZDesign được thiết kế để vừa đẹp, vừa dễ hiểu, vừa hướng khách hàng tới hành động phù hợp."
+                maxWidth="lg"
+              />
+
+              <Card padding="lg">
+                <article class="ezd-body text-[var(--ezd-text-muted)]">
+                  <Content />
+                </article>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+        <!-- Problems -->
+        {
+          problems.length > 0 && (
+            <section class="bg-[var(--ezd-bg-soft)] py-20">
+              <div class="ezd-container">
+                <SectionHeader
+                  eyebrow="Problems"
+                  title="Những vấn đề dịch vụ này thường giải quyết."
+                  description="Các vấn đề dưới đây là lý do nhiều thương hiệu cần một điểm chạm số được thiết kế có chủ đích hơn."
+                  maxWidth="lg"
+                />
+
+                <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+                  {problems.map((problem: string, index: number) => (
+                    <Card hover padding="lg">
+                      <p class="text-xs font-black uppercase tracking-[0.22em] text-[var(--ezd-brand)]">
+                        0{index + 1}
+                      </p>
+
+                      <p class="ezd-body-small mt-4 text-[var(--ezd-text-muted)]">
+                        {problem}
+                      </p>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </section>
+          )
+        }
+
+        <!-- Features -->
+        {
+          features.length > 0 && (
+            <section class="py-20">
+              <div class="ezd-container">
+                <SectionHeader
+                  eyebrow="Features"
+                  title="Các thành phần chính trong giải pháp."
+                  description="EZDesign tập trung vào các phần tạo ra trải nghiệm rõ ràng, dễ dùng và có khả năng hỗ trợ chuyển đổi."
+                  maxWidth="lg"
+                />
+
+                <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+                  {features.map((feature: ServiceFeature) => (
+                    <Card hover padding="lg">
+                      <h3 class="ezd-heading-card text-2xl">
+                        {feature.title}
+                      </h3>
+
+                      <p class="ezd-body-small mt-4 text-[var(--ezd-text-muted)]">
+                        {feature.description}
+                      </p>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </section>
+          )
+        }
+
+        <!-- Use Cases -->
+        {
+          useCases.length > 0 && (
+            <section class="bg-[var(--ezd-bg-soft)] py-20">
+              <div class="ezd-container">
+                <SectionHeader
+                  eyebrow="Use Cases"
+                  title="Một số trường hợp ứng dụng phù hợp."
+                  description="Dịch vụ có thể được điều chỉnh theo từng ngành, từng chiến dịch hoặc từng mục tiêu trải nghiệm."
+                  maxWidth="lg"
+                />
+
+                <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+                  {useCases.map((useCase: ServiceUseCase) => (
+                    <Card hover padding="lg">
+                      <p class="text-xs font-black uppercase tracking-[0.22em] text-[var(--ezd-brand)]">
+                        Use Case
+                      </p>
+
+                      <h3 class="ezd-heading-card mt-4 text-2xl">
+                        {useCase.title}
+                      </h3>
+
+                      <p class="ezd-body-small mt-4 text-[var(--ezd-text-muted)]">
+                        {useCase.description}
+                      </p>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </section>
+          )
+        }
+
+        <!-- Related Case Study -->
+        {
+          relatedCaseStudy && (
+            <section class="py-20">
+              <div class="ezd-container">
+                <Card padding="lg" class="relative overflow-hidden">
+                  <div
+                    class="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[var(--ezd-accent)] opacity-20 blur-3xl"
+                    aria-hidden="true"
+                  >
+                  </div>
+
+                  <div class="relative grid gap-10 lg:grid-cols-[1fr_0.8fr] lg:items-center">
+                    <div>
+                      <p class="ezd-eyebrow">
+                        Related Case Study
+                      </p>
+
+                      <h2 class="ezd-heading-section mt-4 text-3xl md:text-5xl">
+                        Xem cách giải pháp được áp dụng trong một case thực tế.
+                      </h2>
+
+                      <p class="ezd-body-large mt-5 max-w-2xl text-[var(--ezd-text-muted)]">
+                        Case study giúp bạn hình dung rõ hơn cách EZDesign biến ý tưởng thành một điểm chạm số có khả năng hỗ trợ khách hàng.
+                      </p>
+
+                      <div class="mt-8">
+                        <ButtonLink
+                          href={relatedCaseStudy.href}
+                          label={relatedCaseStudy.title}
+                          variant="secondary"
+                          size="lg"
+                        />
+                      </div>
+                    </div>
+
+                    <div class="rounded-[var(--ezd-radius-2xl)] bg-[var(--ezd-bg-soft)] p-6">
+                      <p class="text-xs font-black uppercase tracking-[0.22em] text-[var(--ezd-brand)]">
+                        Case Preview
+                      </p>
+
+                      <div class="mt-5 space-y-4">
+                        <div class="max-w-[86%] rounded-2xl bg-white px-4 py-3 text-sm leading-6 text-[var(--ezd-text-muted)] shadow-[var(--ezd-shadow-sm)]">
+                          Khách truy cập cần được tư vấn nhanh hơn?
+                        </div>
+
+                        <div class="ml-auto max-w-[86%] rounded-2xl bg-[var(--ezd-brand)] px-4 py-3 text-sm leading-6 text-white shadow-[var(--ezd-shadow-sm)]">
+                          Tôi muốn xem cách EZDesign triển khai thực tế.
+                        </div>
+
+                        <div class="max-w-[86%] rounded-2xl bg-white px-4 py-3 text-sm leading-6 text-[var(--ezd-text-muted)] shadow-[var(--ezd-shadow-sm)]">
+                          Case study sẽ cho bạn thấy flow, guardrail và điểm chuyển đổi được thiết kế như thế nào.
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </Card>
+              </div>
+            </section>
+          )
+        }
+
+        <!-- FAQ -->
+        {
+          faqs.length > 0 && (
+            <section class="bg-[var(--ezd-bg-soft)] py-20">
+              <div class="ezd-container">
+                <SectionHeader
+                  eyebrow="FAQ"
+                  title="Những câu hỏi thường gặp."
+                  description="Một số thông tin nền trước khi bạn trao đổi với EZDesign về dịch vụ này."
+                  align="center"
+                  maxWidth="lg"
+                />
+
+                <div class="mt-10 grid gap-4 md:grid-cols-2">
+                  {faqs.map((faq: ServiceFaq) => (
+                    <Card hover>
+                      <h3 class="text-base font-black tracking-tight">
+                        {faq.question}
+                      </h3>
+
+                      <p class="ezd-body-small mt-3 text-[var(--ezd-text-muted)]">
+                        {faq.answer}
+                      </p>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+            </section>
+          )
+        }
+
+        <!-- Final CTA -->
+        <CTASection
+          eyebrow="Start"
+          title="Muốn triển khai một điểm chạm số phù hợp với thương hiệu của bạn?"
+          description="Đặt lịch demo để EZDesign tư vấn giải pháp, scope triển khai và hướng nội dung phù hợp với ngành của bạn."
+          primaryCTA={{
+            label: 'Đặt lịch demo',
+            href: '/contact/',
+          }}
+          secondaryCTA={{
+            label: 'Xem EZD AI Chat',
+            href: '/ezd-ai-chat/',
+          }}
+        />
+      </main>
+    )
+  }
 </BaseLayout>

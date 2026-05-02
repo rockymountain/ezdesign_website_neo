@@ -1,0 +1,75 @@
+---
+import ButtonLink from '../common/ButtonLink.astro';
+import Card from '../common/Card.astro';
+
+type CTA = {
+  label: string;
+  href: string;
+};
+
+type Props = {
+  eyebrow: string;
+  title: string;
+  description: string;
+  primaryCTA: CTA;
+};
+
+const { eyebrow, title, description, primaryCTA } = Astro.props as Props;
+---
+
+<section class="bg-[var(--ezd-bg-soft)] py-20">
+  <div class="ezd-container">
+    <Card padding="lg" class="relative overflow-hidden">
+      <div
+        class="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[var(--ezd-accent)] opacity-20 blur-3xl"
+        aria-hidden="true"
+      >
+      </div>
+
+      <div class="relative grid gap-10 lg:grid-cols-[1fr_0.82fr] lg:items-center">
+        <div>
+          <p class="ezd-eyebrow">
+            {eyebrow}
+          </p>
+
+          <h2 class="ezd-heading-section mt-4 text-3xl md:text-5xl">
+            {title}
+          </h2>
+
+          <p class="ezd-body-large mt-5 max-w-2xl text-[var(--ezd-text-muted)]">
+            {description}
+          </p>
+
+          <div class="mt-8">
+            <ButtonLink
+              href={primaryCTA.href}
+              label={primaryCTA.label}
+              variant="primary"
+              size="lg"
+            />
+          </div>
+        </div>
+
+        <div class="rounded-[var(--ezd-radius-2xl)] bg-[var(--ezd-bg-soft)] p-6">
+          <p class="text-xs font-black uppercase tracking-[0.22em] text-[var(--ezd-brand)]">
+            Yên AI Chat
+          </p>
+
+          <div class="mt-5 space-y-4">
+            <div class="max-w-[86%] rounded-2xl bg-white px-4 py-3 text-sm leading-6 text-[var(--ezd-text-muted)] shadow-[var(--ezd-shadow-sm)]">
+              Khách hỏi về phòng, giá, đường đi hoặc đặt lịch?
+            </div>
+
+            <div class="ml-auto max-w-[86%] rounded-2xl bg-[var(--ezd-brand)] px-4 py-3 text-sm leading-6 text-white shadow-[var(--ezd-shadow-sm)]">
+              Mình muốn hỏi lịch còn phòng cuối tuần này.
+            </div>
+
+            <div class="max-w-[86%] rounded-2xl bg-white px-4 py-3 text-sm leading-6 text-[var(--ezd-text-muted)] shadow-[var(--ezd-shadow-sm)]">
+              Yên có thể hỗ trợ kiểm tra nhu cầu và chuyển bạn sang Zalo để team xác nhận nhanh hơn.
+            </div>
+          </div>
+        </div>
+      </div>
+    </Card>
+  </div>
+</section>

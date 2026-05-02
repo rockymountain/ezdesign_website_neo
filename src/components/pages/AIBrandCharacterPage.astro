@@ -1,0 +1,144 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+import SectionHeader from '../common/SectionHeader.astro';
+import CTASection from '../common/CTASection.astro';
+import Card from '../common/Card.astro';
+
+import AICharacterHero from '../sections/AICharacterHero.astro';
+import AICharacterCapabilityShowcase from '../sections/AICharacterCapabilityShowcase.astro';
+import AICharacterUseCases from '../sections/AICharacterUseCases.astro';
+import AICharacterCaseBanner from '../sections/AICharacterCaseBanner.astro';
+import RelatedServicesGrid from '../sections/RelatedServicesGrid.astro';
+
+import pageContent from '../../data/ai-brand-character-page.json';
+
+type ServiceEntry = CollectionEntry<'services'>;
+type ServiceFaq = ServiceEntry['data']['faqs'][number];
+
+type Props = {
+  service: ServiceEntry;
+};
+
+const { service } = Astro.props as Props;
+
+const faqs = (service.data.faqs ?? []) as ServiceFaq[];
+---
+
+<main class="min-h-screen bg-[var(--ezd-bg)] text-[var(--ezd-text)]">
+  <!-- Hero -->
+  <AICharacterHero
+    eyebrow={pageContent.hero.eyebrow}
+    title={pageContent.hero.title}
+    description={pageContent.hero.description}
+    primaryCTA={pageContent.hero.primaryCTA}
+    secondaryCTA={pageContent.hero.secondaryCTA}
+    characterName={pageContent.hero.characterName}
+    characterRole={pageContent.hero.characterRole}
+    chatText={pageContent.hero.chatText}
+  />
+
+  <!-- Problems -->
+  <section class="py-20">
+    <div class="ezd-container">
+      <SectionHeader
+        eyebrow={pageContent.problems.eyebrow}
+        title={pageContent.problems.title}
+        description={pageContent.problems.description}
+        align="center"
+        maxWidth="xl"
+      />
+
+      <div class="mt-10 grid gap-5 md:grid-cols-3">
+        {
+          pageContent.problems.items.map((problem, index: number) => (
+            <Card hover padding="lg">
+              <p class="text-xs font-black uppercase tracking-[0.22em] text-[var(--ezd-brand)]">
+                0{index + 1}
+              </p>
+
+              <h3 class="ezd-heading-card mt-4 text-2xl">
+                {problem.title}
+              </h3>
+
+              <p class="ezd-body-small mt-4 text-[var(--ezd-text-muted)]">
+                {problem.description}
+              </p>
+            </Card>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Capabilities -->
+  <AICharacterCapabilityShowcase
+    eyebrow={pageContent.capabilities.eyebrow}
+    title={pageContent.capabilities.title}
+    description={pageContent.capabilities.description}
+    items={pageContent.capabilities.items}
+  />
+
+  <!-- Use Cases -->
+  <AICharacterUseCases
+    eyebrow={pageContent.useCases.eyebrow}
+    title={pageContent.useCases.title}
+    description={pageContent.useCases.description}
+    items={pageContent.useCases.items}
+  />
+
+  <!-- Case Study / Social Proof -->
+  <AICharacterCaseBanner
+    eyebrow={pageContent.caseStudy.eyebrow}
+    title={pageContent.caseStudy.title}
+    description={pageContent.caseStudy.description}
+    primaryCTA={pageContent.caseStudy.primaryCTA}
+  />
+
+  <!-- FAQ -->
+  {
+    faqs.length > 0 && (
+      <section class="py-20">
+        <div class="ezd-container">
+          <SectionHeader
+            eyebrow="FAQ"
+            title="Những câu hỏi thường gặp."
+            description="Một số thông tin nền trước khi bạn trao đổi với EZDesign về AI Brand Character."
+            align="center"
+            maxWidth="lg"
+          />
+
+          <div class="mt-10 grid gap-4 md:grid-cols-2">
+            {faqs.map((faq: ServiceFaq) => (
+              <Card hover>
+                <h3 class="text-base font-black tracking-tight">
+                  {faq.question}
+                </h3>
+
+                <p class="ezd-body-small mt-3 text-[var(--ezd-text-muted)]">
+                  {faq.answer}
+                </p>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <!-- Related Services -->
+  <RelatedServicesGrid
+    eyebrow={pageContent.relatedServices.eyebrow}
+    title={pageContent.relatedServices.title}
+    items={pageContent.relatedServices.items}
+  />
+
+  <!-- Final CTA -->
+  <CTASection
+    eyebrow={pageContent.finalCTA.eyebrow}
+    title={pageContent.finalCTA.title}
+    description={pageContent.finalCTA.description}
+    primaryCTA={pageContent.finalCTA.primaryCTA}
+    secondaryCTA={pageContent.finalCTA.secondaryCTA}
+  />
+</main>

@@ -1,0 +1,148 @@
+{
+  "hero": {
+    "eyebrow": "Service",
+    "title": "AI Brand Character cho thương hiệu muốn có giọng nói riêng.",
+    "description": "EZDesign thiết kế nhân vật AI có tên, vai trò, cách xưng hô, tính cách và visual identity phù hợp với ngành, thương hiệu và hành trình khách hàng.",
+    "primaryCTA": {
+      "label": "Đặt lịch demo",
+      "href": "/contact/"
+    },
+    "secondaryCTA": {
+      "label": "Xem AI demo",
+      "href": "/ezd-ai-chat/#live-demo"
+    },
+    "characterName": "Anna",
+    "characterRole": "Tư vấn viên AI",
+    "chatText": "Xin chào, mình là Anna. Mình có thể tư vấn dịch vụ theo giọng thương hiệu của bạn và chuyển khách sang người thật khi cần."
+  },
+  "problems": {
+    "eyebrow": "Vấn đề",
+    "title": "Vì sao chatbot cần có cá tính thương hiệu?",
+    "description": "Chatbot truyền thống thường trả lời được câu hỏi, nhưng khó tạo cảm giác thân thiện và khác biệt cho SME B2C.",
+    "items": [
+      {
+        "title": "Thiếu giọng thương hiệu",
+        "description": "Khách nhận được câu trả lời đúng, nhưng không cảm thấy đó là thương hiệu của bạn."
+      },
+      {
+        "title": "Dễ tạo cảm giác máy móc",
+        "description": "Các câu trả lời khô cứng làm trải nghiệm tư vấn thiếu sự gần gũi và tin cậy."
+      },
+      {
+        "title": "Không có nhân vật để ghi nhớ",
+        "description": "Website mất cơ hội tạo một điểm chạm nhận diện có thể lặp lại trong hành trình khách hàng."
+      }
+    ]
+  },
+  "capabilities": {
+    "eyebrow": "Capabilities",
+    "title": "Năng lực triển khai",
+    "description": "EZDesign không chỉ cấu hình chatbot, mà thiết kế một nhân vật AI có vai trò, giọng nói và visual direction rõ ràng.",
+    "items": [
+      {
+        "title": "Character persona",
+        "description": "Xác định tên, vai trò, xưng hô, tính cách và giới hạn hành vi của nhân vật AI.",
+        "chatName": "Anna — Tư vấn viên",
+        "chatText": "Tuyệt vời. Mình có thể giúp bạn tư vấn dịch vụ theo phong cách nhẹ nhàng, gần gũi và đúng giọng thương hiệu."
+      },
+      {
+        "title": "Brand voice",
+        "description": "Thiết kế cách nhân vật nói chuyện: thân thiện, chuyên nghiệp, tinh tế hoặc vui tươi.",
+        "chatName": "Anna — Brand voice",
+        "chatText": "Mình sẽ trả lời theo giọng thương hiệu: rõ ràng, lịch sự và không nói quá mức."
+      },
+      {
+        "title": "Visual direction",
+        "description": "Định hướng visual, outfit, màu sắc và biểu cảm để nhân vật phù hợp với thương hiệu.",
+        "chatName": "Anna — Visual direction",
+        "chatText": "Visual có thể được tinh chỉnh theo ngành, màu thương hiệu và bối cảnh sử dụng."
+      }
+    ]
+  },
+  "useCases": {
+    "eyebrow": "Use Cases",
+    "title": "Một số trường hợp ứng dụng phù hợp.",
+    "description": "AI Brand Character phù hợp với các website cần tư vấn, giải thích dịch vụ và dẫn khách tới hành động cụ thể.",
+    "items": [
+      {
+        "title": "Website tư vấn dịch vụ",
+        "description": "Nhân vật AI hỗ trợ giải thích dịch vụ, gợi ý lựa chọn và dẫn khách tới form hoặc Zalo.",
+        "href": "/contact/"
+      },
+      {
+        "title": "Hospitality / F&B",
+        "description": "Phù hợp homestay, retreat, cafe, nhà hàng cần tư vấn nhanh về giá, lịch, địa điểm và chính sách.",
+        "href": "/case-studies/yen-ai-chat/"
+      },
+      {
+        "title": "Spa / Salon / Clinic",
+        "description": "Hỗ trợ khách hỏi dịch vụ, quy trình, đặt lịch và chuyển sang tư vấn viên khi cần xác nhận.",
+        "href": "/contact/"
+      }
+    ]
+  },
+  "caseStudy": {
+    "eyebrow": "Case Study",
+    "title": "Yên AI Chat — khi AI trở thành một người nhà của thương hiệu.",
+    "description": "Case Yên AI Chat giúp EZDesign định hình cách một nhân vật AI có thể tư vấn khách, trả lời FAQ, dùng quick replies và chuyển khách sang Zalo khi cần.",
+    "primaryCTA": {
+      "label": "Xem case Yên AI Chat",
+      "href": "/case-studies/yen-ai-chat/"
+    }
+  },
+  "relatedServices": {
+    "eyebrow": "Service",
+    "title": "Các dịch vụ khác",
+    "items": [
+      {
+        "title": "EZD AI Chat",
+        "description": "AI brand assistant giúp website biết tư vấn, trả lời FAQ, thu lead và chuyển khách sang người thật khi cần.",
+        "href": "/ezd-ai-chat/",
+        "tag": "Hero Product"
+      },
+      {
+        "title": "AI Brand Character",
+        "description": "Thiết kế nhân vật AI đại diện thương hiệu với giọng nói, vai trò và visual identity riêng.",
+        "href": "/services/ai-brand-character/",
+        "tag": "Current"
+      },
+      {
+        "title": "AR/VR/MR",
+        "description": "Trải nghiệm tương tác giúp khách hàng khám phá sản phẩm, không gian hoặc chiến dịch trực quan hơn.",
+        "href": "/services/ar-vr-mr/",
+        "tag": "Service"
+      },
+      {
+        "title": "Digital Twin",
+        "description": "Mô phỏng không gian, sản phẩm hoặc quy trình để tạo trải nghiệm số dễ hiểu và có tính ứng dụng.",
+        "href": "/services/digital-twin/",
+        "tag": "Service"
+      },
+      {
+        "title": "Game Activation",
+        "description": "Mini game và trải nghiệm tương tác giúp thương hiệu tăng engagement trong chiến dịch.",
+        "href": "/services/game-activation/",
+        "tag": "Service"
+      },
+      {
+        "title": "Interactive Website",
+        "description": "Website có tương tác, storytelling và CTA rõ ràng để nâng cao trải nghiệm khách hàng.",
+        "href": "/services/interactive-website/",
+        "tag": "Service"
+      }
+    ]
+  },
+  "finalCTA": {
+    "eyebrow": "Start",
+    "title": "Muốn triển khai một điểm chạm số phù hợp với thương hiệu của bạn?",
+    "description": "Bắt đầu bằng một buổi tư vấn ngắn để EZDesign hiểu ngành, khách hàng và mục tiêu chuyển đổi của bạn.",
+    "primaryCTA": {
+      "label": "Đặt lịch demo",
+      "href": "/contact/"
+    },
+    "secondaryCTA": {
+      "label": "Xem demo AI Chat",
+      "href": "/ezd-ai-chat/"
+    }
+  }
+}
