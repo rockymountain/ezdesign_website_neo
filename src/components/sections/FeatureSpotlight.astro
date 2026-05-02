@@ -59,43 +59,71 @@ const initialRight = getWrappedFeature(initialActiveIndex + 1);
     />
 
     <div class="relative mt-12">
-      <div class="grid gap-5 lg:grid-cols-3 lg:items-stretch">
-        <!-- Left card -->
-        <Card
-          variant="glass"
-          padding="lg"
-          hover
-          class="relative min-h-[340px] overflow-hidden"
+      <!-- Desktop arrows -->
+      <div class="pointer-events-none absolute inset-y-0 left-0 right-0 z-20 hidden items-center justify-between lg:flex">
+        <button
+          type="button"
+          class="feature-arrow pointer-events-auto -ml-7"
+          aria-label="Previous feature"
+          data-feature-prev
         >
-          <p
-            class="text-xs font-black uppercase tracking-[0.24em] text-[var(--ezd-brand)]"
-            data-left-feature-index
+          <span aria-hidden="true">‹</span>
+        </button>
+
+        <button
+          type="button"
+          class="feature-arrow pointer-events-auto -mr-7"
+          aria-label="Next feature"
+          data-feature-next
+        >
+          <span aria-hidden="true">›</span>
+        </button>
+      </div>
+
+      <div class="grid gap-5 lg:grid-cols-3 lg:items-stretch">
+        <!-- Left card: desktop only -->
+        <div class="hidden lg:block">
+          <Card
+            variant="glass"
+            padding="lg"
+            hover
+            class="relative min-h-[340px] overflow-hidden"
           >
-            {String(features.length).padStart(2, '0')}
-          </p>
+            <p
+              class="text-xs font-black uppercase tracking-[0.24em] text-[var(--ezd-brand)]"
+              data-left-feature-index
+            >
+              {String(features.length).padStart(2, '0')}
+            </p>
 
-          <h3 class="ezd-heading-card mt-4 text-2xl" data-left-feature-title>
-            {initialLeft.title}
-          </h3>
+            <h3 class="ezd-heading-card mt-4 text-2xl" data-left-feature-title>
+              {initialLeft.title}
+            </h3>
 
-          <p class="ezd-body-small mt-4 text-[var(--ezd-text-muted)]" data-left-feature-description>
-            {initialLeft.description}
-          </p>
-        </Card>
+            <p
+              class="ezd-body-small mt-4 text-[var(--ezd-text-muted)]"
+              data-left-feature-description
+            >
+              {initialLeft.description}
+            </p>
+          </Card>
+        </div>
 
-        <!-- Center card -->
+        <!-- Center card: always visible -->
         <Card
           variant="default"
           padding="lg"
           hover
-          class="relative min-h-[420px] overflow-hidden lg:-mt-6"
+          class="relative mx-auto min-h-[420px] w-full max-w-xl overflow-hidden lg:-mt-6"
+          data-feature-card
         >
-          <div class="absolute inset-x-8 top-8 h-44 rounded-[var(--ezd-radius-2xl)] bg-[var(--ezd-brand-soft)]">
-            <div class="flex h-full items-center justify-center rounded-[var(--ezd-radius-2xl)] border border-[var(--ezd-border)] bg-white/70">
+          <div class="rounded-[var(--ezd-radius-2xl)] bg-[var(--ezd-brand-soft)] p-4">
+            <div class="flex min-h-40 items-center justify-center rounded-[var(--ezd-radius-2xl)] border border-[var(--ezd-border)] bg-white/70">
               <div class="text-center">
                 <div class="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-[var(--ezd-brand)] text-2xl font-black text-white shadow-[var(--ezd-shadow-md)]">
                   AI
                 </div>
+
                 <p class="mt-4 text-xs font-black uppercase tracking-[0.22em] text-[var(--ezd-brand)]">
                   Character Placeholder
                 </p>
@@ -103,7 +131,7 @@ const initialRight = getWrappedFeature(initialActiveIndex + 1);
             </div>
           </div>
 
-          <div class="pt-56">
+          <div class="mt-10">
             <p
               class="text-xs font-black uppercase tracking-[0.24em] text-[var(--ezd-brand)]"
               data-center-feature-index
@@ -115,60 +143,68 @@ const initialRight = getWrappedFeature(initialActiveIndex + 1);
               {initialCenter.title}
             </h3>
 
-            <p class="ezd-body-small mt-4 text-[var(--ezd-text-muted)]" data-center-feature-description>
+            <p
+              class="ezd-body-small mt-4 text-[var(--ezd-text-muted)]"
+              data-center-feature-description
+            >
               {initialCenter.description}
             </p>
           </div>
         </Card>
 
-        <!-- Right card -->
-        <Card
-          variant="glass"
-          padding="lg"
-          hover
-          class="relative min-h-[340px] overflow-hidden"
-        >
-          <p
-            class="text-xs font-black uppercase tracking-[0.24em] text-[var(--ezd-brand)]"
-            data-right-feature-index
+        <!-- Right card: desktop only -->
+        <div class="hidden lg:block">
+          <Card
+            variant="glass"
+            padding="lg"
+            hover
+            class="relative min-h-[340px] overflow-hidden"
           >
-            02
-          </p>
+            <p
+              class="text-xs font-black uppercase tracking-[0.24em] text-[var(--ezd-brand)]"
+              data-right-feature-index
+            >
+              02
+            </p>
 
-          <h3 class="ezd-heading-card mt-4 text-2xl" data-right-feature-title>
-            {initialRight.title}
-          </h3>
+            <h3 class="ezd-heading-card mt-4 text-2xl" data-right-feature-title>
+              {initialRight.title}
+            </h3>
 
-          <p class="ezd-body-small mt-4 text-[var(--ezd-text-muted)]" data-right-feature-description>
-            {initialRight.description}
-          </p>
-        </Card>
-      </div>
-
-      <!-- Tabs row -->
-      <div class="mt-8">
-        <div
-          class="spotlight-tab-row flex flex-nowrap items-center gap-2 overflow-x-auto whitespace-nowrap pb-2"
-          role="tablist"
-          aria-label="EZD AI Chat features"
-          data-feature-tab-row
-        >
-          {
-            features.map((feature: SpotlightFeature, index: number) => (
-              <button
-                type="button"
-                class="spotlight-tab shrink-0 rounded-full px-5 py-2.5 text-xs font-black uppercase tracking-[0.16em]"
-                role="tab"
-                aria-selected={index === 0 ? 'true' : 'false'}
-                data-feature-tab
-                data-index={index}
-              >
-                {feature.title}
-              </button>
-            ))
-          }
+            <p
+              class="ezd-body-small mt-4 text-[var(--ezd-text-muted)]"
+              data-right-feature-description
+            >
+              {initialRight.description}
+            </p>
+          </Card>
         </div>
       </div>
+
+      <!-- Mobile arrows -->
+      <div class="mt-6 flex justify-center gap-4 lg:hidden">
+        <button
+          type="button"
+          class="feature-arrow feature-arrow--mobile"
+          aria-label="Previous feature"
+          data-feature-prev
+        >
+          <span aria-hidden="true">‹</span>
+        </button>
+
+        <button
+          type="button"
+          class="feature-arrow feature-arrow--mobile"
+          aria-label="Next feature"
+          data-feature-next
+        >
+          <span aria-hidden="true">›</span>
+        </button>
+      </div>
+
+      <p class="mt-3 text-center text-xs font-medium text-[var(--ezd-text-soft)] lg:hidden">
+        Nhấn mũi tên để xem thêm tính năng.
+      </p>
     </div>
   </div>
 
@@ -177,8 +213,10 @@ const initialRight = getWrappedFeature(initialActiveIndex + 1);
 
     if (root) {
       const items = features;
-      const tabs = Array.from(root.querySelectorAll('[data-feature-tab]'));
-      const tabRow = root.querySelector('[data-feature-tab-row]');
+      const previousButtons = Array.from(root.querySelectorAll('[data-feature-prev]'));
+      const nextButtons = Array.from(root.querySelectorAll('[data-feature-next]'));
+
+      let activeIndex = 0;
 
       const refs = {
         leftIndex: root.querySelector('[data-left-feature-index]'),
@@ -197,7 +235,9 @@ const initialRight = getWrappedFeature(initialActiveIndex + 1);
       const wrap = (value) => ((value % items.length) + items.length) % items.length;
       const pad = (value) => String(value + 1).padStart(2, '0');
 
-      const updateContent = (activeIndex) => {
+      const updateContent = (nextActiveIndex) => {
+        activeIndex = wrap(nextActiveIndex);
+
         const leftIndex = wrap(activeIndex - 1);
         const centerIndex = wrap(activeIndex);
         const rightIndex = wrap(activeIndex + 1);
@@ -217,87 +257,66 @@ const initialRight = getWrappedFeature(initialActiveIndex + 1);
         if (refs.rightIndex) refs.rightIndex.textContent = pad(rightIndex);
         if (refs.rightTitle) refs.rightTitle.textContent = right.title;
         if (refs.rightDescription) refs.rightDescription.textContent = right.description;
-
-        tabs.forEach((tab, index) => {
-          tab.setAttribute('aria-selected', index === activeIndex ? 'true' : 'false');
-        });
-
-        const activeTab = tabs[activeIndex];
-        if (activeTab) {
-          activeTab.scrollIntoView({
-            inline: 'center',
-            block: 'nearest',
-            behavior: 'smooth',
-          });
-        }
       };
 
-      tabs.forEach((tab, index) => {
-        tab.addEventListener('click', () => {
-          updateContent(index);
+      previousButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          updateContent(activeIndex - 1);
         });
       });
 
-      if (tabRow) {
-        tabRow.addEventListener(
-          'wheel',
-          (event) => {
-            if (Math.abs(event.deltaY) > Math.abs(event.deltaX)) {
-              event.preventDefault();
-              tabRow.scrollLeft += event.deltaY;
-            }
-          },
-          { passive: false }
-        );
-      }
+      nextButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+          updateContent(activeIndex + 1);
+        });
+      });
 
       updateContent(0);
     }
   </script>
 
   <style>
-    .spotlight-tab-row {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-    }
-
-    .spotlight-tab-row::-webkit-scrollbar {
-      display: none;
-    }
-
-    .spotlight-tab {
-      border: 1px solid var(--ezd-border);
-      background: rgb(255 255 255 / 0.78);
-      color: var(--ezd-text-muted);
-      box-shadow: var(--ezd-shadow-sm);
+    .feature-arrow {
+      display: inline-flex;
+      width: 3.75rem;
+      height: 3.75rem;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      background: var(--ezd-accent);
+      color: #ffffff;
+      box-shadow: var(--ezd-shadow-lg);
       transition:
         background-color 0.2s ease,
-        color 0.2s ease,
-        border-color 0.2s ease,
         box-shadow 0.2s ease,
         transform 0.2s ease;
     }
 
-    .spotlight-tab:hover {
-      border-color: var(--ezd-brand);
-      background: rgb(255 255 255 / 0.96);
-      color: var(--ezd-brand);
-      box-shadow: 0 8px 24px rgb(32 38 127 / 0.12);
-      transform: none;
+    .feature-arrow span {
+      display: block;
+      font-size: 3.75rem;
+      font-weight: 700;
+      line-height: 0.72;
+      transform: translateY(-0.05em);
     }
 
-    .spotlight-tab[aria-selected='true'] {
-      border-color: var(--ezd-brand);
+    .feature-arrow:hover {
       background: var(--ezd-brand);
-      color: #ffffff;
-      box-shadow: var(--ezd-shadow-md);
+      box-shadow: 0 20px 54px rgb(32 38 127 / 0.2);
+      transform: translateY(-1px);
     }
 
-    .spotlight-tab[aria-selected='true']:hover {
-      border-color: var(--ezd-brand);
-      background: var(--ezd-brand);
-      color: #ffffff;
-      transform: none;
+    .feature-arrow:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    .feature-arrow--mobile {
+      width: 3.5rem;
+      height: 3.5rem;
+    }
+
+    .feature-arrow--mobile span {
+      font-size: 3.5rem;
     }
   </style>
 </section>
