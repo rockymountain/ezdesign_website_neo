@@ -1,0 +1,76 @@
+---
+import SectionHeader from '../common/SectionHeader.astro';
+import Card from '../common/Card.astro';
+
+type ResultItem = {
+  label: string;
+  title: string;
+  description: string;
+};
+
+type Props = {
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+  items?: ResultItem[];
+};
+
+const {
+  eyebrow = 'Key Results',
+  title = 'Những kết quả có thể chia sẻ an toàn.',
+  description = 'Các điểm dưới đây mô tả năng lực triển khai và trạng thái sẵn sàng của case, không dùng số liệu nhạy cảm khi chưa được phép công khai.',
+  items = [
+    {
+      label: '24/7',
+      title: 'Support-ready touchpoint',
+      description: 'AI assistant luôn sẵn sàng tiếp nhận câu hỏi phổ biến từ khách truy cập website.',
+    },
+    {
+      label: 'FAQ',
+      title: 'FAQ-first response flow',
+      description: 'Các câu hỏi quan trọng được đưa vào guardrail để trả lời nhất quán và giảm sai lệch thông tin.',
+    },
+    {
+      label: 'Zalo',
+      title: 'Human handoff prepared',
+      description: 'Luồng hội thoại được thiết kế để chuyển khách sang người thật khi cần tư vấn hoặc xác nhận.',
+    },
+    {
+      label: 'Safe',
+      title: 'Privacy-safe presentation',
+      description: 'Case chỉ công khai phần visual, flow và learning được phép chia sẻ.',
+    }
+  ],
+} = Astro.props as Props;
+---
+
+<section class="py-20">
+  <div class="ezd-container">
+    <SectionHeader
+      eyebrow={eyebrow}
+      title={title}
+      description={description}
+      maxWidth="xl"
+    />
+
+    <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+      {
+        items.map((item: ResultItem) => (
+          <Card hover padding="lg">
+            <p class="text-xs font-black uppercase tracking-[0.22em] text-[var(--ezd-brand)]">
+              {item.label}
+            </p>
+
+            <h3 class="ezd-heading-card mt-4 text-2xl">
+              {item.title}
+            </h3>
+
+            <p class="ezd-body-small mt-4 text-[var(--ezd-text-muted)]">
+              {item.description}
+            </p>
+          </Card>
+        ))
+      }
+    </div>
+  </div>
+</section>

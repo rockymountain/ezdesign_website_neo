@@ -3,7 +3,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import SectionHeader from '../../components/common/SectionHeader.astro';
 import CTASection from '../../components/common/CTASection.astro';
 import Card from '../../components/common/Card.astro';
-import ButtonLink from '../../components/common/ButtonLink.astro';
+
+import CaseStudyResults from '../../components/sections/CaseStudyResults.astro';
+import CaseStudyVisualProof from '../../components/sections/CaseStudyVisualProof.astro';
+import CaseStudyHandoffFlow from '../../components/sections/CaseStudyHandoffFlow.astro';
 
 import { getCollection, render, type CollectionEntry } from 'astro:content';
 import { buildArticleSchema, buildBreadcrumbSchema } from '../../utils/schema';
@@ -233,8 +236,11 @@ const jsonLd = [
       </div>
     </section>
 
+    <!-- Key Results -->
+    <CaseStudyResults />
+
     <!-- Overview / MDX Content -->
-    <section class="py-20">
+    <section class="bg-[var(--ezd-bg-soft)] py-20">
       <div class="ezd-container">
         <div class="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
           <SectionHeader
@@ -256,7 +262,7 @@ const jsonLd = [
     <!-- Challenge -->
     {
       challenge.length > 0 && (
-        <section class="bg-[var(--ezd-bg-soft)] py-20">
+        <section class="py-20">
           <div class="ezd-container">
             <SectionHeader
               eyebrow="Challenge"
@@ -286,7 +292,7 @@ const jsonLd = [
     <!-- Solution -->
     {
       solution.length > 0 && (
-        <section class="py-20">
+        <section class="bg-[var(--ezd-bg-soft)] py-20">
           <div class="ezd-container">
             <SectionHeader
               eyebrow="Solution"
@@ -312,6 +318,12 @@ const jsonLd = [
         </section>
       )
     }
+
+    <!-- Visual Proof -->
+    <CaseStudyVisualProof />
+
+    <!-- Handoff Flow -->
+    <CaseStudyHandoffFlow />
 
     <!-- Highlights -->
     {
@@ -344,25 +356,28 @@ const jsonLd = [
       hasTestimonial && testimonial && (
         <section class="py-20">
           <div class="ezd-container">
-            <Card padding="lg" class="relative overflow-hidden bg-[var(--ezd-black)] text-white">
+            <Card
+              padding="lg"
+              class="relative overflow-hidden border border-[var(--ezd-border)] bg-[linear-gradient(135deg,rgba(204,251,241,0.28),rgba(239,246,255,0.92))]"
+            >
               <div
-                class="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[var(--ezd-accent)] opacity-20 blur-3xl"
+                class="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[var(--ezd-accent)] opacity-10 blur-3xl"
                 aria-hidden="true"
               >
               </div>
 
               <div class="relative max-w-4xl">
-                <p class="text-xs font-black uppercase tracking-[0.22em] text-white/70">
+                <p class="text-xs font-black uppercase tracking-[0.22em] text-[var(--ezd-brand)]">
                   Testimonial
                 </p>
 
-                <blockquote class="ezd-heading-section mt-5 text-3xl text-white md:text-5xl">
+                <blockquote class="ezd-heading-card mt-5 text-2xl text-[var(--ezd-text)] md:text-3xl">
                   “{testimonial.quote}”
                 </blockquote>
 
                 {
                   (testimonial.name || testimonial.role) && (
-                    <p class="mt-6 text-sm font-bold text-white/70">
+                    <p class="mt-6 text-sm font-bold text-[var(--ezd-text-muted)]">
                       {testimonial.name}
                       {testimonial.role && ` — ${testimonial.role}`}
                     </p>
@@ -413,11 +428,11 @@ const jsonLd = [
 
     <!-- Final CTA -->
     <CTASection
-      eyebrow="Start"
-      title="Muốn tạo một case tương tự cho thương hiệu của bạn?"
-      description="Đặt lịch demo để EZDesign tư vấn cách thiết kế AI brand assistant, lead flow và handoff phù hợp với website hiện tại của bạn."
+      eyebrow="Build Your Assistant"
+      title="Thiết kế AI Assistant tương tự cho thương hiệu của bạn."
+      description="EZDesign có thể giúp bạn biến website thành một điểm chạm biết tư vấn, thu lead và chuyển khách sang người thật khi cần."
       primaryCTA={{
-        label: 'Đặt lịch demo',
+        label: 'Thiết kế AI Assistant tương tự cho tôi',
         href: '/contact/',
       }}
       secondaryCTA={{

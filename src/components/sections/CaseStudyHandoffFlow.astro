@@ -1,0 +1,88 @@
+---
+import SectionHeader from '../common/SectionHeader.astro';
+import Card from '../common/Card.astro';
+
+type FlowStep = {
+  step: string;
+  title: string;
+  description: string;
+};
+
+type Props = {
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+  steps?: FlowStep[];
+};
+
+const {
+  eyebrow = 'Handoff Flow',
+  title = 'Từ câu hỏi đầu tiên đến chuyển tiếp sang người thật.',
+  description = 'Luồng handoff giúp AI không cố trả lời mọi thứ, mà biết lúc nào nên dẫn khách sang kênh tư vấn phù hợp.',
+  steps = [
+    {
+      step: '01',
+      title: 'Customer asks',
+      description: 'Khách đặt câu hỏi về dịch vụ, giá, lịch hoặc nhu cầu cụ thể trên website.',
+    },
+    {
+      step: '02',
+      title: 'AI qualifies',
+      description: 'AI dùng FAQ guardrail và quick replies để hiểu nhu cầu, tránh trả lời lan man.',
+    },
+    {
+      step: '03',
+      title: 'Lead captured',
+      description: 'Khách để lại thông tin hoặc chọn hành động phù hợp như đặt lịch, hỏi thêm hoặc nhận tư vấn.',
+    },
+    {
+      step: '04',
+      title: 'Human handoff',
+      description: 'Khi cần xác nhận, AI chuyển khách sang Zalo hoặc đội ngũ thật để tiếp tục tư vấn.',
+    },
+  ],
+} = Astro.props as Props;
+---
+
+<section class="py-20">
+  <div class="ezd-container">
+    <SectionHeader
+      eyebrow={eyebrow}
+      title={title}
+      description={description}
+      align="center"
+      maxWidth="xl"
+    />
+
+    <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+      {
+        steps.map((item: FlowStep, index: number) => (
+          <Card hover padding="lg" class="relative h-full">
+            <p class="text-xs font-black uppercase tracking-[0.22em] text-[var(--ezd-brand)]">
+              {item.step}
+            </p>
+
+            <h3 class="ezd-heading-card mt-4 text-2xl">
+              {item.title}
+            </h3>
+
+            <p class="ezd-body-small mt-4 text-[var(--ezd-text-muted)]">
+              {item.description}
+            </p>
+
+            {
+              index < steps.length - 1 && (
+                <span
+                  class="absolute -right-3 top-1/2 hidden h-6 w-6 -translate-y-1/2 items-center justify-center rounded-full bg-[var(--ezd-brand)] text-xs font-black text-white lg:flex"
+                  aria-hidden="true"
+                >
+                  →
+                </span>
+              )
+            }
+          </Card>
+        ))
+      }
+    </div>
+  </div>
+</section>

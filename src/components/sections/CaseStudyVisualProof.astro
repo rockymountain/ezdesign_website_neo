@@ -1,0 +1,79 @@
+---
+import SectionHeader from '../common/SectionHeader.astro';
+import Card from '../common/Card.astro';
+
+type Props = {
+  eyebrow?: string;
+  title?: string;
+  description?: string;
+};
+
+const {
+  eyebrow = 'Visual Proof',
+  title = 'Một cách nhìn trực quan hơn về case.',
+  description = 'Khu vực này dùng placeholder trong sprint hiện tại. Sau này có thể thay bằng screenshot, video walkthrough hoặc motion mockup đã được phép công khai.',
+} = Astro.props as Props;
+---
+
+<section class="bg-[var(--ezd-bg-soft)] py-20">
+  <div class="ezd-container">
+    <div class="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
+      <SectionHeader
+        eyebrow={eyebrow}
+        title={title}
+        description={description}
+        maxWidth="lg"
+      />
+
+      <Card padding="lg" class="relative overflow-hidden">
+        <div
+          class="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[var(--ezd-accent)] opacity-20 blur-3xl"
+          aria-hidden="true"
+        >
+        </div>
+
+        <div class="relative rounded-[var(--ezd-radius-2xl)] bg-[var(--ezd-bg-soft)] p-5">
+          <div class="rounded-[var(--ezd-radius-xl)] border border-[var(--ezd-border)] bg-white p-4 shadow-[var(--ezd-shadow-sm)]">
+            <div class="flex gap-2 border-b border-[var(--ezd-border)] pb-3">
+              <span class="h-3 w-3 rounded-full bg-[var(--ezd-brand)]"></span>
+              <span class="h-3 w-3 rounded-full bg-[var(--ezd-accent)]"></span>
+              <span class="h-3 w-3 rounded-full bg-[var(--ezd-border-strong)]"></span>
+            </div>
+
+            <div class="mt-5 grid gap-5 lg:grid-cols-[0.75fr_1.25fr] lg:items-center">
+              <div class="rounded-[var(--ezd-radius-xl)] bg-[linear-gradient(135deg,var(--ezd-brand-soft),var(--ezd-accent-soft))] p-5">
+                <div class="mx-auto flex h-40 w-28 items-center justify-center rounded-full bg-white/70 shadow-[var(--ezd-shadow-md)]">
+                  <div class="flex h-20 w-20 items-center justify-center rounded-full bg-[var(--ezd-brand)] text-2xl font-black text-white">
+                    AI
+                  </div>
+                </div>
+
+                <p class="mt-5 text-center text-xs font-black uppercase tracking-[0.18em] text-[var(--ezd-brand)]">
+                  Character visual
+                </p>
+              </div>
+
+              <div class="space-y-4">
+                <div class="max-w-[86%] rounded-2xl bg-[var(--ezd-bg-soft)] px-4 py-3 text-sm leading-6 text-[var(--ezd-text-muted)]">
+                  Xin chào, mình có thể hỗ trợ bạn tìm thông tin về dịch vụ, lịch và cách đặt chỗ.
+                </div>
+
+                <div class="ml-auto max-w-[86%] rounded-2xl bg-[var(--ezd-brand)] px-4 py-3 text-sm leading-6 text-white">
+                  Mình muốn hỏi về lịch cuối tuần.
+                </div>
+
+                <div class="max-w-[86%] rounded-2xl bg-[var(--ezd-bg-soft)] px-4 py-3 text-sm leading-6 text-[var(--ezd-text-muted)]">
+                  Mình sẽ chuyển bạn sang Zalo để team xác nhận nhanh hơn nhé.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p class="mt-4 text-center text-xs font-semibold text-[var(--ezd-text-soft)]">
+            Placeholder: screenshot / motion mockup / approved visual proof.
+          </p>
+        </div>
+      </Card>
+    </div>
+  </div>
+</section>
