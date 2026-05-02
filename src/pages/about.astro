@@ -17,11 +17,27 @@ type ContentItem = {
   description: string;
 };
 
+type TeamMember = {
+  name: string;
+  role: string;
+  description: string;
+};
+
+type SocialProofTestimonial = {
+  quote: string;
+  author: string;
+  role: string;
+};
+
 const title = pageContent.seo.title;
 const description = pageContent.seo.description;
 
 const values = pageContent.values.items as ContentItem[];
 const principles = pageContent.principles.items as ContentItem[];
+
+const teamMembers = pageContent.team.members as TeamMember[];
+const proofLogos = pageContent.socialProof.logos as string[];
+const proofTestimonial = pageContent.socialProof.testimonial as SocialProofTestimonial;
 
 const finalPrimaryCTA = pageContent.finalCTA.primaryCTA as CTA;
 const finalSecondaryCTA = pageContent.finalCTA.secondaryCTA as CTA;
@@ -127,8 +143,64 @@ const finalSecondaryCTA = pageContent.finalCTA.secondaryCTA as CTA;
       </div>
     </section>
 
-    <!-- Communication Principles -->
+    <!-- Social Proof -->
     <section class="py-20">
+      <div class="ezd-container">
+        <div class="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+          <SectionHeader
+            eyebrow={pageContent.socialProof.eyebrow}
+            title={pageContent.socialProof.title}
+            description={pageContent.socialProof.description}
+            maxWidth="lg"
+          />
+
+          <div class="grid gap-5">
+            <Card padding="lg">
+              <p class="text-xs font-black uppercase tracking-[0.22em] text-[var(--ezd-brand)]">
+                Logo placeholders
+              </p>
+
+              <div class="mt-6 grid gap-3 sm:grid-cols-2">
+                {
+                  proofLogos.map((logo: string) => (
+                    <div class="flex min-h-20 items-center justify-center rounded-[var(--ezd-radius-xl)] border border-[var(--ezd-border)] bg-[var(--ezd-bg-soft)] px-4 text-center">
+                      <p class="text-sm font-black text-[var(--ezd-text-muted)]">
+                        {logo}
+                      </p>
+                    </div>
+                  ))
+                }
+              </div>
+            </Card>
+
+            <Card padding="lg" class="relative overflow-hidden bg-[var(--ezd-black)] text-white">
+              <div
+                class="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[var(--ezd-accent)] opacity-20 blur-3xl"
+                aria-hidden="true"
+              >
+              </div>
+
+              <div class="relative">
+                <p class="text-xs font-black uppercase tracking-[0.22em] text-white/70">
+                  Testimonial placeholder
+                </p>
+
+                <blockquote class="ezd-heading-card mt-5 text-2xl text-white">
+                  “{proofTestimonial.quote}”
+                </blockquote>
+
+                <p class="mt-5 text-sm font-bold text-white/70">
+                  {proofTestimonial.author} — {proofTestimonial.role}
+                </p>
+              </div>
+            </Card>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Communication Principles -->
+    <section class="bg-[var(--ezd-bg-soft)] py-20">
       <div class="ezd-container">
         <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
           <SectionHeader
@@ -152,6 +224,46 @@ const finalSecondaryCTA = pageContent.finalCTA.secondaryCTA as CTA;
               ))
             }
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Meet the Team -->
+    <section class="py-20">
+      <div class="ezd-container">
+        <SectionHeader
+          eyebrow={pageContent.team.eyebrow}
+          title={pageContent.team.title}
+          description={pageContent.team.description}
+          maxWidth="xl"
+        />
+
+        <div class="mt-10 grid gap-5 md:grid-cols-3">
+          {
+            teamMembers.map((member: TeamMember) => (
+              <Card hover padding="lg">
+                <div class="flex h-24 w-24 items-center justify-center rounded-full bg-[var(--ezd-brand-soft)] text-2xl font-black text-[var(--ezd-brand)]">
+                  {member.name
+                    .split(' ')
+                    .map((word: string) => word[0])
+                    .join('')
+                    .slice(0, 2)}
+                </div>
+
+                <h3 class="ezd-heading-card mt-6 text-2xl">
+                  {member.name}
+                </h3>
+
+                <p class="mt-2 text-sm font-black text-[var(--ezd-brand)]">
+                  {member.role}
+                </p>
+
+                <p class="ezd-body-small mt-4 text-[var(--ezd-text-muted)]">
+                  {member.description}
+                </p>
+              </Card>
+            ))
+          }
         </div>
       </div>
     </section>

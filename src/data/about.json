@@ -49,6 +49,45 @@
       }
     ]
   },
+  "team": {
+    "eyebrow": "Human Touch",
+    "title": "Đằng sau các điểm chạm AI vẫn là một đội ngũ con người.",
+    "description": "EZDesign tin rằng công nghệ chỉ hiệu quả khi được thiết kế bởi những người hiểu thương hiệu, hành trình khách hàng và giới hạn vận hành thật của SME.",
+    "members": [
+      {
+        "name": "Design Lead",
+        "role": "Brand experience & UI direction",
+        "description": "Phụ trách định hướng trải nghiệm, hệ thống giao diện và cách thương hiệu xuất hiện qua từng điểm chạm số."
+      },
+      {
+        "name": "AI Implementation",
+        "role": "AI assistant setup & guardrail",
+        "description": "Phụ trách cấu hình AI character, FAQ guardrail, quick replies, lead flow và handoff sang người thật."
+      },
+      {
+        "name": "Visual & Motion",
+        "role": "Character visual, motion mockup & campaign assets",
+        "description": "Phụ trách hình ảnh nhân vật, outfit, motion mockup và các asset trực quan cho website hoặc chiến dịch."
+      }
+    ]
+  },
+  "socialProof": {
+    "eyebrow": "Trusted Touchpoints",
+    "title": "Kinh nghiệm từ các dự án thương hiệu nhỏ và vừa.",
+    "description": "Trong Sprint này, khu vực logo/testimonial dùng placeholder để giữ đúng cấu trúc trust layer. Khi có asset thật, EZDesign có thể thay bằng logo khách hàng, trích dẫn hoặc case study đã được phép công khai.",
+    "logos": [
+      "Yên Retreat & Cafe",
+      "Hospitality SME",
+      "Local Brand",
+      "Education / Workshop",
+      "Creative Studio"
+    ],
+    "testimonial": {
+      "quote": "Điểm quan trọng không phải là có thêm một chatbot, mà là có một điểm chạm biết nói đúng giọng thương hiệu và biết chuyển khách sang người thật khi cần.",
+      "author": "EZDesign case learning",
+      "role": "From Yên AI Chat"
+    }
+  },
   "finalCTA": {
     "eyebrow": "Work with us",
     "title": "Bạn đang muốn nâng cấp trải nghiệm số cho thương hiệu?",
