@@ -28,7 +28,9 @@ const paddingClassMap = {
   lg: 'p-8',
 };
 
-const hoverClass = hover ? 'transition hover:-translate-y-1 hover:shadow-[var(--ezd-shadow-md)]' : '';
+const hoverClass = hover
+  ? 'transition duration-200 hover:-translate-y-1 hover:border-[var(--ezd-hover-border)] hover:shadow-[var(--ezd-shadow-md)]'
+  : '';
 
 const variantClass = variantClassMap[variant];
 const paddingClass = paddingClassMap[padding];

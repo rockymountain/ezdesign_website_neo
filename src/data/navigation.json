@@ -6,11 +6,39 @@
     },
     {
       "label": "Dịch vụ",
-      "href": "/services/ai-brand-character/"
+      "href": "/services/ai-brand-character/",
+      "children": [
+        {
+          "label": "AI Brand Character",
+          "href": "/services/ai-brand-character/"
+        },
+        {
+          "label": "AR/VR/MR",
+          "href": "/services/ar-vr-mr/"
+        },
+        {
+          "label": "Digital Twin",
+          "href": "/services/digital-twin/"
+        },
+        {
+          "label": "Game Activation",
+          "href": "/services/game-activation/"
+        },
+        {
+          "label": "Interactive Website",
+          "href": "/services/interactive-website/"
+        }
+      ]
     },
     {
       "label": "Case Study",
-      "href": "/case-studies/yen-ai-chat/"
+      "href": "/case-studies/yen-ai-chat/",
+      "children": [
+        {
+          "label": "Yên AI Chat",
+          "href": "/case-studies/yen-ai-chat/"
+        }
+      ]
     },
     {
       "label": "Về EZDesign",
@@ -45,6 +73,18 @@
     {
       "label": "Interactive Website",
       "href": "/services/interactive-website/"
+    },
+    {
+      "label": "Yên AI Chat",
+      "href": "/case-studies/yen-ai-chat/"
+    },
+    {
+      "label": "Về EZDesign",
+      "href": "/about/"
+    },
+    {
+      "label": "Liên hệ",
+      "href": "/contact/"
     }
   ]
 }

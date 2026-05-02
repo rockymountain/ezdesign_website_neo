@@ -23,15 +23,15 @@ const sizeClassMap = {
 
 const variantClassMap = {
   primary:
-    'bg-[var(--ezd-brand)] text-white shadow-[var(--ezd-shadow-sm)] hover:bg-[var(--ezd-brand-dark)]',
+    'bg-[var(--ezd-brand)] text-white shadow-[var(--ezd-shadow-sm)] hover:bg-[var(--ezd-brand-dark)] hover:shadow-[var(--ezd-shadow-md)]',
   secondary:
-    'border border-[var(--ezd-border-strong)] bg-white text-[var(--ezd-text)] hover:bg-[var(--ezd-surface-muted)]',
+    'border border-[var(--ezd-border-strong)] bg-white text-[var(--ezd-text)] hover:border-[var(--ezd-hover-border)] hover:bg-[var(--ezd-hover-bg)] hover:text-[var(--ezd-hover-text)] hover:shadow-[var(--ezd-shadow-sm)]',
   dark:
-    'bg-[var(--ezd-black)] text-white shadow-[var(--ezd-shadow-sm)] hover:bg-black/90',
+    'bg-[var(--ezd-black)] text-white shadow-[var(--ezd-shadow-sm)] hover:bg-[var(--ezd-brand)] hover:shadow-[var(--ezd-shadow-md)]',
   ghost:
-    'bg-transparent text-[var(--ezd-text-muted)] hover:bg-[var(--ezd-brand-soft)] hover:text-[var(--ezd-brand-dark)]',
+    'bg-transparent text-[var(--ezd-text-muted)] hover:bg-[var(--ezd-hover-bg)] hover:text-[var(--ezd-hover-text)]',
   light:
-    'bg-white text-[var(--ezd-text)] shadow-[var(--ezd-shadow-sm)] hover:bg-white/90',
+    'bg-white text-[var(--ezd-text)] shadow-[var(--ezd-shadow-sm)] hover:bg-[var(--ezd-hover-bg)] hover:text-[var(--ezd-hover-text)] hover:shadow-[var(--ezd-shadow-md)]',
 };
 
 const sizeClass = sizeClassMap[size];

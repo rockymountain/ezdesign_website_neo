@@ -53,6 +53,14 @@
   /* Layout */
   --ezd-container: 72rem;
   --ezd-container-wide: 88rem;
+
+  /* Interaction */
+  --ezd-hover-bg: #f0f4ff;
+  --ezd-hover-border: var(--ezd-brand);
+  --ezd-hover-text: var(--ezd-brand);
+  --ezd-active-bg: var(--ezd-brand);
+  --ezd-active-text: #ffffff;
+  --ezd-focus: var(--ezd-accent);
 }
 
 html {
@@ -107,11 +115,11 @@ canvas {
 
 .ezd-focus-ring {
   outline: 2px solid transparent;
-  outline-offset: 2px;
+  outline-offset: 3px;
 }
 
 .ezd-focus-ring:focus-visible {
-  outline-color: var(--ezd-accent);
+  outline-color: var(--ezd-focus);
 }
 
 .ezd-brand-gradient {

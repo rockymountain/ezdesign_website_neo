@@ -1,12 +1,12 @@
 ---
 import navigationData from '../../data/navigation.json';
-import siteConfig from '../../data/site.json';
 import BrandMark from './BrandMark.astro';
 import ButtonLink from './ButtonLink.astro';
 
 type NavItem = {
   label: string;
   href: string;
+  children?: NavItem[];
 };
 
 const mainNavigation = navigationData.mainNavigation as NavItem[];
@@ -16,6 +16,16 @@ const currentPath = Astro.url.pathname;
 function isActivePath(href: string) {
   if (href === '/') return currentPath === '/';
   return currentPath === href || currentPath.startsWith(href);
+}
+
+function isActiveItem(item: NavItem) {
+  if (isActivePath(item.href)) return true;
+
+  if (item.children?.length) {
+    return item.children.some((child) => isActivePath(child.href));
+  }
+
+  return false;
 }
 ---
 
@@ -29,7 +39,65 @@ function isActivePath(href: string) {
       <nav class="hidden items-center gap-1 lg:flex" aria-label="Main navigation">
         {
           mainNavigation.map((item: NavItem) => {
-            const active = isActivePath(item.href);
+            const active = isActiveItem(item);
+            const hasChildren = Boolean(item.children?.length);
+
+            if (hasChildren) {
+              return (
+                <div class="nav-dropdown relative" data-nav-dropdown>
+                  <button
+                    type="button"
+                    class:list={[
+                      'ezd-focus-ring inline-flex items-center gap-1 rounded-full px-4 py-2 text-sm font-semibold transition',
+                      active
+                        ? 'bg-[var(--ezd-brand)] text-white'
+                        : 'text-[var(--ezd-text-muted)] hover:bg-[var(--ezd-hover-bg)] hover:text-[var(--ezd-hover-text)]',
+                    ]}
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    data-nav-dropdown-trigger
+                  >
+                    {item.label}
+                    <span class="text-xs leading-none" aria-hidden="true">
+                      ▾
+                    </span>
+                  </button>
+
+                  <div class="nav-dropdown-panel absolute left-0 top-full pt-3">
+                    <div class="w-72 rounded-[var(--ezd-radius-xl)] border border-[var(--ezd-border)] bg-white p-2 shadow-[var(--ezd-shadow-lg)]">
+                      <div class="px-3 py-2">
+                        <p class="text-xs font-black uppercase tracking-[0.22em] text-[var(--ezd-brand)]">
+                          {item.label}
+                        </p>
+                      </div>
+
+                      <div class="grid gap-1">
+                        {
+                          item.children?.map((child: NavItem) => {
+                            const childActive = isActivePath(child.href);
+
+                            return (
+                              <a
+                                href={child.href}
+                                class:list={[
+                                  'ezd-focus-ring rounded-[var(--ezd-radius-md)] px-3 py-3 text-sm font-semibold transition',
+                                  childActive
+                                    ? 'bg-[var(--ezd-brand)] text-white'
+                                    : 'text-[var(--ezd-text-muted)] hover:bg-[var(--ezd-hover-bg)] hover:text-[var(--ezd-hover-text)]',
+                                ]}
+                                aria-current={childActive ? 'page' : undefined}
+                              >
+                                {child.label}
+                              </a>
+                            );
+                          })
+                        }
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            }
 
             return (
               <a
@@ -38,7 +106,7 @@ function isActivePath(href: string) {
                   'ezd-focus-ring rounded-full px-4 py-2 text-sm font-semibold transition',
                   active
                     ? 'bg-[var(--ezd-brand)] text-white'
-                    : 'text-[var(--ezd-text-muted)] hover:bg-[var(--ezd-brand-soft)] hover:text-[var(--ezd-brand-dark)]',
+                    : 'text-[var(--ezd-text-muted)] hover:bg-[var(--ezd-hover-bg)] hover:text-[var(--ezd-hover-text)]',
                 ]}
                 aria-current={active ? 'page' : undefined}
               >
@@ -64,12 +132,56 @@ function isActivePath(href: string) {
         </summary>
 
         <div
-          class="absolute right-0 mt-3 w-[min(18rem,calc(100vw-2rem))] rounded-[var(--ezd-radius-xl)] border border-[var(--ezd-border)] bg-white p-3 shadow-[var(--ezd-shadow-lg)]"
+          class="absolute right-0 mt-3 w-[min(20rem,calc(100vw-2rem))] rounded-[var(--ezd-radius-xl)] border border-[var(--ezd-border)] bg-white p-3 shadow-[var(--ezd-shadow-lg)]"
         >
           <nav class="grid gap-1" aria-label="Mobile navigation">
             {
               mainNavigation.map((item: NavItem) => {
-                const active = isActivePath(item.href);
+                const active = isActiveItem(item);
+                const hasChildren = Boolean(item.children?.length);
+
+                if (hasChildren) {
+                  return (
+                    <details class="group">
+                      <summary
+                        class:list={[
+                          'flex cursor-pointer list-none items-center justify-between rounded-[var(--ezd-radius-md)] px-4 py-3 text-sm font-semibold transition marker:hidden',
+                          active
+                            ? 'bg-[var(--ezd-brand)] text-white'
+                            : 'text-[var(--ezd-text-muted)] hover:bg-[var(--ezd-hover-bg)] hover:text-[var(--ezd-hover-text)]',
+                        ]}
+                      >
+                        {item.label}
+                        <span class="text-xs group-open:rotate-180" aria-hidden="true">
+                          ▾
+                        </span>
+                      </summary>
+
+                      <div class="mt-1 grid gap-1 pl-3">
+                        {
+                          item.children?.map((child: NavItem) => {
+                            const childActive = isActivePath(child.href);
+
+                            return (
+                              <a
+                                href={child.href}
+                                class:list={[
+                                  'rounded-[var(--ezd-radius-md)] px-4 py-3 text-sm font-semibold transition',
+                                  childActive
+                                    ? 'bg-[var(--ezd-brand)] text-white'
+                                    : 'text-[var(--ezd-text-muted)] hover:bg-[var(--ezd-hover-bg)] hover:text-[var(--ezd-hover-text)]',
+                                ]}
+                                aria-current={childActive ? 'page' : undefined}
+                              >
+                                {child.label}
+                              </a>
+                            );
+                          })
+                        }
+                      </div>
+                    </details>
+                  );
+                }
 
                 return (
                   <a
@@ -78,7 +190,7 @@ function isActivePath(href: string) {
                       'rounded-[var(--ezd-radius-md)] px-4 py-3 text-sm font-semibold transition',
                       active
                         ? 'bg-[var(--ezd-brand)] text-white'
-                        : 'text-[var(--ezd-text-muted)] hover:bg-[var(--ezd-brand-soft)] hover:text-[var(--ezd-brand-dark)]',
+                        : 'text-[var(--ezd-text-muted)] hover:bg-[var(--ezd-hover-bg)] hover:text-[var(--ezd-hover-text)]',
                     ]}
                     aria-current={active ? 'page' : undefined}
                   >
@@ -100,4 +212,79 @@ function isActivePath(href: string) {
       </details>
     </div>
   </div>
+
+  <script is:inline>
+    const dropdowns = document.querySelectorAll('[data-nav-dropdown]');
+
+    dropdowns.forEach((dropdown) => {
+      const trigger = dropdown.querySelector('[data-nav-dropdown-trigger]');
+
+      if (!trigger) return;
+
+      trigger.addEventListener('click', (event) => {
+        event.preventDefault();
+
+        const isOpen = dropdown.classList.contains('is-open');
+
+        dropdowns.forEach((item) => {
+          item.classList.remove('is-open');
+          const itemTrigger = item.querySelector('[data-nav-dropdown-trigger]');
+          itemTrigger?.setAttribute('aria-expanded', 'false');
+        });
+
+        if (!isOpen) {
+          dropdown.classList.add('is-open');
+          trigger.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+
+    document.addEventListener('click', (event) => {
+      const target = event.target;
+
+      if (!(target instanceof Element)) return;
+
+      const clickedInsideDropdown = target.closest('[data-nav-dropdown]');
+
+      if (!clickedInsideDropdown) {
+        dropdowns.forEach((dropdown) => {
+          dropdown.classList.remove('is-open');
+          const trigger = dropdown.querySelector('[data-nav-dropdown-trigger]');
+          trigger?.setAttribute('aria-expanded', 'false');
+        });
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key !== 'Escape') return;
+
+      dropdowns.forEach((dropdown) => {
+        dropdown.classList.remove('is-open');
+        const trigger = dropdown.querySelector('[data-nav-dropdown-trigger]');
+        trigger?.setAttribute('aria-expanded', 'false');
+      });
+    });
+  </script>
+
+  <style>
+    .nav-dropdown-panel {
+      visibility: hidden;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(0.35rem);
+      transition:
+        opacity 0.16s ease,
+        transform 0.16s ease,
+        visibility 0.16s ease;
+    }
+
+    .nav-dropdown:hover .nav-dropdown-panel,
+    .nav-dropdown:focus-within .nav-dropdown-panel,
+    .nav-dropdown.is-open .nav-dropdown-panel {
+      visibility: visible;
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+  </style>
 </header>
