@@ -1,0 +1,246 @@
+---
+type ServiceVisualType =
+  | 'ai-brand-character'
+  | 'ar-vr-mr'
+  | 'digital-twin'
+  | 'game-activation'
+  | 'interactive-website'
+  | 'default';
+
+type Props = {
+  type?: ServiceVisualType;
+  title?: string;
+  description?: string;
+};
+
+const {
+  type = 'default',
+  title = 'EZDesign Service',
+  description = 'Visual placeholder for this service.',
+} = Astro.props as Props;
+
+const visualLabelMap: Record<ServiceVisualType, string> = {
+  'ai-brand-character': 'Character ID Card',
+  'ar-vr-mr': 'AR / VR Preview',
+  'digital-twin': 'Digital Twin Map',
+  'game-activation': 'Game Flow',
+  'interactive-website': 'Interactive Website',
+  default: 'Service Preview',
+};
+---
+
+<div class="relative overflow-hidden rounded-[var(--ezd-radius-2xl)] border border-[var(--ezd-border)] bg-white p-5 shadow-[var(--ezd-shadow-lg)]">
+  <div
+    class="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[var(--ezd-accent)] opacity-20 blur-3xl"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div
+    class="pointer-events-none absolute -bottom-24 -left-20 h-64 w-64 rounded-full bg-[var(--ezd-brand)] opacity-10 blur-3xl"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div class="relative">
+    <p class="text-xs font-black uppercase tracking-[0.22em] text-[var(--ezd-brand)]">
+      {visualLabelMap[type]}
+    </p>
+
+    <h2 class="ezd-heading-card mt-3 text-2xl">
+      {title}
+    </h2>
+
+    <p class="ezd-body-small mt-3 text-[var(--ezd-text-muted)]">
+      {description}
+    </p>
+
+    {
+      type === 'ai-brand-character' && (
+        <div class="mt-6 rounded-[var(--ezd-radius-2xl)] bg-[var(--ezd-bg-soft)] p-5">
+          <div class="grid gap-5 md:grid-cols-[0.7fr_1.3fr] md:items-center">
+            <div class="mx-auto flex h-40 w-40 items-center justify-center rounded-full bg-[var(--ezd-brand)] text-5xl font-black text-white shadow-[var(--ezd-shadow-md)]">
+              AI
+            </div>
+
+            <div>
+              <p class="text-xs font-black uppercase tracking-[0.22em] text-[var(--ezd-brand)]">
+                Persona Sheet
+              </p>
+
+              <h3 class="mt-3 text-2xl font-black tracking-tight">
+                Brand Character
+              </h3>
+
+              <div class="mt-5 grid gap-3">
+                <div class="rounded-[var(--ezd-radius-lg)] bg-white p-3 shadow-[var(--ezd-shadow-sm)]">
+                  <p class="text-xs font-black uppercase tracking-[0.18em] text-[var(--ezd-text-soft)]">
+                    Voice
+                  </p>
+                  <p class="mt-1 text-sm font-bold text-[var(--ezd-text)]">
+                    Warm, helpful, on-brand
+                  </p>
+                </div>
+
+                <div class="rounded-[var(--ezd-radius-lg)] bg-white p-3 shadow-[var(--ezd-shadow-sm)]">
+                  <p class="text-xs font-black uppercase tracking-[0.18em] text-[var(--ezd-text-soft)]">
+                    Role
+                  </p>
+                  <p class="mt-1 text-sm font-bold text-[var(--ezd-text)]">
+                    Tư vấn khách & dẫn lead
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+    }
+
+    {
+      type === 'ar-vr-mr' && (
+        <div class="mt-6 grid gap-4 md:grid-cols-2">
+          <div class="rounded-[var(--ezd-radius-2xl)] bg-[var(--ezd-bg-soft)] p-5">
+            <div class="mx-auto flex h-44 w-28 items-center justify-center rounded-[2rem] border-4 border-[var(--ezd-text)] bg-white shadow-[var(--ezd-shadow-md)]">
+              <div class="h-24 w-24 rounded-[var(--ezd-radius-xl)] bg-[linear-gradient(135deg,var(--ezd-brand-soft),var(--ezd-accent-soft))] p-3">
+                <div class="h-full rounded-[var(--ezd-radius-lg)] border border-[var(--ezd-brand)] bg-white/70"></div>
+              </div>
+            </div>
+
+            <p class="mt-5 text-center text-sm font-black text-[var(--ezd-text)]">
+              Web AR activation
+            </p>
+
+            <p class="mt-2 text-center text-xs leading-5 text-[var(--ezd-text-muted)]">
+              Quét QR, mở camera và xem object/scene 3D trên trình duyệt.
+            </p>
+          </div>
+
+          <div class="rounded-[var(--ezd-radius-2xl)] bg-[var(--ezd-bg-soft)] p-5">
+            <div class="flex h-44 items-center justify-center">
+              <div class="relative h-28 w-56 rounded-full border-4 border-[var(--ezd-text)] bg-white shadow-[var(--ezd-shadow-md)]">
+                <div class="absolute left-8 top-8 h-12 w-12 rounded-full bg-[var(--ezd-brand)]"></div>
+                <div class="absolute right-8 top-8 h-12 w-12 rounded-full bg-[var(--ezd-accent)]"></div>
+              </div>
+            </div>
+
+            <p class="mt-5 text-center text-sm font-black text-[var(--ezd-text)]">
+              VR showcase
+            </p>
+
+            <p class="mt-2 text-center text-xs leading-5 text-[var(--ezd-text-muted)]">
+              Mô phỏng không gian hoặc trải nghiệm chiến dịch ở dạng immersive.
+            </p>
+          </div>
+        </div>
+      )
+    }
+
+    {
+      type === 'digital-twin' && (
+        <div class="mt-6 rounded-[var(--ezd-radius-2xl)] bg-[var(--ezd-bg-soft)] p-5">
+          <div class="grid gap-4 md:grid-cols-[1.2fr_0.8fr]">
+            <div class="relative min-h-64 rounded-[var(--ezd-radius-xl)] border border-[var(--ezd-border)] bg-white p-5">
+              <div class="absolute left-6 top-6 h-20 w-28 rounded-[var(--ezd-radius-lg)] border border-[var(--ezd-brand)] bg-[var(--ezd-brand-soft)]"></div>
+              <div class="absolute right-8 top-12 h-24 w-32 rounded-[var(--ezd-radius-lg)] border border-[var(--ezd-accent)] bg-[var(--ezd-accent-soft)]"></div>
+              <div class="absolute bottom-8 left-16 h-20 w-40 rounded-[var(--ezd-radius-lg)] border border-[var(--ezd-border-strong)] bg-[var(--ezd-bg-soft)]"></div>
+
+              <div class="absolute left-12 top-28 h-px w-48 bg-[var(--ezd-border-strong)]"></div>
+              <div class="absolute bottom-24 right-24 h-px w-32 bg-[var(--ezd-border-strong)]"></div>
+            </div>
+
+            <div class="grid gap-3">
+              <div class="rounded-[var(--ezd-radius-lg)] bg-white p-4 shadow-[var(--ezd-shadow-sm)]">
+                <p class="text-xs font-black uppercase tracking-[0.18em] text-[var(--ezd-brand)]">
+                  Space
+                </p>
+                <p class="mt-1 text-sm font-bold">Mô phỏng không gian</p>
+              </div>
+
+              <div class="rounded-[var(--ezd-radius-lg)] bg-white p-4 shadow-[var(--ezd-shadow-sm)]">
+                <p class="text-xs font-black uppercase tracking-[0.18em] text-[var(--ezd-brand)]">
+                  Object
+                </p>
+                <p class="mt-1 text-sm font-bold">Sản phẩm / quy trình</p>
+              </div>
+
+              <div class="rounded-[var(--ezd-radius-lg)] bg-white p-4 shadow-[var(--ezd-shadow-sm)]">
+                <p class="text-xs font-black uppercase tracking-[0.18em] text-[var(--ezd-brand)]">
+                  Interaction
+                </p>
+                <p class="mt-1 text-sm font-bold">Điểm chạm tương tác</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+    }
+
+    {
+      type === 'game-activation' && (
+        <div class="mt-6 grid gap-4 md:grid-cols-3">
+          {
+            ['Start', 'Play', 'Reward'].map((step: string, index: number) => (
+              <div class="rounded-[var(--ezd-radius-2xl)] bg-[var(--ezd-bg-soft)] p-5 text-center">
+                <div class="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-[var(--ezd-brand)] text-2xl font-black text-white">
+                  0{index + 1}
+                </div>
+
+                <h3 class="mt-5 text-xl font-black tracking-tight">
+                  {step}
+                </h3>
+
+                <p class="mt-2 text-xs leading-5 text-[var(--ezd-text-muted)]">
+                  Mini-game flow giúp khách hàng tương tác và để lại tín hiệu chuyển đổi.
+                </p>
+              </div>
+            ))
+          }
+        </div>
+      )
+    }
+
+    {
+      type === 'interactive-website' && (
+        <div class="mt-6 rounded-[var(--ezd-radius-2xl)] bg-[var(--ezd-bg-soft)] p-5">
+          <div class="rounded-[var(--ezd-radius-xl)] border border-[var(--ezd-border)] bg-white p-4 shadow-[var(--ezd-shadow-sm)]">
+            <div class="flex gap-2 border-b border-[var(--ezd-border)] pb-3">
+              <span class="h-3 w-3 rounded-full bg-[var(--ezd-brand)]"></span>
+              <span class="h-3 w-3 rounded-full bg-[var(--ezd-accent)]"></span>
+              <span class="h-3 w-3 rounded-full bg-[var(--ezd-border-strong)]"></span>
+            </div>
+
+            <div class="mt-5 grid gap-4 md:grid-cols-[0.8fr_1.2fr]">
+              <div class="grid gap-3">
+                <div class="h-8 rounded-full bg-[var(--ezd-brand)]"></div>
+                <div class="h-8 rounded-full bg-[var(--ezd-brand-soft)]"></div>
+                <div class="h-8 rounded-full bg-[var(--ezd-accent-soft)]"></div>
+              </div>
+
+              <div class="rounded-[var(--ezd-radius-xl)] bg-[linear-gradient(135deg,var(--ezd-brand-soft),var(--ezd-accent-soft))] p-6">
+                <p class="text-sm font-black text-[var(--ezd-text)]">
+                  Interactive section
+                </p>
+                <p class="mt-2 text-xs leading-5 text-[var(--ezd-text-muted)]">
+                  Scroll, click, quiz, lead capture hoặc demo block được thiết kế theo mục tiêu chuyển đổi.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+    }
+
+    {
+      type === 'default' && (
+        <div class="mt-6 rounded-[var(--ezd-radius-2xl)] bg-[var(--ezd-bg-soft)] p-6">
+          <div class="grid gap-3">
+            <div class="h-10 rounded-full bg-[var(--ezd-brand-soft)]"></div>
+            <div class="h-10 rounded-full bg-[var(--ezd-accent-soft)]"></div>
+            <div class="h-10 rounded-full bg-white"></div>
+          </div>
+        </div>
+      )
+    }
+  </div>
+</div>

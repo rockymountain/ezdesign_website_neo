@@ -4,6 +4,7 @@ import SectionHeader from '../../components/common/SectionHeader.astro';
 import CTASection from '../../components/common/CTASection.astro';
 import Card from '../../components/common/Card.astro';
 import ButtonLink from '../../components/common/ButtonLink.astro';
+import ServiceVisualPanel from '../../components/sections/ServiceVisualPanel.astro';
 
 import { getCollection, render, type CollectionEntry } from 'astro:content';
 import { buildBreadcrumbSchema, buildServiceSchema } from '../../utils/schema';
@@ -14,6 +15,14 @@ type ServiceData = ServiceEntry['data'];
 type ServiceFeature = ServiceData['features'][number];
 type ServiceUseCase = ServiceData['useCases'][number];
 type ServiceFaq = ServiceData['faqs'][number];
+
+type ServiceVisualType =
+  | 'ai-brand-character'
+  | 'ar-vr-mr'
+  | 'digital-twin'
+  | 'game-activation'
+  | 'interactive-website'
+  | 'default';
 
 export async function getStaticPaths() {
   const services: ServiceEntry[] = await getCollection('services');
@@ -54,6 +63,18 @@ const useCases: ServiceUseCase[] = service.data.useCases ?? [];
 const faqs: ServiceFaq[] = service.data.faqs ?? [];
 
 const pageUrl = `/services/${service.data.slug}/`;
+
+const serviceVisualType = (
+  [
+    'ai-brand-character',
+    'ar-vr-mr',
+    'digital-twin',
+    'game-activation',
+    'interactive-website',
+  ].includes(service.data.slug)
+    ? service.data.slug
+    : 'default'
+) as ServiceVisualType;
 
 const jsonLd = [
   buildServiceSchema({
@@ -101,7 +122,7 @@ const jsonLd = [
       </div>
 
       <div class="ezd-container relative">
-        <div class="grid gap-10 lg:grid-cols-[1fr_0.82fr] lg:items-center">
+        <div class="grid gap-10 lg:grid-cols-[1fr_0.92fr] lg:items-center">
           <div>
             <p class="ezd-eyebrow">
               {eyebrow}
@@ -132,47 +153,11 @@ const jsonLd = [
             </div>
           </div>
 
-          <Card padding="lg" class="relative overflow-hidden">
-            <div
-              class="pointer-events-none absolute -right-16 -top-16 h-52 w-52 rounded-full bg-[var(--ezd-accent)] opacity-20 blur-3xl"
-              aria-hidden="true"
-            >
-            </div>
-
-            <div class="relative">
-              <p class="text-xs font-black uppercase tracking-[0.22em] text-[var(--ezd-brand)]">
-                EZDesign Service
-              </p>
-
-              <h2 class="ezd-heading-card mt-4 text-3xl">
-                {title}
-              </h2>
-
-              <p class="ezd-body-small mt-4 text-[var(--ezd-text-muted)]">
-                {excerpt}
-              </p>
-
-              <div class="mt-6 grid gap-3">
-                <div class="rounded-[var(--ezd-radius-xl)] bg-[var(--ezd-bg-soft)] p-4">
-                  <p class="text-sm font-black text-[var(--ezd-text)]">
-                    Rõ vai trò
-                  </p>
-                  <p class="mt-1 text-xs leading-5 text-[var(--ezd-text-muted)]">
-                    Thiết kế theo mục tiêu kinh doanh, hành trình khách hàng và khả năng triển khai thực tế.
-                  </p>
-                </div>
-
-                <div class="rounded-[var(--ezd-radius-xl)] bg-[var(--ezd-bg-soft)] p-4">
-                  <p class="text-sm font-black text-[var(--ezd-text)]">
-                    Dễ triển khai
-                  </p>
-                  <p class="mt-1 text-xs leading-5 text-[var(--ezd-text-muted)]">
-                    Ưu tiên giải pháp gọn, rõ, phù hợp với SME và có thể mở rộng sau.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </Card>
+          <ServiceVisualPanel
+            type={serviceVisualType}
+            title={title}
+            description={excerpt}
+          />
         </div>
       </div>
     </section>
