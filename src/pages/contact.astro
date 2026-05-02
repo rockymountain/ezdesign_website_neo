@@ -40,6 +40,11 @@ const demoExpectations = pageContent.demoExpectations.items as DemoExpectation[]
 
 const finalPrimaryCTA = pageContent.finalCTA.primaryCTA as CTA;
 const finalSecondaryCTA = pageContent.finalCTA.secondaryCTA as CTA;
+
+const fieldClass =
+  'ezd-focus-ring w-full min-w-0 rounded-[var(--ezd-radius-lg)] border border-[var(--ezd-border)] bg-white px-4 py-3 text-sm outline-none transition focus:border-[var(--ezd-brand)]';
+
+const labelClass = 'grid min-w-0 gap-2';
 ---
 
 <BaseLayout title={title} description={description}>
@@ -72,8 +77,8 @@ const finalSecondaryCTA = pageContent.finalCTA.secondaryCTA as CTA;
     <!-- Contact Form + Channels -->
     <section class="py-20">
       <div class="ezd-container">
-        <div class="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
-          <Card padding="lg">
+        <div class="grid gap-10 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:items-start">
+          <Card padding="lg" class="min-w-0">
             <div class="max-w-2xl">
               <p class="ezd-eyebrow">
                 {pageContent.form.eyebrow}
@@ -88,9 +93,9 @@ const finalSecondaryCTA = pageContent.finalCTA.secondaryCTA as CTA;
               </p>
             </div>
 
-            <form class="mt-10 grid gap-5" data-contact-form novalidate>
-              <div class="grid gap-5 md:grid-cols-2">
-                <label for="contact-name" class="grid gap-2">
+            <form class="mt-10 grid min-w-0 gap-5" data-contact-form novalidate>
+              <div class="grid min-w-0 gap-5 md:grid-cols-2">
+                <label for="contact-name" class={labelClass}>
                   <span class="text-sm font-black text-[var(--ezd-text)]">
                     Tên của bạn
                   </span>
@@ -102,7 +107,7 @@ const finalSecondaryCTA = pageContent.finalCTA.secondaryCTA as CTA;
                     required
                     autocomplete="name"
                     placeholder="Ví dụ: Nguyễn An"
-                    class="ezd-focus-ring rounded-[var(--ezd-radius-lg)] border border-[var(--ezd-border)] bg-white px-4 py-3 text-sm outline-none transition focus:border-[var(--ezd-brand)]"
+                    class={fieldClass}
                     data-contact-field
                   />
 
@@ -111,7 +116,7 @@ const finalSecondaryCTA = pageContent.finalCTA.secondaryCTA as CTA;
                   </p>
                 </label>
 
-                <label for="contact-info" class="grid gap-2">
+                <label for="contact-info" class={labelClass}>
                   <span class="text-sm font-black text-[var(--ezd-text)]">
                     Email / Số điện thoại
                   </span>
@@ -123,7 +128,7 @@ const finalSecondaryCTA = pageContent.finalCTA.secondaryCTA as CTA;
                     required
                     autocomplete="email"
                     placeholder="email@domain.com hoặc số điện thoại"
-                    class="ezd-focus-ring rounded-[var(--ezd-radius-lg)] border border-[var(--ezd-border)] bg-white px-4 py-3 text-sm outline-none transition focus:border-[var(--ezd-brand)]"
+                    class={fieldClass}
                     data-contact-field
                   />
 
@@ -133,8 +138,8 @@ const finalSecondaryCTA = pageContent.finalCTA.secondaryCTA as CTA;
                 </label>
               </div>
 
-              <div class="grid gap-5 md:grid-cols-2">
-                <label for="contact-interest" class="grid gap-2">
+              <div class="grid min-w-0 gap-5 md:grid-cols-2">
+                <label for="contact-interest" class={labelClass}>
                   <span class="text-sm font-black text-[var(--ezd-text)]">
                     Bạn quan tâm giải pháp nào?
                   </span>
@@ -143,7 +148,7 @@ const finalSecondaryCTA = pageContent.finalCTA.secondaryCTA as CTA;
                     id="contact-interest"
                     name="interest"
                     required
-                    class="ezd-focus-ring rounded-[var(--ezd-radius-lg)] border border-[var(--ezd-border)] bg-white px-4 py-3 text-sm outline-none transition focus:border-[var(--ezd-brand)]"
+                    class={fieldClass}
                     data-contact-field
                   >
                     <option value="">Chọn giải pháp</option>
@@ -159,7 +164,7 @@ const finalSecondaryCTA = pageContent.finalCTA.secondaryCTA as CTA;
                   </p>
                 </label>
 
-                <label for="contact-industry" class="grid gap-2">
+                <label for="contact-industry" class={labelClass}>
                   <span class="text-sm font-black text-[var(--ezd-text)]">
                     Ngành / mô hình kinh doanh
                   </span>
@@ -167,7 +172,7 @@ const finalSecondaryCTA = pageContent.finalCTA.secondaryCTA as CTA;
                   <select
                     id="contact-industry"
                     name="industry"
-                    class="ezd-focus-ring rounded-[var(--ezd-radius-lg)] border border-[var(--ezd-border)] bg-white px-4 py-3 text-sm outline-none transition focus:border-[var(--ezd-brand)]"
+                    class={fieldClass}
                     data-contact-field
                   >
                     <option value="">Chọn ngành</option>
@@ -180,7 +185,7 @@ const finalSecondaryCTA = pageContent.finalCTA.secondaryCTA as CTA;
                 </label>
               </div>
 
-              <label for="contact-website" class="grid gap-2">
+              <label for="contact-website" class={labelClass}>
                 <span class="text-sm font-black text-[var(--ezd-text)]">
                   Website hiện tại
                 </span>
@@ -191,7 +196,7 @@ const finalSecondaryCTA = pageContent.finalCTA.secondaryCTA as CTA;
                   name="website"
                   autocomplete="url"
                   placeholder="https://..."
-                  class="ezd-focus-ring rounded-[var(--ezd-radius-lg)] border border-[var(--ezd-border)] bg-white px-4 py-3 text-sm outline-none transition focus:border-[var(--ezd-brand)]"
+                  class={fieldClass}
                   data-contact-field
                 />
 
@@ -200,7 +205,7 @@ const finalSecondaryCTA = pageContent.finalCTA.secondaryCTA as CTA;
                 </p>
               </label>
 
-              <label for="contact-message" class="grid gap-2">
+              <label for="contact-message" class={labelClass}>
                 <span class="text-sm font-black text-[var(--ezd-text)]">
                   Nhu cầu / ghi chú
                 </span>
@@ -211,7 +216,7 @@ const finalSecondaryCTA = pageContent.finalCTA.secondaryCTA as CTA;
                   rows="6"
                   required
                   placeholder="Bạn muốn tư vấn EZD AI Chat, nâng cấp website, tạo trải nghiệm tương tác hay cần demo theo ngành?"
-                  class="ezd-focus-ring resize-y rounded-[var(--ezd-radius-lg)] border border-[var(--ezd-border)] bg-white px-4 py-3 text-sm outline-none transition focus:border-[var(--ezd-brand)]"
+                  class={`${fieldClass} resize-y`}
                   data-contact-field
                 ></textarea>
 
@@ -220,7 +225,7 @@ const finalSecondaryCTA = pageContent.finalCTA.secondaryCTA as CTA;
                 </p>
               </label>
 
-              <div class="grid gap-4">
+              <div class="grid min-w-0 gap-4">
                 <button
                   type="submit"
                   class="ezd-focus-ring inline-flex w-full items-center justify-center rounded-full bg-[var(--ezd-brand)] px-6 py-4 text-sm font-black text-white shadow-[var(--ezd-shadow-sm)] transition hover:bg-[var(--ezd-brand-dark)] hover:shadow-[var(--ezd-shadow-md)] disabled:cursor-not-allowed disabled:opacity-60"
@@ -251,16 +256,16 @@ const finalSecondaryCTA = pageContent.finalCTA.secondaryCTA as CTA;
             </form>
           </Card>
 
-          <div class="grid gap-5">
+          <div class="grid min-w-0 gap-5">
             {
               contactChannels.map((channel: ContactChannel) => (
-                <a href={channel.href} class="block">
-                  <Card hover>
+                <a href={channel.href} class="block min-w-0">
+                  <Card hover class="min-w-0">
                     <p class="text-xs font-black uppercase tracking-[0.22em] text-[var(--ezd-brand)]">
                       {channel.label}
                     </p>
 
-                    <h3 class="ezd-heading-card mt-3 text-xl">
+                    <h3 class="ezd-heading-card mt-3 break-words text-xl">
                       {channel.value}
                     </h3>
 
@@ -276,7 +281,7 @@ const finalSecondaryCTA = pageContent.finalCTA.secondaryCTA as CTA;
               ))
             }
 
-            <Card variant="dark" padding="lg">
+            <Card variant="dark" padding="lg" class="min-w-0">
               <p class="text-xs font-black uppercase tracking-[0.22em] text-white/70">
                 Implementation
               </p>

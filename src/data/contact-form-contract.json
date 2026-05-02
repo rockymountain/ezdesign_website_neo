@@ -1,0 +1,101 @@
+{
+  "version": "1.0.0",
+  "endpoint": "/api/contact",
+  "method": "POST",
+  "contentType": "application/json",
+  "fields": [
+    {
+      "name": "name",
+      "label": "Tên của bạn",
+      "type": "string",
+      "required": true,
+      "maxLength": 120
+    },
+    {
+      "name": "contact",
+      "label": "Email / Số điện thoại",
+      "type": "string",
+      "required": true,
+      "maxLength": 160,
+      "description": "Có thể là email hoặc số điện thoại."
+    },
+    {
+      "name": "interest",
+      "label": "Giải pháp quan tâm",
+      "type": "string",
+      "required": true,
+      "maxLength": 120
+    },
+    {
+      "name": "industry",
+      "label": "Ngành / mô hình kinh doanh",
+      "type": "string",
+      "required": false,
+      "maxLength": 120
+    },
+    {
+      "name": "website",
+      "label": "Website hiện tại",
+      "type": "url",
+      "required": false,
+      "maxLength": 240
+    },
+    {
+      "name": "message",
+      "label": "Nhu cầu / ghi chú",
+      "type": "string",
+      "required": true,
+      "maxLength": 2000
+    },
+    {
+      "name": "sourcePath",
+      "label": "Source Path",
+      "type": "string",
+      "required": false,
+      "maxLength": 240
+    },
+    {
+      "name": "submittedAt",
+      "label": "Submitted At",
+      "type": "datetime",
+      "required": true
+    },
+    {
+      "name": "userAgent",
+      "label": "User Agent",
+      "type": "string",
+      "required": false,
+      "maxLength": 500
+    },
+    {
+      "name": "honeypot",
+      "label": "Leave blank",
+      "type": "string",
+      "required": false,
+      "maxLength": 120,
+      "description": "Anti-spam field. If filled, backend should silently accept but not store."
+    }
+  ],
+  "googleSheets": {
+    "columns": [
+      "Submitted At",
+      "Name",
+      "Contact",
+      "Interest",
+      "Industry",
+      "Website",
+      "Message",
+      "Source Path",
+      "User Agent",
+      "Status",
+      "Notes"
+    ],
+    "defaultStatus": "New"
+  },
+  "validation": {
+    "requiredMessage": "Một vài thông tin chưa hợp lệ. Vui lòng kiểm tra lại các trường được đánh dấu.",
+    "websiteMessage": "Website nên bắt đầu bằng https:// hoặc http://",
+    "successMessage": "Cảm ơn bạn. EZDesign đã nhận được thông tin và sẽ phản hồi sớm.",
+    "errorMessage": "Có lỗi khi gửi form. Vui lòng thử lại hoặc liên hệ EZDesign qua email/Zalo."
+  }
+}
