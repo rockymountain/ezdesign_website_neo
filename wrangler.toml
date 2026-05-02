@@ -1,0 +1,6 @@
+name = "ezdesign-website"
+compatibility_date = "2026-05-02"
+pages_build_output_dir = "dist"
+
+[vars]
+ALLOWED_ORIGIN = "http://localhost:4321"

@@ -607,18 +607,78 @@ const labelClass = 'grid min-w-0 gap-2';
         console.info('[EZD Contact Payload]', payload);
 
         setLoading(true);
-        showStatus(
-          'default',
-          'Payload đã được chuẩn hóa. Task tiếp theo sẽ kết nối Cloudflare Worker để validate Turnstile và gửi dữ liệu thật.',
-        );
+        showStatus('default', 'Đang gửi thông tin đến EZDesign...');
 
-        window.setTimeout(() => {
-          setLoading(false);
+        try {
+          const response = await fetch('/api/contact', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payload),
+          });
+
+          const result = await response.json();
+
+          if (!response.ok || !result.ok) {
+            showStatus(
+              'error',
+              result.message || 'Có lỗi khi gửi form. Vui lòng thử lại.',
+            );
+
+            if (result.errors) {
+              Object.entries(result.errors).forEach(([fieldName, message]) => {
+                const field =
+                  fieldName === 'turnstileToken'
+                    ? null
+                    : contactForm.querySelector(`[name="${fieldName}"]`);
+
+                const errorKey =
+                  fieldName === 'turnstileToken' ? 'turnstile' : fieldName;
+
+                const error = contactForm.querySelector(
+                  `[data-field-error="${errorKey}"]`,
+                );
+
+                field?.classList.add('border-red-500');
+
+                if (error) {
+                  error.textContent = String(message);
+                  error.classList.remove('hidden');
+                }
+              });
+            }
+
+            if (window.turnstile) {
+              window.turnstile.reset();
+              window.__ezdTurnstileToken = '';
+            }
+
+            return;
+          }
+
+          contactForm.reset();
+          window.__ezdTurnstileToken = '';
+
+          if (window.turnstile) {
+            window.turnstile.reset();
+          }
+
           showStatus(
             'success',
-            'Form data contract đã sẵn sàng. Kiểm tra payload trong DevTools console trước khi nối backend.',
+            result.message ||
+              'Cảm ơn bạn. EZDesign đã nhận được thông tin và sẽ phản hồi sớm.',
           );
-        }, 700);
+        } catch (error) {
+          console.error('[EZD Contact Error]', error);
+
+          showStatus(
+            'error',
+            'Không thể gửi form lúc này. Vui lòng thử lại hoặc liên hệ EZDesign qua email/Zalo.',
+          );
+        } finally {
+          setLoading(false);
+        }
       });
     }
   </script>
