@@ -36,20 +36,20 @@
   "contactChannels": [
     {
       "label": "Email",
-      "value": "hello@ezdesign.vn",
-      "href": "mailto:hello@ezdesign.vn",
+      "value": "info@ezdesign.vn",
+      "href": "mailto:info@ezdesign.vn",
       "description": "Gửi brief, câu hỏi hoặc yêu cầu tư vấn dự án."
     },
     {
       "label": "Hotline",
-      "value": "Cập nhật sau",
-      "href": "/contact/",
+      "value": "(+84) 983 77 40 65",
+      "href": "tel:+84983774065",
       "description": "Dành cho trao đổi nhanh khi cần hẹn demo hoặc tư vấn trực tiếp."
     },
     {
       "label": "Zalo",
-      "value": "Cập nhật sau",
-      "href": "/contact/",
+      "value": "(+84) 983 77 40 65",
+      "href": "https://zalo.me/0983774065",
       "description": "Kênh handoff phù hợp với SME tại Việt Nam."
     }
   ],
