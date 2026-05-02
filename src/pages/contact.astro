@@ -41,6 +41,9 @@ const demoExpectations = pageContent.demoExpectations.items as DemoExpectation[]
 const finalPrimaryCTA = pageContent.finalCTA.primaryCTA as CTA;
 const finalSecondaryCTA = pageContent.finalCTA.secondaryCTA as CTA;
 
+const turnstileSiteKey =
+  import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '1x00000000000000000000AA';
+
 const fieldClass =
   'ezd-focus-ring w-full min-w-0 rounded-[var(--ezd-radius-lg)] border border-[var(--ezd-border)] bg-white px-4 py-3 text-sm outline-none transition focus:border-[var(--ezd-brand)]';
 
@@ -94,6 +97,18 @@ const labelClass = 'grid min-w-0 gap-2';
             </div>
 
             <form class="mt-10 grid min-w-0 gap-5" data-contact-form novalidate>
+              <!-- Honeypot: bots may fill this, humans should never see it -->
+              <label class="hidden" aria-hidden="true">
+                Leave this field empty
+                <input
+                  type="text"
+                  name="company"
+                  tabindex="-1"
+                  autocomplete="off"
+                  data-contact-honeypot
+                />
+              </label>
+
               <div class="grid min-w-0 gap-5 md:grid-cols-2">
                 <label for="contact-name" class={labelClass}>
                   <span class="text-sm font-black text-[var(--ezd-text)]">
@@ -225,6 +240,39 @@ const labelClass = 'grid min-w-0 gap-2';
                 </p>
               </label>
 
+              <!-- Cloudflare Turnstile -->
+              <div class="grid gap-2">
+                <p class="text-sm font-black text-[var(--ezd-text)]">
+                  Xác minh chống spam
+                </p>
+
+                <div
+                  class="rounded-[var(--ezd-radius-lg)] border border-[var(--ezd-border)] bg-[var(--ezd-bg-soft)] p-4"
+                >
+                  <div
+                    class="cf-turnstile"
+                    data-sitekey={turnstileSiteKey}
+                    data-theme="light"
+                    data-size="normal"
+                    data-callback="onEZDTurnstileSuccess"
+                    data-expired-callback="onEZDTurnstileExpired"
+                    data-error-callback="onEZDTurnstileError"
+                  >
+                  </div>
+                </div>
+
+                <p
+                  class="hidden text-xs font-semibold text-red-600"
+                  data-field-error="turnstile"
+                >
+                  Vui lòng hoàn tất xác minh chống spam trước khi gửi.
+                </p>
+
+                <p class="text-xs leading-5 text-[var(--ezd-text-soft)]">
+                  EZDesign dùng Cloudflare Turnstile để giảm spam mà không cần câu đố CAPTCHA truyền thống.
+                </p>
+              </div>
+
               <div class="grid min-w-0 gap-4">
                 <button
                   type="submit"
@@ -259,13 +307,13 @@ const labelClass = 'grid min-w-0 gap-2';
           <div class="grid min-w-0 gap-5">
             {
               contactChannels.map((channel: ContactChannel) => (
-                <a href={channel.href} class="block min-w-0">
-                  <Card hover class="min-w-0">
+                <a href={channel.href} class="block">
+                  <Card hover>
                     <p class="text-xs font-black uppercase tracking-[0.22em] text-[var(--ezd-brand)]">
                       {channel.label}
                     </p>
 
-                    <h3 class="ezd-heading-card mt-3 break-words text-xl">
+                    <h3 class="ezd-heading-card mt-3 text-xl">
                       {channel.value}
                     </h3>
 
@@ -281,18 +329,18 @@ const labelClass = 'grid min-w-0 gap-2';
               ))
             }
 
-            <Card variant="dark" padding="lg" class="min-w-0">
+            <Card variant="dark" padding="lg">
               <p class="text-xs font-black uppercase tracking-[0.22em] text-white/70">
                 Implementation
               </p>
 
               <h3 class="ezd-heading-card mt-4 text-2xl text-white">
-                Form hiện là UI placeholder.
+                Form đã có data contract và Turnstile token.
               </h3>
 
               <p class="ezd-body-small mt-4 text-white/70">
-                Sprint sau sẽ kết nối form với Cloudflare Worker, Google Sheets và email notification
-                để lưu lead và thông báo cho team EZDesign.
+                Task tiếp theo sẽ kết nối Cloudflare Worker, validate Turnstile qua Siteverify,
+                append lead vào Google Sheets và gửi email notification cho team EZDesign.
               </p>
             </Card>
           </div>
@@ -371,7 +419,40 @@ const labelClass = 'grid min-w-0 gap-2';
     />
   </main>
 
+  <script
+    src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+    async
+    defer
+  ></script>
+
   <script is:inline>
+    window.__ezdTurnstileToken = '';
+
+    window.onEZDTurnstileSuccess = (token) => {
+      window.__ezdTurnstileToken = token || '';
+
+      const contactForm = document.querySelector('[data-contact-form]');
+      const turnstileError = contactForm?.querySelector('[data-field-error="turnstile"]');
+
+      turnstileError?.classList.add('hidden');
+    };
+
+    window.onEZDTurnstileExpired = () => {
+      window.__ezdTurnstileToken = '';
+    };
+
+    window.onEZDTurnstileError = () => {
+      window.__ezdTurnstileToken = '';
+
+      const contactForm = document.querySelector('[data-contact-form]');
+      const turnstileError = contactForm?.querySelector('[data-field-error="turnstile"]');
+
+      if (turnstileError) {
+        turnstileError.textContent = 'Cloudflare Turnstile đang gặp lỗi. Vui lòng tải lại trang hoặc thử lại sau.';
+        turnstileError.classList.remove('hidden');
+      }
+    };
+
     const contactForm = document.querySelector('[data-contact-form]');
 
     if (contactForm) {
@@ -470,7 +551,42 @@ const labelClass = 'grid min-w-0 gap-2';
           error?.classList.remove('hidden');
         }
 
+        const turnstileToken =
+          window.__ezdTurnstileToken ||
+          String(formData.get('cf-turnstile-response') || '').trim();
+
+        if (!turnstileToken) {
+          isValid = false;
+
+          const error = contactForm.querySelector('[data-field-error="turnstile"]');
+
+          if (error) {
+            error.textContent = 'Vui lòng hoàn tất xác minh chống spam trước khi gửi.';
+            error.classList.remove('hidden');
+          }
+        }
+
         return isValid;
+      };
+
+      const buildPayload = () => {
+        const formData = new FormData(contactForm);
+
+        return {
+          name: String(formData.get('name') || '').trim(),
+          contact: String(formData.get('contact') || '').trim(),
+          interest: String(formData.get('interest') || '').trim(),
+          industry: String(formData.get('industry') || '').trim(),
+          website: String(formData.get('website') || '').trim(),
+          message: String(formData.get('message') || '').trim(),
+          sourcePath: window.location.pathname,
+          submittedAt: new Date().toISOString(),
+          userAgent: window.navigator.userAgent,
+          honeypot: String(formData.get('company') || '').trim(),
+          turnstileToken:
+            window.__ezdTurnstileToken ||
+            String(formData.get('cf-turnstile-response') || '').trim(),
+        };
       };
 
       contactForm.addEventListener('submit', async (event) => {
@@ -486,17 +602,21 @@ const labelClass = 'grid min-w-0 gap-2';
           return;
         }
 
+        const payload = buildPayload();
+
+        console.info('[EZD Contact Payload]', payload);
+
         setLoading(true);
         showStatus(
           'default',
-          'Form đang ở chế độ placeholder. Sprint sau sẽ kết nối Cloudflare Worker, Google Sheets và email notification.',
+          'Payload đã được chuẩn hóa. Task tiếp theo sẽ kết nối Cloudflare Worker để validate Turnstile và gửi dữ liệu thật.',
         );
 
         window.setTimeout(() => {
           setLoading(false);
           showStatus(
             'success',
-            'Thông tin đã sẵn sàng để gửi. Ở sprint sau, nút này sẽ gửi dữ liệu thật đến hệ thống lead capture của EZDesign.',
+            'Form data contract đã sẵn sàng. Kiểm tra payload trong DevTools console trước khi nối backend.',
           );
         }, 700);
       });
