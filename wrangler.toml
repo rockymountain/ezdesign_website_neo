@@ -1,3 +1,10 @@
 name = "ezdesign-website"
 compatibility_date = "2026-05-02"
 pages_build_output_dir = "dist"
+
+[vars]
+PUBLIC_TURNSTILE_SITE_KEY="0x4AAAAAADISoyxJP5QUu0Mc"
+ALLOWED_ORIGIN="https://ezdesign.vn"
+GOOGLE_SHEET_RANGE="Leads!A:K"
+LEAD_NOTIFY_FROM="EZDesign Website <leads@notification.ezdesign.vn>"
+LEAD_NOTIFY_TO="info@ezdesign.vn"
