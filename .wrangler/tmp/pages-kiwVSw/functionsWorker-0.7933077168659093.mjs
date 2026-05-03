@@ -203,7 +203,16 @@ async function getGoogleAccessToken(env) {
   });
   if (!response.ok) {
     const errorText = await response.text();
-    console.error("[EZD Contact] Google token error:", errorText);
+    console.error("[EZD Contact] Google token error:", {
+      status: response.status,
+      statusText: response.statusText,
+      serviceAccount: env.GOOGLE_SERVICE_ACCOUNT_EMAIL || "missing",
+      hasPrivateKey: Boolean(env.GOOGLE_PRIVATE_KEY),
+      privateKeyStartsWithBegin: Boolean(
+        env.GOOGLE_PRIVATE_KEY?.includes("BEGIN PRIVATE KEY")
+      ),
+      errorText
+    });
     throw new Error("Unable to get Google access token.");
   }
   const result = await response.json();
@@ -246,7 +255,14 @@ async function appendLeadToGoogleSheet(payload, env) {
   });
   if (!response.ok) {
     const errorText = await response.text();
-    console.error("[EZD Contact] Google Sheets append error:", errorText);
+    console.error("[EZD Contact] Google Sheets append error:", {
+      status: response.status,
+      statusText: response.statusText,
+      range: env.GOOGLE_SHEET_RANGE || "Leads!A:K",
+      sheetIdPrefix: env.GOOGLE_SHEET_ID ? `${env.GOOGLE_SHEET_ID.slice(0, 6)}...` : "missing",
+      serviceAccount: env.GOOGLE_SERVICE_ACCOUNT_EMAIL || "missing",
+      errorText
+    });
     throw new Error("Unable to append lead to Google Sheet.");
   }
 }
@@ -964,7 +980,7 @@ var jsonError = /* @__PURE__ */ __name(async (request, env, _ctx, middlewareCtx)
 }, "jsonError");
 var middleware_miniflare3_json_error_default = jsonError;
 
-// ../.wrangler/tmp/bundle-mO591o/middleware-insertion-facade.js
+// ../.wrangler/tmp/bundle-NVr1au/middleware-insertion-facade.js
 var __INTERNAL_WRANGLER_MIDDLEWARE__ = [
   middleware_ensure_req_body_drained_default,
   middleware_miniflare3_json_error_default
@@ -996,7 +1012,7 @@ function __facade_invoke__(request, env, ctx, dispatch, finalMiddleware) {
 }
 __name(__facade_invoke__, "__facade_invoke__");
 
-// ../.wrangler/tmp/bundle-mO591o/middleware-loader.entry.ts
+// ../.wrangler/tmp/bundle-NVr1au/middleware-loader.entry.ts
 var __Facade_ScheduledController__ = class ___Facade_ScheduledController__ {
   constructor(scheduledTime, cron, noRetry) {
     this.scheduledTime = scheduledTime;

@@ -303,7 +303,17 @@ async function getGoogleAccessToken(env: ContactEnv): Promise<string> {
 
   if (!response.ok) {
     const errorText = await response.text();
-    console.error('[EZD Contact] Google token error:', errorText);
+    // console.error('[EZD Contact] Google token error:', errorText);
+    console.error('[EZD Contact] Google token error:', {
+      status: response.status,
+      statusText: response.statusText,
+      serviceAccount: env.GOOGLE_SERVICE_ACCOUNT_EMAIL || 'missing',
+      hasPrivateKey: Boolean(env.GOOGLE_PRIVATE_KEY),
+      privateKeyStartsWithBegin: Boolean(
+        env.GOOGLE_PRIVATE_KEY?.includes('BEGIN PRIVATE KEY'),
+      ),
+      errorText,
+    });
     throw new Error('Unable to get Google access token.');
   }
 
@@ -358,9 +368,25 @@ async function appendLeadToGoogleSheet(
     }),
   });
 
+  // if (!response.ok) {
+  //   const errorText = await response.text();
+  //   console.error('[EZD Contact] Google Sheets append error:', errorText);
+  //   throw new Error('Unable to append lead to Google Sheet.');
+  // }
   if (!response.ok) {
     const errorText = await response.text();
-    console.error('[EZD Contact] Google Sheets append error:', errorText);
+
+    console.error('[EZD Contact] Google Sheets append error:', {
+      status: response.status,
+      statusText: response.statusText,
+      range: env.GOOGLE_SHEET_RANGE || 'Leads!A:K',
+      sheetIdPrefix: env.GOOGLE_SHEET_ID
+        ? `${env.GOOGLE_SHEET_ID.slice(0, 6)}...`
+        : 'missing',
+      serviceAccount: env.GOOGLE_SERVICE_ACCOUNT_EMAIL || 'missing',
+      errorText,
+    });
+
     throw new Error('Unable to append lead to Google Sheet.');
   }
 }
