@@ -604,7 +604,9 @@ const labelClass = 'grid min-w-0 gap-2';
 
         const payload = buildPayload();
 
-        console.info('[EZD Contact Payload]', payload);
+        if (window.location.hostname === 'localhost') {
+          console.info('[EZD Contact Payload]', payload);
+        }
 
         setLoading(true);
         showStatus('default', 'Đang gửi thông tin đến EZDesign...');
