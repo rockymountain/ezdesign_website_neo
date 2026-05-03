@@ -8,6 +8,8 @@ var TURNSTILE_SITEVERIFY_URL = "https://challenges.cloudflare.com/turnstile/v0/s
 var GOOGLE_TOKEN_URL = "https://oauth2.googleapis.com/token";
 var GOOGLE_SHEETS_SCOPE = "https://www.googleapis.com/auth/spreadsheets";
 var RESEND_EMAILS_URL = "https://api.resend.com/emails";
+var MIN_FORM_FILL_TIME_MS = 3500;
+var MAX_SUBMITTED_AT_SKEW_MS = 10 * 60 * 1e3;
 var MAX_LENGTH = {
   name: 120,
   contact: 160,
@@ -32,20 +34,48 @@ function jsonResponse(body, status = 200, origin = "*") {
 }
 __name(jsonResponse, "jsonResponse");
 __name2(jsonResponse, "jsonResponse");
+function getAllowedOrigins(env) {
+  return (env.ALLOWED_ORIGIN || "").split(",").map((origin) => origin.trim()).filter(Boolean);
+}
+__name(getAllowedOrigins, "getAllowedOrigins");
+__name2(getAllowedOrigins, "getAllowedOrigins");
 function getAllowedOrigin(request, env) {
   const requestOrigin = request.headers.get("Origin") || "";
-  if (!env.ALLOWED_ORIGIN) {
+  const allowedOrigins = getAllowedOrigins(env);
+  if (allowedOrigins.length === 0) {
     return requestOrigin || "*";
   }
-  return requestOrigin === env.ALLOWED_ORIGIN ? requestOrigin : env.ALLOWED_ORIGIN;
+  if (requestOrigin && allowedOrigins.includes(requestOrigin)) {
+    return requestOrigin;
+  }
+  return allowedOrigins[0];
 }
 __name(getAllowedOrigin, "getAllowedOrigin");
 __name2(getAllowedOrigin, "getAllowedOrigin");
+function isAllowedRequestOrigin(request, env) {
+  const allowedOrigins = getAllowedOrigins(env);
+  if (allowedOrigins.length === 0) {
+    return true;
+  }
+  const requestOrigin = request.headers.get("Origin") || "";
+  return Boolean(requestOrigin && allowedOrigins.includes(requestOrigin));
+}
+__name(isAllowedRequestOrigin, "isAllowedRequestOrigin");
+__name2(isAllowedRequestOrigin, "isAllowedRequestOrigin");
 function normalizeString(value) {
   return typeof value === "string" ? value.trim() : "";
 }
 __name(normalizeString, "normalizeString");
 __name2(normalizeString, "normalizeString");
+function parseDateMs(value) {
+  if (typeof value !== "string") {
+    return null;
+  }
+  const time = Date.parse(value);
+  return Number.isNaN(time) ? null : time;
+}
+__name(parseDateMs, "parseDateMs");
+__name2(parseDateMs, "parseDateMs");
 function escapeHtml(value) {
   return value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#039;");
 }
@@ -76,7 +106,9 @@ function validatePayload(payload) {
   if (interest.length > MAX_LENGTH.interest) {
     errors.interest = "Gi\u1EA3i ph\xE1p quan t\xE2m qu\xE1 d\xE0i.";
   }
-  if (industry.length > MAX_LENGTH.industry) errors.industry = "Ng\xE0nh qu\xE1 d\xE0i.";
+  if (industry.length > MAX_LENGTH.industry) {
+    errors.industry = "Ng\xE0nh qu\xE1 d\xE0i.";
+  }
   if (message.length > MAX_LENGTH.message) {
     errors.message = "N\u1ED9i dung ghi ch\xFA qu\xE1 d\xE0i.";
   }
@@ -98,6 +130,25 @@ function validatePayload(payload) {
 }
 __name(validatePayload, "validatePayload");
 __name2(validatePayload, "validatePayload");
+function validateSubmissionTiming(payload) {
+  const errors = {};
+  const now = Date.now();
+  const submittedAtMs = parseDateMs(payload.submittedAt);
+  const formStartedAtMs = parseDateMs(payload.formStartedAt);
+  if (!submittedAtMs) {
+    errors.submittedAt = "Submitted timestamp kh\xF4ng h\u1EE3p l\u1EC7.";
+  } else if (Math.abs(now - submittedAtMs) > MAX_SUBMITTED_AT_SKEW_MS) {
+    errors.submittedAt = "Submitted timestamp \u0111\xE3 h\u1EBFt h\u1EA1n.";
+  }
+  if (!formStartedAtMs) {
+    errors.formStartedAt = "Form start timestamp kh\xF4ng h\u1EE3p l\u1EC7.";
+  } else if (submittedAtMs && submittedAtMs - formStartedAtMs < MIN_FORM_FILL_TIME_MS) {
+    errors.formStartedAt = "Form \u0111\u01B0\u1EE3c g\u1EEDi qu\xE1 nhanh.";
+  }
+  return errors;
+}
+__name(validateSubmissionTiming, "validateSubmissionTiming");
+__name2(validateSubmissionTiming, "validateSubmissionTiming");
 async function validateTurnstileToken(token, request, env) {
   if (!env.TURNSTILE_SECRET_KEY) {
     console.error("[EZD Contact] Missing TURNSTILE_SECRET_KEY.");
@@ -414,6 +465,16 @@ async function handleContactRequest(request, env) {
       allowedOrigin
     );
   }
+  if (!isAllowedRequestOrigin(request, env)) {
+    return jsonResponse(
+      {
+        ok: false,
+        message: "Request origin kh\xF4ng h\u1EE3p l\u1EC7."
+      },
+      403,
+      allowedOrigin
+    );
+  }
   const payload = await readJsonPayload(request);
   if (!payload) {
     return jsonResponse(
@@ -436,7 +497,10 @@ async function handleContactRequest(request, env) {
       allowedOrigin
     );
   }
-  const errors = validatePayload(payload);
+  const errors = {
+    ...validatePayload(payload),
+    ...validateSubmissionTiming(payload)
+  };
   if (Object.keys(errors).length > 0) {
     return jsonResponse(
       {

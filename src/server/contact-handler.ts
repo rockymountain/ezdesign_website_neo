@@ -7,6 +7,7 @@ type ContactPayload = {
   message?: string;
   sourcePath?: string;
   submittedAt?: string;
+  formStartedAt?: string;
   userAgent?: string;
   honeypot?: string;
   turnstileToken?: string;
@@ -40,6 +41,9 @@ const GOOGLE_SHEETS_SCOPE = 'https://www.googleapis.com/auth/spreadsheets';
 
 const RESEND_EMAILS_URL = 'https://api.resend.com/emails';
 
+const MIN_FORM_FILL_TIME_MS = 3500;
+const MAX_SUBMITTED_AT_SKEW_MS = 10 * 60 * 1000;
+
 const MAX_LENGTH = {
   name: 120,
   contact: 160,
@@ -68,20 +72,52 @@ function jsonResponse(
   });
 }
 
+function getAllowedOrigins(env: ContactEnv): string[] {
+  return (env.ALLOWED_ORIGIN || '')
+    .split(',')
+    .map((origin) => origin.trim())
+    .filter(Boolean);
+}
+
 function getAllowedOrigin(request: Request, env: ContactEnv): string {
   const requestOrigin = request.headers.get('Origin') || '';
+  const allowedOrigins = getAllowedOrigins(env);
 
-  if (!env.ALLOWED_ORIGIN) {
+  if (allowedOrigins.length === 0) {
     return requestOrigin || '*';
   }
 
-  return requestOrigin === env.ALLOWED_ORIGIN
-    ? requestOrigin
-    : env.ALLOWED_ORIGIN;
+  if (requestOrigin && allowedOrigins.includes(requestOrigin)) {
+    return requestOrigin;
+  }
+
+  return allowedOrigins[0];
+}
+
+function isAllowedRequestOrigin(request: Request, env: ContactEnv): boolean {
+  const allowedOrigins = getAllowedOrigins(env);
+
+  if (allowedOrigins.length === 0) {
+    return true;
+  }
+
+  const requestOrigin = request.headers.get('Origin') || '';
+
+  return Boolean(requestOrigin && allowedOrigins.includes(requestOrigin));
 }
 
 function normalizeString(value: unknown): string {
   return typeof value === 'string' ? value.trim() : '';
+}
+
+function parseDateMs(value: unknown): number | null {
+  if (typeof value !== 'string') {
+    return null;
+  }
+
+  const time = Date.parse(value);
+
+  return Number.isNaN(time) ? null : time;
 }
 
 function escapeHtml(value: string): string {
@@ -110,24 +146,33 @@ function validatePayload(payload: ContactPayload): Record<string, string> {
   if (!contact) errors.contact = 'Vui lòng nhập email hoặc số điện thoại.';
   if (!interest) errors.interest = 'Vui lòng chọn giải pháp bạn quan tâm.';
   if (!message) errors.message = 'Vui lòng mô tả ngắn nhu cầu của bạn.';
+
   if (!turnstileToken) {
     errors.turnstileToken = 'Vui lòng hoàn tất xác minh chống spam.';
   }
 
   if (name.length > MAX_LENGTH.name) errors.name = 'Tên quá dài.';
+
   if (contact.length > MAX_LENGTH.contact) {
     errors.contact = 'Thông tin liên hệ quá dài.';
   }
+
   if (interest.length > MAX_LENGTH.interest) {
     errors.interest = 'Giải pháp quan tâm quá dài.';
   }
-  if (industry.length > MAX_LENGTH.industry) errors.industry = 'Ngành quá dài.';
+
+  if (industry.length > MAX_LENGTH.industry) {
+    errors.industry = 'Ngành quá dài.';
+  }
+
   if (message.length > MAX_LENGTH.message) {
     errors.message = 'Nội dung ghi chú quá dài.';
   }
+
   if (sourcePath.length > MAX_LENGTH.sourcePath) {
     errors.sourcePath = 'Source path quá dài.';
   }
+
   if (userAgent.length > MAX_LENGTH.userAgent) {
     errors.userAgent = 'User agent quá dài.';
   }
@@ -140,6 +185,31 @@ function validatePayload(payload: ContactPayload): Record<string, string> {
     if (website.length > MAX_LENGTH.website) {
       errors.website = 'Website quá dài.';
     }
+  }
+
+  return errors;
+}
+
+function validateSubmissionTiming(payload: ContactPayload): Record<string, string> {
+  const errors: Record<string, string> = {};
+
+  const now = Date.now();
+  const submittedAtMs = parseDateMs(payload.submittedAt);
+  const formStartedAtMs = parseDateMs(payload.formStartedAt);
+
+  if (!submittedAtMs) {
+    errors.submittedAt = 'Submitted timestamp không hợp lệ.';
+  } else if (Math.abs(now - submittedAtMs) > MAX_SUBMITTED_AT_SKEW_MS) {
+    errors.submittedAt = 'Submitted timestamp đã hết hạn.';
+  }
+
+  if (!formStartedAtMs) {
+    errors.formStartedAt = 'Form start timestamp không hợp lệ.';
+  } else if (
+    submittedAtMs &&
+    submittedAtMs - formStartedAtMs < MIN_FORM_FILL_TIME_MS
+  ) {
+    errors.formStartedAt = 'Form được gửi quá nhanh.';
   }
 
   return errors;
@@ -303,7 +373,7 @@ async function getGoogleAccessToken(env: ContactEnv): Promise<string> {
 
   if (!response.ok) {
     const errorText = await response.text();
-    // console.error('[EZD Contact] Google token error:', errorText);
+
     console.error('[EZD Contact] Google token error:', {
       status: response.status,
       statusText: response.statusText,
@@ -314,6 +384,7 @@ async function getGoogleAccessToken(env: ContactEnv): Promise<string> {
       ),
       errorText,
     });
+
     throw new Error('Unable to get Google access token.');
   }
 
@@ -368,11 +439,6 @@ async function appendLeadToGoogleSheet(
     }),
   });
 
-  // if (!response.ok) {
-  //   const errorText = await response.text();
-  //   console.error('[EZD Contact] Google Sheets append error:', errorText);
-  //   throw new Error('Unable to append lead to Google Sheet.');
-  // }
   if (!response.ok) {
     const errorText = await response.text();
 
@@ -456,7 +522,9 @@ function buildLeadEmailText(payload: ContactPayload): string {
   return [
     'New EZDesign lead',
     '',
-    `Submitted At: ${normalizeString(payload.submittedAt) || new Date().toISOString()}`,
+    `Submitted At: ${
+      normalizeString(payload.submittedAt) || new Date().toISOString()
+    }`,
     `Name: ${normalizeString(payload.name)}`,
     `Contact: ${normalizeString(payload.contact)}`,
     `Interest: ${normalizeString(payload.interest)}`,
@@ -536,6 +604,17 @@ export async function handleContactRequest(
     );
   }
 
+  if (!isAllowedRequestOrigin(request, env)) {
+    return jsonResponse(
+      {
+        ok: false,
+        message: 'Request origin không hợp lệ.',
+      },
+      403,
+      allowedOrigin,
+    );
+  }
+
   const payload = await readJsonPayload(request);
 
   if (!payload) {
@@ -562,7 +641,10 @@ export async function handleContactRequest(
     );
   }
 
-  const errors = validatePayload(payload);
+  const errors = {
+    ...validatePayload(payload),
+    ...validateSubmissionTiming(payload),
+  };
 
   if (Object.keys(errors).length > 0) {
     return jsonResponse(

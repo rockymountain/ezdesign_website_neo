@@ -246,9 +246,7 @@ const labelClass = 'grid min-w-0 gap-2';
                   Xác minh chống spam
                 </p>
 
-                <div
-                  class="rounded-[var(--ezd-radius-lg)] border border-[var(--ezd-border)] bg-[var(--ezd-bg-soft)] p-4"
-                >
+                <div class="rounded-[var(--ezd-radius-lg)] border border-[var(--ezd-border)] bg-[var(--ezd-bg-soft)] p-4">
                   <div
                     class="cf-turnstile"
                     data-sitekey={turnstileSiteKey}
@@ -339,8 +337,8 @@ const labelClass = 'grid min-w-0 gap-2';
               </h3>
 
               <p class="ezd-body-small mt-4 text-white/70">
-                Task tiếp theo sẽ kết nối Cloudflare Worker, validate Turnstile qua Siteverify,
-                append lead vào Google Sheets và gửi email notification cho team EZDesign.
+                Form hiện đã sẵn sàng cho Cloudflare Pages Function, Google Sheets và email notification.
+                Lớp chống spam miễn phí gồm Turnstile, honeypot, timing guard và duplicate submit guard.
               </p>
             </Card>
           </div>
@@ -454,6 +452,7 @@ const labelClass = 'grid min-w-0 gap-2';
     };
 
     const contactForm = document.querySelector('[data-contact-form]');
+    const contactFormStartedAt = new Date().toISOString();
 
     if (contactForm) {
       const submitButton = contactForm.querySelector('[data-contact-submit]');
@@ -581,6 +580,7 @@ const labelClass = 'grid min-w-0 gap-2';
           message: String(formData.get('message') || '').trim(),
           sourcePath: window.location.pathname,
           submittedAt: new Date().toISOString(),
+          formStartedAt: contactFormStartedAt,
           userAgent: window.navigator.userAgent,
           honeypot: String(formData.get('company') || '').trim(),
           turnstileToken:
@@ -592,13 +592,22 @@ const labelClass = 'grid min-w-0 gap-2';
       contactForm.addEventListener('submit', async (event) => {
         event.preventDefault();
 
+        if (contactForm.dataset.submitting === 'true') {
+          return;
+        }
+
+        contactForm.dataset.submitting = 'true';
+
         const isValid = validateForm();
 
         if (!isValid) {
+          contactForm.dataset.submitting = 'false';
+
           showStatus(
             'error',
             'Một vài thông tin chưa hợp lệ. Vui lòng kiểm tra lại các trường được đánh dấu.',
           );
+
           return;
         }
 
@@ -631,7 +640,9 @@ const labelClass = 'grid min-w-0 gap-2';
             if (result.errors) {
               Object.entries(result.errors).forEach(([fieldName, message]) => {
                 const field =
-                  fieldName === 'turnstileToken'
+                  fieldName === 'turnstileToken' ||
+                  fieldName === 'submittedAt' ||
+                  fieldName === 'formStartedAt'
                     ? null
                     : contactForm.querySelector(`[name="${fieldName}"]`);
 
@@ -660,6 +671,7 @@ const labelClass = 'grid min-w-0 gap-2';
           }
 
           contactForm.reset();
+          contactForm.dataset.submitting = 'false';
           window.__ezdTurnstileToken = '';
 
           if (window.turnstile) {
@@ -680,6 +692,7 @@ const labelClass = 'grid min-w-0 gap-2';
           );
         } finally {
           setLoading(false);
+          contactForm.dataset.submitting = 'false';
         }
       });
     }
