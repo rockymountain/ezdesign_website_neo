@@ -1,163 +1,278 @@
 {
   "seo": {
-    "title": "EZD AI Chat — AI Brand Assistant cho SME B2C | EZDesign",
-    "description": "EZD AI Chat giúp SME B2C có một nhân vật AI mang giọng thương hiệu, biết tư vấn khách, trả lời FAQ, thu lead và chuyển khách sang người thật khi cần."
+    "title": "EZD AI Chat | AI Brand Receptionist cho website SME B2C | EZDesign",
+    "description": "EZD AI Chat giúp website của bạn có một nhân viên thương hiệu AI trực 24/7, biết tư vấn, xử lý băn khoăn của khách hàng và chuyển họ thành lead qua Zalo, cuộc gọi hoặc form tư vấn."
   },
   "hero": {
-    "eyebrow": "EZD AI Chat",
-    "title": "Biến website thành nhân viên tư vấn 24/7 với AI Brand Assistant.",
-    "description": "EZD AI Chat giúp website của bạn có một nhân vật AI mang giọng thương hiệu, biết trả lời FAQ, tư vấn khách, dẫn dắt lead flow và chuyển khách sang người thật khi cần.",
+    "eyebrow": "AI Brand Receptionist cho website SME B2C",
+    "title": "AI Receptionist - Tư vấn 24/7, chuyển khách thành lead",
+    "description": "EZD AI Chat không chỉ là chatbot trả lời câu hỏi. Đây là một AI Brand Receptionist được nhúng vào website, giúp khách hàng hiểu dịch vụ, gỡ băn khoăn trước khi mua và chuyển sang Zalo, cuộc gọi hoặc form tư vấn khi họ sẵn sàng.",
     "primaryCTA": {
-      "label": "Đặt lịch demo",
-      "href": "/contact/"
+      "label": "Đăng ký Founding Partner Pilot",
+      "href": "/contact/?intent=pilot"
     },
     "secondaryCTA": {
-      "label": "Xem AI demo",
+      "label": "Xem cách EZD AI Chat hoạt động",
       "href": "#live-demo"
     },
-    "previewNote": "Production widget sẽ được tích hợp tại vùng preview này sau khi hoàn tất UI website.",
+    "previewNote": "AI hỗ trợ tư vấn ban đầu, xử lý các băn khoăn phổ biến và chuyển khách sang người thật khi cần.",
     "previewMessages": [
       {
         "role": "assistant",
-        "text": "Xin chào, mình là EZD Assistant. Bạn muốn tư vấn AI Chat cho ngành nào?"
+        "text": "Xin chào, mình là trợ lý AI của thương hiệu. Bạn đang quan tâm đến dịch vụ nào ạ?"
       },
       {
         "role": "user",
-        "text": "Tôi muốn tư vấn cho spa/salon."
+        "text": "Tôi muốn hỏi giá trước, nhưng chưa chắc có phù hợp không."
       },
       {
         "role": "assistant",
-        "text": "Tuyệt vời. Mình có thể giúp bạn thiết kế nhân vật AI để tư vấn dịch vụ, đặt lịch và chuyển khách sang Zalo khi cần."
+        "text": "Mình hiểu. Trước khi nói giá, mình có thể hỏi nhanh nhu cầu của bạn để gợi ý gói phù hợp hơn, tránh chọn dư hoặc thiếu nhé."
+      },
+      {
+        "role": "user",
+        "text": "Được, tôi muốn tư vấn thêm qua Zalo."
+      },
+      {
+        "role": "assistant",
+        "text": "Dạ được. Mình sẽ chuyển bạn sang Zalo để đội ngũ tư vấn hỗ trợ chi tiết hơn."
       }
     ]
   },
   "painPoints": {
-    "eyebrow": "Vấn đề",
-    "title": "Website có traffic, nhưng bạn đang đánh rơi khách hàng mỗi ngày?",
-    "description": "Một điểm chạm biết trò chuyện giúp bạn phản hồi nhanh hơn, tư vấn đúng ngữ cảnh hơn và dẫn khách tới hành động rõ ràng hơn.",
+    "eyebrow": "Vấn đề của SME B2C",
+    "title": "Vì sao khách chưa chốt đơn?",
+    "description": "Nhiều doanh nghiệp đã có website, bảng giá, hình ảnh, FAQ và nút liên hệ. Nhưng khách vẫn hỏi rồi im lặng, xem rồi thoát, hoặc cần tư vấn nhưng không ai phản hồi kịp. Vấn đề không chỉ là tốc độ trả lời — mà là doanh nghiệp chưa biết chính xác khách đang ngại điều gì trước khi mua.",
     "items": [
       {
-        "title": "Khách hỏi lặp lại",
-        "description": "Khách hỏi nhiều câu giống nhau nhưng nhân sự không phải lúc nào cũng phản hồi kịp."
+        "title": "Khách hỏi giá rồi biến mất",
+        "description": "Khách không nhất thiết thấy đắt. Có thể họ chưa hiểu giá đó bao gồm gì, chưa thấy đủ tin tưởng, hoặc chưa biết gói nào phù hợp với nhu cầu của mình."
       },
       {
-        "title": "Traffic chưa thành lead",
-        "description": "Website có lượt truy cập nhưng thiếu một điểm chạm đủ nhanh để dẫn khách tới hành động."
+        "title": "Website có traffic nhưng ít lead",
+        "description": "Khách vào website, đọc thông tin rồi rời đi mà không để lại số điện thoại, không bấm Zalo và không đặt lịch tư vấn."
       },
       {
-        "title": "Chatbot quá máy móc",
-        "description": "Các chatbot truyền thống thường khô cứng, không phản ánh được cá tính thương hiệu."
+        "title": "Nhân sự không thể trực 24/7",
+        "description": "Nhiều khách hỏi ngoài giờ làm việc, cuối tuần hoặc lúc đội ngũ đang bận. Khi phản hồi chậm, cơ hội chuyển đổi đã giảm."
       },
       {
-        "title": "Khách cần tư vấn trước khi mua",
-        "description": "Nhiều ngành B2C cần giải thích, tư vấn, gợi ý hoặc đặt lịch trước khi chuyển đổi."
+        "title": "FAQ không đủ để tư vấn",
+        "description": "FAQ chỉ trả lời câu hỏi tĩnh. Khách hàng thật thường hỏi theo ngữ cảnh, có băn khoăn riêng và cần được dẫn dắt từng bước."
       },
       {
-        "title": "Đội ngũ nhỏ thiếu người trực",
-        "description": "SME khó duy trì phản hồi nhanh trên mọi khung giờ nếu chỉ dựa vào nhân sự thật."
+        "title": "Chủ doanh nghiệp không biết khách đang kẹt ở đâu",
+        "description": "Bạn có thể cảm nhận khách đang lưỡng lự, nhưng không có dữ liệu rõ ràng về lý do họ chưa mua: giá, niềm tin, thời gian, vị trí, kết quả hay sự phù hợp."
+      },
+      {
+        "title": "Tư vấn không nhất quán",
+        "description": "Mỗi nhân sự có thể trả lời một kiểu. Điều này làm trải nghiệm thương hiệu thiếu nhất quán và khiến khách hàng khó ra quyết định."
       }
     ]
   },
   "difference": {
-    "eyebrow": "Khác biệt",
-    "title": "Không chỉ là chatbot. Đây là một AI brand assistant.",
-    "description": "EZD AI Chat được thiết kế như một nhân vật đại diện thương hiệu, có vai trò, giọng nói và hành trình hội thoại riêng.",
+    "eyebrow": "Khác gì chatbot thường?",
+    "title": "\"Nhân viên tư vấn\" chuyên nghiệp và tận tuỵ",
+    "description": "EZD AI Chat được thiết kế như một điểm chạm thương hiệu biết trò chuyện, biết tư vấn và biết chuyển đổi khách hàng. Thay vì chỉ phản hồi nhanh hơn, hệ thống giúp doanh nghiệp hiểu rõ hơn những băn khoăn đang làm khách hàng chần chừ trước khi mua.",
     "features": [
       {
-        "title": "Nhân vật AI đại diện thương hiệu",
-        "description": "AI không chỉ trả lời câu hỏi, mà xuất hiện như một nhân vật có tính cách, giọng nói và cách xưng hô phù hợp với thương hiệu."
+        "title": "Tư vấn theo ngữ cảnh",
+        "description": "AI không chỉ đọc lại FAQ. AI hiểu khách đang hỏi gì, đang băn khoăn ở đâu và nên dẫn dắt cuộc trò chuyện theo hướng nào."
       },
       {
-        "title": "Biết tư vấn và dẫn khách tới hành động",
-        "description": "AI có thể gợi ý dịch vụ, trả lời FAQ, dẫn khách qua lead flow và chuyển tiếp sang người thật khi cần."
+        "title": "Giữ đúng giọng thương hiệu",
+        "description": "Mỗi doanh nghiệp có cách nói chuyện riêng. EZD AI Chat được cấu hình theo brand voice, dịch vụ, phong cách và quy trình tư vấn của từng thương hiệu."
       },
       {
-        "title": "Dễ triển khai theo mô hình managed SaaS",
-        "description": "EZDesign hỗ trợ setup ban đầu, cấu hình nhân vật, FAQ, quick replies, handoff và analytics để SME bắt đầu nhanh hơn."
+        "title": "Xử lý băn khoăn trước khi mua",
+        "description": "AI có thể phản hồi các ma sát phổ biến như giá, niềm tin, vị trí, thời gian, kết quả, sự phù hợp hoặc so sánh với lựa chọn rẻ hơn."
+      },
+      {
+        "title": "Chuyển khách sang người thật đúng lúc",
+        "description": "Khi khách đã sẵn sàng, AI có thể chuyển sang Zalo, cuộc gọi, form tư vấn hoặc lead flow thay vì để khách tự tìm nút liên hệ."
+      },
+      {
+        "title": "Ghi nhận tín hiệu chuyển đổi",
+        "description": "Hệ thống có thể theo dõi các tín hiệu như mở chat, gửi tin nhắn, bấm Zalo, hoàn thành lead flow hoặc tiếp tục hỏi sau khi nghe giá."
+      },
+      {
+        "title": "Tối ưu theo ngành theo thời gian",
+        "description": "Về dài hạn, EZD AI Chat không chỉ tối ưu từng website riêng lẻ, mà còn giúp nhận diện các pattern ma sát mua hàng theo từng ngành như hospitality, education, agency, clinic hoặc spa."
       }
     ]
   },
   "liveDemo": {
-    "eyebrow": "Live Demo",
-    "title": "Trải nghiệm EZD Assistant ngay trên website.",
-    "description": "Vùng này sẽ embed AI thật của EZD Assistant. Khi đi vào production, khách có thể thử hội thoại trực tiếp ngay tại đây.",
-    "placeholderTitle": "EZD Assistant widget embed placeholder",
-    "placeholderDescription": "Production widget sẽ được tích hợp ở section này sau khi hoàn tất UI website."
+    "eyebrow": "Trải nghiệm thử",
+    "title": "Một cuộc trò chuyện nhỏ có thể cho bạn biết khách đang ngại điều gì.",
+    "description": "Khách hàng thường không nói thẳng “tôi chưa tin” hay “tôi thấy rủi ro”. Họ hỏi bằng những câu rất đời thường: giá bao nhiêu, có phù hợp không, bao lâu thì xong, có cam kết không, khác gì lựa chọn rẻ hơn. EZD AI Chat giúp nhận diện các tín hiệu đó ngay trong cuộc trò chuyện.",
+    "placeholderTitle": "Demo AI Brand Receptionist",
+    "placeholderDescription": "Live demo có thể được cấu hình theo từng ngành: hospitality, education, service/agency, spa, clinic hoặc local booking service."
   },
   "useCases": {
-    "eyebrow": "Use Cases",
-    "title": "Phù hợp với các ngành cần tư vấn trước khi chuyển đổi.",
-    "description": "EZD AI Chat phù hợp với các SME B2C có khách hàng cần hỏi, so sánh, đặt lịch hoặc để lại thông tin trước khi mua."
+    "eyebrow": "Dành cho ngành nào?",
+    "title": "Phù hợp các SME cần tư vấn nhiều trước khi chốt đơn.",
+    "description": "EZD AI Chat ưu tiên các SME B2C có quy trình lead, booking hoặc tư vấn rõ ràng. Đây là những ngành mà khách hàng thường cần được trấn an, giải thích và dẫn dắt trước khi ra quyết định.",
+    "items": [
+      {
+        "title": "Homestay, retreat, villa, cafe-retreat",
+        "description": "Khách thường hỏi về vị trí, giá, tiện nghi, không gian riêng tư, phù hợp nhóm/gia đình, ăn uống, thời tiết và lịch trống. AI có thể tư vấn gói phù hợp và chuyển khách sang Zalo để đặt lịch."
+      },
+      {
+        "title": "Trung tâm ngoại ngữ, trường tư thục, lớp kỹ năng",
+        "description": "Phụ huynh thường lo về trình độ đầu vào, kết quả học, giáo viên, học phí, lịch học và cam kết tiến bộ. AI có thể tư vấn lộ trình, thu lead học thử và chuyển sang tư vấn viên."
+      },
+      {
+        "title": "Thiết kế, branding, website, studio, photography",
+        "description": "Khách thường hỏi giá, thời gian triển khai, phạm vi công việc, bảo hành, khác gì freelancer hoặc template rẻ hơn. AI có thể giải thích quy trình, gợi ý gói dịch vụ và tạo yêu cầu tư vấn."
+      },
+      {
+        "title": "Spa, salon, clinic, thẩm mỹ, chăm sóc sức khỏe",
+        "description": "Khách thường lo về hiệu quả, an toàn, đau hay không, thời gian hồi phục, chuyên viên, giá và liệu trình phù hợp. AI có thể tư vấn ban đầu và chuyển sang đặt lịch."
+      },
+      {
+        "title": "Dịch vụ đặt lịch, đặt hẹn, tư vấn cá nhân hóa",
+        "description": "Phù hợp với các doanh nghiệp cần trả lời nhanh, lọc nhu cầu, xin thông tin cơ bản và chuyển khách sang người thật khi đã có tín hiệu quan tâm rõ ràng."
+      }
+    ]
   },
   "spotlight": {
-    "eyebrow": "AI Features",
-    "title": "Một lớp AI nhẹ, dễ triển khai và có khả năng dẫn dắt chuyển đổi.",
-    "description": "EZD AI Chat kết hợp nhân vật thương hiệu, FAQ guardrail, quick replies, lead flow, handoff và analytics cơ bản để website không chỉ trả lời mà còn biết tư vấn.",
+    "eyebrow": "Founding Partner Pilot",
+    "title": "Tham gia Founding Partner Pilot cùng EZDesign xây dựng AI Receptionist.",
+    "description": "Founding Partner Pilot là giai đoạn triển khai sớm cho một số khách hàng thân thuộc. Doanh nghiệp nhận được AI Brand Receptionist với chi phí thấp hơn gói thương mại đầy đủ. Đổi lại, hai bên cùng hợp tác để tinh chỉnh dữ liệu, phản hồi chất lượng lead và xây dựng các pattern tư vấn hiệu quả cho ngành.",
     "features": [
       {
-        "title": "AI Brand Character",
-        "description": "Thiết kế nhân vật AI có tên, vai trò, cách xưng hô, tính cách và giọng nói phù hợp với thương hiệu."
+        "title": "Triển khai AI Receptionist trên website thật",
+        "description": "EZD cấu hình widget theo thương hiệu, dịch vụ, tone of voice, FAQ, lead flow và handoff của doanh nghiệp."
       },
       {
-        "title": "FAQ Guardrail",
-        "description": "Các thông tin quan trọng như địa chỉ, giờ mở cửa, chính sách và giá cơ bản được kiểm soát bằng lớp FAQ guardrail."
+        "title": "Tập trung vào dữ liệu thật",
+        "description": "Mục tiêu của pilot không phải tạo demo đẹp, mà là ghi nhận câu hỏi thật, băn khoăn thật và hành vi thật của khách hàng trên website."
       },
       {
-        "title": "Quick Replies",
-        "description": "Gợi ý các lựa chọn nhanh để khách dễ bắt đầu hội thoại và đi thẳng vào nhu cầu phổ biến."
+        "title": "Báo cáo ma sát ban đầu",
+        "description": "Sau giai đoạn pilot, EZD tổng hợp các nhóm câu hỏi, băn khoăn và tín hiệu chuyển đổi ban đầu để doanh nghiệp biết khách đang kẹt ở đâu."
       },
       {
-        "title": "Lead Flow",
-        "description": "Dẫn khách qua luồng để lại nhu cầu, thông tin liên hệ hoặc yêu cầu tư vấn theo từng ngành."
+        "title": "Data Partnership rõ ràng",
+        "description": "Dữ liệu riêng và thông tin cá nhân thuộc phạm vi doanh nghiệp. EZD chỉ sử dụng pattern đã ẩn danh và tổng hợp để cải thiện hệ thống."
       },
       {
-        "title": "Human Handoff",
-        "description": "Chuyển tiếp khách sang Zalo, Messenger, WhatsApp hoặc hotline khi cần người thật hỗ trợ."
+        "title": "Kiểm chứng use case theo ngành",
+        "description": "Mỗi doanh nghiệp pilot không chỉ là một khách hàng mới, mà còn là cơ hội kiểm chứng taxonomy, câu hỏi thường gặp và kịch bản tư vấn theo từng ngành."
       },
       {
-        "title": "Basic Analytics",
-        "description": "Theo dõi các tín hiệu cơ bản như lượt mở chat, quick reply clicks, lead flow starts và handoff clicks."
+        "title": "Nền tảng cho tối ưu chuyển đổi",
+        "description": "Khi có đủ dữ liệu, hệ thống có thể tiến tới thư viện pattern tư vấn và xử lý băn khoăn đã được kiểm chứng theo ngành."
       }
     ]
   },
   "pricing": {
-    "eyebrow": "Pricing",
-    "title": "Gói triển khai linh hoạt cho SME.",
-    "description": "EZD AI Chat vận hành theo hướng managed SaaS trong giai đoạn đầu, giúp bạn có thể bắt đầu nhanh mà không cần đội ngũ kỹ thuật nội bộ."
+    "eyebrow": "Gói triển khai",
+    "title": "Bắt đầu bằng pilot nhỏ, sau đó mở rộng theo dữ liệu và hiệu quả thực tế.",
+    "description": "EZD AI Chat được thiết kế theo hướng triển khai nhanh, chi phí vận hành thấp và tăng trưởng dựa trên dữ liệu thật. Với khách hàng đầu tiên, EZD ưu tiên mô hình Founding Partner Pilot để cùng kiểm chứng use case, dữ liệu và quy trình tư vấn.",
+    "plans": [
+      {
+        "name": "Founding Partner Pilot",
+        "priceLabel": "Theo phạm vi pilot",
+        "description": "Dành cho một số doanh nghiệp thân thuộc đầu tiên muốn triển khai AI Brand Receptionist trên website thật và cùng EZD xây dựng dữ liệu ngành.",
+        "features": [
+          "01 AI Brand Receptionist nhúng vào website.",
+          "Cấu hình theo thương hiệu, dịch vụ và giọng nói riêng.",
+          "FAQ / knowledge base cơ bản.",
+          "Lead flow hoặc booking flow cơ bản.",
+          "Handoff sang Zalo, cuộc gọi hoặc form.",
+          "Theo dõi event cơ bản: mở chat, gửi tin nhắn, bấm handoff, hoàn thành lead flow.",
+          "Review dữ liệu pilot ban đầu.",
+          "Điều khoản data partnership rõ ràng."
+        ],
+        "isRecommended": true
+      },
+      {
+        "name": "Growth Optimization",
+        "priceLabel": "Theo tháng / theo gói tối ưu",
+        "description": "Dành cho doanh nghiệp đã có dữ liệu hội thoại và muốn tối ưu tỷ lệ chuyển đổi từ website.",
+        "features": [
+          "Báo cáo nhóm câu hỏi và băn khoăn phổ biến.",
+          "Phân tích điểm rơi trong hội thoại.",
+          "Gợi ý sửa FAQ, landing page và offer.",
+          "Tối ưu response angle.",
+          "Cải thiện lead flow và handoff.",
+          "Review định kỳ với chủ doanh nghiệp."
+        ]
+      },
+      {
+        "name": "Vertical Intelligence",
+        "priceLabel": "Theo dự án / theo ngành",
+        "description": "Dành cho doanh nghiệp hoặc nhóm doanh nghiệp muốn sử dụng playbook, AI template và kịch bản tư vấn đã được tối ưu theo ngành.",
+        "features": [
+          "Vertical Playbook.",
+          "AI Receptionist Template theo ngành.",
+          "Objection Handling Kit.",
+          "Conversion Script Library.",
+          "Knowledge Base Template.",
+          "Báo cáo friction theo ngành."
+        ]
+      }
+    ],
+    "note": "Giai đoạn đầu ưu tiên khách hàng pilot phù hợp hơn là bán đại trà. EZD sẽ tư vấn trực tiếp để xác định phạm vi triển khai, dữ liệu cần chuẩn bị và cách đo hiệu quả phù hợp với từng doanh nghiệp."
   },
   "faq": {
-    "eyebrow": "FAQ",
-    "title": "Những câu hỏi thường gặp.",
-    "description": "Một số thông tin nền trước khi bạn đặt lịch demo hoặc bắt đầu triển khai EZD AI Chat.",
+    "eyebrow": "Câu hỏi thường gặp",
+    "title": "Những điều cần biết trước khi triển khai EZD AI Chat.",
+    "description": "Dưới đây là các câu hỏi phổ biến dành cho doanh nghiệp muốn tham gia pilot hoặc triển khai AI Brand Receptionist trên website.",
     "items": [
       {
         "question": "EZD AI Chat có phải chatbot thông thường không?",
-        "answer": "Không. EZD AI Chat được thiết kế như một AI brand assistant có nhân vật, giọng nói thương hiệu, FAQ guardrail, lead flow và handoff sang người thật."
+        "answer": "Không. Chatbot thông thường chủ yếu trả lời câu hỏi có sẵn. EZD AI Chat được định vị là AI Brand Receptionist: vừa trả lời, vừa tư vấn theo ngữ cảnh, vừa xử lý băn khoăn trước khi mua và chuyển khách sang kênh liên hệ phù hợp khi họ sẵn sàng."
       },
       {
-        "question": "EZDesign có setup giúp không?",
-        "answer": "Có. Giai đoạn đầu EZD AI Chat vận hành theo mô hình managed SaaS, team EZDesign hỗ trợ setup cấu hình, FAQ, knowledge, quick replies và handoff."
+        "question": "AI có thay thế hoàn toàn nhân viên tư vấn không?",
+        "answer": "Không. AI hỗ trợ tư vấn ban đầu, trả lời các câu hỏi lặp lại, lọc nhu cầu và chuyển khách sang người thật khi cần. Mục tiêu là giúp đội ngũ không bỏ lỡ khách hàng và tập trung vào các lead đã có nhu cầu rõ hơn."
       },
       {
-        "question": "Có cần đội ngũ kỹ thuật không?",
-        "answer": "Không bắt buộc. EZDesign có thể hỗ trợ triển khai widget vào website và cấu hình dữ liệu ban đầu theo nhu cầu."
+        "question": "EZD AI Chat có thể nhúng vào website hiện tại không?",
+        "answer": "Có. Widget có thể được nhúng vào website hiện tại. EZDesign sẽ hỗ trợ cấu hình theo thương hiệu, dịch vụ, FAQ, lead flow và kênh handoff phù hợp với doanh nghiệp."
       },
       {
-        "question": "Setup fee tính như thế nào?",
-        "answer": "Setup fee được báo theo nhu cầu thực tế, tùy mức độ custom nhân vật AI, knowledge setup, lead flow, tích hợp Google Sheets/CRM hoặc yêu cầu visual riêng."
+        "question": "Doanh nghiệp cần chuẩn bị gì để triển khai?",
+        "answer": "Bạn cần chuẩn bị thông tin thương hiệu, dịch vụ chính, FAQ, bảng giá hoặc khoảng giá nếu được phép tư vấn, quy trình tư vấn hiện tại, link Zalo/cuộc gọi/form handoff và các băn khoăn phổ biến của khách hàng."
+      },
+      {
+        "question": "EZD có lưu nội dung hội thoại và thông tin khách hàng không?",
+        "answer": "EZD ưu tiên cách triển khai privacy-safe. Analytics không nên ghi nhận raw message, PII hoặc nội dung lead nhạy cảm. Các dữ liệu cá nhân như số điện thoại, email hoặc nội dung lead chỉ nên được xử lý trong phạm vi phục vụ doanh nghiệp sử dụng."
+      },
+      {
+        "question": "EZD dùng dữ liệu của doanh nghiệp như thế nào?",
+        "answer": "Dữ liệu riêng, thông tin cá nhân và lead data thuộc phạm vi phục vụ doanh nghiệp đó. EZD chỉ sử dụng các pattern đã được ẩn danh, chuẩn hóa và tổng hợp để cải thiện hệ thống, ví dụ như nhóm băn khoăn phổ biến hoặc cách phản hồi hiệu quả theo ngành."
+      },
+      {
+        "question": "Founding Partner Pilot khác gì gói thương mại sau này?",
+        "answer": "Founding Partner Pilot dành cho một số khách hàng đầu tiên. Chi phí và phạm vi sẽ linh hoạt hơn, đổi lại doanh nghiệp cùng EZD phản hồi dữ liệu, kiểm chứng quy trình và giúp xây dựng các pattern tư vấn hiệu quả cho ngành."
+      },
+      {
+        "question": "EZD có cam kết tăng doanh thu không?",
+        "answer": "Không cam kết doanh thu tuyệt đối trong giai đoạn pilot, vì kết quả còn phụ thuộc vào traffic, offer, giá, thương hiệu và quy trình chăm sóc lead. EZD cam kết triển khai hệ thống tư vấn ban đầu, đo tín hiệu hành vi và hỗ trợ doanh nghiệp hiểu rõ hơn các băn khoăn khiến khách chưa mua."
+      },
+      {
+        "question": "Website chưa có nhiều traffic thì có nên triển khai không?",
+        "answer": "Có thể, nếu doanh nghiệp muốn chuẩn hóa tư vấn và chuẩn bị nền tảng chuyển đổi sớm. Tuy nhiên, để có dữ liệu đủ tốt cho phân tích friction, website cần có lượng truy cập và tương tác nhất định."
+      },
+      {
+        "question": "Sau pilot, doanh nghiệp nhận được gì?",
+        "answer": "Doanh nghiệp nhận được AI Brand Receptionist đã triển khai trên website, cấu hình theo thương hiệu riêng, dữ liệu event cơ bản và nhận định ban đầu về các nhóm câu hỏi, băn khoăn hoặc điểm cần tối ưu trong hành trình tư vấn."
       }
     ]
   },
   "finalCTA": {
-    "eyebrow": "Start",
-    "title": "Muốn có một nhân vật AI tư vấn cho website của bạn?",
-    "description": "Bắt đầu demo cùng EZDesign để xác định ngành, use case, dữ liệu cần chuẩn bị và hướng triển khai phù hợp cho SME của bạn.",
+    "eyebrow": "Founding Partner Pilot",
+    "title": "Bạn muốn website của mình có một nhân viên thương hiệu AI trực 24/7?",
+    "description": "EZD đang chọn một số doanh nghiệp SME B2C phù hợp để triển khai Founding Partner Pilot. Nếu bạn có website, có khách hàng cần tư vấn trước khi mua và muốn hiểu rõ hơn lý do khách chưa chốt, EZD AI Chat có thể là lớp tư vấn đầu tiên dành cho bạn.",
     "primaryCTA": {
-      "label": "Đặt lịch demo",
-      "href": "/contact/"
+      "label": "Đăng ký trao đổi pilot",
+      "href": "/contact/?intent=pilot"
     },
     "secondaryCTA": {
-      "label": "Xem case Yên AI Chat",
+      "label": "Xem case Yên Retreat",
       "href": "/case-studies/yen-ai-chat/"
     }
   }
